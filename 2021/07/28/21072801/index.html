@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="hexo,Termux,内网穿透," />
 
 
 
@@ -86,15 +86,33 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://example.com/tags/index.html">
+<meta name="description" content="PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。 手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。 以下教程仅基于手机termux&#x2F;linux部署，使用windows部署，自己百度撒。 Termux 是运行在 Android 上的 terminal终端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建Hexo博客(一) ：手机(Termux) + 内网穿透(Sunny-Ngrok)">
+<meta property="og:url" content="http://example.com/2021/07/28/21072801/index.html">
 <meta property="og:site_name" content="qyxie">
+<meta property="og:description" content="PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。 手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。 以下教程仅基于手机termux&#x2F;linux部署，使用windows部署，自己百度撒。 Termux 是运行在 Android 上的 terminal终端">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-07-28T13:08:02.000Z">
-<meta property="article:modified_time" content="2021-07-28T15:49:24.615Z">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/3A4I7NwrmYvsEJV.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/uYVTrvFfo2IjUR3.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/1JEshIyqCOW2mwX.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/mHPMfOoYGhwK56N.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/aUvIwy9m3XCB8Wx.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/twJYzaVb2GDmKQe.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/PmjeX72gCSVTx1Z.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/EOG1yXjU4RQhoMr.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/1w5YCUyu6Aq8Io4.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/iYJWVAOqz4eQNMC.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/kPU1xMiFDe7V2XJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/31/yYJVR5fu3OarE1l.png">
+<meta property="article:published_time" content="2021-07-28T15:50:21.000Z">
+<meta property="article:modified_time" content="2021-08-01T04:02:43.739Z">
 <meta property="article:author" content="滑小稽">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Termux">
+<meta property="article:tag" content="内网穿透">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/07/31/3A4I7NwrmYvsEJV.png">
 
 
 
@@ -124,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/tags/"/>
+  <link rel="canonical" href="http://example.com/2021/07/28/21072801/"/>
 
 
 
 
 
-  <title>tags | qyxie</title>
+  <title>搭建Hexo博客(一) ：手机(Termux) + 内网穿透(Sunny-Ngrok) | qyxie</title>
   
 
 
@@ -300,40 +318,325 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/28/21072801/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/07/15/WuAMlD.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qyxie">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 4 个标签
+          <h1 class="post-title" itemprop="name headline">搭建Hexo博客(一) ：手机(Termux) + 内网穿透(Sunny-Ngrok)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-28T23:50:21+08:00">
+                2021-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/07/28/21072801/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/07/28/21072801/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本页总阅读数 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  833
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Hello-World/" style="font-size: 12px; color: #ccc">Hello World</a> <a href="/tags/Termux/" style="font-size: 12px; color: #ccc">Termux</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 12px; color: #ccc">内网穿透</a>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。</p>
+<p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
+<p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
+<p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
+<h3 id="Termux下载地址："><a href="#Termux下载地址：" class="headerlink" title="Termux下载地址："></a>Termux下载地址：</h3><p><a target="_blank" rel="noopener" href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
+<p> <strong><a target="_blank" rel="noopener" href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
+<h3 id="安装后换源（否则日后下载安装包等速度极慢）："><a href="#安装后换源（否则日后下载安装包等速度极慢）：" class="headerlink" title="安装后换源（否则日后下载安装包等速度极慢）："></a>安装后换源（否则日后下载安装包等速度极慢）：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/3A4I7NwrmYvsEJV.png" alt="image-20210731210904143"></p>
+<h3 id="Hexo基于Node-js-Node-js-版本需不低于-10-13，建议使用-Node-js-12-0-及以上版本-，安装。"><a href="#Hexo基于Node-js-Node-js-版本需不低于-10-13，建议使用-Node-js-12-0-及以上版本-，安装。" class="headerlink" title="Hexo基于Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)，安装。"></a>Hexo基于Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)，安装。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/uYVTrvFfo2IjUR3.png" alt="image-20210731211111196"></p>
+<h3 id="使用-npm-安装-Hexo。"><a href="#使用-npm-安装-Hexo。" class="headerlink" title="使用 npm 安装 Hexo。"></a>使用 npm 安装 Hexo。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/1JEshIyqCOW2mwX.png" alt="image-20210731211201424"></p>
+<h3 id="安装hexo完成后，新建一个博客网站，命名随意，blog"><a href="#安装hexo完成后，新建一个博客网站，命名随意，blog" class="headerlink" title="安装hexo完成后，新建一个博客网站，命名随意，blog"></a>安装hexo完成后，新建一个博客网站，命名随意，blog</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/mHPMfOoYGhwK56N.png" alt="image-20210731211236474"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
+
+<p>进入博客网站目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>生成静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
+
+<p>启动服务器。默认情况下，访问网址为：<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
+<p><img src="https://i.loli.net/2021/07/31/aUvIwy9m3XCB8Wx.png" alt="image-20210731211329894"></p>
+<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://i.loli.net/2021/07/31/twJYzaVb2GDmKQe.png" alt="image-20210731211411895"></p>
+<h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a target="_blank" rel="noopener" href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
+<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://i.loli.net/2021/07/31/PmjeX72gCSVTx1Z.png" alt="image-20210731211517640"></p>
+<p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
+<p><img src="https://i.loli.net/2021/07/31/EOG1yXjU4RQhoMr.png" alt="image-20210731211553657"></p>
+<p>完成订单 <strong>隧道id</strong>复制下 有用</p>
+<p><img src="https://i.loli.net/2021/07/31/1w5YCUyu6Aq8Io4.png" alt="image-20210731211646471"></p>
+<h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
+<p><img src="https://i.loli.net/2021/07/31/iYJWVAOqz4eQNMC.png" alt="image-20210731212010489"></p>
+<p>这里可能会遇到两个问题 </p>
+<ul>
+<li>python没有安装</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg install python</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>找不到解压后的sunny.py的路径运行</li>
+</ul>
+<p>不系统学习Termux有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
+<p><em>访问：<a target="_blank" rel="noopener" href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
+<p><img src="https://i.loli.net/2021/07/31/kPU1xMiFDe7V2XJ.png" alt="image-20210731212112100"></p>
+<p><img src="https://i.loli.net/2021/07/31/yYJVR5fu3OarE1l.png" alt="image-20210731212124251">实现了外网访问。</p>
+<p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
+<p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>富婆 饿饿 饭饭</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+            <a href="/tags/Termux/" rel="tag"># Termux</a>
+          
+            <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag"># 内网穿透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/31/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
   </div>
 
 
@@ -342,6 +645,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -362,8 +672,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -463,6 +782,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Termux%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">Termux下载地址：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%8E%E6%8D%A2%E6%BA%90%EF%BC%88%E5%90%A6%E5%88%99%E6%97%A5%E5%90%8E%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85%E7%AD%89%E9%80%9F%E5%BA%A6%E6%9E%81%E6%85%A2%EF%BC%89%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">安装后换源（否则日后下载安装包等速度极慢）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E5%9F%BA%E4%BA%8ENode-js-Node-js-%E7%89%88%E6%9C%AC%E9%9C%80%E4%B8%8D%E4%BD%8E%E4%BA%8E-10-13%EF%BC%8C%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8-Node-js-12-0-%E5%8F%8A%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC-%EF%BC%8C%E5%AE%89%E8%A3%85%E3%80%82"><span class="nav-number">3.</span> <span class="nav-text">Hexo基于Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)，安装。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-npm-%E5%AE%89%E8%A3%85-Hexo%E3%80%82"><span class="nav-number">4.</span> <span class="nav-text">使用 npm 安装 Hexo。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hexo%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%EF%BC%8C%E5%91%BD%E5%90%8D%E9%9A%8F%E6%84%8F%EF%BC%8Cblog"><span class="nav-number">5.</span> <span class="nav-text">安装hexo完成后，新建一个博客网站，命名随意，blog</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%8F%AF%E4%BB%A5%E8%AE%A9%E5%9C%A8%E5%86%85%E7%BD%91%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%BB%E5%8A%A8%E8%AE%BF%E9%97%AE%E4%B8%80%E4%B8%AA%E6%8B%A5%E6%9C%89%E5%85%AC%E7%BD%91IP%E5%9C%B0%E5%9D%80%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E5%B9%B6%E7%94%B1%E4%B8%AD%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E6%A1%A5%EF%BC%8C%E6%89%93%E9%80%9A%E7%BB%8F%E8%BF%87%E8%AF%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%8E%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E5%88%B0NAT%E4%B9%8B%E5%90%8E%E8%8A%82%E7%82%B9%E7%9A%84%E9%9A%A7%E9%81%93%E3%80%82"><span class="nav-number">5.0.1.</span> <span class="nav-text">内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E5%BC%80%E9%80%9A%E5%85%8D%E8%B4%B9%E9%9A%A7%E9%81%93"><span class="nav-number">6.</span> <span class="nav-text">注册开通免费隧道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%A7%E9%81%93%E6%98%A0%E5%B0%84"><span class="nav-number">7.</span> <span class="nav-text">隧道映射</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

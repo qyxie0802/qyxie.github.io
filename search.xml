@@ -24,4 +24,72 @@
         <tag>Hello World</tag>
       </tags>
   </entry>
+  <entry>
+    <title>搭建Hexo博客(一) ：手机(Termux) + 内网穿透(Sunny-Ngrok)</title>
+    <url>/2021/07/28/21072801/</url>
+    <content><![CDATA[<p>PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。</p>
+<p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
+<p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
+<p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
+<h3 id="Termux下载地址："><a href="#Termux下载地址：" class="headerlink" title="Termux下载地址："></a>Termux下载地址：</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
+<p><a href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
+<p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
+<h3 id="安装后换源（否则日后下载安装包等速度极慢）："><a href="#安装后换源（否则日后下载安装包等速度极慢）：" class="headerlink" title="安装后换源（否则日后下载安装包等速度极慢）："></a>安装后换源（否则日后下载安装包等速度极慢）：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/3A4I7NwrmYvsEJV.png" alt="image-20210731210904143"></p>
+<h3 id="Hexo基于Node-js-Node-js-版本需不低于-10-13，建议使用-Node-js-12-0-及以上版本-，安装。"><a href="#Hexo基于Node-js-Node-js-版本需不低于-10-13，建议使用-Node-js-12-0-及以上版本-，安装。" class="headerlink" title="Hexo基于Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)，安装。"></a>Hexo基于Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)，安装。</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/uYVTrvFfo2IjUR3.png" alt="image-20210731211111196"></p>
+<h3 id="使用-npm-安装-Hexo。"><a href="#使用-npm-安装-Hexo。" class="headerlink" title="使用 npm 安装 Hexo。"></a>使用 npm 安装 Hexo。</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/1JEshIyqCOW2mwX.png" alt="image-20210731211201424"></p>
+<h3 id="安装hexo完成后，新建一个博客网站，命名随意，blog"><a href="#安装hexo完成后，新建一个博客网站，命名随意，blog" class="headerlink" title="安装hexo完成后，新建一个博客网站，命名随意，blog"></a>安装hexo完成后，新建一个博客网站，命名随意，blog</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/31/mHPMfOoYGhwK56N.png" alt="image-20210731211236474"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
+
+<p>进入博客网站目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>生成静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
+
+<p>启动服务器。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
+<p><img src="https://i.loli.net/2021/07/31/aUvIwy9m3XCB8Wx.png" alt="image-20210731211329894"></p>
+<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://i.loli.net/2021/07/31/twJYzaVb2GDmKQe.png" alt="image-20210731211411895"></p>
+<h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
+<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://i.loli.net/2021/07/31/PmjeX72gCSVTx1Z.png" alt="image-20210731211517640"></p>
+<p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
+<p><img src="https://i.loli.net/2021/07/31/EOG1yXjU4RQhoMr.png" alt="image-20210731211553657"></p>
+<p>完成订单 <strong>隧道id</strong>复制下 有用</p>
+<p><img src="https://i.loli.net/2021/07/31/1w5YCUyu6Aq8Io4.png" alt="image-20210731211646471"></p>
+<h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
+<p><img src="https://i.loli.net/2021/07/31/iYJWVAOqz4eQNMC.png" alt="image-20210731212010489"></p>
+<p>这里可能会遇到两个问题 </p>
+<ul>
+<li>python没有安装</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install python</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>找不到解压后的sunny.py的路径运行</li>
+</ul>
+<p>不系统学习Termux有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
+<p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
+<p><img src="https://i.loli.net/2021/07/31/kPU1xMiFDe7V2XJ.png" alt="image-20210731212112100"></p>
+<p><img src="https://i.loli.net/2021/07/31/yYJVR5fu3OarE1l.png" alt="image-20210731212124251">实现了外网访问。</p>
+<p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
+<p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>内网穿透</tag>
+      </tags>
+  </entry>
 </search>

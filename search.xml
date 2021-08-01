@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hello World</title>
-    <url>/2021/07/31/hello-world/</url>
+    <url>/2021/07/17/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -31,19 +31,21 @@
 <p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
 <p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
 <p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
-<h3 id="Termux下载地址："><a href="#Termux下载地址：" class="headerlink" title="Termux下载地址："></a>Termux下载地址：</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
+<h3 id="Termux下载"><a href="#Termux下载" class="headerlink" title="Termux下载"></a>Termux下载</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
 <p><a href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
 <p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
-<h3 id="安装后换源（否则日后下载安装包等速度极慢）："><a href="#安装后换源（否则日后下载安装包等速度极慢）：" class="headerlink" title="安装后换源（否则日后下载安装包等速度极慢）："></a>安装后换源（否则日后下载安装包等速度极慢）：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
+<h3 id="安装后换源"><a href="#安装后换源" class="headerlink" title="安装后换源"></a>安装后换源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2021/07/31/3A4I7NwrmYvsEJV.png" alt="image-20210731210904143"></p>
-<h3 id="Hexo基于Node-js-Node-js-版本需不低于-10-13，建议使用-Node-js-12-0-及以上版本-，安装。"><a href="#Hexo基于Node-js-Node-js-版本需不低于-10-13，建议使用-Node-js-12-0-及以上版本-，安装。" class="headerlink" title="Hexo基于Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)，安装。"></a>Hexo基于Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)，安装。</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
+<p><strong>Hexo</strong> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2021/07/31/uYVTrvFfo2IjUR3.png" alt="image-20210731211111196"></p>
-<h3 id="使用-npm-安装-Hexo。"><a href="#使用-npm-安装-Hexo。" class="headerlink" title="使用 npm 安装 Hexo。"></a>使用 npm 安装 Hexo。</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2021/07/31/1JEshIyqCOW2mwX.png" alt="image-20210731211201424"></p>
-<h3 id="安装hexo完成后，新建一个博客网站，命名随意，blog"><a href="#安装hexo完成后，新建一个博客网站，命名随意，blog" class="headerlink" title="安装hexo完成后，新建一个博客网站，命名随意，blog"></a>安装hexo完成后，新建一个博客网站，命名随意，blog</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+<h3 id="新建一个博客网站"><a href="#新建一个博客网站" class="headerlink" title="新建一个博客网站"></a>新建一个博客网站</h3><p>命名随意，blog</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2021/07/31/mHPMfOoYGhwK56N.png" alt="image-20210731211236474"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
@@ -54,7 +56,7 @@
 <p>生成静态文件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
 
-<p>启动服务器。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
+<p>启动服务。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
 <p><img src="https://i.loli.net/2021/07/31/aUvIwy9m3XCB8Wx.png" alt="image-20210731211329894"></p>
 <p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://i.loli.net/2021/07/31/twJYzaVb2GDmKQe.png" alt="image-20210731211411895"></p>
 <h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
@@ -76,7 +78,7 @@
 <ul>
 <li>找不到解压后的sunny.py的路径运行</li>
 </ul>
-<p>不系统学习Termux有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
+<p>有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
 <p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
 <p><img src="https://i.loli.net/2021/07/31/kPU1xMiFDe7V2XJ.png" alt="image-20210731212112100"></p>
 <p><img src="https://i.loli.net/2021/07/31/yYJVR5fu3OarE1l.png" alt="image-20210731212124251">实现了外网访问。</p>
@@ -109,12 +111,12 @@
 <p>默认回车</p>
 <p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
 <p><img src="https://i.loli.net/2021/08/01/C7DezQYTsmKEhId.png" alt="image-20210801123528280"></p>
-<p>然后打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
+<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
 <p> <img src="https://i.loli.net/2021/08/01/HiAEwCcKzd3qjuP.png" alt="image-20210801123651046"></p>
-<p>新建一个仓库，而且得确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io</strong></p>
+<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io</strong></p>
 <p><img src="https://i.loli.net/2021/08/01/umjV48MylU5ARWc.png" alt="image-20210801123748394"></p>
 <p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
-<p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
+<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
 <p><img src="https://i.loli.net/2021/08/01/hzV2H8XNDfZYTgO.png" alt="image-20210801123916617"></p>
 <p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
 <p><img src="https://i.loli.net/2021/08/01/uesjvPEp9y4XaGO.png" alt="image-20210801124033596"></p>

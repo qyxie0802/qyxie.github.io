@@ -36,18 +36,18 @@
 <p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
 <h3 id="安装后换源"><a href="#安装后换源" class="headerlink" title="安装后换源"></a>安装后换源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.loli.net/2021/07/31/3A4I7NwrmYvsEJV.png" alt="image-20210731210904143"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801133736.png" alt="image-20210731210904143"></p>
 <p><strong>Hexo</strong> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
 <h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.loli.net/2021/07/31/uYVTrvFfo2IjUR3.png" alt="image-20210731211111196"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801133910.png" alt="image-20210731211111196"></p>
 <h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.loli.net/2021/07/31/1JEshIyqCOW2mwX.png" alt="image-20210731211201424"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801133900.png" alt="image-20210731211201424"></p>
 <h3 id="新建一个博客网站"><a href="#新建一个博客网站" class="headerlink" title="新建一个博客网站"></a>新建一个博客网站</h3><p>命名随意，blog</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.loli.net/2021/07/31/mHPMfOoYGhwK56N.png" alt="image-20210731211236474"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801133818.png" alt="image-20210731211236474"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
 
 <p>进入博客网站目录</p>
@@ -57,16 +57,16 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
 
 <p>启动服务。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
-<p><img src="https://i.loli.net/2021/07/31/aUvIwy9m3XCB8Wx.png" alt="image-20210731211329894"></p>
-<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://i.loli.net/2021/07/31/twJYzaVb2GDmKQe.png" alt="image-20210731211411895"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801133932.png" alt="image-20210731211329894"></p>
+<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801133945.png" alt="image-20210731211411895"></p>
 <h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
-<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://i.loli.net/2021/07/31/PmjeX72gCSVTx1Z.png" alt="image-20210731211517640"></p>
+<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801133959.png" alt="image-20210731211517640"></p>
 <p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
-<p><img src="https://i.loli.net/2021/07/31/EOG1yXjU4RQhoMr.png" alt="image-20210731211553657"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134012.png" alt="image-20210731211553657"></p>
 <p>完成订单 <strong>隧道id</strong>复制下 有用</p>
-<p><img src="https://i.loli.net/2021/07/31/1w5YCUyu6Aq8Io4.png" alt="image-20210731211646471"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134031.png" alt="image-20210731211646471"></p>
 <h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
-<p><img src="https://i.loli.net/2021/07/31/iYJWVAOqz4eQNMC.png" alt="image-20210731212010489"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134044.png" alt="image-20210731212010489"></p>
 <p>这里可能会遇到两个问题 </p>
 <ul>
 <li>python没有安装</li>
@@ -80,8 +80,8 @@
 </ul>
 <p>有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
 <p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
-<p><img src="https://i.loli.net/2021/07/31/kPU1xMiFDe7V2XJ.png" alt="image-20210731212112100"></p>
-<p><img src="https://i.loli.net/2021/07/31/yYJVR5fu3OarE1l.png" alt="image-20210731212124251">实现了外网访问。</p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134108.png" alt="image-20210731212112100"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134140.png" alt="image-20210731212124251">实现了外网访问。</p>
 <p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
 <p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
 ]]></content>
@@ -100,36 +100,36 @@
     <content><![CDATA[<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
 <h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.loli.net/2021/08/01/Bsr5OwZmSJy9jgb.png" alt="image-20210801125244299"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134206.png" alt="image-20210801125244299"></p>
 <h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.loli.net/2021/08/01/CjZqu9Y2F5WTeSN.png" alt="image-20210801122605388"></p>
-<p><img src="https://i.loli.net/2021/08/01/DGgEIOnPestRJq1.png" alt="image-20210801122719726"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134215.png" alt="image-20210801122605388"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134223.png" alt="image-20210801122719726"></p>
 <h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.loli.net/2021/08/01/SfFt2BVbl4PZRMK.png" alt="image-20210801123012595"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134234.png" alt="image-20210801123012595"></p>
 <p>默认回车</p>
 <p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
-<p><img src="https://i.loli.net/2021/08/01/C7DezQYTsmKEhId.png" alt="image-20210801123528280"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134252.png" alt="image-20210801123528280"></p>
 <h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
-<p> <img src="https://i.loli.net/2021/08/01/HiAEwCcKzd3qjuP.png" alt="image-20210801123651046"></p>
+<p> <img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134304.png" alt="image-20210801123651046"></p>
 <h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io</strong></p>
-<p><img src="https://i.loli.net/2021/08/01/umjV48MylU5ARWc.png" alt="image-20210801123748394"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134310.png" alt="image-20210801123748394"></p>
 <p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
 <h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
-<p><img src="https://i.loli.net/2021/08/01/hzV2H8XNDfZYTgO.png" alt="image-20210801123916617"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134321.png" alt="image-20210801123916617"></p>
 <p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
-<p><img src="https://i.loli.net/2021/08/01/uesjvPEp9y4XaGO.png" alt="image-20210801124033596"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134326.png" alt="image-20210801124033596"></p>
 <p>保存退出</p>
 <p><code>hexo g</code> 生成静态文件</p>
 <p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
-<p><img src="https://i.loli.net/2021/08/01/po9POK4LjtJxNFk.png" alt="image-20210801125546459"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134331.png" alt="image-20210801125546459"></p>
 <p>github仓库中就可以看到推送过来的文件了</p>
-<p><img src="https://i.loli.net/2021/08/01/RxYeJzHOo9vB28M.png" alt="image-20210801124501973"></p>
+<p><img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134338.png" alt="image-20210801124501973"></p>
 <p>然后在浏览器中访问：</p>
 <p>https://用户名.github.io</p>
 <p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
-<p>但是，github服务器在国外，DNS污染，github.io经常访问不了或者加载非常慢<img src="https://i.loli.net/2021/08/01/PntFgjRJim2BYw8.png" alt="image-20210801124644979"></p>
+<p>但是，github服务器在国外，DNS污染，github.io经常访问不了或者加载非常慢<img src="https://raw.githubusercontent.com/qyxie0802/images/main/img/20210801134345.png" alt="image-20210801124644979"></p>
 <p>可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
 <p>欲知后事如何，且听下回分解</p>
 ]]></content>

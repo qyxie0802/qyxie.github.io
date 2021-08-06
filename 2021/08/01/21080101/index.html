@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="hexo,Termux,aliyun,宝塔," />
+  <meta name="keywords" content="aliyun,PicGo,OSS," />
 
 
 
@@ -86,42 +86,44 @@
 
 
 
-<meta name="description" content="书接上回，github服务器在国外，而且DNS污染严重，于是我斥“巨资”在阿里云买了轻量应用服务器和域名，打算将博客网站挂到阿里云服务器下。">
+<meta name="description" content="图床，就是指储存图片的服务器。 网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云">
-<meta property="og:url" content="http://example.com/2021/07/31/21073101/index.html">
+<meta property="og:title" content="PicGo + 阿里云对象存储OSS搭建个人图床">
+<meta property="og:url" content="http://example.com/2021/08/01/21080101/index.html">
 <meta property="og:site_name" content="滑稽树">
-<meta property="og:description" content="书接上回，github服务器在国外，而且DNS污染严重，于是我斥“巨资”在阿里云买了轻量应用服务器和域名，打算将博客网站挂到阿里云服务器下。">
+<meta property="og:description" content="图床，就是指储存图片的服务器。 网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。">
 <meta property="og:locale">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155455.gif">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155923.jpg">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801160638.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801183119.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801161305.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801170439.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801165416.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801180204.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801162449.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801181550.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801181815.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182112.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182430.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182706.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182930.png">
-<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801183525.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155405.jpg">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203029.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203912.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204908.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204725.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204500.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155509.gif">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211006.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211306.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211453.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212005.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212314.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212706.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213136.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213200.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213218.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213430.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213917.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801214043.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif">
-<meta property="article:published_time" content="2021-07-31T05:15:29.000Z">
-<meta property="article:modified_time" content="2021-08-06T19:41:21.689Z">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801220136.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155518.gif">
+<meta property="article:published_time" content="2021-08-01T12:03:02.000Z">
+<meta property="article:modified_time" content="2021-08-06T20:31:34.889Z">
 <meta property="article:author" content="滑小稽">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="Termux">
 <meta property="article:tag" content="aliyun">
-<meta property="article:tag" content="宝塔">
+<meta property="article:tag" content="PicGo">
+<meta property="article:tag" content="OSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155455.gif">
+<meta name="twitter:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png">
 
 
 
@@ -151,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2021/07/31/21073101/"/>
+  <link rel="canonical" href="http://example.com/2021/08/01/21080101/"/>
 
 
 
 
 
-  <title>搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云 | 滑稽树</title>
+  <title>PicGo + 阿里云对象存储OSS搭建个人图床 | 滑稽树</title>
   
 
 
@@ -339,7 +341,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/31/21073101/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/21080101/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -356,7 +358,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云</h1>
+          <h1 class="post-title" itemprop="name headline">PicGo + 阿里云对象存储OSS搭建个人图床</h1>
         
 
         <div class="post-meta">
@@ -368,8 +370,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-31T13:15:29+08:00">
-                2021-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-01T20:03:02+08:00">
+                2021-08-01
               </time>
             
 
@@ -391,8 +393,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%9B%BE%E5%BA%8A/" itemprop="url" rel="index">
+                    <span itemprop="name">个人图床</span>
                   </a>
                 </span>
 
@@ -409,8 +411,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/07/31/21073101/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2021/07/31/21073101/" itemprop="commentCount"></span>
+                <a href="/2021/08/01/21080101/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/08/01/21080101/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -437,7 +439,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  745
+                  708
                 </span>
               
 
@@ -453,7 +455,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  2
                 </span>
               
             </div>
@@ -474,106 +476,84 @@
       
 
       
-        <p>书接上回，github服务器在国外，而且DNS污染严重，于是我斥“巨资”<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155455.gif">在阿里云买了轻量应用服务器和域名，打算将博客网站挂到阿里云服务器下。</p>
+        <p><em><strong>图床</strong></em>，就是指储存图片的服务器。</p>
+<p>网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。</p>
 <span id="more"></span>
 
-
-<h3 id="购买服务器域名"><a href="#购买服务器域名" class="headerlink" title="购买服务器域名"></a>购买服务器域名</h3><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155923.jpg" alt="qq_pic_merged_1627804751843" style="zoom:50%;" />
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801160638.png" alt="image-20210801160637948"></p>
-<p>配置有点捞，但是挂网站绰绰有余<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>查看公网IP，设置密码</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801183119.png" alt="image-20210801183119470" style="zoom:50%;" />
-
-<p>登录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@host 如：ssh root@192.168.0.104</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801161305.png" alt="image-20210801161305383"></p>
-<h3 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h3><ol>
-<li><strong>安装git</strong></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><strong>配置 git 仓库</strong></li>
-</ol>
-<p>在root用户下输入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">useradd git <span class="comment"># 创建用户git</span></span><br><span class="line">passwd git <span class="comment"># 为用户git设置密码</span></span><br><span class="line">chmod <span class="number">740</span> /etc/sudoers  <span class="comment"># 修改文件权限</span></span><br><span class="line">vim /etc/sudoers</span><br><span class="line"> <span class="comment"># 找到           root ALL=(ALL)  ALL</span></span><br><span class="line"> <span class="comment"># 在下面添加一行   git  ALL=(ALL)  ALL</span></span><br><span class="line"> <span class="comment"># 输入:wq即可保存并退出编辑</span></span><br><span class="line">chmod <span class="number">400</span> /etc/sudoers</span><br></pre></td></tr></table></figure>
-
-<p>切换git用户</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su git   <span class="comment"># 切换到git用户,这步最关键</span></span><br><span class="line">sudo mkdir  -p  /www/wwwroot/blog  <span class="comment"># 把博客目录放在宝塔网站的根目录下</span></span><br><span class="line">cd /home/git</span><br><span class="line">mkdir repos</span><br><span class="line">cd repos</span><br><span class="line">git init --bare blog.git  <span class="comment"># 创建一个裸库blog.git</span></span><br><span class="line">cd blog.git/hooks</span><br><span class="line">vim post-receive</span><br></pre></td></tr></table></figure>
-
-<p>输入以下代码，保存退出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line">git --work-tree=/www/wwwroot/blog --git-<span class="built_in">dir</span>=/home/git/repos/blog.git checkout -f</span><br></pre></td></tr></table></figure>
-
-<p>修改权限</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chmod +x post-receive</span><br><span class="line">exit   <span class="comment">#回到root用户</span></span><br><span class="line">chown -R git:git /home/git/repos/blog.git <span class="comment">#赋予git用户可操作仓库blog.git的权限</span></span><br><span class="line"></span><br><span class="line">chown -R git:git /www/wwwroot/blog <span class="comment">#赋予git用户可操作仓库blog.git的权限</span></span><br></pre></td></tr></table></figure>
+<p><em><strong>图床工具</strong></em>，就是自动把本地图片转换成链接的一款工具，网络上有很多图床工具，就目前使用种类而言，PicGo 算得上一款比较优秀的图床工具。它是一款用 <code>Electron-vue</code> 开发的软件，可以支持微博，七牛云，腾讯云COS，又拍云，GitHub，阿里云OSS，SM.MS，imgur 等8种常用图床，功能强大，简单易用。</p>
+<h3 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h3><p><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载地址</a></p>
+<p><em>mac</em> 系统选择 .<em>dmg</em> 下载，<em>windwos</em> 选择 <em>.exe</em>系统</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png" alt="image-20210801202853961" style="zoom: 67%;" />
 
 
 
-<h3 id="免密登录配置"><a href="#免密登录配置" class="headerlink" title="免密登录配置"></a>免密登录配置</h3><p>之前推送到github配置过，只要复制公钥到阿里云服务器了就行了。</p>
-<ol>
-<li><strong>在本地Termux创建ssh key</strong></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
-<p>默认回车</p>
-<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。</p>
-<p>​    </p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
-<p>windows命令一样，路径如下:</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801170439.png" alt="image-20210801170439598" style="zoom:50%;" />
+<h3 id="安装PicGo"><a href="#安装PicGo" class="headerlink" title="安装PicGo"></a>安装PicGo</h3><p>安装完成后在右下角，我一直打不开以为安装没成功，又卸载重装了一遍才发现在右下角<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155405.jpg" alt="img"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203029.png" alt="image-20210801203029160"></p>
+<p>一开始用Github仓库存储图片，但还是那个问题，github服务器在国外，不做加速处理，图片加载慢，甚至加载不出来。配置过程讲个大概就行。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203912.png" alt="QQ截图20210801142842" style="zoom:50%;" />
 
 
 
 
 
-<ol start="2">
-<li><p><strong>将公钥添加到阿里云服务器authorized_keys文件中</strong></p>
-<p>git用户下输入</p>
+<p><strong>新建一个仓库</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204908.png" alt="image-20210801204908692"></p>
+<p>个人中心，<em>Settings</em>-&gt; <em>Developer settings</em> -&gt;  <em>Personal access tokens</em>，我们在这里创建需要的 <em>token</em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204725.png" alt="image-20210801204725223"></p>
+<p>生成一个 <em>token</em> ，复制保存到其他地方，这个 <em>token</em> 只显示一次。</p>
+<p>打开PicGo -&gt;  图床设置 -&gt;  github图床</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204500.png" alt="image-20210801204500664"></p>
+<p>俗话说的好，免费的就没好东西<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155509.gif" alt="img">Gitee也行，虽然是国内的，但是据说仓库的容量有上限（好像是1个G)，并且图片的大小超过1M 就需要登录才能显示，否则看不见。</p>
+<p>这种事可以花点钱嘛~花不了多少钱。40G的容量一年才9块钱，外网流出流量 00:00-08:00（闲时）：0.25元/GB \ 8:00-24:00（忙时）：0.50元/GB   完全可以抹零。</p>
+<h3 id="开通并创建阿里云对象存储OSS"><a href="#开通并创建阿里云对象存储OSS" class="headerlink" title="开通并创建阿里云对象存储OSS"></a>开通并创建阿里云对象存储OSS</h3><ol>
+<li><p><strong>登录<a target="_blank" rel="noopener" href="https://www.aliyun.com/">阿里云</a></strong></p>
+</li>
+<li><p><strong>搜索对象存储 OSS</strong></p>
 </li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.ssh</span><br><span class="line">vim ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-
-<p>怎么添加属实八仙过海各显神通</p>
-<ul>
-<li>复制粘贴，退出保存。容易出错，我第一次弄的时候就死活不能免密，调试了一个多小时，重来一遍才成功。</li>
-</ul>
-<ul>
-<li>传输文件，再改名/写入</li>
-</ul>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801165416.png" alt="image-20210801165416555"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801180204.png" alt="image-20210801180204879"></p>
-<ul>
-<li>用ssh-copy-id将公钥复制到服务器</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i .ssh/id_rsa.pub root@xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意:</strong> ssh-copy-id <strong>将key写到远程机器的 ~/</strong> .ssh/authorized_key.文件中</p>
-<h3 id="安装宝塔面板"><a href="#安装宝塔面板" class="headerlink" title="安装宝塔面板"></a>安装宝塔面板</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6<span class="number">.0</span>.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
-
-<p>安装完成记录下宝塔面板地址、用户名、密码。或者bt查看</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801162449.png" alt="image-20210801162449399"></p>
-<h3 id="服务器防火墙设置"><a href="#服务器防火墙设置" class="headerlink" title="服务器防火墙设置"></a>服务器防火墙设置</h3><p>放行8888端口  登录不了的话就设置下这个  有的叫安全组</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801181550.png" alt="image-20210801181550802" style="zoom:50%;" />
-
-
-
-<h3 id="登录宝塔面板"><a href="#登录宝塔面板" class="headerlink" title="登录宝塔面板"></a>登录宝塔面板</h3><p>输入账号密码，环境安装方式：<strong>极速安装</strong>     一键安装</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801181815.png" alt="image-20210801181815072" style="zoom:50%;" />
-
-
-
-<h3 id="网站配置"><a href="#网站配置" class="headerlink" title="网站配置"></a>网站配置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182112.png" alt="image-20210801182112159"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182430.png" alt="image-20210801182430055"></p>
-<h3 id="本地HEXO-配置文件设置"><a href="#本地HEXO-配置文件设置" class="headerlink" title="本地HEXO 配置文件设置"></a>本地HEXO 配置文件设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182706.png" alt="image-20210801182706566"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182930.png" alt="image-20210801182930807"></p>
-<h3 id="测试上传"><a href="#测试上传" class="headerlink" title="测试上传"></a>测试上传</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801183525.png" alt="image-20210801183525559"></p>
-<p>最后在浏览器输入地址 查看效果即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211006.png" alt="image-20210801211006780"></p>
+<ol start="3">
+<li><strong>购买OSS资源包</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211306.png" alt="image-20210801211306142"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211453.png" alt="image-20210801211453531"></p>
+<ol start="4">
+<li><p><strong>创建Bucket</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212005.png" alt="image-20210801212005690"></p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212314.png" alt="image-20210801212314421"></p>
+<ol start="5">
+<li><strong>新建目录</strong></li>
+</ol>
+<p>对象存储/Bucket 列表/qyxie-blog/文件管理</p>
+<p>推荐目录名为：<code>img/</code>目录名后要加一个<code>/</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212706.png" alt="image-20210801212706425"></p>
+<h3 id="配置AccessKey"><a href="#配置AccessKey" class="headerlink" title="配置AccessKey"></a>配置AccessKey</h3><ol>
+<li><strong>找到右上角的头像 - AccessKey管理</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213136.png" alt="image-20210801213136841"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213200.png" alt="image-20210801213200840"></p>
+<ol start="2">
+<li><strong>创建AccessKey</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213218.png" alt="image-20210801213218688"></p>
+<ol start="3">
+<li><strong>保存AccessKey ID 和AccessKey Secret</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213430.png" alt="image-20200812145115691"></p>
+<ol start="4">
+<li><p><strong>记下存储空间名和存储区域</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213917.png" alt="image-20210801213917839"></p>
+</li>
+</ol>
+<h3 id="PicGo设置"><a href="#PicGo设置" class="headerlink" title="PicGo设置"></a>PicGo设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801214043.png" alt="image-20210801214043035"></p>
+<p>好了，使用起来也是非常的方便快捷呢。</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif" alt="img"></p>
-<p>建站完成，过程坎坷，一波三折。建议跳过前两步，直接部署到服务器！</p>
-<p>下期教大家如何美化自己的Hexo博客。</p>
+<h3 id="Tips：设置防盗链"><a href="#Tips：设置防盗链" class="headerlink" title="Tips：设置防盗链"></a>Tips：设置防盗链</h3><p>防盗链，就是防止别人盗取你的图片。怕有居心不良的人用我们资源拿去在他们网站展示，消费的是我们的流量，为了解决这种问题，才会有防盗链这个思路。</p>
+<p>存储对象 -&gt;  权限管理 -&gt; 防盗链</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801220136.png" alt="image-20210801220136432"></p>
+<p>但这也将导致编辑博客时<code>Typora</code>本地无法预览图片，暂时不知道如何解决，酌情使用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155518.gif" alt="img"></p>
 
       
     </div>
@@ -620,13 +600,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
-          
-            <a href="/tags/Termux/" rel="tag"># Termux</a>
-          
             <a href="/tags/aliyun/" rel="tag"># aliyun</a>
           
-            <a href="/tags/%E5%AE%9D%E5%A1%94/" rel="tag"># 宝塔</a>
+            <a href="/tags/PicGo/" rel="tag"># PicGo</a>
+          
+            <a href="/tags/OSS/" rel="tag"># OSS</a>
           
         </div>
       
@@ -639,8 +617,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/07/30/21073001/" rel="next" title="搭建Hexo博客(二)：Hexo+github搭建博客">
-                <i class="fa fa-chevron-left"></i> 搭建Hexo博客(二)：Hexo+github搭建博客
+              <a href="/2021/07/31/21073101/" rel="next" title="搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云">
+                <i class="fa fa-chevron-left"></i> 搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云
               </a>
             
           </div>
@@ -649,8 +627,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/08/01/21080101/" rel="prev" title="PicGo + 阿里云对象存储OSS搭建个人图床">
-                PicGo + 阿里云对象存储OSS搭建个人图床 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/08/06/21080601/" rel="prev" title="Hexo之Next主题优化改造">
+                Hexo之Next主题优化改造 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -852,7 +830,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D"><span class="nav-number">1.</span> <span class="nav-text">购买服务器域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">git配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">免密登录配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF"><span class="nav-number">5.</span> <span class="nav-text">安装宝塔面板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%B2%E7%81%AB%E5%A2%99%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">服务器防火墙设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF"><span class="nav-number">7.</span> <span class="nav-text">登录宝塔面板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E9%85%8D%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">网站配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0HEXO-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE"><span class="nav-number">9.</span> <span class="nav-text">本地HEXO 配置文件设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%8A%E4%BC%A0"><span class="nav-number">10.</span> <span class="nav-text">测试上传</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDPicGo"><span class="nav-number">1.</span> <span class="nav-text">下载PicGo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85PicGo"><span class="nav-number">2.</span> <span class="nav-text">安装PicGo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E9%80%9A%E5%B9%B6%E5%88%9B%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8OSS"><span class="nav-number">3.</span> <span class="nav-text">开通并创建阿里云对象存储OSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEAccessKey"><span class="nav-number">4.</span> <span class="nav-text">配置AccessKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PicGo%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">PicGo设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips%EF%BC%9A%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-number">6.</span> <span class="nav-text">Tips：设置防盗链</span></a></li></ol></div>
             
 
           </div>

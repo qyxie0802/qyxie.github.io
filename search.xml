@@ -75,6 +75,62 @@
       </tags>
   </entry>
   <entry>
+    <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
+    <url>/2021/07/30/21073001/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
+
+
+
+<span id="more"></span>
+
+
+
+<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
+<h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150044.png" alt="20210801134206"></p>
+<h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150052.png" alt="20210801134215"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150057.png" alt="20210801134223"></p>
+<h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
+<p>默认回车</p>
+<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
+<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150123.png" alt="20210801134304"></p>
+<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io</strong>！！！</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150142.png" alt="20210801134310"></p>
+<p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
+<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150228.png" alt="20210801134321"></p>
+<p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150234.png" alt="20210801134326"></p>
+<p>保存退出</p>
+<p><code>hexo g</code> 生成静态文件</p>
+<p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150244.png" alt="20210801134331"></p>
+<p>github仓库中就可以看到推送过来的文件了</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150314.png" alt="image-20210801150314039"></p>
+<p>然后在浏览器中访问：</p>
+<p>https://用户名.github.io</p>
+<p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
+<p>但是，github服务器在国外，DNS污染，github.io加载非常慢甚至有时候访问不了<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150340.png" alt="20210801134345">可以通过修改<code>C:\Windows\System32\drivers\etc\hosts</code>文件加快访问速度，但博客是给别人看的，不合适！！！</p>
+<p>当然也可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
+<p>欲知后事如何，且听下回分解（用宝塔面板将Hexo部署到阿里云）</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云</title>
     <url>/2021/07/31/21073101/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141040.jpg" alt="BT面板"></p>
@@ -189,62 +245,6 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
-    <url>/2021/07/30/21073001/</url>
-    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
-
-
-
-<span id="more"></span>
-
-
-
-<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
-<h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150044.png" alt="20210801134206"></p>
-<h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150052.png" alt="20210801134215"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150057.png" alt="20210801134223"></p>
-<h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
-<p>默认回车</p>
-<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
-<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150123.png" alt="20210801134304"></p>
-<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io</strong>！！！</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150142.png" alt="20210801134310"></p>
-<p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
-<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150228.png" alt="20210801134321"></p>
-<p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150234.png" alt="20210801134326"></p>
-<p>保存退出</p>
-<p><code>hexo g</code> 生成静态文件</p>
-<p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150244.png" alt="20210801134331"></p>
-<p>github仓库中就可以看到推送过来的文件了</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150314.png" alt="image-20210801150314039"></p>
-<p>然后在浏览器中访问：</p>
-<p>https://用户名.github.io</p>
-<p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
-<p>但是，github服务器在国外，DNS污染，github.io加载非常慢甚至有时候访问不了<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150340.png" alt="20210801134345">可以通过修改<code>C:\Windows\System32\drivers\etc\hosts</code>文件加快访问速度，但博客是给别人看的，不合适！！！</p>
-<p>当然也可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
-<p>欲知后事如何，且听下回分解（用宝塔面板将Hexo部署到阿里云）</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Termux</tag>
-        <tag>github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PicGo + 阿里云对象存储OSS搭建个人图床</title>
     <url>/2021/08/01/21080101/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141727.jpg" alt="aliyunOSS"></p>
@@ -329,7 +329,7 @@
 <p>搭建个人图床主要目的还是写博客快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
 ]]></content>
       <categories>
-        <category>个人图床</category>
+        <category>实用教程</category>
       </categories>
       <tags>
         <tag>aliyun</tag>
@@ -379,31 +379,6 @@
         <tag>PicGo</tag>
         <tag>Markdown</tag>
         <tag>Typora</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/07/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hello World</tag>
       </tags>
   </entry>
   <entry>
@@ -667,6 +642,83 @@
       </categories>
       <tags>
         <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建获取网站的Favicon图标的API</title>
+    <url>/2021/08/08/21080801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233912.jpg" alt="API"></p>
+<span id="more"></span>
+
+<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
+<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
+<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
+<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
+<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
+<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>下载程序到网站目录</strong></em></p>
+<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
+<p><em><strong>解压缩</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
+<p><em><strong>域名添加解析</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
+<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
+<p>有问题的话试试：cache 文件夹给 755 权限。</p>
+<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
+<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
+<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>favicon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/07/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hello World</tag>
       </tags>
   </entry>
 </search>

@@ -1,136 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>搭建Hexo博客(一)：手机(Termux) + 内网穿透(Sunny-Ngrok)</title>
-    <url>/2021/07/28/21072801/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140431.jpeg" alt="Hexo"></p>
-<span id="more"></span>
-
-<p>PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。</p>
-<p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
-<p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
-<p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
-<h3 id="Termux下载"><a href="#Termux下载" class="headerlink" title="Termux下载"></a>Termux下载</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
-<p><a href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
-<p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
-<h3 id="安装后换源"><a href="#安装后换源" class="headerlink" title="安装后换源"></a>安装后换源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145218.png" alt="20210801133736"></p>
-<p><strong>Hexo</strong> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145258.png" alt="20210801133813"></p>
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145435.png" alt="20210801133900"></p>
-<p>​            </p>
-<h3 id="新建一个博客网站"><a href="#新建一个博客网站" class="headerlink" title="新建一个博客网站"></a>新建一个博客网站</h3><p>命名随意，blog</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145349.png" alt="20210801133818"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
-
-<p>进入博客网站目录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g </span><br></pre></td></tr></table></figure>
-
-<p>生成静态文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
-
-<p>启动服务。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145557.png" alt="image-20210801145557639"></p>
-<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145621.png" alt="20210801133945"></p>
-<h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
-<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145631.png" alt="20210801133959"></p>
-<p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145642.png" alt="20210801134012"></p>
-<p>完成订单 <strong>隧道id</strong>复制下 有用</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145929.png" alt="image-20210801145929348"></p>
-<h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145952.png" alt="20210801134044"></p>
-<p>这里可能会遇到两个问题 </p>
-<ul>
-<li>python没有安装</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install python</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>找不到解压后的sunny.py的路径运行</li>
-</ul>
-<p>有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
-<p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150008.png" alt="20210801134108"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150019.png" alt="20210801134140">实现了外网访问。</p>
-<p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
-<p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Termux</tag>
-        <tag>内网穿透</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
-    <url>/2021/07/30/21073001/</url>
-    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
-
-
-
-<span id="more"></span>
-
-
-
-<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
-<h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150044.png" alt="20210801134206"></p>
-<h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150052.png" alt="20210801134215"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150057.png" alt="20210801134223"></p>
-<h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
-<p>默认回车</p>
-<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
-<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150123.png" alt="20210801134304"></p>
-<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io</strong>！！！</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150142.png" alt="20210801134310"></p>
-<p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
-<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150228.png" alt="20210801134321"></p>
-<p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150234.png" alt="20210801134326"></p>
-<p>保存退出</p>
-<p><code>hexo g</code> 生成静态文件</p>
-<p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150244.png" alt="20210801134331"></p>
-<p>github仓库中就可以看到推送过来的文件了</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150314.png" alt="image-20210801150314039"></p>
-<p>然后在浏览器中访问：</p>
-<p>https://用户名.github.io</p>
-<p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
-<p>但是，github服务器在国外，DNS污染，github.io加载非常慢甚至有时候访问不了<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150340.png" alt="20210801134345">可以通过修改<code>C:\Windows\System32\drivers\etc\hosts</code>文件加快访问速度，但博客是给别人看的，不合适！！！</p>
-<p>当然也可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
-<p>欲知后事如何，且听下回分解（用宝塔面板将Hexo部署到阿里云）</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Termux</tag>
-        <tag>github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云</title>
     <url>/2021/07/31/21073101/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141040.jpg" alt="BT面板"></p>
@@ -245,96 +115,59 @@
       </tags>
   </entry>
   <entry>
-    <title>PicGo + 阿里云对象存储OSS搭建个人图床</title>
-    <url>/2021/08/01/21080101/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141727.jpg" alt="aliyunOSS"></p>
+    <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
+    <url>/2021/07/30/21073001/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
+
+
+
 <span id="more"></span>
 
-<p><em><strong>图床</strong></em>，就是指储存图片的服务器。</p>
-<p>网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。</p>
-<p><em><strong>图床工具</strong></em>，就是自动把本地图片转换成链接的一款工具，网络上有很多图床工具，就目前使用种类而言，PicGo 算得上一款比较优秀的图床工具。它是一款用 <code>Electron-vue</code> 开发的软件，可以支持微博，七牛云，腾讯云COS，又拍云，GitHub，阿里云OSS，SM.MS，imgur 等8种常用图床，功能强大，简单易用。</p>
-<h3 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h3><p><a href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载地址</a></p>
-<p><em>mac</em> 系统选择 .<em>dmg</em> 下载，<em>windwos</em> 选择 <em>.exe</em>系统</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png" alt="image-20210801202853961" style="zoom: 67%;" />
 
 
+<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
+<h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装PicGo"><a href="#安装PicGo" class="headerlink" title="安装PicGo"></a>安装PicGo</h3><p>安装完成后在右下角，我一直打不开以为安装没成功，又卸载重装了一遍才发现在右下角<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155405.jpg" alt="img"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203029.png" alt="image-20210801203029160"></p>
-<p>一开始用Github仓库存储图片，但还是那个问题，github服务器在国外，不做加速处理，图片加载慢，甚至加载不出来。配置过程讲个大概就行。</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203912.png" alt="QQ截图20210801142842" style="zoom:50%;" />
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150044.png" alt="20210801134206"></p>
+<h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
 
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150052.png" alt="20210801134215"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150057.png" alt="20210801134223"></p>
+<h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
 
-
-
-
-<p><strong>新建一个仓库</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204908.png" alt="image-20210801204908692"></p>
-<p>个人中心，<em>Settings</em>-&gt; <em>Developer settings</em> -&gt;  <em>Personal access tokens</em>，我们在这里创建需要的 <em>token</em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204725.png" alt="image-20210801204725223"></p>
-<p>生成一个 <em>token</em> ，复制保存到其他地方，这个 <em>token</em> 只显示一次。</p>
-<p>打开PicGo -&gt;  图床设置 -&gt;  github图床</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204500.png" alt="image-20210801204500664"></p>
-<p>俗话说的好，免费的就没好东西<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155509.gif" alt="img">Gitee也行，虽然是国内的，但是据说仓库的容量有上限（好像是1个G)，并且图片的大小超过1M 就需要登录才能显示，否则看不见。</p>
-<p>这种事可以花点钱嘛~花不了多少钱。40G的容量一年才9块钱，外网流出流量 00:00-08:00（闲时）：0.25元/GB \ 8:00-24:00（忙时）：0.50元/GB   完全可以抹零。</p>
-<h3 id="开通并创建阿里云对象存储OSS"><a href="#开通并创建阿里云对象存储OSS" class="headerlink" title="开通并创建阿里云对象存储OSS"></a>开通并创建阿里云对象存储OSS</h3><ol>
-<li><p><strong>登录<a href="https://www.aliyun.com/">阿里云</a></strong></p>
-</li>
-<li><p><strong>搜索对象存储 OSS</strong></p>
-</li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211006.png" alt="image-20210801211006780"></p>
-<ol start="3">
-<li><strong>购买OSS资源包</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211306.png" alt="image-20210801211306142"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211453.png" alt="image-20210801211453531"></p>
-<ol start="4">
-<li><p><strong>创建Bucket</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212005.png" alt="image-20210801212005690"></p>
-</li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212314.png" alt="image-20210801212314421"></p>
-<ol start="5">
-<li><strong>新建目录</strong></li>
-</ol>
-<p>对象存储/Bucket 列表/qyxie-blog/文件管理</p>
-<p>推荐目录名为：<code>img/</code>目录名后要加一个<code>/</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212706.png" alt="image-20210801212706425"></p>
-<h3 id="配置AccessKey"><a href="#配置AccessKey" class="headerlink" title="配置AccessKey"></a>配置AccessKey</h3><ol>
-<li><strong>找到右上角的头像 - AccessKey管理</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213136.png" alt="image-20210801213136841"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213200.png" alt="image-20210801213200840"></p>
-<ol start="2">
-<li><strong>创建AccessKey</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213218.png" alt="image-20210801213218688"></p>
-<ol start="3">
-<li><strong>保存AccessKey ID 和AccessKey Secret</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213430.png" alt="image-20200812145115691"></p>
-<ol start="4">
-<li><p><strong>记下存储空间名和存储区域</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213917.png" alt="image-20210801213917839"></p>
-</li>
-</ol>
-<h3 id="PicGo设置"><a href="#PicGo设置" class="headerlink" title="PicGo设置"></a>PicGo设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801214043.png" alt="image-20210801214043035"></p>
-<p>好了，使用起来也是非常的方便快捷呢。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif" alt="img"></p>
-<h3 id="Tips：设置防盗链"><a href="#Tips：设置防盗链" class="headerlink" title="Tips：设置防盗链"></a>Tips：设置防盗链</h3><p>防盗链，就是防止别人盗取你的图片。怕有居心不良的人用我们资源拿去在他们网站展示，消费的是我们的流量，为了解决这种问题，才会有防盗链这个思路。</p>
-<p>存储对象 -&gt;  权限管理 -&gt; 防盗链</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801220136.png" alt="image-20210801220136432"></p>
-<p>但这也将导致编辑博客时<code>Typora</code>本地无法预览图片，暂时不知道如何解决，酌情使用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155518.gif" alt="img"></p>
-<p>搭建个人图床主要目的还是写博客快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
+<p>默认回车</p>
+<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
+<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150123.png" alt="20210801134304"></p>
+<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io</strong>！！！</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150142.png" alt="20210801134310"></p>
+<p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
+<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150228.png" alt="20210801134321"></p>
+<p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150234.png" alt="20210801134326"></p>
+<p>保存退出</p>
+<p><code>hexo g</code> 生成静态文件</p>
+<p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150244.png" alt="20210801134331"></p>
+<p>github仓库中就可以看到推送过来的文件了</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150314.png" alt="image-20210801150314039"></p>
+<p>然后在浏览器中访问：</p>
+<p>https://用户名.github.io</p>
+<p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
+<p>但是，github服务器在国外，DNS污染，github.io加载非常慢甚至有时候访问不了<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150340.png" alt="20210801134345">可以通过修改<code>C:\Windows\System32\drivers\etc\hosts</code>文件加快访问速度，但博客是给别人看的，不合适！！！</p>
+<p>当然也可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
+<p>欲知后事如何，且听下回分解（用宝塔面板将Hexo部署到阿里云）</p>
 ]]></content>
       <categories>
-        <category>实用教程</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>aliyun</tag>
-        <tag>PicGo</tag>
-        <tag>OSS</tag>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -395,7 +228,7 @@
 <h3 id="站点基本设置"><a href="#站点基本设置" class="headerlink" title="站点基本设置"></a>站点基本设置</h3><p>编辑 <strong>站点配置文件</strong>。Site</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806223619.png" alt="image-20210806223619642"></p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806224114.png" alt="image-20210806224114858"></p>
-<h3 id="设置菜单"><a href="#设置菜单" class="headerlink" title="设置菜单"></a>设置菜单</h3><p>设定菜单内容，对应<strong>主题配置文件</strong>中字段是 <code>menu</code>。 菜单内容的设置格式是：<code>item name: link</code>。其中 <code>item name </code>是一个名称，这个名称并不直接显示在页面上，她将用于匹配图标以及翻译。</p>
+<h3 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h3><p>设定菜单内容，对应<strong>主题配置文件</strong>中字段是 <code>menu</code>。 菜单内容的设置格式是：<code>item name: link</code>。其中 <code>item name </code>是一个名称，这个名称并不直接显示在页面上，她将用于匹配图标以及翻译。</p>
 <p>NexT 默认的菜单项有：</p>
 <table>
 <thead>
@@ -465,7 +298,11 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Local search</span><br><span class="line"># Dependencies: https://github.com/flashlab/hexo-generator-search</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807030800.png" alt="image-20210807030800335"></p>
-<h3 id="设置-头像"><a href="#设置-头像" class="headerlink" title="设置 头像"></a>设置 头像</h3><ul>
+<h3 id="Favicon"><a href="#Favicon" class="headerlink" title="Favicon"></a>Favicon</h3><p>默认图标是N，修改<code>主题配置文件</code>，只需要设置small和medium两个就可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon.ico</span><br><span class="line">  medium: /images/favicon.ico</span><br><span class="line">  apple_touch_icon: /images/apple-touch-icon-next.png</span><br><span class="line">  safari_pinned_tab: /images/logo.svg</span><br></pre></td></tr></table></figure>
+
+<p>支持本地路径图片/网络图片</p>
+<h3 id="头像"><a href="#头像" class="headerlink" title="头像"></a>头像</h3><ul>
 <li><strong>添加头像</strong></li>
 </ul>
 <p>编辑 <strong>主题配置文件</strong>， 修改字段 <code>avatar</code>， 值设置成头像的链接地址。其中，头像的链接地址可以是：</p>
@@ -592,12 +429,109 @@
 <p>Valine 目前使用的是<a href="http://cn.gravatar.com/">Gravatar</a> 作为评论列表头像。</p>
 <p>请自行登录或注册<a href="http://cn.gravatar.com/">Gravatar</a>，然后修改自己的头像。</p>
 <p>评论的时候，留下在<a href="http://cn.gravatar.com/">Gravatar</a>注册时所使用的邮箱即可。<del>打不开就翻墙。</del></p>
+<p><em><strong>其实还有很多都是“抄作业”，这里直接给“作业”大家照抄就行。</strong></em></p>
+<h3 id="看板娘-Live2D"><a href="#看板娘-Live2D" class="headerlink" title="看板娘(Live2D)"></a>看板娘(Live2D)</h3><p><a href="https://www.jianshu.com/p/d72a86209fd5">HEXO+icarus主题 给博客添加看板娘(Live2D)</a></p>
+<h3 id="分享功能"><a href="#分享功能" class="headerlink" title="分享功能"></a>分享功能</h3><p><a href="https://blog.csdn.net/qq_29951485/article/details/88667321">Hexo NexT主题中添加百度分享功能</a></p>
+<p><em>持续优化，持续更新吧   现在比较大的问题就是首页文章的布局，一篇文章标题+图片占的篇幅太大 文章多了之后没法一目了然。</em></p>
 ]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
       <tags>
         <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PicGo + 阿里云对象存储OSS搭建个人图床</title>
+    <url>/2021/08/01/21080101/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141727.jpg" alt="aliyunOSS"></p>
+<span id="more"></span>
+
+<p><em><strong>图床</strong></em>，就是指储存图片的服务器。</p>
+<p>网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。</p>
+<p><em><strong>图床工具</strong></em>，就是自动把本地图片转换成链接的一款工具，网络上有很多图床工具，就目前使用种类而言，PicGo 算得上一款比较优秀的图床工具。它是一款用 <code>Electron-vue</code> 开发的软件，可以支持微博，七牛云，腾讯云COS，又拍云，GitHub，阿里云OSS，SM.MS，imgur 等8种常用图床，功能强大，简单易用。</p>
+<h3 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h3><p><a href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载地址</a></p>
+<p><em>mac</em> 系统选择 .<em>dmg</em> 下载，<em>windwos</em> 选择 <em>.exe</em>系统</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png" alt="image-20210801202853961" style="zoom: 67%;" />
+
+
+
+<h3 id="安装PicGo"><a href="#安装PicGo" class="headerlink" title="安装PicGo"></a>安装PicGo</h3><p>安装完成后在右下角，我一直打不开以为安装没成功，又卸载重装了一遍才发现在右下角<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155405.jpg" alt="img"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203029.png" alt="image-20210801203029160"></p>
+<p>一开始用Github仓库存储图片，但还是那个问题，github服务器在国外，不做加速处理，图片加载慢，甚至加载不出来。配置过程讲个大概就行。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203912.png" alt="QQ截图20210801142842" style="zoom:50%;" />
+
+
+
+
+
+<p><strong>新建一个仓库</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204908.png" alt="image-20210801204908692"></p>
+<p>个人中心，<em>Settings</em>-&gt; <em>Developer settings</em> -&gt;  <em>Personal access tokens</em>，我们在这里创建需要的 <em>token</em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204725.png" alt="image-20210801204725223"></p>
+<p>生成一个 <em>token</em> ，复制保存到其他地方，这个 <em>token</em> 只显示一次。</p>
+<p>打开PicGo -&gt;  图床设置 -&gt;  github图床</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204500.png" alt="image-20210801204500664"></p>
+<p>俗话说的好，免费的就没好东西<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155509.gif" alt="img">Gitee也行，虽然是国内的，但是据说仓库的容量有上限（好像是1个G)，并且图片的大小超过1M 就需要登录才能显示，否则看不见。</p>
+<p>这种事可以花点钱嘛~花不了多少钱。40G的容量一年才9块钱，外网流出流量 00:00-08:00（闲时）：0.25元/GB \ 8:00-24:00（忙时）：0.50元/GB   完全可以抹零。</p>
+<h3 id="开通并创建阿里云对象存储OSS"><a href="#开通并创建阿里云对象存储OSS" class="headerlink" title="开通并创建阿里云对象存储OSS"></a>开通并创建阿里云对象存储OSS</h3><ol>
+<li><p><strong>登录<a href="https://www.aliyun.com/">阿里云</a></strong></p>
+</li>
+<li><p><strong>搜索对象存储 OSS</strong></p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211006.png" alt="image-20210801211006780"></p>
+<ol start="3">
+<li><strong>购买OSS资源包</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211306.png" alt="image-20210801211306142"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211453.png" alt="image-20210801211453531"></p>
+<ol start="4">
+<li><p><strong>创建Bucket</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212005.png" alt="image-20210801212005690"></p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212314.png" alt="image-20210801212314421"></p>
+<ol start="5">
+<li><strong>新建目录</strong></li>
+</ol>
+<p>对象存储/Bucket 列表/qyxie-blog/文件管理</p>
+<p>推荐目录名为：<code>img/</code>目录名后要加一个<code>/</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212706.png" alt="image-20210801212706425"></p>
+<h3 id="配置AccessKey"><a href="#配置AccessKey" class="headerlink" title="配置AccessKey"></a>配置AccessKey</h3><ol>
+<li><strong>找到右上角的头像 - AccessKey管理</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213136.png" alt="image-20210801213136841"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213200.png" alt="image-20210801213200840"></p>
+<ol start="2">
+<li><strong>创建AccessKey</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213218.png" alt="image-20210801213218688"></p>
+<ol start="3">
+<li><strong>保存AccessKey ID 和AccessKey Secret</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213430.png" alt="image-20200812145115691"></p>
+<ol start="4">
+<li><p><strong>记下存储空间名和存储区域</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213917.png" alt="image-20210801213917839"></p>
+</li>
+</ol>
+<h3 id="PicGo设置"><a href="#PicGo设置" class="headerlink" title="PicGo设置"></a>PicGo设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801214043.png" alt="image-20210801214043035"></p>
+<p>好了，使用起来也是非常的方便快捷呢。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif" alt="img"></p>
+<h3 id="Tips：设置防盗链"><a href="#Tips：设置防盗链" class="headerlink" title="Tips：设置防盗链"></a>Tips：设置防盗链</h3><p>防盗链，就是防止别人盗取你的图片。怕有居心不良的人用我们资源拿去在他们网站展示，消费的是我们的流量，为了解决这种问题，才会有防盗链这个思路。</p>
+<p>存储对象 -&gt;  权限管理 -&gt; 防盗链</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801220136.png" alt="image-20210801220136432"></p>
+<p>但这也将导致编辑博客时<code>Typora</code>本地无法预览图片，暂时不知道如何解决，酌情使用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155518.gif" alt="img"></p>
+<p>搭建个人图床主要目的还是写博客快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>aliyun</tag>
+        <tag>PicGo</tag>
+        <tag>OSS</tag>
       </tags>
   </entry>
   <entry>
@@ -755,6 +689,80 @@
       </categories>
       <tags>
         <tag>Hello World</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建Hexo博客(一)：手机(Termux) + 内网穿透(Sunny-Ngrok)</title>
+    <url>/2021/07/28/21072801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140431.jpeg" alt="Hexo"></p>
+<span id="more"></span>
+
+<p>PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。</p>
+<p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
+<p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
+<p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
+<h3 id="Termux下载"><a href="#Termux下载" class="headerlink" title="Termux下载"></a>Termux下载</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
+<p><a href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
+<p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
+<h3 id="安装后换源"><a href="#安装后换源" class="headerlink" title="安装后换源"></a>安装后换源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145218.png" alt="20210801133736"></p>
+<p><strong>Hexo</strong> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145258.png" alt="20210801133813"></p>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145435.png" alt="20210801133900"></p>
+<p>​            </p>
+<h3 id="新建一个博客网站"><a href="#新建一个博客网站" class="headerlink" title="新建一个博客网站"></a>新建一个博客网站</h3><p>命名随意，blog</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145349.png" alt="20210801133818"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
+
+<p>进入博客网站目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>生成静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
+
+<p>启动服务。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145557.png" alt="image-20210801145557639"></p>
+<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145621.png" alt="20210801133945"></p>
+<h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
+<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145631.png" alt="20210801133959"></p>
+<p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145642.png" alt="20210801134012"></p>
+<p>完成订单 <strong>隧道id</strong>复制下 有用</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145929.png" alt="image-20210801145929348"></p>
+<h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145952.png" alt="20210801134044"></p>
+<p>这里可能会遇到两个问题 </p>
+<ul>
+<li>python没有安装</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install python</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>找不到解压后的sunny.py的路径运行</li>
+</ul>
+<p>有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
+<p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150008.png" alt="20210801134108"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150019.png" alt="20210801134140">实现了外网访问。</p>
+<p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
+<p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>内网穿透</tag>
       </tags>
   </entry>
 </search>

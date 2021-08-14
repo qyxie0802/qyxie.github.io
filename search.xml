@@ -338,50 +338,6 @@
       </tags>
   </entry>
   <entry>
-    <title>如何优雅写博客</title>
-    <url>/2021/08/07/21080701/</url>
-    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141834.jpg" alt="Typora" style="zoom:150%;" />
-
-<span id="more"></span>
-
-<p><strong>Markdown</strong>是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<em>——百度百科</em></p>
-<p>Hexo 使用 <strong>Markdown</strong>(或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>工欲善其事必先利其器，用Hexo写博客不可能每次都</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
-
-<p>然后用记事本或者vi编辑器去写文章中。效率非常低，而且图片插入是个难点。需要一个 高效好用的<strong>Markdown 文本编辑器</strong>。</p>
-<h2 id="Typora-是什么？"><a href="#Typora-是什么？" class="headerlink" title="Typora 是什么？"></a>Typora 是什么？</h2><p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，完全免费的。<a href="https://typora.io/">Typora 官网</a> 上他们将 Typora 描述为 「A truly <strong>minimal</strong> markdown editor. 」。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807142738.png" alt="img"></p>
-<h4 id="极致简洁"><a href="#极致简洁" class="headerlink" title="极致简洁"></a>极致简洁</h4><p>打开Typora，你会发现它的界面非常简洁，几乎没有任何按钮，只在上方有一排功能键，右下角是字数统计，其余强大的功能都被藏在后台。且按下F11进入全屏状态，你的世界里就只有文字。</p>
-<h4 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h4><p>般Markdown 编辑器界面都是两个窗口，左边是Markdown 源码，右边是效果预览。有时一边写源码，一边看效果，确实有点不便。但是使用<strong>Typora</strong> 可以实时的看到渲染效果，而且是在同一个界面，所见即所得。</p>
-<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p><strong>Typora</strong> 对几乎所有Markdown 语法都提供了快捷操作，通过菜单栏的<code>段落</code> 和<code>格式</code> 中的功能可以快速设置标记语法，一些常用的操作都有快捷键，用起来非常高效。</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145046.png" alt="image-20210807145046432" style="zoom:50%;" />
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145129.png" alt="image-20210807145129861"></p>
-<h4 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h4><p>Typora 的图片插入功能是广受好评的。要知道，Markdown 原生不太注重图片插入的功能，但你在 Typora 中：</p>
-<ul>
-<li><p>可以直接将网络图片、剪贴板图片复制到文档中</p>
-</li>
-<li><p>可以拖动本地图片到文档中</p>
-</li>
-<li><p><a href="https://www.qyxie.top/2021/08/01/21080101/#more">配合PicGo个人图床</a>  <!--PicGo + 阿里云对象存储OSS搭建个人图床教程--></p>
-<p><code>文件</code>-&gt;<code>偏好设置</code>-&gt;<code>图像</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807143933.png" alt="image-20210807143933250"></p>
-</li>
-</ul>
-<p>Typora 会自动帮你插入符合 Markdown 语法的图片语句，并给它加上标题。</p>
-<p>Typora和PicGo几乎绑定，写博客才能快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>PicGo</tag>
-        <tag>Markdown</tag>
-        <tag>Typora</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo之Next主题优化改造</title>
     <url>/2021/08/06/21080601/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806201406.png" alt="image-20210806201405765"></p>
@@ -645,7 +601,51 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建获取网站的Favicon图标的API</title>
+    <title>如何优雅写博客</title>
+    <url>/2021/08/07/21080701/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141834.jpg" alt="Typora" style="zoom:150%;" />
+
+<span id="more"></span>
+
+<p><strong>Markdown</strong>是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<em>——百度百科</em></p>
+<p>Hexo 使用 <strong>Markdown</strong>(或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>工欲善其事必先利其器，用Hexo写博客不可能每次都</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后用记事本或者vi编辑器去写文章中。效率非常低，而且图片插入是个难点。需要一个 高效好用的<strong>Markdown 文本编辑器</strong>。</p>
+<h2 id="Typora-是什么？"><a href="#Typora-是什么？" class="headerlink" title="Typora 是什么？"></a>Typora 是什么？</h2><p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，完全免费的。<a href="https://typora.io/">Typora 官网</a> 上他们将 Typora 描述为 「A truly <strong>minimal</strong> markdown editor. 」。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807142738.png" alt="img"></p>
+<h4 id="极致简洁"><a href="#极致简洁" class="headerlink" title="极致简洁"></a>极致简洁</h4><p>打开Typora，你会发现它的界面非常简洁，几乎没有任何按钮，只在上方有一排功能键，右下角是字数统计，其余强大的功能都被藏在后台。且按下F11进入全屏状态，你的世界里就只有文字。</p>
+<h4 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h4><p>般Markdown 编辑器界面都是两个窗口，左边是Markdown 源码，右边是效果预览。有时一边写源码，一边看效果，确实有点不便。但是使用<strong>Typora</strong> 可以实时的看到渲染效果，而且是在同一个界面，所见即所得。</p>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p><strong>Typora</strong> 对几乎所有Markdown 语法都提供了快捷操作，通过菜单栏的<code>段落</code> 和<code>格式</code> 中的功能可以快速设置标记语法，一些常用的操作都有快捷键，用起来非常高效。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145046.png" alt="image-20210807145046432" style="zoom:50%;" />
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145129.png" alt="image-20210807145129861"></p>
+<h4 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h4><p>Typora 的图片插入功能是广受好评的。要知道，Markdown 原生不太注重图片插入的功能，但你在 Typora 中：</p>
+<ul>
+<li><p>可以直接将网络图片、剪贴板图片复制到文档中</p>
+</li>
+<li><p>可以拖动本地图片到文档中</p>
+</li>
+<li><p><a href="https://www.qyxie.top/2021/08/01/21080101/#more">配合PicGo个人图床</a>  <!--PicGo + 阿里云对象存储OSS搭建个人图床教程--></p>
+<p><code>文件</code>-&gt;<code>偏好设置</code>-&gt;<code>图像</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807143933.png" alt="image-20210807143933250"></p>
+</li>
+</ul>
+<p>Typora 会自动帮你插入符合 Markdown 语法的图片语句，并给它加上标题。</p>
+<p>Typora和PicGo几乎绑定，写博客才能快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>PicGo</tag>
+        <tag>Markdown</tag>
+        <tag>Typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>获取网站的Favicon图标的API接口</title>
     <url>/2021/08/08/21080801/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233912.jpg" alt="API"></p>
 <span id="more"></span>
@@ -694,6 +694,42 @@
       <tags>
         <tag>API</tag>
         <tag>favicon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易的随机图片API接口</title>
+    <url>/2021/08/14/21081401/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233912.jpg" alt="API"></p>
+<span id="more"></span>    
+
+
+
+<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
+<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
+<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>新建目录</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
+<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
+<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
+<p>好了，在网页源码中调用就行了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
+<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
       </tags>
   </entry>
   <entry>

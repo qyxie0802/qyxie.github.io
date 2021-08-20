@@ -382,6 +382,58 @@
       </tags>
   </entry>
   <entry>
+    <title>获取网站的Favicon图标的API接口</title>
+    <url>/2021/08/08/21080801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
+<span id="more"></span>
+
+<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
+<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
+<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
+<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
+<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
+<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>下载程序到网站目录</strong></em></p>
+<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
+<p><em><strong>解压缩</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
+<p><em><strong>域名添加解析</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
+<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
+<p>有问题的话试试：cache 文件夹给 755 权限。</p>
+<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
+<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
+<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>favicon</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo之Next主题优化改造</title>
     <url>/2021/08/06/21080601/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132857.png" alt="image-20210820132857390"></p>
@@ -653,58 +705,6 @@
       </tags>
   </entry>
   <entry>
-    <title>获取网站的Favicon图标的API接口</title>
-    <url>/2021/08/08/21080801/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
-<span id="more"></span>
-
-<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
-<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
-<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
-<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
-<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
-<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
-<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
-<p><em><strong>下载程序到网站目录</strong></em></p>
-<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
-<p><em><strong>解压缩</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
-<p><em><strong>域名添加解析</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
-<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
-<p>有问题的话试试：cache 文件夹给 755 权限。</p>
-<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
-<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
-<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-        <tag>favicon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>简易的随机图片API接口</title>
     <url>/2021/08/14/21081401/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
@@ -798,9 +798,9 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo上传服务器后CSS样式失效</title>
+    <title>Hexo部署到服务器CSS样式失效</title>
     <url>/2021/08/20/21082001/</url>
-    <content><![CDATA[<p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。我想这应该是最后一次主题美化了，下定决心以后专心写文章。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
+    <content><![CDATA[<p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
 <span id="more"></span>
 
 <p>我承认我急了，一下午白干了。我博客<code>github page</code>和服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。</p>
@@ -817,6 +817,52 @@
       </categories>
       <tags>
         <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何设置浏览器的默认首页</title>
+    <url>/2021/08/20/21082002/</url>
+    <content><![CDATA[<p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
+<p>我二次开发了一个简单的<a href="https://nav.qyxie.top/">个人网址导航</a>，免费为大家收录精选的网站，指引大家愉快上网，希望大家积极提交收录申请，并将此网页设置为浏览器的默认首页。</p>
+<span id="more"></span>
+
+<p>网址：<a href="https://nav.qyxie.top/">https://nav.qyxie.top/</a></p>
+<ol>
+<li><h4 id="Gogle-Chrome"><a href="#Gogle-Chrome" class="headerlink" title="Gogle Chrome"></a>Gogle Chrome</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 启动时 -&gt; 打开特定网页或一组网页 -&gt; 添加新网页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820225836.png" alt="image-20210820225836555"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230249.png" alt="image-20210820230249451"></p>
+<p>外观 -&gt; 显示“主页”按钮</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230739.png" alt="image-20210820230739006"></p>
+<p>就是左上角的这个，设置跳转</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230904.png" alt="image-20210820230904283"></p>
+<ol start="2">
+<li><h4 id="Microsoft-Edge"><a href="#Microsoft-Edge" class="headerlink" title="Microsoft Edge"></a>Microsoft Edge</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 开始、主页和新建标签页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230550.png" alt="image-20210820230550677"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230653.png" alt="image-20210820230653035"></p>
+<ol start="3">
+<li><h4 id="Internet-Explorer"><a href="#Internet-Explorer" class="headerlink" title="Internet Explorer"></a>Internet Explorer</h4></li>
+</ol>
+<p>右上角 -&gt; Internet选项 -&gt; 常规 -&gt; 主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231148.png" alt="image-20210820231148136"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231415.png" alt="image-20210820231415538"></p>
+<ol start="4">
+<li><h4 id="手机浏览器"><a href="#手机浏览器" class="headerlink" title="手机浏览器"></a>手机浏览器</h4></li>
+</ol>
+<p>设置 -&gt; 主页设置 -&gt; 编辑自定义主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820232127.png" alt="image-20210820232127516"></p>
+<p>多的不说，其他大差不差，大家都是聪明人，不用讲的太明白(<em>ﾟ∀ﾟ</em>)！ </p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Chrome</tag>
+        <tag>IE</tag>
+        <tag>Edge</tag>
       </tags>
   </entry>
   <entry>

@@ -338,6 +338,50 @@
       </tags>
   </entry>
   <entry>
+    <title>如何优雅写博客</title>
+    <url>/2021/08/07/21080701/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141834.jpg" alt="Typora" style="zoom:150%;" />
+
+<span id="more"></span>
+
+<p><strong>Markdown</strong>是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<em>——百度百科</em></p>
+<p>Hexo 使用 <strong>Markdown</strong>(或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>工欲善其事必先利其器，用Hexo写博客不可能每次都</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后用记事本或者vi编辑器去写文章中。效率非常低，而且图片插入是个难点。需要一个 高效好用的<strong>Markdown 文本编辑器</strong>。</p>
+<h2 id="Typora-是什么？"><a href="#Typora-是什么？" class="headerlink" title="Typora 是什么？"></a>Typora 是什么？</h2><p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，完全免费的。<a href="https://typora.io/">Typora 官网</a> 上他们将 Typora 描述为 「A truly <strong>minimal</strong> markdown editor. 」。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807142738.png" alt="img"></p>
+<h4 id="极致简洁"><a href="#极致简洁" class="headerlink" title="极致简洁"></a>极致简洁</h4><p>打开Typora，你会发现它的界面非常简洁，几乎没有任何按钮，只在上方有一排功能键，右下角是字数统计，其余强大的功能都被藏在后台。且按下F11进入全屏状态，你的世界里就只有文字。</p>
+<h4 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h4><p>般Markdown 编辑器界面都是两个窗口，左边是Markdown 源码，右边是效果预览。有时一边写源码，一边看效果，确实有点不便。但是使用<strong>Typora</strong> 可以实时的看到渲染效果，而且是在同一个界面，所见即所得。</p>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p><strong>Typora</strong> 对几乎所有Markdown 语法都提供了快捷操作，通过菜单栏的<code>段落</code> 和<code>格式</code> 中的功能可以快速设置标记语法，一些常用的操作都有快捷键，用起来非常高效。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145046.png" alt="image-20210807145046432" style="zoom:50%;" />
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145129.png" alt="image-20210807145129861"></p>
+<h4 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h4><p>Typora 的图片插入功能是广受好评的。要知道，Markdown 原生不太注重图片插入的功能，但你在 Typora 中：</p>
+<ul>
+<li><p>可以直接将网络图片、剪贴板图片复制到文档中</p>
+</li>
+<li><p>可以拖动本地图片到文档中</p>
+</li>
+<li><p><a href="https://www.qyxie.top/2021/08/01/21080101/#more">配合PicGo个人图床</a>  <!--PicGo + 阿里云对象存储OSS搭建个人图床教程--></p>
+<p><code>文件</code>-&gt;<code>偏好设置</code>-&gt;<code>图像</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807143933.png" alt="image-20210807143933250"></p>
+</li>
+</ul>
+<p>Typora 会自动帮你插入符合 Markdown 语法的图片语句，并给它加上标题。</p>
+<p>Typora和PicGo几乎绑定，写博客才能快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>PicGo</tag>
+        <tag>Markdown</tag>
+        <tag>Typora</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>获取网站的Favicon图标的API接口</title>
     <url>/2021/08/08/21080801/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
@@ -390,47 +434,121 @@
       </tags>
   </entry>
   <entry>
-    <title>如何优雅写博客</title>
-    <url>/2021/08/07/21080701/</url>
-    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141834.jpg" alt="Typora" style="zoom:150%;" />
+    <title>简易的随机图片API接口</title>
+    <url>/2021/08/14/21081401/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
+<span id="more"></span>    
 
+
+
+<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
+<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
+<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>新建目录</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
+<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
+<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
+<p>好了，在网页源码中调用就行了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
+<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站ICP备案与公安备案</title>
+    <url>/2021/08/19/21081901/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820135606.png" alt="image-20210820135606772"></p>
 <span id="more"></span>
 
-<p><strong>Markdown</strong>是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<em>——百度百科</em></p>
-<p>Hexo 使用 <strong>Markdown</strong>(或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>工欲善其事必先利其器，用Hexo写博客不可能每次都</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
-
-<p>然后用记事本或者vi编辑器去写文章中。效率非常低，而且图片插入是个难点。需要一个 高效好用的<strong>Markdown 文本编辑器</strong>。</p>
-<h2 id="Typora-是什么？"><a href="#Typora-是什么？" class="headerlink" title="Typora 是什么？"></a>Typora 是什么？</h2><p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，完全免费的。<a href="https://typora.io/">Typora 官网</a> 上他们将 Typora 描述为 「A truly <strong>minimal</strong> markdown editor. 」。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807142738.png" alt="img"></p>
-<h4 id="极致简洁"><a href="#极致简洁" class="headerlink" title="极致简洁"></a>极致简洁</h4><p>打开Typora，你会发现它的界面非常简洁，几乎没有任何按钮，只在上方有一排功能键，右下角是字数统计，其余强大的功能都被藏在后台。且按下F11进入全屏状态，你的世界里就只有文字。</p>
-<h4 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h4><p>般Markdown 编辑器界面都是两个窗口，左边是Markdown 源码，右边是效果预览。有时一边写源码，一边看效果，确实有点不便。但是使用<strong>Typora</strong> 可以实时的看到渲染效果，而且是在同一个界面，所见即所得。</p>
-<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p><strong>Typora</strong> 对几乎所有Markdown 语法都提供了快捷操作，通过菜单栏的<code>段落</code> 和<code>格式</code> 中的功能可以快速设置标记语法，一些常用的操作都有快捷键，用起来非常高效。</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145046.png" alt="image-20210807145046432" style="zoom:50%;" />
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145129.png" alt="image-20210807145129861"></p>
-<h4 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h4><p>Typora 的图片插入功能是广受好评的。要知道，Markdown 原生不太注重图片插入的功能，但你在 Typora 中：</p>
+<p>在阿里云，腾讯云等购买国内服务器，如果是用于web访问的话就必须备案后才能使用（无需域名的情况除外）。否则会提示“该网站暂时无法访问”。但如果不需要web访问的话，目前看来是无需备案的。</p>
+<p>也可以买国外的服务器，好处是不需要备案，但是一般国内用户访问国外服务器，速度会非常慢，然后访问服务器也时常变的不稳定，这种情况还是选择国内云服务器比较稳妥。</p>
+<h3 id="备案是什么？"><a href="#备案是什么？" class="headerlink" title="备案是什么？"></a>备案是什么？</h3><p>所谓备案，就是我们常说的网站备案，备案的全称叫做ICP备案。ICP也就是Internet Content Provider，指的是网络内容服务商 ，即向广大用户综合提供互联网信息业务和增值业务的网络运营商。ICP备案是信息产业部对网站的一种管理，为了防止非法网站。就像是官方认可的网站，就好像开个小门面需要办营业执照一样。</p>
+<p>备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播。根据中华人民共和国国务院令第291号《中华人民共和国电信条例》、第292号《互联网信息服务管理办法》（简称ICP管理办法），国家对提供互联网信息服务的ICP实行许可证制度。ICP证是网站经营的许可证，根据国家,互联网信息服务管理办法》规定，经营性网站必须办理ICP证，否则就属于非法经营。</p>
+<h2 id="备案、域名、服务器之间的关系"><a href="#备案、域名、服务器之间的关系" class="headerlink" title="备案、域名、服务器之间的关系"></a>备案、域名、服务器之间的关系</h2><p>其实网站备案、ICP备案、域名备案、服务器备案本质上指的都是给网站申请ICP备案号。</p>
 <ul>
-<li><p>可以直接将网络图片、剪贴板图片复制到文档中</p>
-</li>
-<li><p>可以拖动本地图片到文档中</p>
-</li>
-<li><p><a href="https://www.qyxie.top/2021/08/01/21080101/#more">配合PicGo个人图床</a>  <!--PicGo + 阿里云对象存储OSS搭建个人图床教程--></p>
-<p><code>文件</code>-&gt;<code>偏好设置</code>-&gt;<code>图像</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807143933.png" alt="image-20210807143933250"></p>
-</li>
+<li>只有域名+没有国内服务器空间=不能备案</li>
+<li>没有域名+只有国内服务器空间=不能备案</li>
+<li>有域名+有国内服务器空间=可以备案</li>
 </ul>
-<p>Typora 会自动帮你插入符合 Markdown 语法的图片语句，并给它加上标题。</p>
-<p>Typora和PicGo几乎绑定，写博客才能快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+<p>备案是针对服务器空间的，但是备案号是挂在域名上的，可以说备案如果没有空间或者没有域名都备案不了。简单来说，就是完成ICP备案，域名和服务器缺一不可。</p>
+<h3 id="找谁办理备案"><a href="#找谁办理备案" class="headerlink" title="找谁办理备案"></a>找谁办理备案</h3><p>备案正常情况下是找服务器/虚拟主机的提供商办理备案，你使用了相关服务商提供的网络服务器，服务商自然会提供相应的备案服务。为了方便备案请尽量保证域名和服务器的提供商一致。如果不是，请保证域名和服务器的实名认证一致。</p>
+<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>阿里云轻量应用服务器购买时长在3个月及以上（含续费），赠送备案服务号5个。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819232653.png" alt="image-20210819232653671"></p>
+<p><a href="https://help.aliyun.com/knowledge_detail/36922.html?source=5176.11533457&userCode=28kqeewo">首次备案流程-备案-阿里云</a></p>
+<p>按照以上流程，阿里云初审用时2天，工信部审核用时9天。（仅供参考）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233527.png" alt="image-20210819233527311"></p>
+<p>网站开通后，请在网站首页底部中间位置放置您的ICP备案号并链接至”<a href="https://beian.miit.gov.cn&quot;./">https://beian.miit.gov.cn&quot;。</a> 并在开通之日起30日内登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a>提交公安联网备案申请。获取《<a href="https://help.aliyun.com/knowledge_detail/36981.html">公安备案信息填写指南</a>》。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233627.png" alt="image-20210819233627212"></p>
+<h3 id="公安备案"><a href="#公安备案" class="headerlink" title="公安备案"></a>公安备案</h3><p>网站备案是根据国家法律法规需要网站的所有者向国家有关部门申请的备案，公安局备案是其中一种。公安局备案一般按照各地公安机关指定的地点和方式进行，操作流程会比ICP备案流程简单，主要是已登记为主。</p>
+<p>公安备案不做后果咱也不是很清楚（ICP备案不做域名直接访问不了），但是每个公民都有配合义务，在条例层面是「必须」遵守。</p>
+<p>注册登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a></p>
+<h5 id="开办主体管理，提交审核"><a href="#开办主体管理，提交审核" class="headerlink" title="开办主体管理，提交审核"></a>开办主体管理，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235154.png" alt="image-20210819235154678"></p>
+<p>等待审核通过</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235817.png" alt="image-20210819235817040"></p>
+<h5 id="新办网站申请，提交审核"><a href="#新办网站申请，提交审核" class="headerlink" title="新办网站申请，提交审核"></a>新办网站申请，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235855.png" alt="image-20210819235855616"></p>
+<p>新办网站申请信息填写参考<a href="https://help.aliyun.com/knowledge_detail/36981.html">阿里云-公安备案信息填写指南</a></p>
+<p>公安备案审核时间/流程似乎取决于你当地的公安机关，网警，反正我备案的时候直接在网站上提交资料和照片,不到十天就通过了。但是听说也要求本人到携带身份证到当地公安机关进行备案的。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000130.png" alt="image-20210820000130624"></p>
+<p>​    <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000330.png" alt="image-20210820000330671"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001339.png" alt="image-20210820001339754"></p>
+<p>将公安备案编号HTML代码稍作修改，加上ICP备案编号，加上备案编号图标。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;a href=&quot;https://beian.miit.gov.cn/&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽ICP备2021011133号-1&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;a target=&quot;_blank&quot; href=&quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35052402000312&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;img src=&quot;https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210805124438.png&quot; style=&quot;float:left;&quot;/&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽公网安备 35052402000312号&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>大家也可以直接复制我的代码，以下几处自行修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001931.png" alt="image-20210820001930929"></p>
+<p>打开<code>themes/next/layout/_partials/footer.swig</code></p>
+<p>将代码放到合适的位置</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002328.png" alt="QQ图片20210820002320"></p>
+<p>效果展示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002411.png" alt="image-20210820002411893"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>备案</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/07/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>PicGo</tag>
-        <tag>Markdown</tag>
-        <tag>Typora</tag>
+        <tag>Hello World</tag>
       </tags>
   </entry>
   <entry>
@@ -702,124 +820,6 @@
       </categories>
       <tags>
         <tag>Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简易的随机图片API接口</title>
-    <url>/2021/08/14/21081401/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
-<span id="more"></span>    
-
-
-
-<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
-<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
-<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
-<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
-<p><em><strong>新建目录</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
-<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
-<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
-<p>好了，在网页源码中调用就行了。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
-<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网站ICP备案与公安备案</title>
-    <url>/2021/08/19/21081901/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820135606.png" alt="image-20210820135606772"></p>
-<span id="more"></span>
-
-<p>在阿里云，腾讯云等购买国内服务器，如果是用于web访问的话就必须备案后才能使用（无需域名的情况除外）。否则会提示“该网站暂时无法访问”。但如果不需要web访问的话，目前看来是无需备案的。</p>
-<p>也可以买国外的服务器，好处是不需要备案，但是一般国内用户访问国外服务器，速度会非常慢，然后访问服务器也时常变的不稳定，这种情况还是选择国内云服务器比较稳妥。</p>
-<h3 id="备案是什么？"><a href="#备案是什么？" class="headerlink" title="备案是什么？"></a>备案是什么？</h3><p>所谓备案，就是我们常说的网站备案，备案的全称叫做ICP备案。ICP也就是Internet Content Provider，指的是网络内容服务商 ，即向广大用户综合提供互联网信息业务和增值业务的网络运营商。ICP备案是信息产业部对网站的一种管理，为了防止非法网站。就像是官方认可的网站，就好像开个小门面需要办营业执照一样。</p>
-<p>备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播。根据中华人民共和国国务院令第291号《中华人民共和国电信条例》、第292号《互联网信息服务管理办法》（简称ICP管理办法），国家对提供互联网信息服务的ICP实行许可证制度。ICP证是网站经营的许可证，根据国家,互联网信息服务管理办法》规定，经营性网站必须办理ICP证，否则就属于非法经营。</p>
-<h2 id="备案、域名、服务器之间的关系"><a href="#备案、域名、服务器之间的关系" class="headerlink" title="备案、域名、服务器之间的关系"></a>备案、域名、服务器之间的关系</h2><p>其实网站备案、ICP备案、域名备案、服务器备案本质上指的都是给网站申请ICP备案号。</p>
-<ul>
-<li>只有域名+没有国内服务器空间=不能备案</li>
-<li>没有域名+只有国内服务器空间=不能备案</li>
-<li>有域名+有国内服务器空间=可以备案</li>
-</ul>
-<p>备案是针对服务器空间的，但是备案号是挂在域名上的，可以说备案如果没有空间或者没有域名都备案不了。简单来说，就是完成ICP备案，域名和服务器缺一不可。</p>
-<h3 id="找谁办理备案"><a href="#找谁办理备案" class="headerlink" title="找谁办理备案"></a>找谁办理备案</h3><p>备案正常情况下是找服务器/虚拟主机的提供商办理备案，你使用了相关服务商提供的网络服务器，服务商自然会提供相应的备案服务。为了方便备案请尽量保证域名和服务器的提供商一致。如果不是，请保证域名和服务器的实名认证一致。</p>
-<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>阿里云轻量应用服务器购买时长在3个月及以上（含续费），赠送备案服务号5个。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819232653.png" alt="image-20210819232653671"></p>
-<p><a href="https://help.aliyun.com/knowledge_detail/36922.html?source=5176.11533457&userCode=28kqeewo">首次备案流程-备案-阿里云</a></p>
-<p>按照以上流程，阿里云初审用时2天，工信部审核用时9天。（仅供参考）</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233527.png" alt="image-20210819233527311"></p>
-<p>网站开通后，请在网站首页底部中间位置放置您的ICP备案号并链接至”<a href="https://beian.miit.gov.cn&quot;./">https://beian.miit.gov.cn&quot;。</a> 并在开通之日起30日内登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a>提交公安联网备案申请。获取《<a href="https://help.aliyun.com/knowledge_detail/36981.html">公安备案信息填写指南</a>》。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233627.png" alt="image-20210819233627212"></p>
-<h3 id="公安备案"><a href="#公安备案" class="headerlink" title="公安备案"></a>公安备案</h3><p>网站备案是根据国家法律法规需要网站的所有者向国家有关部门申请的备案，公安局备案是其中一种。公安局备案一般按照各地公安机关指定的地点和方式进行，操作流程会比ICP备案流程简单，主要是已登记为主。</p>
-<p>公安备案不做后果咱也不是很清楚（ICP备案不做域名直接访问不了），但是每个公民都有配合义务，在条例层面是「必须」遵守。</p>
-<p>注册登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a></p>
-<h5 id="开办主体管理，提交审核"><a href="#开办主体管理，提交审核" class="headerlink" title="开办主体管理，提交审核"></a>开办主体管理，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235154.png" alt="image-20210819235154678"></p>
-<p>等待审核通过</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235817.png" alt="image-20210819235817040"></p>
-<h5 id="新办网站申请，提交审核"><a href="#新办网站申请，提交审核" class="headerlink" title="新办网站申请，提交审核"></a>新办网站申请，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235855.png" alt="image-20210819235855616"></p>
-<p>新办网站申请信息填写参考<a href="https://help.aliyun.com/knowledge_detail/36981.html">阿里云-公安备案信息填写指南</a></p>
-<p>公安备案审核时间/流程似乎取决于你当地的公安机关，网警，反正我备案的时候直接在网站上提交资料和照片,不到十天就通过了。但是听说也要求本人到携带身份证到当地公安机关进行备案的。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000130.png" alt="image-20210820000130624"></p>
-<p>​    <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000330.png" alt="image-20210820000330671"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001339.png" alt="image-20210820001339754"></p>
-<p>将公安备案编号HTML代码稍作修改，加上ICP备案编号，加上备案编号图标。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;a href=&quot;https://beian.miit.gov.cn/&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽ICP备2021011133号-1&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;a target=&quot;_blank&quot; href=&quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35052402000312&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;img src=&quot;https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210805124438.png&quot; style=&quot;float:left;&quot;/&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽公网安备 35052402000312号&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>大家也可以直接复制我的代码，以下几处自行修改。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001931.png" alt="image-20210820001930929"></p>
-<p>打开<code>themes/next/layout/_partials/footer.swig</code></p>
-<p>将代码放到合适的位置</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002328.png" alt="QQ图片20210820002320"></p>
-<p>效果展示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002411.png" alt="image-20210820002411893"></p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>备案</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/07/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hello World</tag>
       </tags>
   </entry>
 </search>

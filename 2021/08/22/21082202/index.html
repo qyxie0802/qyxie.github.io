@@ -99,8 +99,16 @@
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212055.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212316.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212626.jpg">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822214549.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232011.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232211.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232345.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823094953.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823113800.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232504.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822233626.png">
 <meta property="article:published_time" content="2021-08-22T11:48:39.000Z">
-<meta property="article:modified_time" content="2021-08-22T13:28:27.031Z">
+<meta property="article:modified_time" content="2021-08-23T03:47:03.236Z">
 <meta property="article:author" content="滑小稽">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="valine">
@@ -425,7 +433,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  378
+                  592
                 </span>
               
 
@@ -441,7 +449,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -503,7 +511,7 @@
 </tr>
 <tr>
 <td>SMTP_USER</td>
-<td><a href="mailto:&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#120;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;">&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#120;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;</a></td>
+<td><a href="mailto:&#x78;&#x78;&#x78;&#120;&#x78;&#x78;&#x78;&#x78;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#x78;&#x78;&#x78;&#120;&#x78;&#x78;&#x78;&#x78;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;</a></td>
 <td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
 </tr>
 </tbody></table>
@@ -512,12 +520,29 @@
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211720.png" alt="image-20210822211720760"></p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211739.png" alt="image-20210822211739670"></p>
 <p>根据提示获取授权码，写入的时候<em><strong>不要带空格不要带空格不要带空格</strong></em></p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 部署 -&gt; 部署项目 -&gt; Git部署   ，输入<code>https://github.com/zhaojun1998/Valine-Admin</code></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 部署 -&gt; 部署项目 -&gt; Git部署   ，输入<code>https://github.com/zhaojun1998/Valine-Admin.git</code></p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212055.png" alt="image-20210822212054925"></p>
 <p>分支或提交填写master，点击部署</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212316.png" alt="image-20210822212316905"></p>
 <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>当收到评论时，QQ邮件提醒</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212626.jpg" alt="QQ图片20210822212521"></p>
+<h3 id="后台评论管理"><a href="#后台评论管理" class="headerlink" title="后台评论管理"></a>后台评论管理</h3><p>数据存储 -&gt; 结构化数据 -&gt; _User -&gt; 添加行   添加后台管理用户，<code>uesrname</code>,<code>password</code>,<code>email</code>三个字段就行</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822214549.png" alt="image-20210822214549875"></p>
+<p>设置 -&gt; 域名绑定，填写一个自己域名的二级域名，配置云引擎域名</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232011.png" alt="image-20210822232011572"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232211.png" alt="image-20210822232211699"></p>
+<p>LeanCloud -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
+<p><code>ADMIN_URL</code>：<code>刚刚绑定的域名</code>，<strong>添加后重新手动部署</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232345.png" alt="image-20210822232345575"></p>
+<p>访问域名，管理评论</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823094953.png" alt="image-20210823094953512"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823113800.png" alt="image-20210823113759964"></p>
+<h3 id="配置自动唤醒"><a href="#配置自动唤醒" class="headerlink" title="配置自动唤醒"></a>配置自动唤醒</h3><p><strong>免费版的LeanCloud是不能24小时运行的，每天必须休眠 6 个小时，30 分钟内没有外部请求，则休眠，需要设置定时休眠来保证大多数时间邮件服务是正常的。</strong></p>
+<p>云引擎 -&gt; 定时任务 -&gt; 创建定时任务</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232504.png" alt="image-20210822232504769"></p>
+<p>表达式<code>0 */20 7-23 * * ?</code>表示为7-23时每20分钟</p>
+<p><strong>重启服务</strong>生效</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822233626.png" alt="image-20210822233626036"></p>
 
       
     </div>
@@ -581,8 +606,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/08/22/21082201/" rel="next" title="Next主题文章目录中文锚点失效">
-                <i class="fa fa-chevron-left"></i> Next主题文章目录中文锚点失效
+              <a href="/2021/08/21/21082102/" rel="next" title="网恋照妖镜">
+                <i class="fa fa-chevron-left"></i> 网恋照妖镜
               </a>
             
           </div>
@@ -590,6 +615,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/22/21082201/" rel="prev" title="Next主题文章目录中文锚点失效">
+                Next主题文章目录中文锚点失效 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -790,7 +819,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">快速开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMTP%E6%8E%88%E6%9D%83%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">SMTP授权码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">效果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">快速开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMTP%E6%8E%88%E6%9D%83%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">SMTP授权码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E8%AF%84%E8%AE%BA%E7%AE%A1%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">后台评论管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E5%94%A4%E9%86%92"><span class="nav-number">7.</span> <span class="nav-text">配置自动唤醒</span></a></li></ol></div>
             
 
           </div>

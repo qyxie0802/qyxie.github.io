@@ -800,10 +800,10 @@
   <entry>
     <title>Hexo部署到服务器CSS样式失效</title>
     <url>/2021/08/20/21082001/</url>
-    <content><![CDATA[<p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
 <span id="more"></span>
 
-<p>我承认我急了，一下午白干了。我博客<code>github page</code>和服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。</p>
+<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
 <p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
 <p>多的我也看不懂，直接解决问题好了。</p>
 <p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
@@ -822,7 +822,7 @@
   <entry>
     <title>如何设置浏览器的默认首页</title>
     <url>/2021/08/20/21082002/</url>
-    <content><![CDATA[<p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
+    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
 <p>我二次开发了一个简单的<a href="https://nav.qyxie.top/">个人网址导航</a>，免费为大家收录精选的网站，指引大家愉快上网，希望大家积极提交收录申请，并将此网页设置为浏览器的默认首页。</p>
 <span id="more"></span>
 
@@ -903,7 +903,7 @@
 
 <p>这样，对于每一篇需要加密的文章就不必都在在头部添加 <strong>abstract</strong> 和 <strong>message</strong> 字段了，脚本会自动添加默认的内容填充。 而你在文章头部的配置优先级高于<strong>站点配置文件</strong> 的 <strong>default</strong>配置，会覆盖它。</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821151528.png" alt="image-20210821151528503"></p>
-<p>本地预览输入密码可能会无响应，因为需要https协议，部署到服务器就没问题啦。</p>
+<p><em>tips:本地预览输入密码可能会无响应，因为需要https协议，部署到服务器就没问题啦。</em></p>
 ]]></content>
       <categories>
         <category>实用教程</category>
@@ -959,7 +959,7 @@
   <entry>
     <title>为博客Valine评论系统添加邮件提醒和后台管理</title>
     <url>/2021/08/22/21082202/</url>
-    <content><![CDATA[<p>​        之前在<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造</a>中已经添加了评论系统，但是没有邮件通知，别人评论不能第一时间知道（虽然也不会有人评论）。这功能吧，可以不要，但不能没有。</p>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>​        之前在<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造</a>中已经添加了评论系统，但是没有邮件通知，别人评论不能第一时间知道（虽然也不会有人评论）。这功能吧，可以不要，但不能没有。</p>
 <span id="more"></span>
 
 <h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p>博客添加valine评论系统不再赘述，参考之前的配置<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造——评论系统</a>。</p>
@@ -1000,7 +1000,7 @@
 </tr>
 <tr>
 <td>SMTP_USER</td>
-<td><a href="mailto:&#x78;&#120;&#120;&#120;&#x78;&#120;&#120;&#x78;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;">&#x78;&#120;&#120;&#120;&#x78;&#120;&#120;&#x78;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;</a></td>
+<td><a href="mailto:&#x78;&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#64;&#113;&#x71;&#46;&#x63;&#111;&#109;">&#x78;&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#64;&#113;&#x71;&#46;&#x63;&#111;&#109;</a></td>
 <td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
 </tr>
 </tbody></table>

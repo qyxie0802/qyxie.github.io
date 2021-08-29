@@ -1067,4 +1067,124 @@
         <tag>Hello World</tag>
       </tags>
   </entry>
+  <entry>
+    <title>记一次debian10的安装</title>
+    <url>/2021/08/27/21082701/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>久久总能碰上一次Debian系统安装的需求，其实跟其他linx系统都差不多，但时间久了总能忘掉一些细节，比如网卡配置文件的路径等等。记录下，有空看看，加强记忆。</p>
+<span id="more"></span>
+
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><p><a href="https://www.debian.org/">Debian官网</a></p>
+<p>“造轮子”的事我就不干了，直接上链接。</p>
+<p><a href="https://linux.cn/article-11083-1.html?pr">图解 Debian 10（Buster）安装步骤</a></p>
+<p>几乎就是回车回车，值得注意的是选择电脑桌面环境和其它软件包时，<em><strong>SSH Server</strong></em> 还是√上吧，省的进系统还要装。</p>
+<p>安装 <em><strong>Grub 引导加载程序</strong></em>，选择<code>Yes</code>。其他选择<code>No</code>。</p>
+<p>进系统后</p>
+<h3 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/network/interface</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#配置网卡eth0的IP地址</span><br><span class="line">auto eth0 </span><br><span class="line">iface eth0 inet static 静态/dhcp</span><br><span class="line">address 192.168.2.147 ip地址</span><br><span class="line">netmask 255.255.255.0 子网掩码</span><br><span class="line">gateway 192.168.2.1 网关</span><br></pre></td></tr></table></figure>
+
+<p>或者使用nano编辑器   “Ctrl+O” “Ctrl+X” 保存退出</p>
+<p>重启网卡生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/networking restart</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设置DNS"><a href="#设置DNS" class="headerlink" title="设置DNS"></a>设置DNS</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;nameserver 110.80.137.52&quot; &gt;&gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cp /etc/resolv.conf /etc/resolv.conf.bak # 备份原有dns配置文件</span><br><span class="line">vi /etc/resolv.conf # 编辑DNS配置文件</span><br><span class="line">nameserver 110.80.137.52 # 设置首选dns</span><br><span class="line">nameserver 114.114.114.114 # 设置备用dns</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="开启root远程登录"><a href="#开启root远程登录" class="headerlink" title="开启root远程登录"></a>开启root远程登录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>PermitRootLogin no -&gt;  PermitRootLogin yes</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210827232508.png" alt="image-20210827232508198"></p>
+<p>重启ssh生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Debian10</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>仙境传说 绯雨骑士团H5私服</title>
+    <url>/2021/08/28/21082901/</url>
+    <content><![CDATA[<h3 id="游戏介绍："><a href="#游戏介绍：" class="headerlink" title="游戏介绍："></a>游戏介绍：</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829085126.png" alt="image-20210829085125752"></p>
+<p>绯雨骑士团是一款二次元挂机游戏，将二次元和挂机结合起来，为玩家打造一个休闲养肝的游戏。只要轻轻点击，即可进行游戏，无需繁琐操作，任何人都可以轻松玩转。</p>
+<p>黑衣剑士吉莲、超能法师爱丽丝、无敌射手伊芙、万能骑士爱德华……各职业英雄全员等候召令！守护您的二次元情怀，即刻，出发！</p>
+<p>独家剧情！一手资料，先睹为快！</p>
+<p>召集组队，为守护而战。更可多人同屏华丽战斗，宏大绝杀场面。</p>
+<p>守护世界的正义！成为一名赏金猎人吧！你可以和你的好友一起讨伐红名通缉犯。让妹纸为你侧目，为正义战斗！</p>
+<span id="more"></span>
+
+<h3 id="游戏地址："><a href="#游戏地址：" class="headerlink" title="游戏地址："></a>游戏地址：</h3><p><a href="http://82.156.19.29/">http://82.156.19.29/</a>  </p>
+<p>手机、平板、PC三屏联动！都能玩！是兄弟就来砍我。</p>
+<p>注册的时候<strong>用户名</strong>和<strong>密码</strong>是比较随意的，但请务必记住密码，后台看到的密码是MD5  32位加密的，我也破解不了的。</p>
+<p>过了新手引导点击头像可以改<strong>名字</strong>，<strong>头像</strong>，<strong>声音</strong>，<strong>画质</strong>！其他的自己探索啦~</p>
+<p>非盈利纯娱乐。无对接充值系统，砍不过的直接找我要卡密（可以理解为礼包兑换码）。</p>
+<h3 id="架设教程："><a href="#架设教程：" class="headerlink" title="架设教程："></a>架设教程：</h3><p>服务器是腾讯云白嫖的，1h2g，第一个月免费，第二个月9元，续费一年也才不到100元，尽管玩，我保证只要有一个人玩就永不停服。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235300.gif" alt="img"></p>
+<p>阿里云：<a href="https://free.aliyun.com/">https://free.aliyun.com/</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235902.png" alt="image-20210828235902337"></p>
+<p>腾讯云：<a href="https://cloud.tencent.com/act/free">https://cloud.tencent.com/act/free</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829000002.png" alt="image-20210829000002846"></p>
+<p>新用户注册就能领取，亲测1h2g能玩，如果你有更高配置的现有服务器那更好啦~</p>
+<h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>Windows Server 2012 R2 DataCenter 64bitCN</p>
+<p>重置密码后远程桌面登录。</p>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>绯雨骑士团H5  链接：<a href="https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g">https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g</a>  提取码：r1s4</p>
+<p><a href="https://notepad-plus-plus.org/">notepad++</a>    链接：<a href="https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw">https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw</a>  提取码：tspf</p>
+<p>navicat数据库管理工具  链接：<a href="https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g">https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g</a>   提取码：rp15</p>
+<p>解压缩工具（腾讯云2012自带7-zip)</p>
+<p>下载文件，解压notepad++和navicat到桌面</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829101624.png" alt="image-20210829101623940"></p>
+<h4 id="新建分区D盘"><a href="#新建分区D盘" class="headerlink" title="新建分区D盘"></a>新建分区D盘</h4><p>系统默认只有一个C盘，而且盘符D被CD驱动器占用。</p>
+<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理   -&gt; 更改驱动器号和路径  -&gt; 确定</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102104.png" alt="image-20210829102103999"></p>
+<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理 -&gt; 右击C盘  -&gt; 压缩卷  -&gt; 压缩出15G的空间</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102352.png" alt="image-20210829102352759"></p>
+<p>新建简单卷  无脑下一步得到D盘</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102530.png" alt="image-20210829102529915"></p>
+<h4 id="解压游戏源码"><a href="#解压游戏源码" class="headerlink" title="解压游戏源码"></a>解压游戏源码</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102722.png" alt="image-20210829102722329"></p>
+<h4 id="启动phpstudy"><a href="#启动phpstudy" class="headerlink" title="启动phpstudy"></a>启动phpstudy</h4><p>打开之后点击启动，启动apache2.4.39和mysql5.7.26。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103038.png" alt="image-20210829103038512"></p>
+<h4 id="游戏外网修改"><a href="#游戏外网修改" class="headerlink" title="游戏外网修改"></a>游戏外网修改</h4><p>使用notepad++把以下路径里面的81.70.8.199修改成你的外网IP</p>
+<p>D:\fyqst_wudiliu.Com\wudiliu\Server\s1\wserver\logic\guildbattle\appUtil.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\cityserver_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\server_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\version_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\versions里面的manifest2.0.1.json到manifest2.3.5.json【15个】json文件<br>D:\fyqst_wudiliu.Com\wudiliu\www\game.html</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103331.png" alt="image-20210829103331512"></p>
+<p>一次性打开所有需要修改的文件(可以直接拖动文件到Notepad++)，ctrl+F 查找替换 -&gt; 替换所有打开文件(o) </p>
+<p>一共24处，务必确认下！！</p>
+<p>修改完全部保存，全部关闭。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103501.png" alt="image-20210829103501540"></p>
+<h4 id="数据库修改"><a href="#数据库修改" class="headerlink" title="数据库修改"></a>数据库修改</h4><p>用Navicat链接数据库</p>
+<p>数据库账号:root<br>数据库密码:123456</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104022.png" alt="image-20210829104022223"></p>
+<p>打开数据库【ttf_ly_login】找到【uw_server_info表】   <em><strong>tips:注意这个表有两个字段需要修改host和host2</strong></em><br>打开数据库【ttf_ly_main】找到【uw_game_config表】和【uw_battles_group表】</p>
+<p>把以上路径里面的ip修改成你的外网IP</p>
+<p>修改完点击下方✔保存</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104155.png" alt="image-20210829104155332"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104638.png" alt="image-20210829104638092"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104740.png" alt="image-20210829104740744"></p>
+<h4 id="启动游戏"><a href="#启动游戏" class="headerlink" title="启动游戏"></a>启动游戏</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104820.png" alt="image-20210829104820729"></p>
+<p>一共有七个窗口，少一个都不行</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104910.png" alt="image-20210829104910032"></p>
+<h4 id="进入游戏"><a href="#进入游戏" class="headerlink" title="进入游戏"></a>进入游戏</h4><p>访问ip</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105014.png" alt="image-20210829105014261"></p>
+<p>起飞~</p>
+<p>封面不太正经但游戏绝对正经，就是点点点，刷怪升级。体验下80后玩传奇的感觉。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105037.gif" alt="img"></p>
+<p>私服自然有GM后台，游戏源码里【使用说明】有讲。略。下课~</p>
+<p><strong>免责声明：</strong></p>
+<p>1.本文部分内容转载自其它媒体，但并不代表本站赞同其观点和对其真实性负责。<br>2.若您需要商业运营或用于其他商业活动，请您购买正版授权并合法使用。<br>3.如果本站有侵犯、不妥之处的资源，请在网站下方联系我们。将会第一时间解决！<br>4.本站所有内容均由互联网收集整理、网友上传，仅供大家参考、学习，不存在任何商业目的与商业用途。<br>5.本站提供的所有资源仅供参考学习使用，版权归原著所有，禁止下载本站资源参与商业和非法行为，请在24小时之内自行删除！</p>
+]]></content>
+      <categories>
+        <category>休闲娱乐</category>
+      </categories>
+      <tags>
+        <tag>游戏</tag>
+        <tag>绯雨骑士团H5</tag>
+      </tags>
+  </entry>
 </search>

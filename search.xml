@@ -1,62 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
-    <url>/2021/07/30/21073001/</url>
-    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
-
-
-
-<span id="more"></span>
-
-
-
-<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
-<h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150044.png" alt="20210801134206"></p>
-<h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150052.png" alt="20210801134215"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150057.png" alt="20210801134223"></p>
-<h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
-<p>默认回车</p>
-<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
-<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150123.png" alt="20210801134304"></p>
-<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io</strong>！！！</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150142.png" alt="20210801134310"></p>
-<p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
-<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150228.png" alt="20210801134321"></p>
-<p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150234.png" alt="20210801134326"></p>
-<p>保存退出</p>
-<p><code>hexo g</code> 生成静态文件</p>
-<p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150244.png" alt="20210801134331"></p>
-<p>github仓库中就可以看到推送过来的文件了</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150314.png" alt="image-20210801150314039"></p>
-<p>然后在浏览器中访问：</p>
-<p>https://用户名.github.io</p>
-<p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
-<p>但是，github服务器在国外，DNS污染，github.io加载非常慢甚至有时候访问不了<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150340.png" alt="20210801134345">可以通过修改<code>C:\Windows\System32\drivers\etc\hosts</code>文件加快访问速度，但博客是给别人看的，不合适！！！</p>
-<p>当然也可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
-<p>欲知后事如何，且听下回分解（用宝塔面板将Hexo部署到阿里云）</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Termux</tag>
-        <tag>github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>搭建Hexo博客(一)：手机(Termux) + 内网穿透(Sunny-Ngrok)</title>
     <url>/2021/07/28/21072801/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132342.png" alt="image-20210820132342590"></p>
@@ -128,6 +72,62 @@
         <tag>hexo</tag>
         <tag>Termux</tag>
         <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
+    <url>/2021/07/30/21073001/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
+
+
+
+<span id="more"></span>
+
+
+
+<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
+<h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150044.png" alt="20210801134206"></p>
+<h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150052.png" alt="20210801134215"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150057.png" alt="20210801134223"></p>
+<h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
+<p>默认回车</p>
+<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
+<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150123.png" alt="20210801134304"></p>
+<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io</strong>！！！</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150142.png" alt="20210801134310"></p>
+<p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
+<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150228.png" alt="20210801134321"></p>
+<p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150234.png" alt="20210801134326"></p>
+<p>保存退出</p>
+<p><code>hexo g</code> 生成静态文件</p>
+<p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150244.png" alt="20210801134331"></p>
+<p>github仓库中就可以看到推送过来的文件了</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150314.png" alt="image-20210801150314039"></p>
+<p>然后在浏览器中访问：</p>
+<p>https://用户名.github.io</p>
+<p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
+<p>但是，github服务器在国外，DNS污染，github.io加载非常慢甚至有时候访问不了<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150340.png" alt="20210801134345">可以通过修改<code>C:\Windows\System32\drivers\etc\hosts</code>文件加快访问速度，但博客是给别人看的，不合适！！！</p>
+<p>当然也可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
+<p>欲知后事如何，且听下回分解（用宝塔面板将Hexo部署到阿里云）</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -379,58 +379,6 @@
         <tag>PicGo</tag>
         <tag>Markdown</tag>
         <tag>Typora</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>获取网站的Favicon图标的API接口</title>
-    <url>/2021/08/08/21080801/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
-<span id="more"></span>
-
-<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
-<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
-<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
-<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
-<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
-<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
-<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
-<p><em><strong>下载程序到网站目录</strong></em></p>
-<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
-<p><em><strong>解压缩</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
-<p><em><strong>域名添加解析</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
-<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
-<p>有问题的话试试：cache 文件夹给 755 权限。</p>
-<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
-<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
-<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
-]]></content>
-      <categories>
-        <category>实用工具</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-        <tag>favicon</tag>
       </tags>
   </entry>
   <entry>
@@ -705,39 +653,77 @@
       </tags>
   </entry>
   <entry>
-    <title>简易的随机图片API接口</title>
-    <url>/2021/08/06/21081401/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
-<span id="more"></span>    
+    <title>获取网站的Favicon图标的API接口</title>
+    <url>/2021/08/08/21080801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
+<span id="more"></span>
 
+<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
+<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
+<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
 
-
-<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
-<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
-<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
-<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
+<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
+<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
+<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
-<p><em><strong>新建目录</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
-<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><em><strong>下载程序到网站目录</strong></em></p>
+<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
+<p><em><strong>解压缩</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
+<p><em><strong>域名添加解析</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
+<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
+<p>有问题的话试试：cache 文件夹给 755 权限。</p>
+<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
 
 
 
-<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
-<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
-<p>好了，在网页源码中调用就行了。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
-<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
+<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
+<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
+<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
 ]]></content>
       <categories>
         <category>实用工具</category>
       </categories>
       <tags>
         <tag>API</tag>
+        <tag>favicon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo部署到服务器CSS样式失效</title>
+    <url>/2021/08/20/21082001/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
+<span id="more"></span>
+
+<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
+<p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
+<p>多的我也看不懂，直接解决问题好了。</p>
+<p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164711.png" alt="image-20210820164711269"></p>
+<p>删除后如下图所示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164748.png" alt="image-20210820164747984"></p>
+<p>重新生成静态文件，部署到服务器，总算是对头了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Next</tag>
       </tags>
   </entry>
   <entry>
@@ -798,25 +784,39 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo部署到服务器CSS样式失效</title>
-    <url>/2021/08/20/21082001/</url>
-    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
-<span id="more"></span>
+    <title>简易的随机图片API接口</title>
+    <url>/2021/08/06/21081401/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
+<span id="more"></span>    
 
-<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
-<p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
-<p>多的我也看不懂，直接解决问题好了。</p>
-<p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164711.png" alt="image-20210820164711269"></p>
-<p>删除后如下图所示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164748.png" alt="image-20210820164747984"></p>
-<p>重新生成静态文件，部署到服务器，总算是对头了。</p>
+
+
+<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
+<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
+<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>新建目录</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
+<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
+<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
+<p>好了，在网页源码中调用就行了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
+<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
 ]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>实用工具</category>
       </categories>
       <tags>
-        <tag>Next</tag>
+        <tag>API</tag>
       </tags>
   </entry>
   <entry>
@@ -863,6 +863,93 @@
         <tag>Chrome</tag>
         <tag>IE</tag>
         <tag>Edge</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网恋照妖镜</title>
+    <url>/2021/08/21/21082102/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="80ac18a173e65d11f437746d8f69c197c456653c6d6d6a37349df6de8bcab4cb">f026650ac6b38bfb9a9129bfd7e0704ef5a12d879d6289b0678aeabd316e5a98addb47d7386d933d2ba10735f9ea959fb548fc18e983bcadfdbaba152fb6eaf3186ba28ea709ff25a787b42078fb7cc0306b6d2a4b61a32e92a2328c982ef26019344605b87cf34de432b0a945b0249186e4f673def96271369dc044340f1ca898e98c5e7f9bd3d95c90c879fb44f4d35c96e27a8b1f6bcdf992fa79c326343e296fa2c690ba5206fecd66a840f7dfe7627e49746a9f0b154e250179874cbbfe2e5e2aee84ebac6dcf96b47aa744a1c5d0fca75c1be68f1d6956366fce48d695f6bbbc383052ba1b162b2638f00369ba3db7fabb7ec1ad7bb8ca828b44fdb17e3893a3e1c34921e04883fdd8fbef94b4dc1fa74d6a6ac79f0dbe3074c6845a28bf2e9c3cee52127e220cce2cb7c38a5af45cfbc7f929571dfe7239c8950feed5efc01ed7f45acfd5230bf6b6325231c8fca0b19d80c07e95599813678407878286e693238fdff317bcca6b026debb99be5112752343efb70af7d3654e3a363de200c33544708c42154f442c533eff9e2567a2ec0f24c462543e0fc0b68d9eda2f76b5665ec280abd43462c120264e95af690ac473fb67ad7441ae2824af3fc140d19af57d17e92c76d031529ecc5c8700b4d5e3792f0fda00511f1e84bdbf946804375c53c8564ec80a4e71abb10600cd316ce7804875d524414ef9c7aa61a2672c7bd9f27a402307636a3d7d17a94c1f12780e24425d7367b95c6bf8d1f964a6acf0cb910a6f195aa2a02fb276406dedf0799fc831d87c4bc1e7822767397866c290d1b2d18727abfbab5153cf7c246d0cd5cafb5554c67be89a13fec71b9c8b3dbada234843aaf8cdb32b5e3da4f64b34e1c4bcfddd2814a1ef3250bd0a1bb161843b27f4658484a1593d98878cf1fba33e011cbb25afb577435727a82091e53fe5d9b6ac44a6f0b5ae18735a4c574b090caf53fec64e2c8828a1d66a23084dd95021495ca8142df80cfc3bd02da38f3bb5e0bbc8eb7e4103a138a2510444de4e38087dfa0be1e3bfc85f706386e93e1bf720ac7e9c8d00bcb7a0ef0762d4d8acf5336a8ec45c1d31d4f22d4480e8d439218ade8698ac5b1269dec2fb6feab1c07305176b70233161fc151a77407d18e0222d25baf202c6401d5933b0cf0bf911ec42427b7e096c8126aa11c594d835e00f9a9666b4fe0ef16fdf2ea58c93ccd1b1f8c9fd8dd17c92127fa30498c211645674d44e8f584ee17a1fdf3751f4a89c901b8d380522bf4599f5ac70ae746b379f563df98136b2fd4484cddd0157b51a238b0585555749c7cd8d3092fdb10ad6e54229948b10b31f3432b10d439006db41ff848ba9288aeb7fbc6835c222cfa0d96e83859d7a157fc76adf426d9b8cbfb684193e93e44a5b6b1e2d51608d1032ea9b04a81e7422dce448de99b70eab7b402daa8657009a3c9668dfb6fb9675018da52a2785a988f16fcfed365f15dc35c73217272c15ec41fe0538de73565c778945b12b48acd38a379f312925d3a59ca3c8b45d9648e3899751431283d5a1f74f8a11e1e48b69e36501e8829a28f81869e7c6cbf42c166f0483bf4d1f91a72e82e77dbc569292532cc54e2752322d01d9f59062e9623204558022c3cf124b87b33206c5a025712a28a109a672c90029ae8cca251b8d29e185bd7e67483c98633f91f8db5f413dc7721823b0176bb4a4a8afdd695ecc394b277ef10e4ff8980966176af09e750213d2ad65aab491397ef8535e2e63d059820fae63a4d32cbf5dac5801ad80f7652bf8686b53a918ab55e4d6776039ea2d8d80da27e1ad1031bea64f86e64d013a5e1bfe747a155c89380013e7bf38ba5861becd6228069b302f23c29e13a7175f34b1ab3db81be90ef08a319719d8c38b7c7f58c1a76e2dc9d997eb3662ee25a03e2789b8989e49b420e10ff3bff0dbb1fa639331897c1c8ffe73e95d2b2cda3740ebd9d8859c34bf7beb81e0dd67a25fd1620476cc8978671221ba3de343fae1e472336beb12153e1d9b1d624c749b4f57eeb923d59ee43d25d9dc274a2cf1465b0f4b425b666234037a6288f18ad84810eaa7505bc69c8ab50419fb0b7eaf4386853125b7e15625b3ba36c2e29c9961148e339bf1516ce0417e94bb709e0ae14ddf4d8065d995adb3f61bbd1359a76ac2fdb8199cc5462eba3235f3a7462ec7d3012f47aea811a908cbd8d10ea6a478d9724c18cafc19d641f4d60f30e47924a89ebd74f664cecba4f3a72489f86c0876db3f8bd49c779cb87b1098d9670c681237852e0235765f71d33e3cb41fe5a0df2fbc1d41df0dcbf1726a55cdff8282fd766288663a4f6d49bf4c1ad74358e823139dd5bb8e7640dbaf6585dbe1cb526d0935c576488247db9a80cb43dc78cc90a4075f2ee4dad2976a8a6819318c718a8d699c80b35514e62099d4b33ea7cff6df14b3f28c2137c89124415272cb4063589c936393349c8e012b925b17f1ef749f6fac48c10283dc5182aed333578b1b02c2b4d952d11831027b383c2922039b94c9d66f60e53abf20d6b8a0ccbf00f6cf77e26ac7a092ed19b2562123413e3cbde03fb1b57a2259dedc118f7304973d50c621cfe454fdb4d1dfe07b2e7d941b92ff20064f5e11bec2c2e513d92a99695bb9256b1353361e614f2a271880004602acfb3b4d3105182819d56bd8423bc91dd80b62e33c055f9ada834bf705365848329853511acb3fcca57454e9c6b9d5f7d2ee9b5f38ba240155f0dc78f4dfbeb0aec5aca85c929844a3c6963ac8ef1aee281bc3c2a363cbf20e1a1941258b89ce08f1d8f923d4cd00e8c1e3a6e14b45bc18e7633d08cda405bd8e34e7a07d19401756a53397dbf0d9daa186cd95cd72dfa1c729ddd685998275877b1caa4e92df5a0abedb03eb3fc8441101d6a9af7b4838be2b5e3a97aa57f35b297683273884d64a271ce382b2a329a0154ffe87f20ce3045972521e171719491d8d8e6bd86ff81441fc994b5157cd56909edab2c9d28e719287f5c16a82033ab9e04435f0ebd41be76724d132e7b20b5319e4a9c032912734b49e2d5907a2bf5866819510cf09faaa2c44eb67cf3c0fe018652596b7d20643fcc120649f50a0402495cba5f18459e9a539c1321870314fa19a06b8010201d99ae1f17b28f3ecb6f2b86427d507d1fa0049b65231a317cf7e936b64ee30234a6c2ae30a812131eeb0452500e0832f19bb0ace6c3456f93b8f27c0232f5dcf2a5cb5253bf7d2299d205ee09881a1910ec7aaf118c85c48e6aadba1456777d3b4ee8f54185b145a9b9362137ab63e72a3ff35c444f56ae01850b781a69deba7152a83c7effb9a89db5e3d362224bb44a4039b7d50da174e53c0c7e36c3f22914ca70e7e2610daf225f9b4272d0c3c22ff88f5d7fe4834371a3ff0ace8f578d1c0fb750ccd08e6d573ede9a65469f90b4889364b82d5176db283860e1a9a9277beda9f24ec6770e7bfdfa091f941b2988403ac024cc2e426ab13aba9da7042d88ac3c9a201a9e0eda3d182263729d06e0eb3a73b1431db1333def7125012284dae37bcd858754a252b0a5056513e709ad740b6ae8b22b8c4fa880a01c545d3da39b5cf1cc9a8c3f8838d495b5cbbbd4eb34e2161e349f344a77027a23869cfda1327c16d0cf14f3dbe1269bf74c3fa89465447e4b61baebb32681a003da0249a65f72e9</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">输入密码，查看文章</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>mirror</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next主题文章目录中文锚点失效</title>
+    <url>/2021/08/22/21082201/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Hexo 安装 Next 主题后, 文章侧边栏目录<strong>中文目录</strong>锚点点击后无法正常跳转，而纯英文锚点没有问题。</p>
+<span id="more"></span>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822203128.png" alt="image-20210822203128277"></p>
+<h3 id="问题跟踪"><a href="#问题跟踪" class="headerlink" title="问题跟踪"></a>问题跟踪</h3><p>浏览器F12 debug一下，控制台有报错不过看不懂，只知道<code>post-details.js</code>有问题。还能咋样，有问题找度娘。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822203927.png" alt="image-20210822203911332"></p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>编辑<code>/themes/next/source/js/src</code> 目录下的 <code>post-details.js</code>,大概76行，添加下面代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">targetSelector = decodeURI(this.getAttribute(&#x27;href&#x27;))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822204317.png" alt="QQ图片20210822204306"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次debian10的安装</title>
+    <url>/2021/08/27/21082701/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>久久总能碰上一次Debian系统安装的需求，其实跟其他linx系统都差不多，但时间久了总能忘掉一些细节，比如网卡配置文件的路径等等。记录下，有空看看，加强记忆。</p>
+<span id="more"></span>
+
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><p><a href="https://www.debian.org/">Debian官网</a></p>
+<p>“造轮子”的事我就不干了，直接上链接。</p>
+<p><a href="https://linux.cn/article-11083-1.html?pr">图解 Debian 10（Buster）安装步骤</a></p>
+<p>几乎就是回车回车，值得注意的是选择电脑桌面环境和其它软件包时，<em><strong>SSH Server</strong></em> 还是√上吧，省的进系统还要装。</p>
+<p>安装 <em><strong>Grub 引导加载程序</strong></em>，选择<code>Yes</code>。其他选择<code>No</code>。</p>
+<p>进系统后</p>
+<h3 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/network/interface</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#配置网卡eth0的IP地址</span><br><span class="line">auto eth0 </span><br><span class="line">iface eth0 inet static 静态/dhcp</span><br><span class="line">address 192.168.2.147 ip地址</span><br><span class="line">netmask 255.255.255.0 子网掩码</span><br><span class="line">gateway 192.168.2.1 网关</span><br></pre></td></tr></table></figure>
+
+<p>或者使用nano编辑器   “Ctrl+O” “Ctrl+X” 保存退出</p>
+<p>重启网卡生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/networking restart</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设置DNS"><a href="#设置DNS" class="headerlink" title="设置DNS"></a>设置DNS</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;nameserver 110.80.137.52&quot; &gt;&gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cp /etc/resolv.conf /etc/resolv.conf.bak # 备份原有dns配置文件</span><br><span class="line">vi /etc/resolv.conf # 编辑DNS配置文件</span><br><span class="line">nameserver 110.80.137.52 # 设置首选dns</span><br><span class="line">nameserver 114.114.114.114 # 设置备用dns</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="开启root远程登录"><a href="#开启root远程登录" class="headerlink" title="开启root远程登录"></a>开启root远程登录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>PermitRootLogin no -&gt;  PermitRootLogin yes</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210827232508.png" alt="image-20210827232508198"></p>
+<p>重启ssh生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Debian10</tag>
       </tags>
   </entry>
   <entry>
@@ -914,46 +1001,28 @@
       </tags>
   </entry>
   <entry>
-    <title>网恋照妖镜</title>
-    <url>/2021/08/21/21082102/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="80ac18a173e65d11f437746d8f69c197c456653c6d6d6a37349df6de8bcab4cb">f026650ac6b38bfb9a9129bfd7e0704ef5a12d879d6289b0678aeabd316e5a98addb47d7386d933d2ba10735f9ea959fb548fc18e983bcadfdbaba152fb6eaf3186ba28ea709ff25a787b42078fb7cc0306b6d2a4b61a32e92a2328c982ef26019344605b87cf34de432b0a945b0249186e4f673def96271369dc044340f1ca898e98c5e7f9bd3d95c90c879fb44f4d35c96e27a8b1f6bcdf992fa79c326343e296fa2c690ba5206fecd66a840f7dfe7627e49746a9f0b154e250179874cbbfe2e5e2aee84ebac6dcf96b47aa744a1c5d0fca75c1be68f1d6956366fce48d695f6bbbc383052ba1b162b2638f00369ba3db7fabb7ec1ad7bb8ca828b44fdb17e3893a3e1c34921e04883fdd8fbef94b4dc1fa74d6a6ac79f0dbe3074c6845a28bf2e9c3cee52127e220cce2cb7c38a5af45cfbc7f929571dfe7239c8950feed5efc01ed7f45acfd5230bf6b6325231c8fca0b19d80c07e95599813678407878286e693238fdff317bcca6b026debb99be5112752343efb70af7d3654e3a363de200c33544708c42154f442c533eff9e2567a2ec0f24c462543e0fc0b68d9eda2f76b5665ec280abd43462c120264e95af690ac473fb67ad7441ae2824af3fc140d19af57d17e92c76d031529ecc5c8700b4d5e3792f0fda00511f1e84bdbf946804375c53c8564ec80a4e71abb10600cd316ce7804875d524414ef9c7aa61a2672c7bd9f27a402307636a3d7d17a94c1f12780e24425d7367b95c6bf8d1f964a6acf0cb910a6f195aa2a02fb276406dedf0799fc831d87c4bc1e7822767397866c290d1b2d18727abfbab5153cf7c246d0cd5cafb5554c67be89a13fec71b9c8b3dbada234843aaf8cdb32b5e3da4f64b34e1c4bcfddd2814a1ef3250bd0a1bb161843b27f4658484a1593d98878cf1fba33e011cbb25afb577435727a82091e53fe5d9b6ac44a6f0b5ae18735a4c574b090caf53fec64e2c8828a1d66a23084dd95021495ca8142df80cfc3bd02da38f3bb5e0bbc8eb7e4103a138a2510444de4e38087dfa0be1e3bfc85f706386e93e1bf720ac7e9c8d00bcb7a0ef0762d4d8acf5336a8ec45c1d31d4f22d4480e8d439218ade8698ac5b1269dec2fb6feab1c07305176b70233161fc151a77407d18e0222d25baf202c6401d5933b0cf0bf911ec42427b7e096c8126aa11c594d835e00f9a9666b4fe0ef16fdf2ea58c93ccd1b1f8c9fd8dd17c92127fa30498c211645674d44e8f584ee17a1fdf3751f4a89c901b8d380522bf4599f5ac70ae746b379f563df98136b2fd4484cddd0157b51a238b0585555749c7cd8d3092fdb10ad6e54229948b10b31f3432b10d439006db41ff848ba9288aeb7fbc6835c222cfa0d96e83859d7a157fc76adf426d9b8cbfb684193e93e44a5b6b1e2d51608d1032ea9b04a81e7422dce448de99b70eab7b402daa8657009a3c9668dfb6fb9675018da52a2785a988f16fcfed365f15dc35c73217272c15ec41fe0538de73565c778945b12b48acd38a379f312925d3a59ca3c8b45d9648e3899751431283d5a1f74f8a11e1e48b69e36501e8829a28f81869e7c6cbf42c166f0483bf4d1f91a72e82e77dbc569292532cc54e2752322d01d9f59062e9623204558022c3cf124b87b33206c5a025712a28a109a672c90029ae8cca251b8d29e185bd7e67483c98633f91f8db5f413dc7721823b0176bb4a4a8afdd695ecc394b277ef10e4ff8980966176af09e750213d2ad65aab491397ef8535e2e63d059820fae63a4d32cbf5dac5801ad80f7652bf8686b53a918ab55e4d6776039ea2d8d80da27e1ad1031bea64f86e64d013a5e1bfe747a155c89380013e7bf38ba5861becd6228069b302f23c29e13a7175f34b1ab3db81be90ef08a319719d8c38b7c7f58c1a76e2dc9d997eb3662ee25a03e2789b8989e49b420e10ff3bff0dbb1fa639331897c1c8ffe73e95d2b2cda3740ebd9d8859c34bf7beb81e0dd67a25fd1620476cc8978671221ba3de343fae1e472336beb12153e1d9b1d624c749b4f57eeb923d59ee43d25d9dc274a2cf1465b0f4b425b666234037a6288f18ad84810eaa7505bc69c8ab50419fb0b7eaf4386853125b7e15625b3ba36c2e29c9961148e339bf1516ce0417e94bb709e0ae14ddf4d8065d995adb3f61bbd1359a76ac2fdb8199cc5462eba3235f3a7462ec7d3012f47aea811a908cbd8d10ea6a478d9724c18cafc19d641f4d60f30e47924a89ebd74f664cecba4f3a72489f86c0876db3f8bd49c779cb87b1098d9670c681237852e0235765f71d33e3cb41fe5a0df2fbc1d41df0dcbf1726a55cdff8282fd766288663a4f6d49bf4c1ad74358e823139dd5bb8e7640dbaf6585dbe1cb526d0935c576488247db9a80cb43dc78cc90a4075f2ee4dad2976a8a6819318c718a8d699c80b35514e62099d4b33ea7cff6df14b3f28c2137c89124415272cb4063589c936393349c8e012b925b17f1ef749f6fac48c10283dc5182aed333578b1b02c2b4d952d11831027b383c2922039b94c9d66f60e53abf20d6b8a0ccbf00f6cf77e26ac7a092ed19b2562123413e3cbde03fb1b57a2259dedc118f7304973d50c621cfe454fdb4d1dfe07b2e7d941b92ff20064f5e11bec2c2e513d92a99695bb9256b1353361e614f2a271880004602acfb3b4d3105182819d56bd8423bc91dd80b62e33c055f9ada834bf705365848329853511acb3fcca57454e9c6b9d5f7d2ee9b5f38ba240155f0dc78f4dfbeb0aec5aca85c929844a3c6963ac8ef1aee281bc3c2a363cbf20e1a1941258b89ce08f1d8f923d4cd00e8c1e3a6e14b45bc18e7633d08cda405bd8e34e7a07d19401756a53397dbf0d9daa186cd95cd72dfa1c729ddd685998275877b1caa4e92df5a0abedb03eb3fc8441101d6a9af7b4838be2b5e3a97aa57f35b297683273884d64a271ce382b2a329a0154ffe87f20ce3045972521e171719491d8d8e6bd86ff81441fc994b5157cd56909edab2c9d28e719287f5c16a82033ab9e04435f0ebd41be76724d132e7b20b5319e4a9c032912734b49e2d5907a2bf5866819510cf09faaa2c44eb67cf3c0fe018652596b7d20643fcc120649f50a0402495cba5f18459e9a539c1321870314fa19a06b8010201d99ae1f17b28f3ecb6f2b86427d507d1fa0049b65231a317cf7e936b64ee30234a6c2ae30a812131eeb0452500e0832f19bb0ace6c3456f93b8f27c0232f5dcf2a5cb5253bf7d2299d205ee09881a1910ec7aaf118c85c48e6aadba1456777d3b4ee8f54185b145a9b9362137ab63e72a3ff35c444f56ae01850b781a69deba7152a83c7effb9a89db5e3d362224bb44a4039b7d50da174e53c0c7e36c3f22914ca70e7e2610daf225f9b4272d0c3c22ff88f5d7fe4834371a3ff0ace8f578d1c0fb750ccd08e6d573ede9a65469f90b4889364b82d5176db283860e1a9a9277beda9f24ec6770e7bfdfa091f941b2988403ac024cc2e426ab13aba9da7042d88ac3c9a201a9e0eda3d182263729d06e0eb3a73b1431db1333def7125012284dae37bcd858754a252b0a5056513e709ad740b6ae8b22b8c4fa880a01c545d3da39b5cf1cc9a8c3f8838d495b5cbbbd4eb34e2161e349f344a77027a23869cfda1327c16d0cf14f3dbe1269bf74c3fa89465447e4b61baebb32681a003da0249a65f72e9</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">输入密码，查看文章</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>实用工具</category>
-      </categories>
-      <tags>
-        <tag>mirror</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Next主题文章目录中文锚点失效</title>
-    <url>/2021/08/22/21082201/</url>
-    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Hexo 安装 Next 主题后, 文章侧边栏目录<strong>中文目录</strong>锚点点击后无法正常跳转，而纯英文锚点没有问题。</p>
+    <title>Hello World</title>
+    <url>/2021/07/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822203128.png" alt="image-20210822203128277"></p>
-<h3 id="问题跟踪"><a href="#问题跟踪" class="headerlink" title="问题跟踪"></a>问题跟踪</h3><p>浏览器F12 debug一下，控制台有报错不过看不懂，只知道<code>post-details.js</code>有问题。还能咋样，有问题找度娘。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822203927.png" alt="image-20210822203911332"></p>
-<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>编辑<code>/themes/next/source/js/src</code> 目录下的 <code>post-details.js</code>,大概76行，添加下面代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">targetSelector = decodeURI(this.getAttribute(&#x27;href&#x27;))</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822204317.png" alt="QQ图片20210822204306"></p>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
+        <tag>Hello World</tag>
       </tags>
   </entry>
   <entry>
@@ -1000,7 +1069,7 @@
 </tr>
 <tr>
 <td>SMTP_USER</td>
-<td><a href="mailto:&#x78;&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#64;&#113;&#x71;&#46;&#x63;&#111;&#109;">&#x78;&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#64;&#113;&#x71;&#46;&#x63;&#111;&#109;</a></td>
+<td><a href="mailto:&#x78;&#120;&#x78;&#120;&#120;&#x78;&#x78;&#120;&#64;&#113;&#x71;&#x2e;&#x63;&#x6f;&#x6d;">&#x78;&#120;&#x78;&#120;&#120;&#x78;&#x78;&#120;&#64;&#113;&#x71;&#x2e;&#x63;&#x6f;&#x6d;</a></td>
 <td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
 </tr>
 </tbody></table>
@@ -1040,75 +1109,6 @@
         <tag>Hexo</tag>
         <tag>valine</tag>
         <tag>LeanCloud</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/07/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hello World</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>记一次debian10的安装</title>
-    <url>/2021/08/27/21082701/</url>
-    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>久久总能碰上一次Debian系统安装的需求，其实跟其他linx系统都差不多，但时间久了总能忘掉一些细节，比如网卡配置文件的路径等等。记录下，有空看看，加强记忆。</p>
-<span id="more"></span>
-
-<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><p><a href="https://www.debian.org/">Debian官网</a></p>
-<p>“造轮子”的事我就不干了，直接上链接。</p>
-<p><a href="https://linux.cn/article-11083-1.html?pr">图解 Debian 10（Buster）安装步骤</a></p>
-<p>几乎就是回车回车，值得注意的是选择电脑桌面环境和其它软件包时，<em><strong>SSH Server</strong></em> 还是√上吧，省的进系统还要装。</p>
-<p>安装 <em><strong>Grub 引导加载程序</strong></em>，选择<code>Yes</code>。其他选择<code>No</code>。</p>
-<p>进系统后</p>
-<h3 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/network/interface</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#配置网卡eth0的IP地址</span><br><span class="line">auto eth0 </span><br><span class="line">iface eth0 inet static 静态/dhcp</span><br><span class="line">address 192.168.2.147 ip地址</span><br><span class="line">netmask 255.255.255.0 子网掩码</span><br><span class="line">gateway 192.168.2.1 网关</span><br></pre></td></tr></table></figure>
-
-<p>或者使用nano编辑器   “Ctrl+O” “Ctrl+X” 保存退出</p>
-<p>重启网卡生效</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/networking restart</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="设置DNS"><a href="#设置DNS" class="headerlink" title="设置DNS"></a>设置DNS</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;nameserver 110.80.137.52&quot; &gt;&gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cp /etc/resolv.conf /etc/resolv.conf.bak # 备份原有dns配置文件</span><br><span class="line">vi /etc/resolv.conf # 编辑DNS配置文件</span><br><span class="line">nameserver 110.80.137.52 # 设置首选dns</span><br><span class="line">nameserver 114.114.114.114 # 设置备用dns</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="开启root远程登录"><a href="#开启root远程登录" class="headerlink" title="开启root远程登录"></a>开启root远程登录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-
-<p>PermitRootLogin no -&gt;  PermitRootLogin yes</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210827232508.png" alt="image-20210827232508198"></p>
-<p>重启ssh生效</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>Debian10</tag>
       </tags>
   </entry>
   <entry>

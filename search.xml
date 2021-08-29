@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
+    <url>/2021/07/30/21073001/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
+
+
+
+<span id="more"></span>
+
+
+
+<p>书接上回，接下来要将hexo生成的静态文件上传到github，实现本地无需运行服务，打造个人博客网站。</p>
+<h3 id="本地安装git"><a href="#本地安装git" class="headerlink" title="本地安装git"></a>本地安装git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150044.png" alt="20210801134206"></p>
+<h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github 用户名&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;github 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150052.png" alt="20210801134215"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150057.png" alt="20210801134223"></p>
+<h3 id="在本地创建ssh-key"><a href="#在本地创建ssh-key" class="headerlink" title="在本地创建ssh key"></a>在本地创建ssh key</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
+<p>默认回车</p>
+<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。接着 id_rsa.pub 密钥，将内容复制；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
+<h3 id="注册github账户以及Add-SSH-Key"><a href="#注册github账户以及Add-SSH-Key" class="headerlink" title="注册github账户以及Add SSH Key"></a>注册github账户以及Add SSH Key</h3><p>打开GitHub-Settings-Keys页面，创建一个新的 SSH key，填写 Title 和 Key，Title 可以随意，而 Key 的内容则是我们刚才复制的 id_rsa.pub 中的内容，最后点击 Add SSH key 即可；</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150123.png" alt="20210801134304"></p>
+<h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>确保你的仓库是 public，你要搞个 private，就没人能访问了。同时，<strong>仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io！！！仓库名一定要是：用户名.github.io</strong>！！！</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150142.png" alt="20210801134310"></p>
+<p>接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
+<h3 id="本地配置远端推送"><a href="#本地配置远端推送" class="headerlink" title="本地配置远端推送"></a>本地配置远端推送</h3><p>只需要博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150228.png" alt="20210801134321"></p>
+<p>vi编辑器命令模式下输入<code>/deploy</code>定位，找到远程部署设置代码修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150234.png" alt="20210801134326"></p>
+<p>保存退出</p>
+<p><code>hexo g</code> 生成静态文件</p>
+<p><code>Hexo d</code> 将本地生成的静态文件推送到GitHub仓库</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150244.png" alt="20210801134331"></p>
+<p>github仓库中就可以看到推送过来的文件了</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150314.png" alt="image-20210801150314039"></p>
+<p>然后在浏览器中访问：</p>
+<p>https://用户名.github.io</p>
+<p>推送的是静态文件所以本地hexo服务不用运行，每次写完博客只要<code>hexo g</code>,<code>hexo d</code> 就行。还能外网访问。nice</p>
+<p>但是，github服务器在国外，DNS污染，github.io加载非常慢甚至有时候访问不了<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150340.png" alt="20210801134345">可以通过修改<code>C:\Windows\System32\drivers\etc\hosts</code>文件加快访问速度，但博客是给别人看的，不合适！！！</p>
+<p>当然也可以使用Gitee “中国github” /doge ，但是有更好的解决办法。</p>
+<p>欲知后事如何，且听下回分解（用宝塔面板将Hexo部署到阿里云）</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建Hexo博客(三)：用宝塔面板将Hexo部署到阿里云</title>
+    <url>/2021/07/31/21073101/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132539.png" alt="image-20210820132539510"></p>
+<span id="more"></span>
+
+<p>书接上回，github服务器在国外，而且DNS污染严重，于是我斥“巨资”<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155455.gif">在阿里云买了轻量应用服务器和域名，打算将博客网站挂到阿里云服务器下。</p>
+<h3 id="购买服务器域名"><a href="#购买服务器域名" class="headerlink" title="购买服务器域名"></a>购买服务器域名</h3><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155923.jpg" alt="qq_pic_merged_1627804751843" style="zoom:50%;" />
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801160638.png" alt="image-20210801160637948"></p>
+<p>配置有点捞，但是挂网站绰绰有余<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>查看公网IP，设置密码</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801183119.png" alt="image-20210801183119470" style="zoom:50%;" />
+
+<p>登录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh user@host 如：ssh root@192.168.0.104</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801161305.png" alt="image-20210801161305383"></p>
+<h3 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h3><ol>
+<li><strong>安装git</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>配置 git 仓库</strong></li>
+</ol>
+<p>在root用户下输入</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">useradd git <span class="comment"># 创建用户git</span></span><br><span class="line">passwd git <span class="comment"># 为用户git设置密码</span></span><br><span class="line">chmod <span class="number">740</span> /etc/sudoers  <span class="comment"># 修改文件权限</span></span><br><span class="line">vim /etc/sudoers</span><br><span class="line"> <span class="comment"># 找到           root ALL=(ALL)  ALL</span></span><br><span class="line"> <span class="comment"># 在下面添加一行   git  ALL=(ALL)  ALL</span></span><br><span class="line"> <span class="comment"># 输入:wq即可保存并退出编辑</span></span><br><span class="line">chmod <span class="number">400</span> /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<p>切换git用户</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">su git   <span class="comment"># 切换到git用户,这步最关键</span></span><br><span class="line">sudo mkdir  -p  /www/wwwroot/blog  <span class="comment"># 把博客目录放在宝塔网站的根目录下</span></span><br><span class="line">cd /home/git</span><br><span class="line">mkdir repos</span><br><span class="line">cd repos</span><br><span class="line">git init --bare blog.git  <span class="comment"># 创建一个裸库blog.git</span></span><br><span class="line">cd blog.git/hooks</span><br><span class="line">vim post-receive</span><br></pre></td></tr></table></figure>
+
+<p>输入以下代码，保存退出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line">git --work-tree=/www/wwwroot/blog --git-<span class="built_in">dir</span>=/home/git/repos/blog.git checkout -f</span><br></pre></td></tr></table></figure>
+
+<p>修改权限</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">chmod +x post-receive</span><br><span class="line">exit   <span class="comment">#回到root用户</span></span><br><span class="line">chown -R git:git /home/git/repos/blog.git <span class="comment">#赋予git用户可操作仓库blog.git的权限</span></span><br><span class="line"></span><br><span class="line">chown -R git:git /www/wwwroot/blog <span class="comment">#赋予git用户可操作仓库blog.git的权限</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="免密登录配置"><a href="#免密登录配置" class="headerlink" title="免密登录配置"></a>免密登录配置</h3><p>之前推送到github配置过，只要复制公钥到阿里云服务器了就行了。</p>
+<ol>
+<li><strong>在本地Termux创建ssh key</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150105.png" alt="20210801134234"></p>
+<p>默认回车</p>
+<p>执行上述命令之后，会在<code>~/.ssh</code>目录生成 id_rsa 和 id_rsa.pub 两个文件，前者是我们私有的，而后者则是对外开放的。</p>
+<p>​    </p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150112.png" alt="20210801134252"></p>
+<p>windows命令一样，路径如下:</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801170439.png" alt="image-20210801170439598" style="zoom:50%;" />
+
+
+
+
+
+<ol start="2">
+<li><p><strong>将公钥添加到阿里云服务器authorized_keys文件中</strong></p>
+<p>git用户下输入</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir ~/.ssh</span><br><span class="line">vim ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>怎么添加属实八仙过海各显神通</p>
+<ul>
+<li>复制粘贴，退出保存。容易出错，我第一次弄的时候就死活不能免密，调试了一个多小时，重来一遍才成功。</li>
+</ul>
+<ul>
+<li>传输文件，再改名/写入</li>
+</ul>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801165416.png" alt="image-20210801165416555"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801180204.png" alt="image-20210801180204879"></p>
+<ul>
+<li>用ssh-copy-id将公钥复制到服务器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-copy-id -i .ssh/id_rsa.pub root@xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意:</strong> ssh-copy-id <strong>将key写到远程机器的 ~/</strong> .ssh/authorized_key.文件中</p>
+<h3 id="安装宝塔面板"><a href="#安装宝塔面板" class="headerlink" title="安装宝塔面板"></a>安装宝塔面板</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6<span class="number">.0</span>.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装完成记录下宝塔面板地址、用户名、密码。或者bt查看</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801162449.png" alt="image-20210801162449399"></p>
+<h3 id="服务器防火墙设置"><a href="#服务器防火墙设置" class="headerlink" title="服务器防火墙设置"></a>服务器防火墙设置</h3><p>放行8888端口  登录不了的话就设置下这个  有的叫安全组</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801181550.png" alt="image-20210801181550802" style="zoom:50%;" />
+
+
+
+<h3 id="登录宝塔面板"><a href="#登录宝塔面板" class="headerlink" title="登录宝塔面板"></a>登录宝塔面板</h3><p>输入账号密码，环境安装方式：<strong>极速安装</strong>     一键安装</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801181815.png" alt="image-20210801181815072" style="zoom:50%;" />
+
+
+
+<h3 id="网站配置"><a href="#网站配置" class="headerlink" title="网站配置"></a>网站配置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182112.png" alt="image-20210801182112159"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182430.png" alt="image-20210801182430055"></p>
+<h3 id="本地HEXO-配置文件设置"><a href="#本地HEXO-配置文件设置" class="headerlink" title="本地HEXO 配置文件设置"></a>本地HEXO 配置文件设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182706.png" alt="image-20210801182706566"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801182930.png" alt="image-20210801182930807"></p>
+<h3 id="测试上传"><a href="#测试上传" class="headerlink" title="测试上传"></a>测试上传</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801183525.png" alt="image-20210801183525559"></p>
+<p>最后在浏览器输入地址 查看效果即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif" alt="img"></p>
+<p>建站完成，过程坎坷，一波三折。建议跳过前两步，直接部署到服务器！</p>
+<p>下期教大家如何美化自己的Hexo博客。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>aliyun</tag>
+        <tag>宝塔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PicGo + 阿里云对象存储OSS搭建个人图床</title>
+    <url>/2021/08/01/21080101/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141727.jpg" alt="aliyunOSS"></p>
+<span id="more"></span>
+
+<p><em><strong>图床</strong></em>，就是指储存图片的服务器。</p>
+<p>网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。</p>
+<p><em><strong>图床工具</strong></em>，就是自动把本地图片转换成链接的一款工具，网络上有很多图床工具，就目前使用种类而言，PicGo 算得上一款比较优秀的图床工具。它是一款用 <code>Electron-vue</code> 开发的软件，可以支持微博，七牛云，腾讯云COS，又拍云，GitHub，阿里云OSS，SM.MS，imgur 等8种常用图床，功能强大，简单易用。</p>
+<h3 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h3><p><a href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载地址</a></p>
+<p><em>mac</em> 系统选择 .<em>dmg</em> 下载，<em>windwos</em> 选择 <em>.exe</em>系统</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png" alt="image-20210801202853961" style="zoom: 67%;" />
+
+
+
+<h3 id="安装PicGo"><a href="#安装PicGo" class="headerlink" title="安装PicGo"></a>安装PicGo</h3><p>安装完成后在右下角，我一直打不开以为安装没成功，又卸载重装了一遍才发现在右下角<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155405.jpg" alt="img"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203029.png" alt="image-20210801203029160"></p>
+<p>一开始用Github仓库存储图片，但还是那个问题，github服务器在国外，不做加速处理，图片加载慢，甚至加载不出来。配置过程讲个大概就行。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203912.png" alt="QQ截图20210801142842" style="zoom:50%;" />
+
+
+
+
+
+<p><strong>新建一个仓库</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204908.png" alt="image-20210801204908692"></p>
+<p>个人中心，<em>Settings</em>-&gt; <em>Developer settings</em> -&gt;  <em>Personal access tokens</em>，我们在这里创建需要的 <em>token</em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204725.png" alt="image-20210801204725223"></p>
+<p>生成一个 <em>token</em> ，复制保存到其他地方，这个 <em>token</em> 只显示一次。</p>
+<p>打开PicGo -&gt;  图床设置 -&gt;  github图床</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204500.png" alt="image-20210801204500664"></p>
+<p>俗话说的好，免费的就没好东西<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155509.gif" alt="img">Gitee也行，虽然是国内的，但是据说仓库的容量有上限（好像是1个G)，并且图片的大小超过1M 就需要登录才能显示，否则看不见。</p>
+<p>这种事可以花点钱嘛~花不了多少钱。40G的容量一年才9块钱，外网流出流量 00:00-08:00（闲时）：0.25元/GB \ 8:00-24:00（忙时）：0.50元/GB   完全可以抹零。</p>
+<h3 id="开通并创建阿里云对象存储OSS"><a href="#开通并创建阿里云对象存储OSS" class="headerlink" title="开通并创建阿里云对象存储OSS"></a>开通并创建阿里云对象存储OSS</h3><ol>
+<li><p><strong>登录<a href="https://www.aliyun.com/">阿里云</a></strong></p>
+</li>
+<li><p><strong>搜索对象存储 OSS</strong></p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211006.png" alt="image-20210801211006780"></p>
+<ol start="3">
+<li><strong>购买OSS资源包</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211306.png" alt="image-20210801211306142"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211453.png" alt="image-20210801211453531"></p>
+<ol start="4">
+<li><p><strong>创建Bucket</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212005.png" alt="image-20210801212005690"></p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212314.png" alt="image-20210801212314421"></p>
+<ol start="5">
+<li><strong>新建目录</strong></li>
+</ol>
+<p>对象存储/Bucket 列表/qyxie-blog/文件管理</p>
+<p>推荐目录名为：<code>img/</code>目录名后要加一个<code>/</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212706.png" alt="image-20210801212706425"></p>
+<h3 id="配置AccessKey"><a href="#配置AccessKey" class="headerlink" title="配置AccessKey"></a>配置AccessKey</h3><ol>
+<li><strong>找到右上角的头像 - AccessKey管理</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213136.png" alt="image-20210801213136841"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213200.png" alt="image-20210801213200840"></p>
+<ol start="2">
+<li><strong>创建AccessKey</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213218.png" alt="image-20210801213218688"></p>
+<ol start="3">
+<li><strong>保存AccessKey ID 和AccessKey Secret</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213430.png" alt="image-20200812145115691"></p>
+<ol start="4">
+<li><p><strong>记下存储空间名和存储区域</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213917.png" alt="image-20210801213917839"></p>
+</li>
+</ol>
+<h3 id="PicGo设置"><a href="#PicGo设置" class="headerlink" title="PicGo设置"></a>PicGo设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801214043.png" alt="image-20210801214043035"></p>
+<p>好了，使用起来也是非常的方便快捷呢。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif" alt="img"></p>
+<h3 id="Tips：设置防盗链"><a href="#Tips：设置防盗链" class="headerlink" title="Tips：设置防盗链"></a>Tips：设置防盗链</h3><p>防盗链，就是防止别人盗取你的图片。怕有居心不良的人用我们资源拿去在他们网站展示，消费的是我们的流量，为了解决这种问题，才会有防盗链这个思路。</p>
+<p>存储对象 -&gt;  权限管理 -&gt; 防盗链</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801220136.png" alt="image-20210801220136432"></p>
+<p>但这也将导致编辑博客时<code>Typora</code>本地无法预览图片，暂时不知道如何解决，酌情使用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155518.gif" alt="img"></p>
+<p>搭建个人图床主要目的还是写博客快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>aliyun</tag>
+        <tag>PicGo</tag>
+        <tag>OSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何优雅写博客</title>
+    <url>/2021/08/07/21080701/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141834.jpg" alt="Typora" style="zoom:150%;" />
+
+<span id="more"></span>
+
+<p><strong>Markdown</strong>是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<em>——百度百科</em></p>
+<p>Hexo 使用 <strong>Markdown</strong>(或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>工欲善其事必先利其器，用Hexo写博客不可能每次都</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后用记事本或者vi编辑器去写文章中。效率非常低，而且图片插入是个难点。需要一个 高效好用的<strong>Markdown 文本编辑器</strong>。</p>
+<h2 id="Typora-是什么？"><a href="#Typora-是什么？" class="headerlink" title="Typora 是什么？"></a>Typora 是什么？</h2><p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，完全免费的。<a href="https://typora.io/">Typora 官网</a> 上他们将 Typora 描述为 「A truly <strong>minimal</strong> markdown editor. 」。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807142738.png" alt="img"></p>
+<h4 id="极致简洁"><a href="#极致简洁" class="headerlink" title="极致简洁"></a>极致简洁</h4><p>打开Typora，你会发现它的界面非常简洁，几乎没有任何按钮，只在上方有一排功能键，右下角是字数统计，其余强大的功能都被藏在后台。且按下F11进入全屏状态，你的世界里就只有文字。</p>
+<h4 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h4><p>般Markdown 编辑器界面都是两个窗口，左边是Markdown 源码，右边是效果预览。有时一边写源码，一边看效果，确实有点不便。但是使用<strong>Typora</strong> 可以实时的看到渲染效果，而且是在同一个界面，所见即所得。</p>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p><strong>Typora</strong> 对几乎所有Markdown 语法都提供了快捷操作，通过菜单栏的<code>段落</code> 和<code>格式</code> 中的功能可以快速设置标记语法，一些常用的操作都有快捷键，用起来非常高效。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145046.png" alt="image-20210807145046432" style="zoom:50%;" />
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145129.png" alt="image-20210807145129861"></p>
+<h4 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h4><p>Typora 的图片插入功能是广受好评的。要知道，Markdown 原生不太注重图片插入的功能，但你在 Typora 中：</p>
+<ul>
+<li><p>可以直接将网络图片、剪贴板图片复制到文档中</p>
+</li>
+<li><p>可以拖动本地图片到文档中</p>
+</li>
+<li><p><a href="https://www.qyxie.top/2021/08/01/21080101/#more">配合PicGo个人图床</a>  <!--PicGo + 阿里云对象存储OSS搭建个人图床教程--></p>
+<p><code>文件</code>-&gt;<code>偏好设置</code>-&gt;<code>图像</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807143933.png" alt="image-20210807143933250"></p>
+</li>
+</ul>
+<p>Typora 会自动帮你插入符合 Markdown 语法的图片语句，并给它加上标题。</p>
+<p>Typora和PicGo几乎绑定，写博客才能快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>PicGo</tag>
+        <tag>Markdown</tag>
+        <tag>Typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>获取网站的Favicon图标的API接口</title>
+    <url>/2021/08/08/21080801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
+<span id="more"></span>
+
+<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
+<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
+<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
+<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
+<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
+<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>下载程序到网站目录</strong></em></p>
+<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
+<p><em><strong>解压缩</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
+<p><em><strong>域名添加解析</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
+<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
+<p>有问题的话试试：cache 文件夹给 755 权限。</p>
+<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
+<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
+<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>favicon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易的随机图片API接口</title>
+    <url>/2021/08/06/21081401/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
+<span id="more"></span>    
+
+
+
+<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
+<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
+<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>新建目录</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
+<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
+<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
+<p>好了，在网页源码中调用就行了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
+<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站ICP备案与公安备案</title>
+    <url>/2021/08/19/21081901/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820135606.png" alt="image-20210820135606772"></p>
+<span id="more"></span>
+
+<p>在阿里云，腾讯云等购买国内服务器，如果是用于web访问的话就必须备案后才能使用（无需域名的情况除外）。否则会提示“该网站暂时无法访问”。但如果不需要web访问的话，目前看来是无需备案的。</p>
+<p>也可以买国外的服务器，好处是不需要备案，但是一般国内用户访问国外服务器，速度会非常慢，然后访问服务器也时常变的不稳定，这种情况还是选择国内云服务器比较稳妥。</p>
+<h3 id="备案是什么？"><a href="#备案是什么？" class="headerlink" title="备案是什么？"></a>备案是什么？</h3><p>所谓备案，就是我们常说的网站备案，备案的全称叫做ICP备案。ICP也就是Internet Content Provider，指的是网络内容服务商 ，即向广大用户综合提供互联网信息业务和增值业务的网络运营商。ICP备案是信息产业部对网站的一种管理，为了防止非法网站。就像是官方认可的网站，就好像开个小门面需要办营业执照一样。</p>
+<p>备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播。根据中华人民共和国国务院令第291号《中华人民共和国电信条例》、第292号《互联网信息服务管理办法》（简称ICP管理办法），国家对提供互联网信息服务的ICP实行许可证制度。ICP证是网站经营的许可证，根据国家,互联网信息服务管理办法》规定，经营性网站必须办理ICP证，否则就属于非法经营。</p>
+<h2 id="备案、域名、服务器之间的关系"><a href="#备案、域名、服务器之间的关系" class="headerlink" title="备案、域名、服务器之间的关系"></a>备案、域名、服务器之间的关系</h2><p>其实网站备案、ICP备案、域名备案、服务器备案本质上指的都是给网站申请ICP备案号。</p>
+<ul>
+<li>只有域名+没有国内服务器空间=不能备案</li>
+<li>没有域名+只有国内服务器空间=不能备案</li>
+<li>有域名+有国内服务器空间=可以备案</li>
+</ul>
+<p>备案是针对服务器空间的，但是备案号是挂在域名上的，可以说备案如果没有空间或者没有域名都备案不了。简单来说，就是完成ICP备案，域名和服务器缺一不可。</p>
+<h3 id="找谁办理备案"><a href="#找谁办理备案" class="headerlink" title="找谁办理备案"></a>找谁办理备案</h3><p>备案正常情况下是找服务器/虚拟主机的提供商办理备案，你使用了相关服务商提供的网络服务器，服务商自然会提供相应的备案服务。为了方便备案请尽量保证域名和服务器的提供商一致。如果不是，请保证域名和服务器的实名认证一致。</p>
+<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>阿里云轻量应用服务器购买时长在3个月及以上（含续费），赠送备案服务号5个。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819232653.png" alt="image-20210819232653671"></p>
+<p><a href="https://help.aliyun.com/knowledge_detail/36922.html?source=5176.11533457&userCode=28kqeewo">首次备案流程-备案-阿里云</a></p>
+<p>按照以上流程，阿里云初审用时2天，工信部审核用时9天。（仅供参考）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233527.png" alt="image-20210819233527311"></p>
+<p>网站开通后，请在网站首页底部中间位置放置您的ICP备案号并链接至”<a href="https://beian.miit.gov.cn&quot;./">https://beian.miit.gov.cn&quot;。</a> 并在开通之日起30日内登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a>提交公安联网备案申请。获取《<a href="https://help.aliyun.com/knowledge_detail/36981.html">公安备案信息填写指南</a>》。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233627.png" alt="image-20210819233627212"></p>
+<h3 id="公安备案"><a href="#公安备案" class="headerlink" title="公安备案"></a>公安备案</h3><p>网站备案是根据国家法律法规需要网站的所有者向国家有关部门申请的备案，公安局备案是其中一种。公安局备案一般按照各地公安机关指定的地点和方式进行，操作流程会比ICP备案流程简单，主要是已登记为主。</p>
+<p>公安备案不做后果咱也不是很清楚（ICP备案不做域名直接访问不了），但是每个公民都有配合义务，在条例层面是「必须」遵守。</p>
+<p>注册登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a></p>
+<h5 id="开办主体管理，提交审核"><a href="#开办主体管理，提交审核" class="headerlink" title="开办主体管理，提交审核"></a>开办主体管理，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235154.png" alt="image-20210819235154678"></p>
+<p>等待审核通过</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235817.png" alt="image-20210819235817040"></p>
+<h5 id="新办网站申请，提交审核"><a href="#新办网站申请，提交审核" class="headerlink" title="新办网站申请，提交审核"></a>新办网站申请，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235855.png" alt="image-20210819235855616"></p>
+<p>新办网站申请信息填写参考<a href="https://help.aliyun.com/knowledge_detail/36981.html">阿里云-公安备案信息填写指南</a></p>
+<p>公安备案审核时间/流程似乎取决于你当地的公安机关，网警，反正我备案的时候直接在网站上提交资料和照片,不到十天就通过了。但是听说也要求本人到携带身份证到当地公安机关进行备案的。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000130.png" alt="image-20210820000130624"></p>
+<p>​    <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000330.png" alt="image-20210820000330671"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001339.png" alt="image-20210820001339754"></p>
+<p>将公安备案编号HTML代码稍作修改，加上ICP备案编号，加上备案编号图标。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;a href=&quot;https://beian.miit.gov.cn/&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽ICP备2021011133号-1&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;a target=&quot;_blank&quot; href=&quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35052402000312&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;img src=&quot;https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210805124438.png&quot; style=&quot;float:left;&quot;/&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽公网安备 35052402000312号&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>大家也可以直接复制我的代码，以下几处自行修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001931.png" alt="image-20210820001930929"></p>
+<p>打开<code>themes/next/layout/_partials/footer.swig</code></p>
+<p>将代码放到合适的位置</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002328.png" alt="QQ图片20210820002320"></p>
+<p>效果展示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002411.png" alt="image-20210820002411893"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>备案</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo部署到服务器CSS样式失效</title>
+    <url>/2021/08/20/21082001/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
+<span id="more"></span>
+
+<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
+<p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
+<p>多的我也看不懂，直接解决问题好了。</p>
+<p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164711.png" alt="image-20210820164711269"></p>
+<p>删除后如下图所示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164748.png" alt="image-20210820164747984"></p>
+<p>重新生成静态文件，部署到服务器，总算是对头了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何设置浏览器的默认首页</title>
+    <url>/2021/08/20/21082002/</url>
+    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
+<p>我二次开发了一个简单的<a href="https://nav.qyxie.top/">个人网址导航</a>，免费为大家收录精选的网站，指引大家愉快上网，希望大家积极提交收录申请，并将此网页设置为浏览器的默认首页。</p>
+<span id="more"></span>
+
+<p>网址：<a href="https://nav.qyxie.top/">https://nav.qyxie.top/</a></p>
+<ol>
+<li><h4 id="Gogle-Chrome"><a href="#Gogle-Chrome" class="headerlink" title="Gogle Chrome"></a>Gogle Chrome</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 启动时 -&gt; 打开特定网页或一组网页 -&gt; 添加新网页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820225836.png" alt="image-20210820225836555"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230249.png" alt="image-20210820230249451"></p>
+<p>外观 -&gt; 显示“主页”按钮</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230739.png" alt="image-20210820230739006"></p>
+<p>就是左上角的这个，设置跳转</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230904.png" alt="image-20210820230904283"></p>
+<ol start="2">
+<li><h4 id="Microsoft-Edge"><a href="#Microsoft-Edge" class="headerlink" title="Microsoft Edge"></a>Microsoft Edge</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 开始、主页和新建标签页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230550.png" alt="image-20210820230550677"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230653.png" alt="image-20210820230653035"></p>
+<ol start="3">
+<li><h4 id="Internet-Explorer"><a href="#Internet-Explorer" class="headerlink" title="Internet Explorer"></a>Internet Explorer</h4></li>
+</ol>
+<p>右上角 -&gt; Internet选项 -&gt; 常规 -&gt; 主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231148.png" alt="image-20210820231148136"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231415.png" alt="image-20210820231415538"></p>
+<ol start="4">
+<li><h4 id="手机浏览器"><a href="#手机浏览器" class="headerlink" title="手机浏览器"></a>手机浏览器</h4></li>
+</ol>
+<p>设置 -&gt; 主页设置 -&gt; 编辑自定义主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820232127.png" alt="image-20210820232127516"></p>
+<p>多的不说，其他大差不差，大家都是聪明人，不用讲的太明白(<em>ﾟ∀ﾟ</em>)！ </p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Chrome</tag>
+        <tag>IE</tag>
+        <tag>Edge</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo之Next主题优化改造</title>
+    <url>/2021/08/06/21080601/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132857.png" alt="image-20210820132857390"></p>
+<span id="more"></span>
+
+<p>博客初步搭建完成，但是这个默认的主题实在丑的可以。还好Hexo是可以修改主题的。其中不乏一些非常优秀的主题。</p>
+<p><a href="https://www.zhihu.com/question/24422335">知乎：有哪些好看的 Hexo 主题？</a></p>
+<p><em>NexT</em>是Hexo的知名第三方主题,黑白极简风格四合一,有相当多的使用者。<em><strong>精于心，简于形</strong></em>标语说的是真的不错。使用NexT主题的人比较多，主题成熟。优化，配置，扩展很多都集成了，比较简单。</p>
+<h3 id="启用Next主题"><a href="#启用Next主题" class="headerlink" title="启用Next主题"></a>启用Next主题</h3><ol>
+<li><strong>下载Next主题包</strong></li>
+</ol>
+<p>在<em><strong>博客根目录下</strong></em>安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/iissnan/hexo-theme-next.git themes/next</span><br></pre></td></tr></table></figure>
+
+<p>以上代码的意思是从 <a href="https://github.com/iissnan/hexo-theme-next%E5%B0%86next%E4%B8%8B%E8%BD%BD%E5%88%B0%E5%BD%93%E5%89%8D%E5%8D%9A%E5%AE%A2%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84themes%E9%87%8C%E9%9D%A2%E7%9A%84next%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E3%80%82">https://github.com/iissnan/hexo-theme-next将next下载到当前博客根目录下的themes里面的next文件夹中。</a></p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806205932.jpg" alt="img" style="zoom:67%;" />
+
+
+
+<ol start="2">
+<li><strong>修改Next主题</strong></li>
+</ol>
+<p>我的博客根目录是<code>/hexo</code>,在以下会有两个配置文件。请注意区分。</p>
+<p><code>/hexo/_config.yml</code>，为了描述方便，在以下说明中，将称为 <strong>站点配置文件</strong></p>
+<p><code>/hexo/themes/next/_config.yml</code>，为了描述方便，在以下说明中，将称为 <strong>主题配置文件</strong></p>
+<p>在站点配置文件中搜索theme，由<code>landscape</code>默认主题修改为<code>next</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806212527.png" alt="image-20210806212527590"></p>
+<p>保存退出。</p>
+<p>hexo一键三连</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo s -g</span><br></pre></td></tr></table></figure>
+
+<p>访问页面，这就是Next的默认页面。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806213203.png" alt="image-20210806213202922"></p>
+<p>如果网页报错：</p>
+<p><code>“ &#123;% extends ‘_layout.swig‘ %&#125; &#123;% import ‘_macro/post.swig‘ as post_template %&#125;“</code></p>
+<p>原因是hexo在5.0之后把swig给删除了需要自己手动安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i hexo-renderer-swig </span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><strong>选择 Scheme</strong></li>
+</ol>
+<p>Scheme 是 NexT 提供的一种特性，借助于 Scheme，NexT 为你提供多种不同的外观。同时，几乎所有的配置都可以 在 Scheme 之间共用。目前 NexT 支持三种 Scheme，他们是：</p>
+<ul>
+<li>Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白</li>
+<li>Mist - Muse 的紧凑版本，整洁有序的单栏外观</li>
+<li>Pisces - 双栏 Scheme，小家碧玉似的清新</li>
+<li>Gemini - 左侧网站信息及目录，块+片段结构布局</li>
+</ul>
+<p>进入<strong>主题配置文件</strong>，搜索Scheme,注释掉默认的，启用你想用的。我用的是<em><strong>Gemini</strong></em>。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806221815.png" alt="image-20210806221815378"></p>
+<p>保存退出，重启Hexo服务，修改成功，左侧网站信息及目录，块+片段结构布局。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806221939.png" alt="image-20210806221939223"></p>
+<h3 id="站点基本设置"><a href="#站点基本设置" class="headerlink" title="站点基本设置"></a>站点基本设置</h3><p>编辑 <strong>站点配置文件</strong>。Site</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806223619.png" alt="image-20210806223619642"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806224114.png" alt="image-20210806224114858"></p>
+<h3 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h3><p>设定菜单内容，对应<strong>主题配置文件</strong>中字段是 <code>menu</code>。 菜单内容的设置格式是：<code>item name: link</code>。其中 <code>item name </code>是一个名称，这个名称并不直接显示在页面上，她将用于匹配图标以及翻译。</p>
+<p>NexT 默认的菜单项有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">键值</th>
+<th align="left">设定值</th>
+<th align="left">显示文本（简体中文）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">home</td>
+<td align="left"><code>home: /</code></td>
+<td align="left">主页</td>
+</tr>
+<tr>
+<td align="left">archives</td>
+<td align="left"><code>archives: /archives</code></td>
+<td align="left">归档页</td>
+</tr>
+<tr>
+<td align="left">categories</td>
+<td align="left"><code>categories: /categories</code></td>
+<td align="left">分类页</td>
+</tr>
+<tr>
+<td align="left">tags</td>
+<td align="left"><code>tags: /tags</code></td>
+<td align="left">标签页</td>
+</tr>
+<tr>
+<td align="left">about</td>
+<td align="left"><code>about: /about</code></td>
+<td align="left">关于页面</td>
+</tr>
+<tr>
+<td align="left">commonweal</td>
+<td align="left"><code>commonweal: /404.html</code></td>
+<td align="left">公益 404</td>
+</tr>
+</tbody></table>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806234521.png" alt="image-20210806234521372"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806231520.png" alt="image-20210806231520743"></p>
+<p>光设置菜单，无页面也不能跳转。about这个你是找不到网页的，因为你的文章中没有about这个东西。如果你想要的话，可以执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
+
+<p>它就会在根目录下source文件夹中新建了一个about文件夹，以及<code>index.md</code>，在<code>index.md</code>中写上你想要写的东西，就可以在网站上展示出来了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806232337.png" alt="image-20210806232337570"></p>
+<p>加个type属性，要与<code>menu</code>中的菜单项匹配。</p>
+<p><strong>注意：</strong>如果有集成评论服务，页面也会带有评论。 若需要关闭的话，请添加字段 <code>comments</code> 并将值设置为 <code>false</code>，如：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210806232732.png" alt="image-20210806232732533"></p>
+<p>如法炮制：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807004317.png" alt="image-20210807004317793"></p>
+<p>其中分类，标签，归档自动完成。只要每篇文章开头按照格式书写。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: XXXX</span><br><span class="line">date: XXXX-XX-XX XX:XX:XX</span><br><span class="line">categories: XXXX</span><br><span class="line">tags: [XXXX,XXXX,XXXX]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+<p>腾讯公益404自行百度代码添加。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807010710.png" alt="image-20210807010710696"></p>
+<h3 id="本地搜索"><a href="#本地搜索" class="headerlink" title="本地搜索"></a>本地搜索</h3><p>在你站点的根目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>打开 <code>站点配置文件</code>,添加配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+
+<p>打开 <code>themes/next/_config.yml</code> ,搜索关键字 <code>local_search</code> ,设置为 <code>true</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Local search</span><br><span class="line"># Dependencies: https://github.com/flashlab/hexo-generator-search</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807030800.png" alt="image-20210807030800335"></p>
+<h3 id="Favicon"><a href="#Favicon" class="headerlink" title="Favicon"></a>Favicon</h3><p>默认图标是N，修改<code>主题配置文件</code>，只需要设置small和medium两个就可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon.ico</span><br><span class="line">  medium: /images/favicon.ico</span><br><span class="line">  apple_touch_icon: /images/apple-touch-icon-next.png</span><br><span class="line">  safari_pinned_tab: /images/logo.svg</span><br></pre></td></tr></table></figure>
+
+<p>支持本地路径图片/网络图片</p>
+<h3 id="头像"><a href="#头像" class="headerlink" title="头像"></a>头像</h3><ul>
+<li><strong>添加头像</strong></li>
+</ul>
+<p>编辑 <strong>主题配置文件</strong>， 修改字段 <code>avatar</code>， 值设置成头像的链接地址。其中，头像的链接地址可以是：</p>
+<table>
+<thead>
+<tr>
+<th align="left">地址</th>
+<th align="left">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">完整的互联网 URI</td>
+<td align="left"><code>http://example.com/avatar.png</code></td>
+</tr>
+<tr>
+<td align="left">站点内的地址</td>
+<td align="left">将头像放置主题目录下的 <code>source/uploads/</code> （新建 uploads 目录若不存在） 配置为：<code>avatar: /uploads/avatar.png</code>或者 放置在 <code>source/images/</code> 目录下 配置为：<code>avatar: /images/avatar.png</code></td>
+</tr>
+</tbody></table>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807015106.png" alt="image-20210807015106481"></p>
+<ul>
+<li><p><strong>设置头像边框为圆形框</strong></p>
+<p>打开位于 <code>themes/next/source/css/_common/components/sidebar/sidebar-author.syl</code> 文件,修改如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.site-author-image &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  margin: 0 auto;</span><br><span class="line">  padding: $site-author-image-padding;</span><br><span class="line">  max-width: $site-author-image-width;</span><br><span class="line">  height: $site-author-image-height;</span><br><span class="line">  border: $site-author-image-border-width solid $site-author-image-border-color;</span><br><span class="line"> // 修改头像边框</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  -webkit-border-radius: 50%;</span><br><span class="line">  -moz-border-radius: 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>特效：鼠标放置头像上旋转</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.site-author-image &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  margin: 0 auto;</span><br><span class="line">  padding: $site-author-image-padding;</span><br><span class="line">  max-width: $site-author-image-width;</span><br><span class="line">  height: $site-author-image-height;</span><br><span class="line">  border: $site-author-image-border-width solid $site-author-image-border-color;</span><br><span class="line"> // 修改头像边框</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  -webkit-border-radius: 50%;</span><br><span class="line">  -moz-border-radius: 50%;</span><br><span class="line">  // 设置旋转</span><br><span class="line">  transition: 1.4s all;</span><br><span class="line">&#125;</span><br><span class="line">// 可旋转的圆形头像,`hover`动作</span><br><span class="line">.site-author-image:hover &#123;</span><br><span class="line">    -webkit-transform: rotate(360deg);</span><br><span class="line">    -moz-transform: rotate(360deg);</span><br><span class="line">    -ms-transform: rotate(360deg);</span><br><span class="line">    -transform: rotate(360deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807020148.png" alt="image-20210807020147972"></p>
+<h3 id="侧边栏社交链接"><a href="#侧边栏社交链接" class="headerlink" title="侧边栏社交链接"></a>侧边栏社交链接</h3><p>侧栏社交链接的修改包含两个部分，第一是链接，第二是链接图标。 两者配置均在 <strong>主题配置文件</strong> 中。</p>
+<ol>
+<li><p>链接放置在 <code>social</code> 字段下，一行一个链接。其键值格式是 <code>显示文本: 链接地址</code>。</p>
+<p>配置示例</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Social links</span><br><span class="line">social:</span><br><span class="line">  GitHub: https://github.com/your-user-name</span><br><span class="line">  Twitter: https://twitter.com/your-user-name</span><br><span class="line">  微博: http://weibo.com/your-user-name</span><br><span class="line">  豆瓣: http://douban.com/people/your-user-name</span><br><span class="line">  知乎: http://www.zhihu.com/people/your-user-name</span><br><span class="line">  # 等等</span><br></pre></td></tr></table></figure></li>
+<li><p>设定链接的图标，对应的字段是 <code>social_icons</code>。匹配键: <a href="http://www.fontawesome.com.cn/">Font Awesome</a> 图标名称（不必带 <code>fa-</code> 前缀）。自行查找更换。 <code>enable</code> 选项用于控制是否显示图标，你可以设置成 <code>false</code> 来去掉图标。</p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807020010.png" alt="image-20210807020010653"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807020159.png" alt="image-20210807020159112"></p>
+<p>​    </p>
+<h3 id="友情链接"><a href="#友情链接" class="headerlink" title="友情链接"></a>友情链接</h3><p>编辑 <strong>主题配置文件</strong> 添加：</p>
+<p>友情链接配置示例</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807020349.png" alt="image-20210807020349403"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807024439.png" alt="image-20210807024439190"></p>
+<h3 id="网易云音乐插件"><a href="#网易云音乐插件" class="headerlink" title="网易云音乐插件"></a>网易云音乐插件</h3><p>打开网易云网页版，找一首你喜欢的歌。点击生成外链。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807031233.png" alt="image-20210807031232975"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807031259.png" alt="image-20210807031259412"></p>
+<p>复制代码，添加到<code>hexo/themes/next/layout/_macro/sidebar.swig</code>中</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807031841.png" alt="image-20210807031841577"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807031913.png" alt="image-20210807031913689"></p>
+<h3 id="浏览页面的时候显示当前浏览进度"><a href="#浏览页面的时候显示当前浏览进度" class="headerlink" title="浏览页面的时候显示当前浏览进度"></a>浏览页面的时候显示当前浏览进度</h3><p>打开 <code>主题配置文件</code> ,搜索关键字 <code>scrollpercent</code> ,把 <code>false</code> 改为 <code>true</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Scroll percent label in b2t button</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807025644.png" alt="image-20210807025644152"></p>
+<h3 id="fork-me-on-github"><a href="#fork-me-on-github" class="headerlink" title="fork me on github"></a>fork me on github</h3><p>选择样式<a href="https://github.com/blog/273-github-ribbons">GitHub Ribbons</a>,修改跳转链接为自己的Github地址,复制代码。</p>
+<p>打开 <code>themes/next/layout/_layout.swig</code> 文件，把代码复制到<code>&lt;div class=&quot;headband&quot;&gt;&lt;/div&gt;</code>下面。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807032757.png" alt="image-20210807032757357"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807032825.png" alt="image-20210807032825268"></p>
+<h3 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h3><p>方法1. <code>主题配置文件</code>中<code>auto_excerpt</code>字段改为true 。超过150字省略，增加阅读全文按钮。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807034818.png" alt="image-20210807034818000"></p>
+<p>方法2. 文章中加入<code>&lt;!-- more --&gt;</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807035330.png" alt="image-20210807035330580"></p>
+<p>方法2的优先级大于方法1 所以一起使用 效果如下：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807034537.png" alt="image-20210807034537324"></p>
+<h3 id="文章末打赏功能"><a href="#文章末打赏功能" class="headerlink" title="文章末打赏功能"></a>文章末打赏功能</h3><p> 只需要 <strong>主题配置文件</strong> 中填入 微信 和 支付宝 收款二维码图片地址 即可开启该功能。</p>
+<p>打赏功能配置示例</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807040656.png" alt="image-20210807040656783"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807040809.png" alt="image-20210807040809147"></p>
+<h3 id="数据统计与分析"><a href="#数据统计与分析" class="headerlink" title="数据统计与分析"></a>数据统计与分析</h3><ul>
+<li>编辑 <strong>主题配置文件</strong> 中的<code>busuanzi_count</code>的配置项。</li>
+</ul>
+<p>当<code>enable: true</code>时，代表开启全局开关。若<code>site_uv</code>、<code>site_pv</code>、<code>page_pv</code>的值均为<code>false</code>时，不蒜子仅作记录而不会在页面上显示。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807041324.png" alt="image-20210807041324625"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807041422.png" alt="image-20210807041422008"></p>
+<ul>
+<li><p>在站点的根目录下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm i --save hexo-wordcount</span><br></pre></td></tr></table></figure>
+
+<p>编辑 <strong>主题配置文件</strong> 中的<code>post_wordcount</code>的配置项。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Post wordcount display settings</span><br><span class="line"># Dependencies: https://github.com/willin/hexo-wordcount</span><br><span class="line">post_wordcount:</span><br><span class="line">  item_text: true</span><br><span class="line">  #字数统计</span><br><span class="line">  wordcount: true</span><br><span class="line">  #阅读时长</span><br><span class="line">  min2read: true</span><br><span class="line">  #总字数,显示在页面底部</span><br><span class="line">  totalcount: true</span><br><span class="line">  separated_meta: true</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807042246.png" alt="image-20210807042246099"></p>
+<h3 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h3><p><em><strong>Valine</strong></em>是一款基于<code>Leancloud</code>的极简风评论系统。</p>
+<ol>
+<li><p><strong>注册登录<a href="https://leancloud.cn/dashboard/login.html#/signup">Leancloud</a>`</strong></p>
+</li>
+<li><p><strong>创建应用，开发版，名称随意。</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807125855.png" alt="image-20210807125855609"></p>
+</li>
+<li><p><strong>选择刚刚创建的<code>应用</code>&gt;<code>设置</code>&gt;<code>应用凭证</code><strong>，</strong>获取AppID和AppKey</strong></p>
+</li>
+</ol>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807130130.png" alt="image-20210807130130456" style="zoom: 67%;" />
+
+
+
+<ol start="4">
+<li><strong>点击设置 → 安全中心 绑定web安全域名，防止恶意调用。</strong></li>
+</ol>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807130235.png" alt="image-20210807130235706" style="zoom:67%;" />
+
+
+
+<ol start="5">
+<li><strong>主题配置文件中，填写<code>appid</code>和<code>appkey</code>等<code>valine</code>参数</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807131124.png" alt="image-20210807131124422"></p>
+<p>测试通过</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807131203.png" alt="image-20210807131203258"></p>
+<p>并且数据支持后台查看/导出的。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807131643.png" alt="image-20210807131643643"></p>
+<ul>
+<li><h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4></li>
+</ul>
+<p>在 Hexo 博客中，评论的功能在所有页面都默认开启，但是有的时候我们在页面上不需要显示评论功能，例如分类，标记页面我们并不需要评论功能。可以通过<code>comments</code>属性设置<code>true</code>或<code>false</code>控制该页面或者是文章的评论功能是否打开，如下：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tags</span><br><span class="line">date: 2021-8-7 13:13:45</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line"><span class="section">comments: false</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="6">
+<li><strong>评论头像配置</strong></li>
+</ol>
+<p>Valine 目前使用的是<a href="http://cn.gravatar.com/">Gravatar</a> 作为评论列表头像。</p>
+<p>请自行登录或注册<a href="http://cn.gravatar.com/">Gravatar</a>，然后修改自己的头像。</p>
+<p>评论的时候，留下在<a href="http://cn.gravatar.com/">Gravatar</a>注册时所使用的邮箱即可。<del>打不开就翻墙。</del></p>
+<p><em><strong>其实还有很多都是“抄作业”，这里直接给“作业”大家照抄就行。</strong></em></p>
+<h3 id="看板娘-Live2D"><a href="#看板娘-Live2D" class="headerlink" title="看板娘(Live2D)"></a>看板娘(Live2D)</h3><p><a href="https://www.jianshu.com/p/d72a86209fd5">HEXO+icarus主题 给博客添加看板娘(Live2D)</a></p>
+<h3 id="分享功能"><a href="#分享功能" class="headerlink" title="分享功能"></a>分享功能</h3><p><a href="https://blog.csdn.net/qq_29951485/article/details/88667321">Hexo NexT主题中添加百度分享功能</a></p>
+<p><em>持续优化，持续更新吧   现在比较大的问题就是首页文章的布局，一篇文章标题+图片占的篇幅太大 文章多了之后没法一目了然。</em></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo文章加密</title>
+    <url>/2021/08/21/21082101/</url>
+    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>​        博客中可能有些文章是个人情感宣泄、敏感内容或收费技术等，不方便公开，需要对文章进行加密处理。而Next这个主题可谓是包办了几乎所有的需求，却偏偏没有集成<strong>文章加密功能</strong>。但俗话说的好，办法总比困难多。</p>
+<span id="more"></span>
+
+<h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>编辑<code>/themes/next/layout/_partials/head.swig</code>在如下位置添加代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    (function()&#123;</span><br><span class="line">        if(&#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">            if (prompt(&#x27;请输入密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">                alert(&#x27;密码错误&#x27;);</span><br><span class="line">                history.back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143327.png" alt="image-20210821143327571"></p>
+<p>之后，在你想要加密的文章的头文件里添加上<code>password: xxxxxx </code>即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143828.png" alt="image-20210821143828921"></p>
+<p>演示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821144043.png" alt="image-20210821144043245"></p>
+<p>问题：</p>
+<ul>
+<li><p>丑。调用浏览器的UI，各个平台的样式不统一。</p>
+</li>
+<li><p>容易被破解。前端的验证，都是浮云。有心之人想要破解的话那不是分分钟的事。</p>
+</li>
+</ul>
+<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用大神Hexo插件。</p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></table></figure>
+
+<h5 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h5><p>在站点配置文件添加如下代码，启用插件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="文章配置"><a href="#文章配置" class="headerlink" title="文章配置"></a>文章配置</h5><p>在你的文章的头部添加上对应的字段，如 password, abstract, message</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821145640.png" alt="image-20210821145640641"></p>
+<ul>
+<li>password: 是该博客加密使用的密码</li>
+<li>abstract: 是该博客的摘要，会显示在博客的列表页</li>
+<li>message: 这个是博客查看时，密码输入框上面的描述性文字</li>
+</ul>
+<h5 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  default_abstract: 文章默认摘要</span><br><span class="line">  default_message: 文章默认描述文字</span><br></pre></td></tr></table></figure>
+
+<p>这样，对于每一篇需要加密的文章就不必都在在头部添加 <strong>abstract</strong> 和 <strong>message</strong> 字段了，脚本会自动添加默认的内容填充。 而你在文章头部的配置优先级高于<strong>站点配置文件</strong> 的 <strong>default</strong>配置，会覆盖它。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821151528.png" alt="image-20210821151528503"></p>
+<p><em>tips:本地预览输入密码可能会无响应，因为需要https协议，部署到服务器就没问题啦。</em></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Next</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网恋照妖镜</title>
+    <url>/2021/08/21/21082102/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="80ac18a173e65d11f437746d8f69c197c456653c6d6d6a37349df6de8bcab4cb">f026650ac6b38bfb9a9129bfd7e0704ef5a12d879d6289b0678aeabd316e5a98addb47d7386d933d2ba10735f9ea959fb548fc18e983bcadfdbaba152fb6eaf3186ba28ea709ff25a787b42078fb7cc0306b6d2a4b61a32e92a2328c982ef26019344605b87cf34de432b0a945b0249186e4f673def96271369dc044340f1ca898e98c5e7f9bd3d95c90c879fb44f4d35c96e27a8b1f6bcdf992fa79c326343e296fa2c690ba5206fecd66a840f7dfe7627e49746a9f0b154e250179874cbbfe2e5e2aee84ebac6dcf96b47aa744a1c5d0fca75c1be68f1d6956366fce48d695f6bbbc383052ba1b162b2638f00369ba3db7fabb7ec1ad7bb8ca828b44fdb17e3893a3e1c34921e04883fdd8fbef94b4dc1fa74d6a6ac79f0dbe3074c6845a28bf2e9c3cee52127e220cce2cb7c38a5af45cfbc7f929571dfe7239c8950feed5efc01ed7f45acfd5230bf6b6325231c8fca0b19d80c07e95599813678407878286e693238fdff317bcca6b026debb99be5112752343efb70af7d3654e3a363de200c33544708c42154f442c533eff9e2567a2ec0f24c462543e0fc0b68d9eda2f76b5665ec280abd43462c120264e95af690ac473fb67ad7441ae2824af3fc140d19af57d17e92c76d031529ecc5c8700b4d5e3792f0fda00511f1e84bdbf946804375c53c8564ec80a4e71abb10600cd316ce7804875d524414ef9c7aa61a2672c7bd9f27a402307636a3d7d17a94c1f12780e24425d7367b95c6bf8d1f964a6acf0cb910a6f195aa2a02fb276406dedf0799fc831d87c4bc1e7822767397866c290d1b2d18727abfbab5153cf7c246d0cd5cafb5554c67be89a13fec71b9c8b3dbada234843aaf8cdb32b5e3da4f64b34e1c4bcfddd2814a1ef3250bd0a1bb161843b27f4658484a1593d98878cf1fba33e011cbb25afb577435727a82091e53fe5d9b6ac44a6f0b5ae18735a4c574b090caf53fec64e2c8828a1d66a23084dd95021495ca8142df80cfc3bd02da38f3bb5e0bbc8eb7e4103a138a2510444de4e38087dfa0be1e3bfc85f706386e93e1bf720ac7e9c8d00bcb7a0ef0762d4d8acf5336a8ec45c1d31d4f22d4480e8d439218ade8698ac5b1269dec2fb6feab1c07305176b70233161fc151a77407d18e0222d25baf202c6401d5933b0cf0bf911ec42427b7e096c8126aa11c594d835e00f9a9666b4fe0ef16fdf2ea58c93ccd1b1f8c9fd8dd17c92127fa30498c211645674d44e8f584ee17a1fdf3751f4a89c901b8d380522bf4599f5ac70ae746b379f563df98136b2fd4484cddd0157b51a238b0585555749c7cd8d3092fdb10ad6e54229948b10b31f3432b10d439006db41ff848ba9288aeb7fbc6835c222cfa0d96e83859d7a157fc76adf426d9b8cbfb684193e93e44a5b6b1e2d51608d1032ea9b04a81e7422dce448de99b70eab7b402daa8657009a3c9668dfb6fb9675018da52a2785a988f16fcfed365f15dc35c73217272c15ec41fe0538de73565c778945b12b48acd38a379f312925d3a59ca3c8b45d9648e3899751431283d5a1f74f8a11e1e48b69e36501e8829a28f81869e7c6cbf42c166f0483bf4d1f91a72e82e77dbc569292532cc54e2752322d01d9f59062e9623204558022c3cf124b87b33206c5a025712a28a109a672c90029ae8cca251b8d29e185bd7e67483c98633f91f8db5f413dc7721823b0176bb4a4a8afdd695ecc394b277ef10e4ff8980966176af09e750213d2ad65aab491397ef8535e2e63d059820fae63a4d32cbf5dac5801ad80f7652bf8686b53a918ab55e4d6776039ea2d8d80da27e1ad1031bea64f86e64d013a5e1bfe747a155c89380013e7bf38ba5861becd6228069b302f23c29e13a7175f34b1ab3db81be90ef08a319719d8c38b7c7f58c1a76e2dc9d997eb3662ee25a03e2789b8989e49b420e10ff3bff0dbb1fa639331897c1c8ffe73e95d2b2cda3740ebd9d8859c34bf7beb81e0dd67a25fd1620476cc8978671221ba3de343fae1e472336beb12153e1d9b1d624c749b4f57eeb923d59ee43d25d9dc274a2cf1465b0f4b425b666234037a6288f18ad84810eaa7505bc69c8ab50419fb0b7eaf4386853125b7e15625b3ba36c2e29c9961148e339bf1516ce0417e94bb709e0ae14ddf4d8065d995adb3f61bbd1359a76ac2fdb8199cc5462eba3235f3a7462ec7d3012f47aea811a908cbd8d10ea6a478d9724c18cafc19d641f4d60f30e47924a89ebd74f664cecba4f3a72489f86c0876db3f8bd49c779cb87b1098d9670c681237852e0235765f71d33e3cb41fe5a0df2fbc1d41df0dcbf1726a55cdff8282fd766288663a4f6d49bf4c1ad74358e823139dd5bb8e7640dbaf6585dbe1cb526d0935c576488247db9a80cb43dc78cc90a4075f2ee4dad2976a8a6819318c718a8d699c80b35514e62099d4b33ea7cff6df14b3f28c2137c89124415272cb4063589c936393349c8e012b925b17f1ef749f6fac48c10283dc5182aed333578b1b02c2b4d952d11831027b383c2922039b94c9d66f60e53abf20d6b8a0ccbf00f6cf77e26ac7a092ed19b2562123413e3cbde03fb1b57a2259dedc118f7304973d50c621cfe454fdb4d1dfe07b2e7d941b92ff20064f5e11bec2c2e513d92a99695bb9256b1353361e614f2a271880004602acfb3b4d3105182819d56bd8423bc91dd80b62e33c055f9ada834bf705365848329853511acb3fcca57454e9c6b9d5f7d2ee9b5f38ba240155f0dc78f4dfbeb0aec5aca85c929844a3c6963ac8ef1aee281bc3c2a363cbf20e1a1941258b89ce08f1d8f923d4cd00e8c1e3a6e14b45bc18e7633d08cda405bd8e34e7a07d19401756a53397dbf0d9daa186cd95cd72dfa1c729ddd685998275877b1caa4e92df5a0abedb03eb3fc8441101d6a9af7b4838be2b5e3a97aa57f35b297683273884d64a271ce382b2a329a0154ffe87f20ce3045972521e171719491d8d8e6bd86ff81441fc994b5157cd56909edab2c9d28e719287f5c16a82033ab9e04435f0ebd41be76724d132e7b20b5319e4a9c032912734b49e2d5907a2bf5866819510cf09faaa2c44eb67cf3c0fe018652596b7d20643fcc120649f50a0402495cba5f18459e9a539c1321870314fa19a06b8010201d99ae1f17b28f3ecb6f2b86427d507d1fa0049b65231a317cf7e936b64ee30234a6c2ae30a812131eeb0452500e0832f19bb0ace6c3456f93b8f27c0232f5dcf2a5cb5253bf7d2299d205ee09881a1910ec7aaf118c85c48e6aadba1456777d3b4ee8f54185b145a9b9362137ab63e72a3ff35c444f56ae01850b781a69deba7152a83c7effb9a89db5e3d362224bb44a4039b7d50da174e53c0c7e36c3f22914ca70e7e2610daf225f9b4272d0c3c22ff88f5d7fe4834371a3ff0ace8f578d1c0fb750ccd08e6d573ede9a65469f90b4889364b82d5176db283860e1a9a9277beda9f24ec6770e7bfdfa091f941b2988403ac024cc2e426ab13aba9da7042d88ac3c9a201a9e0eda3d182263729d06e0eb3a73b1431db1333def7125012284dae37bcd858754a252b0a5056513e709ad740b6ae8b22b8c4fa880a01c545d3da39b5cf1cc9a8c3f8838d495b5cbbbd4eb34e2161e349f344a77027a23869cfda1327c16d0cf14f3dbe1269bf74c3fa89465447e4b61baebb32681a003da0249a65f72e9</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">输入密码，查看文章</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>mirror</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next主题文章目录中文锚点失效</title>
+    <url>/2021/08/22/21082201/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Hexo 安装 Next 主题后, 文章侧边栏目录<strong>中文目录</strong>锚点点击后无法正常跳转，而纯英文锚点没有问题。</p>
+<span id="more"></span>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822203128.png" alt="image-20210822203128277"></p>
+<h3 id="问题跟踪"><a href="#问题跟踪" class="headerlink" title="问题跟踪"></a>问题跟踪</h3><p>浏览器F12 debug一下，控制台有报错不过看不懂，只知道<code>post-details.js</code>有问题。还能咋样，有问题找度娘。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822203927.png" alt="image-20210822203911332"></p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>编辑<code>/themes/next/source/js/src</code> 目录下的 <code>post-details.js</code>,大概76行，添加下面代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">targetSelector = decodeURI(this.getAttribute(&#x27;href&#x27;))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822204317.png" alt="QQ图片20210822204306"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建Hexo博客(一)：手机(Termux) + 内网穿透(Sunny-Ngrok)</title>
+    <url>/2021/07/28/21072801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132342.png" alt="image-20210820132342590"></p>
+<span id="more"></span>
+
+<p>PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。</p>
+<p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
+<p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
+<p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
+<h3 id="Termux下载"><a href="#Termux下载" class="headerlink" title="Termux下载"></a>Termux下载</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
+<p><a href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
+<p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
+<h3 id="安装后换源"><a href="#安装后换源" class="headerlink" title="安装后换源"></a>安装后换源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145218.png" alt="20210801133736"></p>
+<p><strong>Hexo</strong> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145258.png" alt="20210801133813"></p>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145435.png" alt="20210801133900"></p>
+<p>​            </p>
+<h3 id="新建一个博客网站"><a href="#新建一个博客网站" class="headerlink" title="新建一个博客网站"></a>新建一个博客网站</h3><p>命名随意，blog</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145349.png" alt="20210801133818"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
+
+<p>进入博客网站目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>生成静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
+
+<p>启动服务。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145557.png" alt="image-20210801145557639"></p>
+<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145621.png" alt="20210801133945"></p>
+<h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
+<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145631.png" alt="20210801133959"></p>
+<p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145642.png" alt="20210801134012"></p>
+<p>完成订单 <strong>隧道id</strong>复制下 有用</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145929.png" alt="image-20210801145929348"></p>
+<h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145952.png" alt="20210801134044"></p>
+<p>这里可能会遇到两个问题 </p>
+<ul>
+<li>python没有安装</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install python</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>找不到解压后的sunny.py的路径运行</li>
+</ul>
+<p>有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
+<p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150008.png" alt="20210801134108"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150019.png" alt="20210801134140">实现了外网访问。</p>
+<p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
+<p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为博客Valine评论系统添加邮件提醒和后台管理</title>
+    <url>/2021/08/22/21082202/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>​        之前在<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造</a>中已经添加了评论系统，但是没有邮件通知，别人评论不能第一时间知道（虽然也不会有人评论）。这功能吧，可以不要，但不能没有。</p>
+<span id="more"></span>
+
+<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p>博客添加valine评论系统不再赘述，参考之前的配置<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造——评论系统</a>。</p>
+<h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822210329.png" alt="image-20210822210329228"></p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SENDER_NAME</td>
+<td>qyxie</td>
+<td>评论提醒 [可选] 发件人</td>
+</tr>
+<tr>
+<td>SITE_NAME</td>
+<td>滑稽树</td>
+<td>[<em>必填</em>] 网站名称</td>
+</tr>
+<tr>
+<td>SITE_URL</td>
+<td><a href="https://www.qyxie.top/">https://www.qyxie.top</a></td>
+<td>[<em>必填</em>] 网站地址，<strong>最后不要加 /</strong></td>
+</tr>
+<tr>
+<td>SMTP_PASS</td>
+<td>xxxxxxxxxxxxxxxx</td>
+<td>[<em>必填</em>] SMTP登录密码/授权码，不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式。</td>
+</tr>
+<tr>
+<td>SMTP_SERVICE</td>
+<td>QQ</td>
+<td>[<em>必填</em>] 邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多。</td>
+</tr>
+<tr>
+<td>SMTP_USER</td>
+<td><a href="mailto:&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#120;&#x78;&#64;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#120;&#x78;&#64;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;</a></td>
+<td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
+</tr>
+</tbody></table>
+<h3 id="SMTP授权码"><a href="#SMTP授权码" class="headerlink" title="SMTP授权码"></a>SMTP授权码</h3><p>我用的是QQ邮箱，其他邮件服务商自己百度。</p>
+<p>登录<a href="https://mail.qq.com/">QQ邮箱</a> -&gt; 设置 -&gt; 账户 -&gt; 开启SMTP服务</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211720.png" alt="image-20210822211720760"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211739.png" alt="image-20210822211739670"></p>
+<p>根据提示获取授权码，写入的时候<em><strong>不要带空格不要带空格不要带空格</strong></em></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 部署 -&gt; 部署项目 -&gt; Git部署   ，输入<code>https://github.com/zhaojun1998/Valine-Admin.git</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212055.png" alt="image-20210822212054925"></p>
+<p>分支或提交填写master，点击部署</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212316.png" alt="image-20210822212316905"></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>当收到评论时，QQ邮件提醒</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212626.jpg" alt="QQ图片20210822212521"></p>
+<h3 id="后台评论管理"><a href="#后台评论管理" class="headerlink" title="后台评论管理"></a>后台评论管理</h3><p>数据存储 -&gt; 结构化数据 -&gt; _User -&gt; 添加行   添加后台管理用户，<code>uesrname</code>,<code>password</code>,<code>email</code>三个字段就行</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822214549.png" alt="image-20210822214549875"></p>
+<p>设置 -&gt; 域名绑定，填写一个自己域名的二级域名，配置云引擎域名</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232011.png" alt="image-20210822232011572"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232211.png" alt="image-20210822232211699"></p>
+<p>LeanCloud -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
+<p><code>ADMIN_URL</code>：<code>刚刚绑定的域名</code>，<strong>添加后重新手动部署</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232345.png" alt="image-20210822232345575"></p>
+<p>访问域名，管理评论</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823094953.png" alt="image-20210823094953512"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823113800.png" alt="image-20210823113759964"></p>
+<h3 id="配置自动唤醒"><a href="#配置自动唤醒" class="headerlink" title="配置自动唤醒"></a>配置自动唤醒</h3><p><strong>免费版的LeanCloud是不能24小时运行的，每天必须休眠 6 个小时，30 分钟内没有外部请求，则休眠，需要设置定时休眠来保证大多数时间邮件服务是正常的。</strong></p>
+<p>云引擎 -&gt; 定时任务 -&gt; 创建定时任务</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232504.png" alt="image-20210822232504769"></p>
+<p>表达式<code>0 */20 7-23 * * ?</code>表示为7-23时每20分钟</p>
+<p><strong>重启服务</strong>生效</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822233626.png" alt="image-20210822233626036"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>valine</tag>
+        <tag>LeanCloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次debian10的安装</title>
+    <url>/2021/08/27/21082701/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>久久总能碰上一次Debian系统安装的需求，其实跟其他linx系统都差不多，但时间久了总能忘掉一些细节，比如网卡配置文件的路径等等。记录下，有空看看，加强记忆。</p>
+<span id="more"></span>
+
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><p><a href="https://www.debian.org/">Debian官网</a></p>
+<p>“造轮子”的事我就不干了，直接上链接。</p>
+<p><a href="https://linux.cn/article-11083-1.html?pr">图解 Debian 10（Buster）安装步骤</a></p>
+<p>几乎就是回车回车，值得注意的是选择电脑桌面环境和其它软件包时，<em><strong>SSH Server</strong></em> 还是√上吧，省的进系统还要装。</p>
+<p>安装 <em><strong>Grub 引导加载程序</strong></em>，选择<code>Yes</code>。其他选择<code>No</code>。</p>
+<p>进系统后</p>
+<h3 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/network/interface</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#配置网卡eth0的IP地址</span><br><span class="line">auto eth0 </span><br><span class="line">iface eth0 inet static 静态/dhcp</span><br><span class="line">address 192.168.2.147 ip地址</span><br><span class="line">netmask 255.255.255.0 子网掩码</span><br><span class="line">gateway 192.168.2.1 网关</span><br></pre></td></tr></table></figure>
+
+<p>或者使用nano编辑器   “Ctrl+O” “Ctrl+X” 保存退出</p>
+<p>重启网卡生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/networking restart</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设置DNS"><a href="#设置DNS" class="headerlink" title="设置DNS"></a>设置DNS</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;nameserver 110.80.137.52&quot; &gt;&gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cp /etc/resolv.conf /etc/resolv.conf.bak # 备份原有dns配置文件</span><br><span class="line">vi /etc/resolv.conf # 编辑DNS配置文件</span><br><span class="line">nameserver 110.80.137.52 # 设置首选dns</span><br><span class="line">nameserver 114.114.114.114 # 设置备用dns</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="开启root远程登录"><a href="#开启root远程登录" class="headerlink" title="开启root远程登录"></a>开启root远程登录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>PermitRootLogin no -&gt;  PermitRootLogin yes</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210827232508.png" alt="image-20210827232508198"></p>
+<p>重启ssh生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Debian10</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>仙境传说 绯雨骑士团H5私服</title>
+    <url>/2021/08/28/21082901/</url>
+    <content><![CDATA[<h3 id="游戏介绍："><a href="#游戏介绍：" class="headerlink" title="游戏介绍："></a>游戏介绍：</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829085126.png" alt="image-20210829085125752"></p>
+<p>绯雨骑士团是一款二次元挂机游戏，将二次元和挂机结合起来，为玩家打造一个休闲养肝的游戏。只要轻轻点击，即可进行游戏，无需繁琐操作，任何人都可以轻松玩转。</p>
+<p>黑衣剑士吉莲、超能法师爱丽丝、无敌射手伊芙、万能骑士爱德华……各职业英雄全员等候召令！守护您的二次元情怀，即刻，出发！</p>
+<p>独家剧情！一手资料，先睹为快！</p>
+<p>召集组队，为守护而战。更可多人同屏华丽战斗，宏大绝杀场面。</p>
+<p>守护世界的正义！成为一名赏金猎人吧！你可以和你的好友一起讨伐红名通缉犯。让妹纸为你侧目，为正义战斗！</p>
+<span id="more"></span>
+
+<h3 id="游戏地址："><a href="#游戏地址：" class="headerlink" title="游戏地址："></a>游戏地址：</h3><p><a href="http://82.156.19.29/">http://82.156.19.29/</a>  </p>
+<p>手机、平板、PC三屏联动！都能玩！是兄弟就来砍我。</p>
+<p>注册的时候<strong>用户名</strong>和<strong>密码</strong>是比较随意的，但请务必记住密码，后台看到的密码是MD5  32位加密的，我也破解不了的。</p>
+<p>过了新手引导点击头像可以改<strong>名字</strong>，<strong>头像</strong>，<strong>声音</strong>，<strong>画质</strong>！其他的自己探索啦~</p>
+<p>非盈利纯娱乐。无对接充值系统，砍不过的直接找我要卡密（可以理解为礼包兑换码）。</p>
+<h3 id="网页添加到桌面："><a href="#网页添加到桌面：" class="headerlink" title="网页添加到桌面："></a>网页添加到桌面：</h3><p>这样就不用每次打开浏览器输入网址啦~</p>
+<ul>
+<li><strong>手机</strong></li>
+</ul>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829143207.png" alt="image-20210829143206895" style="zoom:67%;" />
+
+<ul>
+<li>电脑</li>
+</ul>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829143435.png" alt="image-20210829143434741"></p>
+<h3 id="架设教程："><a href="#架设教程：" class="headerlink" title="架设教程："></a>架设教程：</h3><p>写给有需要的人~</p>
+<p>服务器是腾讯云白嫖的，1h2g，第一个月免费，第二个月9元，续费一年也才不到100元，尽管玩，我保证只要有一个人玩就永不停服。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235300.gif" alt="img"></p>
+<p>阿里云：<a href="https://free.aliyun.com/">https://free.aliyun.com/</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235902.png" alt="image-20210828235902337"></p>
+<p>腾讯云：<a href="https://cloud.tencent.com/act/free">https://cloud.tencent.com/act/free</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829000002.png" alt="image-20210829000002846"></p>
+<p>新用户注册就能领取，亲测1h2g能玩，如果你有更高配置的现有服务器那更好啦~</p>
+<h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>Windows Server 2012 R2 DataCenter 64bitCN</p>
+<p>重置密码后远程桌面登录。</p>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>绯雨骑士团H5  链接：<a href="https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g">https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g</a>  提取码：r1s4</p>
+<p><a href="https://notepad-plus-plus.org/">notepad++</a>    链接：<a href="https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw">https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw</a>  提取码：tspf</p>
+<p>navicat数据库管理工具  链接：<a href="https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g">https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g</a>   提取码：rp15</p>
+<p>解压缩工具（腾讯云2012自带7-zip)</p>
+<p>下载文件，解压notepad++和navicat到桌面</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829101624.png" alt="image-20210829101623940"></p>
+<h4 id="新建分区D盘"><a href="#新建分区D盘" class="headerlink" title="新建分区D盘"></a>新建分区D盘</h4><p>系统默认只有一个C盘，而且盘符D被CD驱动器占用。</p>
+<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理   -&gt; 更改驱动器号和路径  -&gt; 确定</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102104.png" alt="image-20210829102103999"></p>
+<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理 -&gt; 右击C盘  -&gt; 压缩卷  -&gt; 压缩出15G的空间</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102352.png" alt="image-20210829102352759"></p>
+<p>新建简单卷  无脑下一步得到D盘</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102530.png" alt="image-20210829102529915"></p>
+<h4 id="解压游戏源码"><a href="#解压游戏源码" class="headerlink" title="解压游戏源码"></a>解压游戏源码</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102722.png" alt="image-20210829102722329"></p>
+<h4 id="启动phpstudy"><a href="#启动phpstudy" class="headerlink" title="启动phpstudy"></a>启动phpstudy</h4><p>打开之后点击启动，启动apache2.4.39和mysql5.7.26。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103038.png" alt="image-20210829103038512"></p>
+<h4 id="游戏外网修改"><a href="#游戏外网修改" class="headerlink" title="游戏外网修改"></a>游戏外网修改</h4><p>使用notepad++把以下路径里面的81.70.8.199修改成你的外网IP</p>
+<p>D:\fyqst_wudiliu.Com\wudiliu\Server\s1\wserver\logic\guildbattle\appUtil.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\cityserver_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\server_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\version_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\versions里面的manifest2.0.1.json到manifest2.3.5.json【15个】json文件<br>D:\fyqst_wudiliu.Com\wudiliu\www\game.html</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103331.png" alt="image-20210829103331512"></p>
+<p>一次性打开所有需要修改的文件(可以直接拖动文件到Notepad++)，ctrl+F 查找替换 -&gt; 替换所有打开文件(o) </p>
+<p>一共24处，务必确认下！！</p>
+<p>修改完全部保存，全部关闭。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103501.png" alt="image-20210829103501540"></p>
+<h4 id="数据库修改"><a href="#数据库修改" class="headerlink" title="数据库修改"></a>数据库修改</h4><p>用Navicat链接数据库</p>
+<p>数据库账号:root<br>数据库密码:123456</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104022.png" alt="image-20210829104022223"></p>
+<p>打开数据库【ttf_ly_login】找到【uw_server_info表】   <em><strong>tips:注意这个表有两个字段需要修改host和host2</strong></em><br>打开数据库【ttf_ly_main】找到【uw_game_config表】和【uw_battles_group表】</p>
+<p>把以上路径里面的ip修改成你的外网IP</p>
+<p>修改完点击下方✔保存</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104155.png" alt="image-20210829104155332"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104638.png" alt="image-20210829104638092"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104740.png" alt="image-20210829104740744"></p>
+<h4 id="启动游戏"><a href="#启动游戏" class="headerlink" title="启动游戏"></a>启动游戏</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104820.png" alt="image-20210829104820729"></p>
+<p>一共有七个窗口，少一个都不行</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104910.png" alt="image-20210829104910032"></p>
+<h4 id="进入游戏"><a href="#进入游戏" class="headerlink" title="进入游戏"></a>进入游戏</h4><p>访问ip</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105014.png" alt="image-20210829105014261"></p>
+<p>起飞~</p>
+<p>封面不太正经但游戏绝对正经，就是点点点，刷怪升级。体验下80后玩传奇的感觉。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105037.gif" alt="img"></p>
+<p>私服自然有GM后台，游戏源码里【使用说明】有讲。略。下课~</p>
+<p><strong>免责声明：</strong></p>
+<p>1.本文部分内容转载自其它媒体，但并不代表本站赞同其观点和对其真实性负责。<br>2.若您需要商业运营或用于其他商业活动，请您购买正版授权并合法使用。<br>3.如果本站有侵犯、不妥之处的资源，请在网站下方联系我们。将会第一时间解决！<br>4.本站所有内容均由互联网收集整理、网友上传，仅供大家参考、学习，不存在任何商业目的与商业用途。<br>5.本站提供的所有资源仅供参考学习使用，版权归原著所有，禁止下载本站资源参与商业和非法行为，请在24小时之内自行删除！</p>
+]]></content>
+      <categories>
+        <category>休闲娱乐</category>
+      </categories>
+      <tags>
+        <tag>游戏</tag>
+        <tag>绯雨骑士团H5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/07/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hello World</tag>
+      </tags>
+  </entry>
+</search>

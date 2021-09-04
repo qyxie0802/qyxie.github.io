@@ -1200,4 +1200,94 @@
         <tag>Hello World</tag>
       </tags>
   </entry>
+  <entry>
+    <title>小霸王在线游戏机</title>
+    <url>/2021/09/04/21090401/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>“小霸王其乐无穷！”直到现在，当我看到这句话时，耳边仿佛还是会响起当年的电子音。</p>
+<p>对于 80、90 后而言，儿时有很多的快乐时光，和一群小伙伴一起打小霸王绝对是其中之一。这样快乐的童年时光恐怕只能在我们的回忆中寻找了。</p>
+<p> 而今，我们或许能用代码，让我们坐上童年的时光机回到过去~</p>
+<span id="more"></span>
+
+<p>在我小学的时候，那个物质极其匮乏的年代里 ，谁家拥有一台小霸王游戏机绝对会成为整个儿童社交圈的焦点人物，那个人自然。。。。。不是我，我只记得我天天往别人家跑，玩小霸王的日子。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210904134538.jpeg"></p>
+<p>长大一点，我还买过一个清华紫光的MP4，里面也有雪人兄弟，冒险岛等等，每个游戏我都通关了好多次，后来这个MP4被我爷爷发现没收了，哈哈哈~</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210904135705.jpg" alt="mp4"></p>
+<p>再后来我再也没玩过这些游戏了。直到今天看到小霸王在线游戏机的开源项目。</p>
+<h3 id="源码地址："><a href="#源码地址：" class="headerlink" title="源码地址："></a>源码地址：</h3><p><a href="https://gitee.com/feiyu22/jsnes">https://gitee.com/feiyu22/jsnes</a></p>
+<p>是别人的开源项目哦~搭建也十分简单，下载上传到网站根目录即可访问使用；</p>
+<h3 id="在线体验："><a href="#在线体验：" class="headerlink" title="在线体验："></a>在线体验：</h3><p><a href="http://fcgames.qyxie.top/">http://fcgames.qyxie.top/</a></p>
+<p>我自己“缝合”了一下，有几十款我们儿时经常玩的小游戏，之前在微信朋友圈里很火的内容，带你回到小时候，具有怀旧的风格哦，各种小时候玩过的小游戏机全都有，还有按键声音模拟哦。</p>
+<p>手机横屏游戏体验更好~</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210904141524.jpeg" alt="Screenshot_2021-09-04-14-14-56-586_com.android.br"></p>
+<h3 id="按键说明："><a href="#按键说明：" class="headerlink" title="按键说明："></a>按键说明：</h3><p>移动端使用触摸操控，PC端按键映射如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">按键</th>
+<th align="left">player1</th>
+<th align="left">player2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Left</td>
+<td align="left">A</td>
+<td align="left">Num-4</td>
+</tr>
+<tr>
+<td align="left">Right</td>
+<td align="left">D</td>
+<td align="left">Num-6</td>
+</tr>
+<tr>
+<td align="left">Up</td>
+<td align="left">W</td>
+<td align="left">Num-8</td>
+</tr>
+<tr>
+<td align="left">Down</td>
+<td align="left">S</td>
+<td align="left">Num-2</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="left">J</td>
+<td align="left">Num-7</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="left">K</td>
+<td align="left">Num-9</td>
+</tr>
+<tr>
+<td align="left">AA</td>
+<td align="left">Z</td>
+<td align="left">Num-/</td>
+</tr>
+<tr>
+<td align="left">BB</td>
+<td align="left">X</td>
+<td align="left">Num-*</td>
+</tr>
+<tr>
+<td align="left">Start</td>
+<td align="left">Enter</td>
+<td align="left">Num-1</td>
+</tr>
+<tr>
+<td align="left">Select</td>
+<td align="left">Ctrl</td>
+<td align="left">Num-3</td>
+</tr>
+</tbody></table>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>PC不习惯，手机触屏没有手柄按键的感觉，我的青春果然还是回不去了吗<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210904141717.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>休闲娱乐</category>
+      </categories>
+      <tags>
+        <tag>游戏</tag>
+        <tag>FCGames</tag>
+        <tag>小霸王</tag>
+      </tags>
+  </entry>
 </search>

@@ -1290,4 +1290,64 @@
         <tag>小霸王</tag>
       </tags>
   </entry>
+  <entry>
+    <title>惠普暗影精灵笔记本windows hello人脸解锁改造</title>
+    <url>/2021/09/15/21091501/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>传统的开机密码并不安全，而且输入繁琐（重点）。而为了便于使用，微软在Win10中加入了Windows Hello功能。Windows Hello是一种生物特征授权方式，让你可以实时访问自己的Windows 10设备。有了Windows Hello，用户只需要露一下脸，动动手指，就能立刻被运行Windows10的新设备所识别。</p>
+<p>对于人脸识别而言，所有笔记本都安装了摄像头，因此大家认为笔记本都支持Windows Hello功能的人脸识别登录。但并非如此，根据微软资料显示，默认情况下，Windows hello的人脸识别功能需要Intel Real Sense 或 3D摄像头支持人脸解锁功能。目前支持Windows Hello的笔记本并不是很多，但是随着生物特征授权的方式越来越被人们所接受，相信未来支持Windows Hello的设备会越来越多。</p>
+<span id="more"></span>
+
+<p>本人五年前的惠普暗影精灵2自然也是不支持windows hello人脸解锁滴，每次开机输密码属实繁琐。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210915155435.png" alt="image-20210915155435715" style="zoom:67%;" />
+
+
+
+<p>上网找同品牌支持windows hello，接口类型一样的笔记本摄像头。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210915161354.png" alt="    "></p>
+<p>收到快递了~~~先接USB测试下摄像头功能是否正常。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/52DD21FE248539BAB6DFFD46E576DCA3.jpg" alt="img" style="zoom: 50%;" />
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919121610281.png" alt="image-20210919121610281"></p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919121923669.png" alt="image-20210919121923669" style="zoom: 67%;" />
+
+
+
+<p>稳健，直接改内置。</p>
+<p>降压管是台式电脑需要的，将5V降到3.3V红外才能正常使用，笔记本原本就是3.3V不需要降压管，改内置直接把摄像头模块供电接口接上就行，USB接口和降压管都是多余的。你们可以只买摄像头模块。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919122217802.png" alt="image-20210919122217802"></p>
+<p>拆开笔记本B面，惠普几乎都一样B面是卡扣的，没有螺丝，只要沿缝隙撬一撬就能打开啦。其他型号笔记本上网搜拆机视频或者大力出奇迹吧。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210918110029088.png" alt="image-20210918110029088" style="zoom: 67%;" />
+
+
+
+<p>把供电线拔了，拆下摄像头模块，然后将淘宝买的支持windows hello摄像头装上。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210918110454812.png" alt="image-20210918110454812" style="zoom:67%;" />
+
+
+
+<p>然后就……就被我掰断了，擦，，，这个实在脆，插供电线的时候一用力断了。。。。大力只能出事故</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/KyIM3gBqChuDoJ1.png" alt="image-20210918104749358"></p>
+<p>告辞，此贴终结。。。散。。。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/1CA67ABCF00B2F6740432956F3493433.jpg" alt="img"></p>
+<p>开玩笑的，我又重新买了一个<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/1878C700DA0B38BC5337A0410DA76997.gif" alt="img"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/oEOYJ5BnwGxdCtU.png" alt="image-20210918104924568"></p>
+<p>经过漫长的快递等待。。。装上后，在红外的位置开孔，搞定。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919150359720.png" alt="image-20210919150359720"></p>
+<p>人脸设置</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919133647865.png"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919133817353.png" alt="image-20210919133817353"></p>
+<p>起飞</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919133902843.png" alt="image-20210919133902843"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20210919134005556.png" alt="image-20210919134005556"></p>
+<p>属实一波三折，捞的不谈。</p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>暗影精灵2</tag>
+        <tag>惠普笔记本</tag>
+        <tag>windows hello</tag>
+        <tag>人脸解锁</tag>
+      </tags>
+  </entry>
 </search>

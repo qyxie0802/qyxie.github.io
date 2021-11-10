@@ -1363,4 +1363,176 @@
         <tag>人脸解锁</tag>
       </tags>
   </entry>
+  <entry>
+    <title>白嫖腾讯云函数，实现原神小助手</title>
+    <url>/2021/11/09/21110901/</url>
+    <content><![CDATA[<ul>
+<li><strong>米游社原神每日签到</strong></li>
+<li><strong>米游币每日任务</strong></li>
+<li><strong>微信原神积分商城签到</strong></li>
+<li><strong>微博超话签到</strong></li>
+<li><strong>原神超话功能</strong> 活动监测 + 领兑换码 + 多方推送</li>
+<li><strong>支持多个角色</strong> 支持绑定官服和B站服的米游社账号</li>
+</ul>
+<span id="more"></span>
+
+<p>教程出自<a href="https://www.yindan.me/tutorial/genshin-impact-helper.html">YINDAN☛原神签到小助手 每日福利不用愁</a>，一开始在葫芦侠看到这个原神小助手，但教程不是很清楚，版本是1.7，而且是搬运。我各平台搜索发现原贴出自酷安，然后酷安也不是原作者，好歹他留下了项目github，然后我就又一路摸到作者的博客，已经更新到版本2.0.3。可惜比较笨，教程也是“详略得当”，我看不太明白，后来经一位HXD的指点，才部署成功。捞的不谈。捞的不谈。高手可以直接去大佬原项目看看，不行的还是跟着我的教程部署吧。另外已将YINDAN大佬友链收录。</p>
+<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>打开并登录「腾讯云」，直接搜索「云函数」</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109163440708.png" alt="image-20211109163440708"></p>
+<p>如果是第一次开通云函数功能，会弹出一个「服务授权」，点击「前往访问管理」，点击「确定授权」，然后微信扫码确认即可</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109162315682.png" alt="image-20211109162315682"></p>
+<h4 id="新建函数"><a href="#新建函数" class="headerlink" title="新建函数"></a>新建函数</h4><p>云函数控制台点击「函数服务」，点击「新建」</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109163724213.png" alt="image-20211109163724213"></p>
+<h4 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h4><p>创建方式改为「自定义创建」然后选「事件函数」，函数名称，地区任意，运行环境则选「Python3.6」，部署方式选择「本地上传zip包」，并上传<a href="https://wwa.lanzoui.com/b07mk6dla">原神签到小助手l.zip</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109170121820.png" alt="image-20211109170121820"></p>
+<h4 id="米游社签到任务"><a href="#米游社签到任务" class="headerlink" title="米游社签到任务"></a>米游社签到任务</h4><h5 id="获取cookie"><a href="#获取cookie" class="headerlink" title="获取cookie"></a>获取cookie</h5><p>方法很多，我提供一种。</p>
+<p>电脑Edge浏览器插件</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109221105195.png" alt="image-20211109221105195"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109221151482.png" alt="image-20211109221151482"></p>
+<p><strong>EditThisCookie</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109224019327.png" alt="image-20211109224019327"></p>
+<p>InPrivate就是Edge无痕模式，要设置无痕可用</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109221928900.png" alt="image-20211109221928900"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109222422602.png" alt="image-20211109222422602"></p>
+<p>无痕模式登录<a href="https://user.mihoyo.com/#/login/">米游社登录 (mihoyo.com)</a></p>
+<p>点击右上角插件就可以获取cookie</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109222735440.png" alt="image-20211109222735440"></p>
+<h5 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h5><p>回到腾讯云，再次编辑「函数配置」-&gt; 「环境配置」，设置执行超时300s；填入cookie，保存配置</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>COOKIE_MIHOYOBBS</td>
+<td>cookie_token=xxxxxx; account_id=xxxxxx</td>
+<td>原神签到福利</td>
+</tr>
+<tr>
+<td>COOKIE_BH3</td>
+<td>cookie_token=xxxxxx; account_id=xxxxxx</td>
+<td>崩坏3福利补给</td>
+</tr>
+<tr>
+<td>COOKIE_MIYOUBI</td>
+<td>account_id=xxxxxx; cookie_token=xxxxxx; login_ticket=xxxxxx</td>
+<td>米游社区任务</td>
+</tr>
+<tr>
+<td>LANGUAGE</td>
+<td>zh</td>
+<td>中文</td>
+</tr>
+</tbody></table>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109223037652.png" alt="image-20211109223037652"></p>
+<p><em><strong><u>Tips：</u></strong></em></p>
+<p>「原神签到福利」「崩坏3福利补给」只要cookie_token、account_id两个字段。</p>
+<p>「米游社区任务」需要account_id、cookie_token和login_ticket三个字段，而且必须退出账号**无痕模式!!!无痕模式!!!无痕模式!!!**即时获取，然后立即填入COOKIE_MIYOUBI运行一次。</p>
+<p>如果日志报错：YOUR COOKIE_MIYOUBI: xxxxxx，那么这是正常的，只需要把转义stuid=xxxxx; stoken=xxxxxx; login_ticket=xxxxxx回填至COOKIE_MIYOUBI再次运行就OK。</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>「函数管理」，「函数代码」部分往下翻，「部署」，完成后「测试」</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109225825337.png" alt="image-20211109225825337"></p>
+<h5 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109213528818.png" alt="image-20211109213528818"></p>
+<h5 id="回填"><a href="#回填" class="headerlink" title="回填"></a>回填</h5><table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>COOKIE_MIYOUBI</td>
+<td>stuid=xxxxx; stoken=xxxxxx; login_ticket=xxxxxx</td>
+<td>回填环境变量，再次运行即可</td>
+</tr>
+</tbody></table>
+<p><em><strong><u>Tips：</u></strong></em></p>
+<p>Cookie 支持配置多个，不同账号的 Cookie 值之间用 <code>#</code>分隔，如：<code>cookie1#cookie2#cookie3</code>。</p>
+<h4 id="每天定时触发运行"><a href="#每天定时触发运行" class="headerlink" title="每天定时触发运行"></a>每天定时触发运行</h4><p>「函数服务」-&gt;「触发管理」-&gt;「新建触发器」，「触发周期」字段改为自定义触发周期</p>
+<p>下面的cron表达式，则代表了触发的时间</p>
+<p>Cron 表达式有七个必需字段，按空格分隔。</p>
+<table>
+<thead>
+<tr>
+<th align="left">第一位</th>
+<th align="left">第二位</th>
+<th align="left">第三位</th>
+<th align="left">第四位</th>
+<th align="left">第五位</th>
+<th align="left">第六位</th>
+<th align="left">第七位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">秒</td>
+<td align="left">分钟</td>
+<td align="left">小时</td>
+<td align="left">日</td>
+<td align="left">月</td>
+<td align="left">星期</td>
+<td align="left">年</td>
+</tr>
+</tbody></table>
+<p>*表示所有值。在“小时”字段中， 表示每个小时</p>
+<p>比如 0 10 30 0 0 0 0就表示每天上午10点30触发（24H制）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109231220416.png" alt="image-20211109231220416"></p>
+<h4 id="利用pushplus实现消息推送"><a href="#利用pushplus实现消息推送" class="headerlink" title="利用pushplus实现消息推送"></a>利用pushplus实现消息推送</h4><p>在微信里关注pushplus公众号</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109231731506.png" alt="image-20211109231731506"></p>
+<p>点击左下角，「pushplus官网」-&gt;「一对一推送」，提示登录微信授权即可，然后就可以获取到你的token</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109232044864.png" alt="image-20211109232044864"></p>
+<p>回到腾讯云，编辑「函数代码」</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;ONEPUSH&quot;: &#123;</span><br><span class="line">  &quot;notifier&quot;: &quot;pushplus&quot;,</span><br><span class="line">  &quot;params&quot;: &#123;</span><br><span class="line">  &quot;markdown&quot;: true,</span><br><span class="line">  &quot;token&quot;:&quot;xxxxxxxxxxxxxxxxxxxxxxxx&quot;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211110204739433.png" alt="image-20211110204739433"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109233347154.png" alt="image-20211109233347154"></p>
+<p>因微信政策原因，pushplus可能会先让你发送激活消息才能收到推送，按照提示来即可。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211110205432272.png" alt="image-20211110205432272" style="zoom:50%;" />
+
+
+
+<p>至此，你已经实现了米游社任务，并且将结果通过push推送至你的手机。但这个小助手功能远不止如此，微信原神积分商城签到，微博超话签到，实时便笺等等功能，部署支持 <code>Docker</code>、<code>PyPI</code>和云函数三种安装方式，推送支持酷推、钉钉机器人、Discord、iGot聚合推送、pushplus、Server酱、Telegram robot、企业微信应用、企业微信机器人和自定义推送，本人 <del>需求</del> 能力有限，朋友~自己研究☛<a href="https://www.yindan.me/tutorial/genshin-impact-helper.html">原神签到小助手 每日福利不用愁</a>。</p>
+<h4 id="微信原神积分商城签到"><a href="#微信原神积分商城签到" class="headerlink" title="微信原神积分商城签到"></a>微信原神积分商城签到</h4><p>微信打开原神积分商城，黄鸟抓包</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211110210332542.png" alt="image-20211110210332542"></p>
+<p>token填入</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SHOPTOKEN</td>
+<td>b7x5101f467exxxxxxxxxxff1bcxxb3b</td>
+<td>原神微信积分商城签到</td>
+</tr>
+</tbody></table>
+<h4 id="实时便笺"><a href="#实时便笺" class="headerlink" title="实时便笺"></a>实时便笺</h4><table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>COOKIE_RESIN_TIMER</td>
+<td>cookie_token=xxxxxx; account_id=xxxxxx</td>
+<td>与原神，崩坏签到一样</td>
+</tr>
+</tbody></table>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211110210813406.png" alt="image-20211110210813406" style="zoom:50%;" />
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>腾讯云</tag>
+        <tag>Genshin</tag>
+      </tags>
+  </entry>
 </search>

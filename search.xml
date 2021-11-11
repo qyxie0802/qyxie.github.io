@@ -1376,14 +1376,14 @@
 </ul>
 <span id="more"></span>
 
-<p>教程出自<a href="https://www.yindan.me/tutorial/genshin-impact-helper.html">YINDAN☛原神签到小助手 每日福利不用愁</a>，一开始在葫芦侠看到这个原神小助手，但教程不是很清楚，版本是1.7，而且是搬运。我各平台搜索发现原贴出自酷安，然后酷安也不是原作者，好歹他留下了项目github，然后我就又一路摸到作者的博客，已经更新到版本2.0.3。可惜比较笨，教程也是“详略得当”，我看不太明白，后来经一位HXD的指点，才部署成功。捞的不谈。捞的不谈。高手可以直接去大佬原项目看看，不行的还是跟着我的教程部署吧。另外已将YINDAN大佬友链收录。</p>
+<p>教程出自<a href="https://www.yindan.me/tutorial/genshin-impact-helper.html">YINDAN☛原神签到小助手 每日福利不用愁</a>，一开始在葫芦侠看到这个原神小助手，但教程不是很清楚，版本是1.7，而且应该是搬运。我各平台搜索发现原贴出自酷安，然而酷安也不是原作者，不过好歹说了下项目github，然后我就又一路摸到作者的博客，已经更新到版本2.0.3。可惜比较笨，教程也是“详略得当”，我看不太明白，后来经一位HXD的指点，才部署成功。捞的不谈。捞的不谈。高手可以直接去大佬原项目看看，不行的还是跟着我的教程部署吧。另外已将YINDAN大佬友链收录。</p>
 <h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>打开并登录「腾讯云」，直接搜索「云函数」</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109163440708.png" alt="image-20211109163440708"></p>
 <p>如果是第一次开通云函数功能，会弹出一个「服务授权」，点击「前往访问管理」，点击「确定授权」，然后微信扫码确认即可</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109162315682.png" alt="image-20211109162315682"></p>
 <h4 id="新建函数"><a href="#新建函数" class="headerlink" title="新建函数"></a>新建函数</h4><p>云函数控制台点击「函数服务」，点击「新建」</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109163724213.png" alt="image-20211109163724213"></p>
-<h4 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h4><p>创建方式改为「自定义创建」然后选「事件函数」，函数名称，地区任意，运行环境则选「Python3.6」，部署方式选择「本地上传zip包」，并上传<a href="https://wwa.lanzoui.com/b07mk6dla">原神签到小助手l.zip</a></p>
+<h4 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h4><p>创建方式改为「自定义创建」然后选「事件函数」，函数名称，地区任意，运行环境则选「Python3.6」，部署方式选择「本地上传zip包」，并上传<a href="https://wwa.lanzoui.com/b07mk6dla">原神签到小助手l.zip</a>    密码：ed03</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211109170121820.png" alt="image-20211109170121820"></p>
 <h4 id="米游社签到任务"><a href="#米游社签到任务" class="headerlink" title="米游社签到任务"></a>米游社签到任务</h4><h5 id="获取cookie"><a href="#获取cookie" class="headerlink" title="获取cookie"></a>获取cookie</h5><p>方法很多，我提供一种。</p>
 <p>电脑Edge浏览器插件</p>

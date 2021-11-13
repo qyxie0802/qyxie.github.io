@@ -1535,4 +1535,144 @@
         <tag>Genshin</tag>
       </tags>
   </entry>
+  <entry>
+    <title>linux防火墙之Firewalls &amp; iptables</title>
+    <url>/2021/11/09/21110801/</url>
+    <content><![CDATA[<p>Linux中有两种防火墙软件，<em>ConterOS7.0</em>以上使用的是firewall，ConterOS7.0以下使用的是iptables。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/Firewalls.jpg" alt="Firewalls"></p>
+<span id="more"></span>
+
+
+
+<p>**Tips:*<em>systemctl是</em>CentOS7*的服务管理工具中主要的工具，融合之前service和chkconfig的功能于一体。</p>
+<table>
+<thead>
+<tr>
+<th>System V init 命令（RHEL 6）</th>
+<th>systemctl 命令（RHEL 7）</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>service xxxx start</td>
+<td>systemctl start xxxx.service</td>
+<td>启动服务</td>
+</tr>
+<tr>
+<td>service xxxx stop</td>
+<td>systemctl stop xxxx.service</td>
+<td>停止服务</td>
+</tr>
+<tr>
+<td>service xxxx restart</td>
+<td>systemctl restart xxxx.service</td>
+<td>重启服务</td>
+</tr>
+<tr>
+<td>service xxxx reload</td>
+<td>systemctl reload xxxx.service</td>
+<td>重新加载配置文件（不终止服务）</td>
+</tr>
+<tr>
+<td>service xxxx status</td>
+<td>systemctl status xxxx.service</td>
+<td>查看服务状态</td>
+</tr>
+<tr>
+<td>chkconfig xxxx on</td>
+<td>systemctl enable xxxx.service</td>
+<td>开机自启</td>
+</tr>
+<tr>
+<td>chkconfig xxxx off</td>
+<td>systemctl disable xxxx.service</td>
+<td>禁止开机自启</td>
+</tr>
+<tr>
+<td>chkconfig xxxx</td>
+<td>systemctl is-enabled xxxx.service</td>
+<td>查看特定服务是否为开机自启</td>
+</tr>
+<tr>
+<td>chkconfig –list</td>
+<td>systemctl list-unit-files –type=service</td>
+<td>查看各个级别下服务的启动与禁用情况</td>
+</tr>
+</tbody></table>
+<p><strong>Tips:</strong>  reload (重新加载)，reload会重新加载配置文件，服务不会中断。而且reload时会测试conf语法等，如果出错会rollback用上一次正确配置文件保持正常运行。也叫平滑重启，不会对已经连接的服务造成影响。<br>restart (重启)（先stop后start），会重启服务。这个重启会造成服务一瞬间的中断，restart自然也就reload了。</p>
+<h3 id="Firewalls"><a href="#Firewalls" class="headerlink" title="Firewalls"></a>Firewalls</h3><p>firewall-cmd 是 firewalld的字符界面管理工具，firewalld是centos7的一大特性，最大的好处有两个：支持动态更新，不用重启服务；第二个就是加入了防火墙的“zone”概念。</p>
+<h4 id="相关常用命令"><a href="#相关常用命令" class="headerlink" title="相关常用命令"></a>相关常用命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start  firewalld # 启动</span><br><span class="line">systemctl stop firewalld # 关闭</span><br><span class="line">systemctl status firewalld # 或者 firewall-cmd --state 查看状态</span><br><span class="line">systemctl restart firewalld # 重启</span><br><span class="line">firewall-cmd --reload # 重新加载配置文件</span><br><span class="line">firewall-cmd --help  #获取帮助</span><br><span class="line">systemctl enable firewalld.service # 开机自启</span><br><span class="line">systemctl disable firewalld.service # 禁用开机自启</span><br><span class="line">systemctl is-enabled firewalld # 查看服务是否开机启动</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="1、开放端口"><a href="#1、开放端口" class="headerlink" title="1、开放端口"></a>1、开放端口</h4><p>（1）如我们需要开启XShell连接时需要使用的22端口</p>
+<p><strong>临时增加</strong> (<code>reload</code>之后消失)：不需要<code>reload</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=22/tcp</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>永久增加</strong> ：<code>reload</code>后生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=22/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>其中–permanent的作用是使设置永久生效，不加的话机器重启之后失效 </p>
+<p>（2）重新载入一下防火墙设置，使设置生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>（3）可通过如下命令查看是否生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --query-port=22/tcp</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113230828367.png" alt="image-20211113230828367"></p>
+<p>（4）如下命令可查看当前系统打开的所有端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113230901879.png" alt="image-20211113230901879"></p>
+<h4 id="2、限制端口"><a href="#2、限制端口" class="headerlink" title="2、限制端口"></a>2、限制端口</h4><p>（1）比如我们现在需要关掉刚刚打开的22端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --remove-port=22/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>（2）重新载入一下防火墙设置，使设置生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>（3）再去查看系统所有开放的端口，已经看到没有22端口了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3、批量开放或限制端口"><a href="#3、批量开放或限制端口" class="headerlink" title="3、批量开放或限制端口"></a>3、批量开放或限制端口</h4><p>（1）批量开放端口，如从100到500这之间的端口我们全部要打开</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=100-500/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4、服务相关"><a href="#4、服务相关" class="headerlink" title="4、服务相关"></a>4、服务相关</h4><p>获取所有支持的服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --get-services</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113233042121.png" alt="image-20211113233042121"></p>
+<p>增加服务： (临时增加)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-service=http</span><br></pre></td></tr></table></figure>
+
+<p>删除服务： (临时删除)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --remove-service=http</span><br></pre></td></tr></table></figure>
+
+<p>查询服务 :</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --query-service=http</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><p>iptables 的最大优点是它可以配置有状态的<a href="https://baike.baidu.com/item/%E9%98%B2%E7%81%AB%E5%A2%99">防火墙</a>，有四种有效状态，名称分别为 ESTABLISHED 、 INVALID 、 NEW 和 RELATED。</p>
+<h4 id="相关常用命令-1"><a href="#相关常用命令-1" class="headerlink" title="相关常用命令"></a>相关常用命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service iptables start           //启动iptables</span><br><span class="line">service iptables stop           //关闭iptables</span><br><span class="line">service iptables restart       //重启iptables</span><br><span class="line">service iptables status       //查看iptables状态</span><br><span class="line">cat /etc/sysconfig/iptables  //查看iptables规则</span><br><span class="line">vi /etc/sysconfig/iptables  //修改iptables的规则</span><br><span class="line">service iptables save      //保存命令行中设置的iptables规则到iptables文件中</span><br><span class="line">iptables -V   (注意：V是大写字母V）  //查看iptables版本</span><br></pre></td></tr></table></figure>
+
+<p>iptables简直是地狱中的地狱，我还是会开关就好了，告辞。</p>
+<p>以上内容均来自百度各大佬文章进行总结归纳，也就图个自己查看方便，勿喷。</p>
+<p>​    </p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Firewalls</tag>
+        <tag>iptables</tag>
+      </tags>
+  </entry>
 </search>

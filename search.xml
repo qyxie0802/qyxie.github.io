@@ -1675,4 +1675,63 @@
         <tag>iptables</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Windows Subsystem for Android安卓子系统初体验</title>
+    <url>/2021/11/14/21111401/</url>
+    <content><![CDATA[<p>微软官方在 Windows 11 内测版刚发布的时候就曾被爆出 Windows 11 将支持安装安卓应用，早前Windows 11发布我也是第一时间通过加入Dev通道获得推送，但安装成功后索然无味，感觉除了UI的变化毫无亮点，支持安装安卓应用功能也未上线。如今Windows 11 发布了安卓子系统 Windows Subsystem for Android，前段时间有事没能第一时间体验到，最近有空在酷安了解了下如何安装，分享下。</p>
+<p>前提，安装了WIN11。</p>
+<span id="more"></span>
+
+<h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><p>设置 &gt; 系统 &gt; 存储 &gt; 高级存储设置 &gt; 保存新内容的地方</p>
+<p>怕C盘爆了的话，在这里可以改安装位置 ，如果你只有一个盘当我没说 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163237401.png" alt="image-20211114163237401"></p>
+<p>当然，已经安装在C盘了也可以更改</p>
+<p>设置 &gt;  应用 &gt; 应用和功能 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163233680.png" alt="image-20211114163233680"></p>
+<h3 id="安装Windows-Subsystem-for-Android"><a href="#安装Windows-Subsystem-for-Android" class="headerlink" title="安装Windows Subsystem for Android"></a>安装Windows Subsystem for Android</h3><p>控制面板 &gt; 启动或关闭Windows功能  把“虚拟机平台”和“Hyper-V”前面的勾打上，然后点击确定 安装完成后重启即可 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163228691.png" alt="image-20211114163228691"></p>
+<p><a href="https://pan.xunlei.com/s/VMoT7Faoxb3Y8F2OvIxd83dPA1">迅雷</a><br>提取码：s7hn</p>
+<p><a href="https://pan.baidu.com/s/1_X8mQtyGMlO7rDEMjd66aw">百度云网盘</a><br>提取码：hmgr</p>
+<p>下载WSA.zip 解压到D盘根目录下。当然你也可以放在其他位置，就是安装和执行脚本的时候自己考虑下路径问题。</p>
+<p>同时按住Win键和x唤出菜单，选择Windows终端（管理员），安装WSA</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add-Appxpackage &quot;D:\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.Msixbundle&quot;  </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163222224.png" alt="image-20211114163222224"></p>
+<p> 等待安完毕 ，打开开始菜单，就可以看到<strong>「Windows Subsystem for Android」</strong>的绿色图标。打开后依次点击  “文档”  “开启开发人员模式”  “刷新IP地址”     </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163213647.png" alt="image-20211114163213647"></p>
+<h3 id="安装外部apk"><a href="#安装外部apk" class="headerlink" title="安装外部apk"></a>安装外部apk</h3><p>“D:\apk\platform-tools” 目录是adb工具，用来安装apk的 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163205612.png" alt="image-20211114163205612"></p>
+<p>“D:\apk\双击apk安装脚本.bat” 是apk安装脚本 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163146033.png" alt="image-20211114163146033"></p>
+<p>修改 1.apk 文件默认打开方式</p>
+<p>右键 1.apk 文件，打开属性。</p>
+<p>选择更改，选择在这台电脑查找其他应用，并勾选始终使用此应用打开 .apk 文件。</p>
+<p>选择.bat 脚本，点击确定即可。 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163326569.png" alt="image-20211114163326569"></p>
+<p>外部应用通过上诉脚本实现安装，安卓子系统内部的话下载完就直接安装了，这个1.apk就是酷安，你可以通过先安装酷安在搜索其他软件进行安装，不行就外部下载双击安装。</p>
+<h3 id="问题与解决："><a href="#问题与解决：" class="headerlink" title="问题与解决："></a>问题与解决：</h3><p>安卓子系统WSA用户数据以虚拟磁盘vhdx形式存放在如下路径：C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\LocalCache\userdata.vhdx，比较大，WSA虽然可以安装或者在设置里应用和功能里进行移动到其他盘符，但这个操作只是移动了WSA系统文件，而安装软件都是装到了上诉路径下系统盘的userdata.vhdx镜像中。这样C盘有点顶不住撒。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163539044.png" alt="image-20211114163539044"></p>
+<p>Tips：是个隐藏文件。 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163400022.png" alt="image-20211114163400022"></p>
+<p>万能的贴吧老哥给出了办法，用windows 的mklink命令进行移动。</p>
+<p>首先完全关闭wsa，把系统盘的LocalCache文件夹剪切（里面有个userdata.vhdx虚拟磁盘，注意是剪切，或者复制完删除C盘的LocalCache）到想要放到的目录，如D盘根目录，（如果无法移动说明wsa正在后台运行，任务管理器结束任务或者重启电脑）；</p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114164304618.png" alt="image-20211114164304618"></p>
+<p>按win+r，输入cmd打开windows命令提示符输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mklink /J &quot;C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\LocalCache&quot; &quot;D:\LocalCache&quot;</span><br></pre></td></tr></table></figure>
+
+<p>前面是原位置，后面是移动后的位置，根据实际情况自己灵活改动。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114191118035.png" alt="image-20211114191118035"></p>
+<p>之后在C盘 C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\路径下又出现了个LocalCache文件夹，并且文件夹左下角带有一个小箭头，说明映射成功。</p>
+<p> 重启电脑，打开Windows Subsystem for Android，或者开几个app看看，应该是没问题的，亲测有效可用。解放系统盘。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Windows Subsystem for Android是我对WIN11最大的期待，有许多app只有移动端没有电脑端，绕过安卓模拟器直装后启动速度非常快，而且使用起来非常流畅。卸载也可以在“程序和功能”中直接卸载。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114171320827.png" alt="image-20211114171320827"></p>
+<p>但目前看来安卓模拟器仍有不可替代的优势，键盘手柄映射等等，WSA只能玩玩金铲铲之类的只需要鼠标点点点的游戏。期待Windows Subsystem for Android的下一次更新。</p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
 </search>

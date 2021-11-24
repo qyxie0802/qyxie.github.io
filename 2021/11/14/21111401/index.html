@@ -93,10 +93,12 @@
 <meta property="og:site_name" content="滑稽树">
 <meta property="og:description" content="微软官方在 Windows 11 内测版刚发布的时候就曾被爆出 Windows 11 将支持安装安卓应用，早前Windows 11发布我也是第一时间通过加入Dev通道获得推送，但安装成功后索然无味，感觉除了UI的变化毫无亮点，支持安装安卓应用功能也未上线。如今Windows 11 发布了安卓子系统 Windows Subsystem for Android，前段时间有事没能第一时间体验到，最近有空">
 <meta property="og:locale">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/J%5BKGKPT@LXF%7DMUJCBR%5DW4LU.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163237401.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163233680.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163228691.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163222224.png">
+<meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211124101043061.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163213647.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163205612.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163146033.png">
@@ -107,11 +109,11 @@
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114191118035.png">
 <meta property="og:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114171320827.png">
 <meta property="article:published_time" content="2021-11-14T10:30:00.000Z">
-<meta property="article:modified_time" content="2021-11-14T11:13:41.249Z">
+<meta property="article:modified_time" content="2021-11-24T02:15:43.114Z">
 <meta property="article:author" content="滑小稽">
 <meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163237401.png">
+<meta name="twitter:image" content="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/J%5BKGKPT@LXF%7DMUJCBR%5DW4LU.png">
 
 
 
@@ -430,7 +432,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.2k
                 </span>
               
 
@@ -468,9 +470,14 @@
 
       
         <p>微软官方在 Windows 11 内测版刚发布的时候就曾被爆出 Windows 11 将支持安装安卓应用，早前Windows 11发布我也是第一时间通过加入Dev通道获得推送，但安装成功后索然无味，感觉除了UI的变化毫无亮点，支持安装安卓应用功能也未上线。如今Windows 11 发布了安卓子系统 Windows Subsystem for Android，前段时间有事没能第一时间体验到，最近有空在酷安了解了下如何安装，分享下。</p>
-<p>前提，安装了WIN11。</p>
 <span id="more"></span>
 
+
+
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>安装了WIN11。</p>
+<p><a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/software-download/windows11">win11官方镜像下载</a></p>
+<p>下载ISO镜像文件用pe安装，方便快捷，没有硬件要求，也不需要UEFI，我家十年前的电脑都用上win11啦.</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/J%5BKGKPT@LXF%7DMUJCBR%5DW4LU.png" alt="img"></p>
 <h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><p>设置 &gt; 系统 &gt; 存储 &gt; 高级存储设置 &gt; 保存新内容的地方</p>
 <p>怕C盘爆了的话，在这里可以改安装位置 ，如果你只有一个盘当我没说 </p>
 <p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163237401.png" alt="image-20211114163237401"></p>
@@ -486,6 +493,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add-Appxpackage &quot;D:\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.Msixbundle&quot;  </span><br></pre></td></tr></table></figure>
 
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163222224.png" alt="image-20211114163222224"></p>
+<p>如下报错就到微软商店更新【应用安装程序】</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211124101043061.png" alt="image-20211124101043061"></p>
 <p> 等待安完毕 ，打开开始菜单，就可以看到<strong>「Windows Subsystem for Android」</strong>的绿色图标。打开后依次点击  “文档”  “开启开发人员模式”  “刷新IP地址”     </p>
 <p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163213647.png" alt="image-20211114163213647"></p>
 <h3 id="安装外部apk"><a href="#安装外部apk" class="headerlink" title="安装外部apk"></a>安装外部apk</h3><p>“D:\apk\platform-tools” 目录是adb工具，用来安装apk的 </p>
@@ -783,7 +792,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%A9%E9%A6%A8%E6%8F%90%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text">温馨提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Windows-Subsystem-for-Android"><span class="nav-number">2.</span> <span class="nav-text">安装Windows Subsystem for Android</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%A4%96%E9%83%A8apk"><span class="nav-number">3.</span> <span class="nav-text">安装外部apk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">问题与解决：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%8F%90"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%A9%E9%A6%A8%E6%8F%90%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">温馨提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Windows-Subsystem-for-Android"><span class="nav-number">3.</span> <span class="nav-text">安装Windows Subsystem for Android</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%A4%96%E9%83%A8apk"><span class="nav-number">4.</span> <span class="nav-text">安装外部apk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">问题与解决：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

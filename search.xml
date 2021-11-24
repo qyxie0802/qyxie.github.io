@@ -1679,9 +1679,14 @@
     <title>Windows Subsystem for Android安卓子系统初体验</title>
     <url>/2021/11/14/21111401/</url>
     <content><![CDATA[<p>微软官方在 Windows 11 内测版刚发布的时候就曾被爆出 Windows 11 将支持安装安卓应用，早前Windows 11发布我也是第一时间通过加入Dev通道获得推送，但安装成功后索然无味，感觉除了UI的变化毫无亮点，支持安装安卓应用功能也未上线。如今Windows 11 发布了安卓子系统 Windows Subsystem for Android，前段时间有事没能第一时间体验到，最近有空在酷安了解了下如何安装，分享下。</p>
-<p>前提，安装了WIN11。</p>
 <span id="more"></span>
 
+
+
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>安装了WIN11。</p>
+<p><a href="https://www.microsoft.com/zh-cn/software-download/windows11">win11官方镜像下载</a></p>
+<p>下载ISO镜像文件用pe安装，方便快捷，没有硬件要求，也不需要UEFI，我家十年前的电脑都用上win11啦.</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/J%5BKGKPT@LXF%7DMUJCBR%5DW4LU.png" alt="img"></p>
 <h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><p>设置 &gt; 系统 &gt; 存储 &gt; 高级存储设置 &gt; 保存新内容的地方</p>
 <p>怕C盘爆了的话，在这里可以改安装位置 ，如果你只有一个盘当我没说 </p>
 <p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163237401.png" alt="image-20211114163237401"></p>
@@ -1697,6 +1702,8 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add-Appxpackage &quot;D:\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.Msixbundle&quot;  </span><br></pre></td></tr></table></figure>
 
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163222224.png" alt="image-20211114163222224"></p>
+<p>如下报错就到微软商店更新【应用安装程序】</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211124101043061.png" alt="image-20211124101043061"></p>
 <p> 等待安完毕 ，打开开始菜单，就可以看到<strong>「Windows Subsystem for Android」</strong>的绿色图标。打开后依次点击  “文档”  “开启开发人员模式”  “刷新IP地址”     </p>
 <p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163213647.png" alt="image-20211114163213647"></p>
 <h3 id="安装外部apk"><a href="#安装外部apk" class="headerlink" title="安装外部apk"></a>安装外部apk</h3><p>“D:\apk\platform-tools” 目录是adb工具，用来安装apk的 </p>

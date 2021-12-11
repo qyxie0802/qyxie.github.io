@@ -1741,4 +1741,135 @@
         <tag>Windows</tag>
       </tags>
   </entry>
+  <entry>
+    <title>BiliHelper部署，升级好比坐火箭</title>
+    <url>/2021/12/11/21121101/</url>
+    <content><![CDATA[<p>B站距离等级6还有五千经验，平时都只刷刷视频甚至不投币（俗称：白嫖怪），升级遥遥无期，今天看到一个B站助手还不错，研究部署下。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211183609071.png" alt="image-20211211183609071"></p>
+<p>项目地址：<a href="https://github.com/lkeme/BiliHelper-personal">哔哩哔哩（Bilibili）助手 - PHP 版（Personal）</a>，Github也有部署指南，开源免费，如果你感觉本项目对你有所帮助的话，欢迎点击对原作者进行打赏。</p>
+<p>话不多说，开始我的部署教程吧。</p>
+<span id="more"></span>
+
+<h3 id="环境依赖："><a href="#环境依赖：" class="headerlink" title="环境依赖："></a>环境依赖：</h3><p>linux服务器安装宝塔面板（略）</p>
+<p>宝塔面板软件商店搜索安装php8.0</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153450418.png" alt="image-20211211153450418"></p>
+<p>php8.0管理，删除禁用函数putenv、proc_open、pcntl_signal_dispatch，一共三个</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153635155.png" alt="image-20211211153635155"></p>
+<h3 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h3><p><a href="https://www.runoob.com/w3cnote/composer-install-and-usage.html">Composer 安装与使用</a></p>
+<p>使用以下命令来安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># php -r &quot;copy(&#x27;https://install.phpcomposer.com/installer&#x27;, &#x27;composer-setup.php&#x27;);&quot;</span><br><span class="line"># php composer-setup.php</span><br><span class="line"></span><br><span class="line">All settings correct for using Composer</span><br><span class="line">Downloading...</span><br><span class="line"></span><br><span class="line">Composer (version 1.6.5) successfully installed to: /root/composer.phar</span><br><span class="line">Use it: php composer.phar</span><br></pre></td></tr></table></figure>
+
+
+
+<p>移动 composer.phar，这样 composer 就可以进行全局调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
+
+<p>更新 composer：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">composer selfupdate</span><br></pre></td></tr></table></figure>
+
+<p>切换为国内镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="部署指南："><a href="#部署指南：" class="headerlink" title="部署指南："></a>部署指南：</h3><ol>
+<li>下载（克隆）项目代码，初始化项目</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git clone https://github.com/lkeme/BiliHelper-personal.git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211152627375.png" alt="image-20211211152627375"></p>
+<p>没有安装git或者跟我一样git失败的也可以直接下载压缩包，上传解压</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153218821.png" alt="image-20211211153218821"></p>
+<ol start="2">
+<li>使用 composer工具进行安装</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd BiliHelper-personal/</span><br><span class="line"># composer install</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211164816662.png" alt="image-20211211164816662"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211164727178.png" alt="image-20211211164727178"></p>
+<ol start="3">
+<li>修改配置文件 <code>user.ini</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd conf/</span><br><span class="line"># cp user.ini.example user.ini</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211165806755.png" alt="image-20211211165806755"></p>
+<p>用宝塔面板修改方便点，配置账号密码，保存</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211170413879.png" alt="image-20211211170413879"></p>
+<p>登录模式|[1.账密模式 2.短信验证码模式 ]</p>
+<p>1就是直接输入账号密码，2短信登录，此时password字段随意填</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211172141151.png" alt="image-20211211172141151"></p>
+<ol start="4">
+<li>运行测试</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd ,,  #回到项目路径</span><br><span class="line"># php index.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211172554683.png" alt="image-20211211172554683"></p>
+<p>起飞~</p>
+<h3 id="Supervisor-配置："><a href="#Supervisor-配置：" class="headerlink" title="Supervisor 配置："></a>Supervisor 配置：</h3><p>将 BiliHelper-personal 部署到线上服务器时，需要配置一个进程监控器来监测 <code>php index.php</code> 命令，在它意外退出时自动重启。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install supervisor # 使用yum安装supervisor</span><br><span class="line">systemctl enable supervisord.service # 设置开机自启</span><br></pre></td></tr></table></figure>
+
+<p>编辑/etc/supervisord.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[program:bilibili]</span><br><span class="line">process_name=%(program_name)s</span><br><span class="line">command=php /path/to/your/BiliHelper-personal/index.php    #注：路径根据实际情况</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">redirect_stderr=true</span><br><span class="line">stdout_logfile=/tmp/bilibili.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211173809947.png" alt="image-20211211173809947"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">supervisord -c /etc/supervisord.conf # 指定配置文件启动</span><br></pre></td></tr></table></figure>
+
+<p>再次运行测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># php index.php</span><br></pre></td></tr></table></figure>
+
+<p>之后就算ctrl+c 结束也没事了 ，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能。在/tmp/bilibili.log中也不断有日志输出，部署没得问题。</p>
+<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>关于项目的更多功能以及配置请访问项目原地址<a href="https://github.com/lkeme/BiliHelper-personal">哔哩哔哩（Bilibili）助手 - PHP 版（Personal）</a>查阅文档，我也是菜鸡，更多的是发现好的项目，剩下的靠大家了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211183356350.png" alt="image-20211211183356350"></p>
+<p>项目应该也是可以使用云函数部署的，但是我不会，有大佬研究下欢迎指导下。</p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>bilibili</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Composer安装报错</title>
+    <url>/2021/12/11/21121102/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Composer安装报错，错误代码如下：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211160331789.png" alt="image-20211211160331789"></p>
+<span id="more"></span>
+
+
+
+<p>[root@iZ2ze82v6un2qb4pu22ug1Z BiliHelper-personal]# php -r “copy(‘<a href="https://install.phpcomposer.com/installer&#39;">https://install.phpcomposer.com/installer&#39;</a>, ‘composer-setup.php’);”<br>PHP Warning:  copy(): SSL operation failed with code 1. OpenSSL Error messages:<br>error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed in Command line code on line 1</p>
+<p>Warning: copy(): SSL operation failed with code 1. OpenSSL Error messages:<br>error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed in Command line code on line 1<br>PHP Warning:  copy(): Failed to enable crypto in Command line code on line 1</p>
+<p>Warning: copy(): Failed to enable crypto in Command line code on line 1<br>PHP Warning:  copy(<a href="https://install.phpcomposer.com/installer">https://install.phpcomposer.com/installer</a>): Failed to open stream: operation failed in Command line code on line 1</p>
+<p>Warning: copy(<a href="https://install.phpcomposer.com/installer">https://install.phpcomposer.com/installer</a>): Failed to open stream: operation failed in Command line code on line 1</p>
+<p>应该是CA证书验证失败造成的错误</p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>下载个CA证书</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://curl.haxx.se/ca/cacert.pem</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211160551418.png" alt="image-20211211160551418"></p>
+<p>报错：</p>
+<p>[root@iZ2ze82v6un2qb4pu22ug1Z ~]# wget <a href="http://curl.haxx.se/ca/cacert.pem">http://curl.haxx.se/ca/cacert.pem</a><br>–2021-12-11 15:50:51–  <a href="http://curl.haxx.se/ca/cacert.pem">http://curl.haxx.se/ca/cacert.pem</a><br>Resolving curl.haxx.se (curl.haxx.se)… 151.101.74.49, 2a04:4e42:11::561<br>Connecting to curl.haxx.se (curl.haxx.se)|151.101.74.49|:80… connected.<br>HTTP request sent, awaiting response… 301 Moved Permanently<br>Location: <a href="https://curl.haxx.se/ca/cacert.pem">https://curl.haxx.se/ca/cacert.pem</a> [following]<br>–2021-12-11 15:50:53–  <a href="https://curl.haxx.se/ca/cacert.pem">https://curl.haxx.se/ca/cacert.pem</a><br>Connecting to curl.haxx.se (curl.haxx.se)|151.101.74.49|:443… connected.<br>HTTP request sent, awaiting response… 301 Moved Permanently<br>Location: <a href="https://curl.se/ca/cacert.pem">https://curl.se/ca/cacert.pem</a> [following]<br>–2021-12-11 15:50:54–  <a href="https://curl.se/ca/cacert.pem">https://curl.se/ca/cacert.pem</a><br>Resolving curl.se (curl.se)… 151.101.130.49, 151.101.194.49, 151.101.2.49, …<br>Connecting to curl.se (curl.se)|151.101.130.49|:443… connected.<br>ERROR: cannot verify curl.se’s certificate, issued by ‘/C=US/O=Let’s Encrypt/CN=R3’:<br>  Issued certificate has expired.<br>To connect to curl.se insecurely, use `–no-check-certificate’.</p>
+<p>好！！！证书下载失败，牛皮。</p>
+<p>使用网页下载再上传至linux服务器，结果网页都打不开，下载不下来。</p>
+<p>我直接挂梯子下载成功~</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir -p /usr/local/openssl/ssl/certs/ </span><br><span class="line">mv cacert.pem /usr/local/openssl/ssl/certs/cacert.pem</span><br></pre></td></tr></table></figure>
+
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211155655637.png" alt="image-20211211155655637" style="zoom:67%;" />
+
+
+
+<p>编辑php.ini（路径 /www/server/php/80/etc php.ini），修改cafile路径，保存</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211161139182.png" alt="image-20211211161139182"></p>
+<p>彳亍，可以安装<strong>composer</strong>了</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211162811233.png" alt="image-20211211162811233"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
 </search>

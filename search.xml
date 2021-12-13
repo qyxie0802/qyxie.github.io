@@ -1872,4 +1872,56 @@
         <tag>Linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>云盘变本地硬盘</title>
+    <url>/2021/12/13/21121301/</url>
+    <content><![CDATA[<p>今天带来的是一个好用的工具 **<u><em>CloudDrive</em></u>**，可以把你的阿里云盘和天翼云盘的内容映射到本地盘符，方便的使用。<br>功能：快捷访问云盘文件、使用第三方播放器播放视频、文件重命名、全局下载带宽控制<br>本地上传、本地下载、115秒传迁移到阿里云盘、网络盘、本地盘互换等</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213180843830.png" alt="image-20211213180843830"></p>
+<span id="more"></span>
+
+
+
+<p><a href="https://www.aliyundrive.com/s/wLQfjyVMUq3">软件下载链接</a>  </p>
+<p>☝更多功能详情与问题答疑也请访问上述连接</p>
+<p>简体中文安装</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213145638398.png" alt="image-20211213145638398"></p>
+<p>安装软件后打不开，如上图报错的话，直接浏览器访问localhost:9798</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213183037460.png" alt="image-20211213183037460"></p>
+<p>localhost:9798拒绝访问的话，就是服务没有启动，打开安装目录下的clouddriveservice.EXE即可</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213160642846.png" alt="image-20211213160642846"></p>
+<p>.</p>
+<p>注册登录（注册的是这个CloudDrive应用，不是网盘。）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213160924281.png" alt="image-20211213160924281"></p>
+<p>手机阿里云盘扫码登录后进行挂载，也支持115，天翼云盘等~</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213161824286.png" alt="image-20211213161824286"></p>
+<p>挂载点任意，不要跟已有冲突就行，挂载类型可选本地盘/网络盘</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213161936760.png" alt="image-20211213161936760"></p>
+<p>起飞~</p>
+<p>本地盘</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213162109142.png" alt="image-20211213162109142"></p>
+<p>网络盘</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213182246132.png" alt="image-20211213182246132"></p>
+<p>一开始我自定义安装在D盘，服务不能自启动，每次都要打开安装目录下的clouddriveservice.EXE，我重装默认安装位置后没有问题，反正不大放在C盘就放在C盘吧，配合CloudDrive控制器可以对服务进行开关。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213193124106.png" alt="image-20211213193124106"></p>
+<p>注意:</p>
+<ol>
+<li><p>挂载的盘符可自行定制，但是—定要选—个，不然没得玩。</p>
+</li>
+<li><p>本地计算机打开文件夹可能会卡顿，这是正常现象，跟网络和缓存有关系。</p>
+</li>
+<li><p>因为挂的是网络磁盘，所以服务没开没得用，没得网就没得用。</p>
+</li>
+<li><p>可以使用本地播放器播放云盘的视频资源，目前网络带宽一般不会卡顿。</p>
+</li>
+<li><p>不适合用来打游戏或者在线编辑文档（为了防止文件丢失记得做好备份）。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>CloudDrive</tag>
+      </tags>
+  </entry>
 </search>

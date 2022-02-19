@@ -653,42 +653,6 @@
       </tags>
   </entry>
   <entry>
-    <title>简易的随机图片API接口</title>
-    <url>/2021/08/06/21081401/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
-<span id="more"></span>    
-
-
-
-<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
-<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
-<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
-<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
-<p><em><strong>新建目录</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
-<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
-<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
-<p>好了，在网页源码中调用就行了。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
-<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
-]]></content>
-      <categories>
-        <category>实用工具</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>获取网站的Favicon图标的API接口</title>
     <url>/2021/08/08/21080801/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
@@ -738,6 +702,42 @@
       <tags>
         <tag>API</tag>
         <tag>favicon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易的随机图片API接口</title>
+    <url>/2021/08/06/21081401/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
+<span id="more"></span>    
+
+
+
+<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
+<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
+<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>新建目录</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
+<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
+<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
+<p>好了，在网页源码中调用就行了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
+<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
       </tags>
   </entry>
   <entry>
@@ -866,54 +866,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo文章加密</title>
-    <url>/2021/08/21/21082101/</url>
-    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>​        博客中可能有些文章是个人情感宣泄、敏感内容或收费技术等，不方便公开，需要对文章进行加密处理。而Next这个主题可谓是包办了几乎所有的需求，却偏偏没有集成<strong>文章加密功能</strong>。但俗话说的好，办法总比困难多。</p>
-<span id="more"></span>
-
-<h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>编辑<code>/themes/next/layout/_partials/head.swig</code>在如下位置添加代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    (function()&#123;</span><br><span class="line">        if(&#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">            if (prompt(&#x27;请输入密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">                alert(&#x27;密码错误&#x27;);</span><br><span class="line">                history.back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143327.png" alt="image-20210821143327571"></p>
-<p>之后，在你想要加密的文章的头文件里添加上<code>password: xxxxxx </code>即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143828.png" alt="image-20210821143828921"></p>
-<p>演示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821144043.png" alt="image-20210821144043245"></p>
-<p>问题：</p>
-<ul>
-<li><p>丑。调用浏览器的UI，各个平台的样式不统一。</p>
-</li>
-<li><p>容易被破解。前端的验证，都是浮云。有心之人想要破解的话那不是分分钟的事。</p>
-</li>
-</ul>
-<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用大神Hexo插件。</p>
-<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></table></figure>
-
-<h5 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h5><p>在站点配置文件添加如下代码，启用插件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="文章配置"><a href="#文章配置" class="headerlink" title="文章配置"></a>文章配置</h5><p>在你的文章的头部添加上对应的字段，如 password, abstract, message</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821145640.png" alt="image-20210821145640641"></p>
-<ul>
-<li>password: 是该博客加密使用的密码</li>
-<li>abstract: 是该博客的摘要，会显示在博客的列表页</li>
-<li>message: 这个是博客查看时，密码输入框上面的描述性文字</li>
-</ul>
-<h5 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  default_abstract: 文章默认摘要</span><br><span class="line">  default_message: 文章默认描述文字</span><br></pre></td></tr></table></figure>
-
-<p>这样，对于每一篇需要加密的文章就不必都在在头部添加 <strong>abstract</strong> 和 <strong>message</strong> 字段了，脚本会自动添加默认的内容填充。 而你在文章头部的配置优先级高于<strong>站点配置文件</strong> 的 <strong>default</strong>配置，会覆盖它。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821151528.png" alt="image-20210821151528503"></p>
-<p><em>tips:本地预览输入密码可能会无响应，因为需要https协议，部署到服务器就没问题啦。</em></p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>Next</tag>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网恋照妖镜</title>
     <url>/2021/08/21/21082102/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -1000,7 +952,7 @@
 </tr>
 <tr>
 <td>SMTP_USER</td>
-<td><a href="mailto:&#120;&#120;&#120;&#x78;&#x78;&#x78;&#x78;&#x78;&#x40;&#113;&#x71;&#46;&#99;&#111;&#109;">&#120;&#120;&#120;&#x78;&#x78;&#x78;&#x78;&#x78;&#x40;&#113;&#x71;&#46;&#99;&#111;&#109;</a></td>
+<td><a href="mailto:&#120;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#120;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#109;">&#120;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#120;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#109;</a></td>
 <td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
 </tr>
 </tbody></table>
@@ -1040,6 +992,54 @@
         <tag>Hexo</tag>
         <tag>valine</tag>
         <tag>LeanCloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo文章加密</title>
+    <url>/2021/08/21/21082101/</url>
+    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>​        博客中可能有些文章是个人情感宣泄、敏感内容或收费技术等，不方便公开，需要对文章进行加密处理。而Next这个主题可谓是包办了几乎所有的需求，却偏偏没有集成<strong>文章加密功能</strong>。但俗话说的好，办法总比困难多。</p>
+<span id="more"></span>
+
+<h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>编辑<code>/themes/next/layout/_partials/head.swig</code>在如下位置添加代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    (function()&#123;</span><br><span class="line">        if(&#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">            if (prompt(&#x27;请输入密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">                alert(&#x27;密码错误&#x27;);</span><br><span class="line">                history.back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143327.png" alt="image-20210821143327571"></p>
+<p>之后，在你想要加密的文章的头文件里添加上<code>password: xxxxxx </code>即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143828.png" alt="image-20210821143828921"></p>
+<p>演示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821144043.png" alt="image-20210821144043245"></p>
+<p>问题：</p>
+<ul>
+<li><p>丑。调用浏览器的UI，各个平台的样式不统一。</p>
+</li>
+<li><p>容易被破解。前端的验证，都是浮云。有心之人想要破解的话那不是分分钟的事。</p>
+</li>
+</ul>
+<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用大神Hexo插件。</p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></table></figure>
+
+<h5 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h5><p>在站点配置文件添加如下代码，启用插件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="文章配置"><a href="#文章配置" class="headerlink" title="文章配置"></a>文章配置</h5><p>在你的文章的头部添加上对应的字段，如 password, abstract, message</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821145640.png" alt="image-20210821145640641"></p>
+<ul>
+<li>password: 是该博客加密使用的密码</li>
+<li>abstract: 是该博客的摘要，会显示在博客的列表页</li>
+<li>message: 这个是博客查看时，密码输入框上面的描述性文字</li>
+</ul>
+<h5 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  default_abstract: 文章默认摘要</span><br><span class="line">  default_message: 文章默认描述文字</span><br></pre></td></tr></table></figure>
+
+<p>这样，对于每一篇需要加密的文章就不必都在在头部添加 <strong>abstract</strong> 和 <strong>message</strong> 字段了，脚本会自动添加默认的内容填充。 而你在文章头部的配置优先级高于<strong>站点配置文件</strong> 的 <strong>default</strong>配置，会覆盖它。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821151528.png" alt="image-20210821151528503"></p>
+<p><em>tips:本地预览输入密码可能会无响应，因为需要https协议，部署到服务器就没问题啦。</em></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Next</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>

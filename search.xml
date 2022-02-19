@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>搭建Hexo博客(一)：手机(Termux) + 内网穿透(Sunny-Ngrok)</title>
+    <url>/2021/07/28/21072801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132342.png" alt="image-20210820132342590"></p>
+<span id="more"></span>
+
+<p>PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。</p>
+<p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
+<p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
+<p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
+<h3 id="Termux下载"><a href="#Termux下载" class="headerlink" title="Termux下载"></a>Termux下载</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
+<p><a href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
+<p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
+<h3 id="安装后换源"><a href="#安装后换源" class="headerlink" title="安装后换源"></a>安装后换源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145218.png" alt="20210801133736"></p>
+<p><strong>Hexo</strong> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145258.png" alt="20210801133813"></p>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145435.png" alt="20210801133900"></p>
+<p>​            </p>
+<h3 id="新建一个博客网站"><a href="#新建一个博客网站" class="headerlink" title="新建一个博客网站"></a>新建一个博客网站</h3><p>命名随意，blog</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145349.png" alt="20210801133818"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
+
+<p>进入博客网站目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>生成静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
+
+<p>启动服务。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145557.png" alt="image-20210801145557639"></p>
+<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145621.png" alt="20210801133945"></p>
+<h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
+<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145631.png" alt="20210801133959"></p>
+<p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145642.png" alt="20210801134012"></p>
+<p>完成订单 <strong>隧道id</strong>复制下 有用</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145929.png" alt="image-20210801145929348"></p>
+<h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145952.png" alt="20210801134044"></p>
+<p>这里可能会遇到两个问题 </p>
+<ul>
+<li>python没有安装</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install python</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>找不到解压后的sunny.py的路径运行</li>
+</ul>
+<p>有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
+<p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150008.png" alt="20210801134108"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150019.png" alt="20210801134140">实现了外网访问。</p>
+<p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
+<p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Termux</tag>
+        <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建Hexo博客(二)：Hexo+github搭建博客</title>
     <url>/2021/07/30/21073001/</url>
     <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807140501.jpeg" alt="Hexo+github" style="zoom:150%;" />
@@ -396,131 +470,6 @@
       </tags>
   </entry>
   <entry>
-    <title>网站ICP备案与公安备案</title>
-    <url>/2021/08/19/21081901/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820135606.png" alt="image-20210820135606772"></p>
-<span id="more"></span>
-
-<p>在阿里云，腾讯云等购买国内服务器，如果是用于web访问的话就必须备案后才能使用（无需域名的情况除外）。否则会提示“该网站暂时无法访问”。但如果不需要web访问的话，目前看来是无需备案的。</p>
-<p>也可以买国外的服务器，好处是不需要备案，但是一般国内用户访问国外服务器，速度会非常慢，然后访问服务器也时常变的不稳定，这种情况还是选择国内云服务器比较稳妥。</p>
-<h3 id="备案是什么？"><a href="#备案是什么？" class="headerlink" title="备案是什么？"></a>备案是什么？</h3><p>所谓备案，就是我们常说的网站备案，备案的全称叫做ICP备案。ICP也就是Internet Content Provider，指的是网络内容服务商 ，即向广大用户综合提供互联网信息业务和增值业务的网络运营商。ICP备案是信息产业部对网站的一种管理，为了防止非法网站。就像是官方认可的网站，就好像开个小门面需要办营业执照一样。</p>
-<p>备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播。根据中华人民共和国国务院令第291号《中华人民共和国电信条例》、第292号《互联网信息服务管理办法》（简称ICP管理办法），国家对提供互联网信息服务的ICP实行许可证制度。ICP证是网站经营的许可证，根据国家,互联网信息服务管理办法》规定，经营性网站必须办理ICP证，否则就属于非法经营。</p>
-<h2 id="备案、域名、服务器之间的关系"><a href="#备案、域名、服务器之间的关系" class="headerlink" title="备案、域名、服务器之间的关系"></a>备案、域名、服务器之间的关系</h2><p>其实网站备案、ICP备案、域名备案、服务器备案本质上指的都是给网站申请ICP备案号。</p>
-<ul>
-<li>只有域名+没有国内服务器空间=不能备案</li>
-<li>没有域名+只有国内服务器空间=不能备案</li>
-<li>有域名+有国内服务器空间=可以备案</li>
-</ul>
-<p>备案是针对服务器空间的，但是备案号是挂在域名上的，可以说备案如果没有空间或者没有域名都备案不了。简单来说，就是完成ICP备案，域名和服务器缺一不可。</p>
-<h3 id="找谁办理备案"><a href="#找谁办理备案" class="headerlink" title="找谁办理备案"></a>找谁办理备案</h3><p>备案正常情况下是找服务器/虚拟主机的提供商办理备案，你使用了相关服务商提供的网络服务器，服务商自然会提供相应的备案服务。为了方便备案请尽量保证域名和服务器的提供商一致。如果不是，请保证域名和服务器的实名认证一致。</p>
-<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>阿里云轻量应用服务器购买时长在3个月及以上（含续费），赠送备案服务号5个。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819232653.png" alt="image-20210819232653671"></p>
-<p><a href="https://help.aliyun.com/knowledge_detail/36922.html?source=5176.11533457&userCode=28kqeewo">首次备案流程-备案-阿里云</a></p>
-<p>按照以上流程，阿里云初审用时2天，工信部审核用时9天。（仅供参考）</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233527.png" alt="image-20210819233527311"></p>
-<p>网站开通后，请在网站首页底部中间位置放置您的ICP备案号并链接至”<a href="https://beian.miit.gov.cn&quot;./">https://beian.miit.gov.cn&quot;。</a> 并在开通之日起30日内登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a>提交公安联网备案申请。获取《<a href="https://help.aliyun.com/knowledge_detail/36981.html">公安备案信息填写指南</a>》。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233627.png" alt="image-20210819233627212"></p>
-<h3 id="公安备案"><a href="#公安备案" class="headerlink" title="公安备案"></a>公安备案</h3><p>网站备案是根据国家法律法规需要网站的所有者向国家有关部门申请的备案，公安局备案是其中一种。公安局备案一般按照各地公安机关指定的地点和方式进行，操作流程会比ICP备案流程简单，主要是已登记为主。</p>
-<p>公安备案不做后果咱也不是很清楚（ICP备案不做域名直接访问不了），但是每个公民都有配合义务，在条例层面是「必须」遵守。</p>
-<p>注册登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a></p>
-<h5 id="开办主体管理，提交审核"><a href="#开办主体管理，提交审核" class="headerlink" title="开办主体管理，提交审核"></a>开办主体管理，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235154.png" alt="image-20210819235154678"></p>
-<p>等待审核通过</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235817.png" alt="image-20210819235817040"></p>
-<h5 id="新办网站申请，提交审核"><a href="#新办网站申请，提交审核" class="headerlink" title="新办网站申请，提交审核"></a>新办网站申请，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235855.png" alt="image-20210819235855616"></p>
-<p>新办网站申请信息填写参考<a href="https://help.aliyun.com/knowledge_detail/36981.html">阿里云-公安备案信息填写指南</a></p>
-<p>公安备案审核时间/流程似乎取决于你当地的公安机关，网警，反正我备案的时候直接在网站上提交资料和照片,不到十天就通过了。但是听说也要求本人到携带身份证到当地公安机关进行备案的。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000130.png" alt="image-20210820000130624"></p>
-<p>​    <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000330.png" alt="image-20210820000330671"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001339.png" alt="image-20210820001339754"></p>
-<p>将公安备案编号HTML代码稍作修改，加上ICP备案编号，加上备案编号图标。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;a href=&quot;https://beian.miit.gov.cn/&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽ICP备2021011133号-1&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;a target=&quot;_blank&quot; href=&quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35052402000312&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;img src=&quot;https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210805124438.png&quot; style=&quot;float:left;&quot;/&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽公网安备 35052402000312号&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>大家也可以直接复制我的代码，以下几处自行修改。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001931.png" alt="image-20210820001930929"></p>
-<p>打开<code>themes/next/layout/_partials/footer.swig</code></p>
-<p>将代码放到合适的位置</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002328.png" alt="QQ图片20210820002320"></p>
-<p>效果展示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002411.png" alt="image-20210820002411893"></p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>备案</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo部署到服务器CSS样式失效</title>
-    <url>/2021/08/20/21082001/</url>
-    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
-<span id="more"></span>
-
-<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
-<p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
-<p>多的我也看不懂，直接解决问题好了。</p>
-<p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164711.png" alt="image-20210820164711269"></p>
-<p>删除后如下图所示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164748.png" alt="image-20210820164747984"></p>
-<p>重新生成静态文件，部署到服务器，总算是对头了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何设置浏览器的默认首页</title>
-    <url>/2021/08/20/21082002/</url>
-    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
-<p>我二次开发了一个简单的<a href="https://nav.qyxie.top/">个人网址导航</a>，免费为大家收录精选的网站，指引大家愉快上网，希望大家积极提交收录申请，并将此网页设置为浏览器的默认首页。</p>
-<span id="more"></span>
-
-<p>网址：<a href="https://nav.qyxie.top/">https://nav.qyxie.top/</a></p>
-<ol>
-<li><h4 id="Gogle-Chrome"><a href="#Gogle-Chrome" class="headerlink" title="Gogle Chrome"></a>Gogle Chrome</h4></li>
-</ol>
-<p>右上角 -&gt; 设置 -&gt; 启动时 -&gt; 打开特定网页或一组网页 -&gt; 添加新网页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820225836.png" alt="image-20210820225836555"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230249.png" alt="image-20210820230249451"></p>
-<p>外观 -&gt; 显示“主页”按钮</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230739.png" alt="image-20210820230739006"></p>
-<p>就是左上角的这个，设置跳转</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230904.png" alt="image-20210820230904283"></p>
-<ol start="2">
-<li><h4 id="Microsoft-Edge"><a href="#Microsoft-Edge" class="headerlink" title="Microsoft Edge"></a>Microsoft Edge</h4></li>
-</ol>
-<p>右上角 -&gt; 设置 -&gt; 开始、主页和新建标签页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230550.png" alt="image-20210820230550677"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230653.png" alt="image-20210820230653035"></p>
-<ol start="3">
-<li><h4 id="Internet-Explorer"><a href="#Internet-Explorer" class="headerlink" title="Internet Explorer"></a>Internet Explorer</h4></li>
-</ol>
-<p>右上角 -&gt; Internet选项 -&gt; 常规 -&gt; 主页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231148.png" alt="image-20210820231148136"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231415.png" alt="image-20210820231415538"></p>
-<ol start="4">
-<li><h4 id="手机浏览器"><a href="#手机浏览器" class="headerlink" title="手机浏览器"></a>手机浏览器</h4></li>
-</ol>
-<p>设置 -&gt; 主页设置 -&gt; 编辑自定义主页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820232127.png" alt="image-20210820232127516"></p>
-<p>多的不说，其他大差不差，大家都是聪明人，不用讲的太明白(<em>ﾟ∀ﾟ</em>)！ </p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>Chrome</tag>
-        <tag>IE</tag>
-        <tag>Edge</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo之Next主题优化改造</title>
     <url>/2021/08/06/21080601/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132857.png" alt="image-20210820132857390"></p>
@@ -792,6 +741,131 @@
       </tags>
   </entry>
   <entry>
+    <title>网站ICP备案与公安备案</title>
+    <url>/2021/08/19/21081901/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820135606.png" alt="image-20210820135606772"></p>
+<span id="more"></span>
+
+<p>在阿里云，腾讯云等购买国内服务器，如果是用于web访问的话就必须备案后才能使用（无需域名的情况除外）。否则会提示“该网站暂时无法访问”。但如果不需要web访问的话，目前看来是无需备案的。</p>
+<p>也可以买国外的服务器，好处是不需要备案，但是一般国内用户访问国外服务器，速度会非常慢，然后访问服务器也时常变的不稳定，这种情况还是选择国内云服务器比较稳妥。</p>
+<h3 id="备案是什么？"><a href="#备案是什么？" class="headerlink" title="备案是什么？"></a>备案是什么？</h3><p>所谓备案，就是我们常说的网站备案，备案的全称叫做ICP备案。ICP也就是Internet Content Provider，指的是网络内容服务商 ，即向广大用户综合提供互联网信息业务和增值业务的网络运营商。ICP备案是信息产业部对网站的一种管理，为了防止非法网站。就像是官方认可的网站，就好像开个小门面需要办营业执照一样。</p>
+<p>备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播。根据中华人民共和国国务院令第291号《中华人民共和国电信条例》、第292号《互联网信息服务管理办法》（简称ICP管理办法），国家对提供互联网信息服务的ICP实行许可证制度。ICP证是网站经营的许可证，根据国家,互联网信息服务管理办法》规定，经营性网站必须办理ICP证，否则就属于非法经营。</p>
+<h2 id="备案、域名、服务器之间的关系"><a href="#备案、域名、服务器之间的关系" class="headerlink" title="备案、域名、服务器之间的关系"></a>备案、域名、服务器之间的关系</h2><p>其实网站备案、ICP备案、域名备案、服务器备案本质上指的都是给网站申请ICP备案号。</p>
+<ul>
+<li>只有域名+没有国内服务器空间=不能备案</li>
+<li>没有域名+只有国内服务器空间=不能备案</li>
+<li>有域名+有国内服务器空间=可以备案</li>
+</ul>
+<p>备案是针对服务器空间的，但是备案号是挂在域名上的，可以说备案如果没有空间或者没有域名都备案不了。简单来说，就是完成ICP备案，域名和服务器缺一不可。</p>
+<h3 id="找谁办理备案"><a href="#找谁办理备案" class="headerlink" title="找谁办理备案"></a>找谁办理备案</h3><p>备案正常情况下是找服务器/虚拟主机的提供商办理备案，你使用了相关服务商提供的网络服务器，服务商自然会提供相应的备案服务。为了方便备案请尽量保证域名和服务器的提供商一致。如果不是，请保证域名和服务器的实名认证一致。</p>
+<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>阿里云轻量应用服务器购买时长在3个月及以上（含续费），赠送备案服务号5个。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819232653.png" alt="image-20210819232653671"></p>
+<p><a href="https://help.aliyun.com/knowledge_detail/36922.html?source=5176.11533457&userCode=28kqeewo">首次备案流程-备案-阿里云</a></p>
+<p>按照以上流程，阿里云初审用时2天，工信部审核用时9天。（仅供参考）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233527.png" alt="image-20210819233527311"></p>
+<p>网站开通后，请在网站首页底部中间位置放置您的ICP备案号并链接至”<a href="https://beian.miit.gov.cn&quot;./">https://beian.miit.gov.cn&quot;。</a> 并在开通之日起30日内登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a>提交公安联网备案申请。获取《<a href="https://help.aliyun.com/knowledge_detail/36981.html">公安备案信息填写指南</a>》。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233627.png" alt="image-20210819233627212"></p>
+<h3 id="公安备案"><a href="#公安备案" class="headerlink" title="公安备案"></a>公安备案</h3><p>网站备案是根据国家法律法规需要网站的所有者向国家有关部门申请的备案，公安局备案是其中一种。公安局备案一般按照各地公安机关指定的地点和方式进行，操作流程会比ICP备案流程简单，主要是已登记为主。</p>
+<p>公安备案不做后果咱也不是很清楚（ICP备案不做域名直接访问不了），但是每个公民都有配合义务，在条例层面是「必须」遵守。</p>
+<p>注册登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a></p>
+<h5 id="开办主体管理，提交审核"><a href="#开办主体管理，提交审核" class="headerlink" title="开办主体管理，提交审核"></a>开办主体管理，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235154.png" alt="image-20210819235154678"></p>
+<p>等待审核通过</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235817.png" alt="image-20210819235817040"></p>
+<h5 id="新办网站申请，提交审核"><a href="#新办网站申请，提交审核" class="headerlink" title="新办网站申请，提交审核"></a>新办网站申请，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235855.png" alt="image-20210819235855616"></p>
+<p>新办网站申请信息填写参考<a href="https://help.aliyun.com/knowledge_detail/36981.html">阿里云-公安备案信息填写指南</a></p>
+<p>公安备案审核时间/流程似乎取决于你当地的公安机关，网警，反正我备案的时候直接在网站上提交资料和照片,不到十天就通过了。但是听说也要求本人到携带身份证到当地公安机关进行备案的。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000130.png" alt="image-20210820000130624"></p>
+<p>​    <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000330.png" alt="image-20210820000330671"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001339.png" alt="image-20210820001339754"></p>
+<p>将公安备案编号HTML代码稍作修改，加上ICP备案编号，加上备案编号图标。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;a href=&quot;https://beian.miit.gov.cn/&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽ICP备2021011133号-1&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;a target=&quot;_blank&quot; href=&quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35052402000312&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;img src=&quot;https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210805124438.png&quot; style=&quot;float:left;&quot;/&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽公网安备 35052402000312号&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>大家也可以直接复制我的代码，以下几处自行修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001931.png" alt="image-20210820001930929"></p>
+<p>打开<code>themes/next/layout/_partials/footer.swig</code></p>
+<p>将代码放到合适的位置</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002328.png" alt="QQ图片20210820002320"></p>
+<p>效果展示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002411.png" alt="image-20210820002411893"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>备案</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo部署到服务器CSS样式失效</title>
+    <url>/2021/08/20/21082001/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
+<span id="more"></span>
+
+<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
+<p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
+<p>多的我也看不懂，直接解决问题好了。</p>
+<p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164711.png" alt="image-20210820164711269"></p>
+<p>删除后如下图所示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164748.png" alt="image-20210820164747984"></p>
+<p>重新生成静态文件，部署到服务器，总算是对头了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何设置浏览器的默认首页</title>
+    <url>/2021/08/20/21082002/</url>
+    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
+<p>我二次开发了一个简单的<a href="https://nav.qyxie.top/">个人网址导航</a>，免费为大家收录精选的网站，指引大家愉快上网，希望大家积极提交收录申请，并将此网页设置为浏览器的默认首页。</p>
+<span id="more"></span>
+
+<p>网址：<a href="https://nav.qyxie.top/">https://nav.qyxie.top/</a></p>
+<ol>
+<li><h4 id="Gogle-Chrome"><a href="#Gogle-Chrome" class="headerlink" title="Gogle Chrome"></a>Gogle Chrome</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 启动时 -&gt; 打开特定网页或一组网页 -&gt; 添加新网页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820225836.png" alt="image-20210820225836555"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230249.png" alt="image-20210820230249451"></p>
+<p>外观 -&gt; 显示“主页”按钮</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230739.png" alt="image-20210820230739006"></p>
+<p>就是左上角的这个，设置跳转</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230904.png" alt="image-20210820230904283"></p>
+<ol start="2">
+<li><h4 id="Microsoft-Edge"><a href="#Microsoft-Edge" class="headerlink" title="Microsoft Edge"></a>Microsoft Edge</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 开始、主页和新建标签页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230550.png" alt="image-20210820230550677"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230653.png" alt="image-20210820230653035"></p>
+<ol start="3">
+<li><h4 id="Internet-Explorer"><a href="#Internet-Explorer" class="headerlink" title="Internet Explorer"></a>Internet Explorer</h4></li>
+</ol>
+<p>右上角 -&gt; Internet选项 -&gt; 常规 -&gt; 主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231148.png" alt="image-20210820231148136"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231415.png" alt="image-20210820231415538"></p>
+<ol start="4">
+<li><h4 id="手机浏览器"><a href="#手机浏览器" class="headerlink" title="手机浏览器"></a>手机浏览器</h4></li>
+</ol>
+<p>设置 -&gt; 主页设置 -&gt; 编辑自定义主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820232127.png" alt="image-20210820232127516"></p>
+<p>多的不说，其他大差不差，大家都是聪明人，不用讲的太明白(<em>ﾟ∀ﾟ</em>)！ </p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Chrome</tag>
+        <tag>IE</tag>
+        <tag>Edge</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo文章加密</title>
     <url>/2021/08/21/21082101/</url>
     <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>​        博客中可能有些文章是个人情感宣泄、敏感内容或收费技术等，不方便公开，需要对文章进行加密处理。而Next这个主题可谓是包办了几乎所有的需求，却偏偏没有集成<strong>文章加密功能</strong>。但俗话说的好，办法总比困难多。</p>
@@ -883,166 +957,6 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建Hexo博客(一)：手机(Termux) + 内网穿透(Sunny-Ngrok)</title>
-    <url>/2021/07/28/21072801/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132342.png" alt="image-20210820132342590"></p>
-<span id="more"></span>
-
-<p>PS：当初觉得网站需要24h运行服务，电脑总不能24开机，手机可以（其实是可以部署静态文件的），所以用手机搭建。</p>
-<p>手机好处就是小巧，随身携带，走到哪只要内网电脑ssh手机就可以随时随地对博客网站进行编辑。但是手机写博客体验非常差，几乎没人这么干。</p>
-<p>以下教程仅基于手机termux/linux部署，使用windows部署，自己百度撒。</p>
-<p><strong>Termux</strong> 是运行在 Android 上的 terminal终端模拟器。极致模拟Linux，也是一款强大的手机开发生产工具，但我之前一直当个ping小工具。</p>
-<h3 id="Termux下载"><a href="#Termux下载" class="headerlink" title="Termux下载"></a>Termux下载</h3><p><a href="https://f-droid.org/packages/com.termux/">F-Droid 下载地址</a></p>
-<p><a href="https://www.coolapk.com/apk/com.termux">酷安 下载地址</a></p>
-<p> <strong><a href="https://www.sqlsec.com/2018/05/termux.html">Termux 高级终端安装使用配置教程</a>国内已知最详细的termux教程，非常值得阅读！！！墙裂推荐。</strong></p>
-<h3 id="安装后换源"><a href="#安装后换源" class="headerlink" title="安装后换源"></a>安装后换源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list &amp;&amp;sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list &amp;&amp;sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb ![img](file:///C:\Users\xieqingyuan\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list &amp;&amp;apt update &amp;&amp; apt upgrade</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145218.png" alt="20210801133736"></p>
-<p><strong>Hexo</strong> 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install nodejs</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145258.png" alt="20210801133813"></p>
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145435.png" alt="20210801133900"></p>
-<p>​            </p>
-<h3 id="新建一个博客网站"><a href="#新建一个博客网站" class="headerlink" title="新建一个博客网站"></a>新建一个博客网站</h3><p>命名随意，blog</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145349.png" alt="20210801133818"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure>
-
-<p>进入博客网站目录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g </span><br></pre></td></tr></table></figure>
-
-<p>生成静态文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br></pre></td></tr></table></figure>
-
-<p>启动服务。默认情况下，访问网址为：<a href="http://localhost:4000/">http://localhost:4000/</a>  或者局域网内访问本机4000端口。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145557.png" alt="image-20210801145557639"></p>
-<p>至此博客网站搭建完成。但只能本机/局域网内访问显然不合适。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145621.png" alt="20210801133945"></p>
-<h5 id="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"><a href="#内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。" class="headerlink" title="内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。"></a>内网穿透可以让在内网的节点主动访问一个拥有公网IP地址的服务器，并由中间服务器搭桥，打通经过该服务器从其他主机到NAT之后节点的隧道。</h5><p><a href="http://ngrok.cc/">Sunny-Ngrok内网转发 - 国内内网映射服务器</a></p>
-<h3 id="注册开通免费隧道"><a href="#注册开通免费隧道" class="headerlink" title="注册开通免费隧道"></a>注册开通免费隧道</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145631.png" alt="20210801133959"></p>
-<p>隧道协议选http或https<br>隧道名称随便填<br>前置域名输入你想要的前置域名<br>本地端口填<strong>127.0.0.1:4000</strong><br>其他都不用填<br>然后直接确认添加</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145642.png" alt="20210801134012"></p>
-<p>完成订单 <strong>隧道id</strong>复制下 有用</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145929.png" alt="image-20210801145929348"></p>
-<h3 id="隧道映射"><a href="#隧道映射" class="headerlink" title="隧道映射"></a>隧道映射</h3><p>下载客户端python版本解压之后只需要执行一下sunny.py脚本输入隧道id。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801145952.png" alt="20210801134044"></p>
-<p>这里可能会遇到两个问题 </p>
-<ul>
-<li>python没有安装</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pkg install python</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>找不到解压后的sunny.py的路径运行</li>
-</ul>
-<p>有点难搞，也能搞。下载手机安卓app <em><strong><u>qpython</u></strong></em> 。选择文件，解压后的sunny.py运行，输入隧道id。不做演示了</p>
-<p><em>访问：<a href="http://xieqingyuan.free.idcfengye.com/">http://xieqingyuan.free.idcfengye.com</a></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150008.png" alt="20210801134108"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801150019.png" alt="20210801134140">实现了外网访问。</p>
-<p>那么问题来了，python脚本和hexo服务都不能停，这样真的方便吗？？？不方便！！！</p>
-<p>预知后事如何，且听下回分解（Hexo+github搭建博客）</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Termux</tag>
-        <tag>内网穿透</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为博客Valine评论系统添加邮件提醒和后台管理</title>
-    <url>/2021/08/22/21082202/</url>
-    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>​        之前在<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造</a>中已经添加了评论系统，但是没有邮件通知，别人评论不能第一时间知道（虽然也不会有人评论）。这功能吧，可以不要，但不能没有。</p>
-<span id="more"></span>
-
-<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p>博客添加valine评论系统不再赘述，参考之前的配置<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造——评论系统</a>。</p>
-<h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822210329.png" alt="image-20210822210329228"></p>
-<table>
-<thead>
-<tr>
-<th>变量</th>
-<th>示例</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SENDER_NAME</td>
-<td>qyxie</td>
-<td>评论提醒 [可选] 发件人</td>
-</tr>
-<tr>
-<td>SITE_NAME</td>
-<td>滑稽树</td>
-<td>[<em>必填</em>] 网站名称</td>
-</tr>
-<tr>
-<td>SITE_URL</td>
-<td><a href="https://www.qyxie.top/">https://www.qyxie.top</a></td>
-<td>[<em>必填</em>] 网站地址，<strong>最后不要加 /</strong></td>
-</tr>
-<tr>
-<td>SMTP_PASS</td>
-<td>xxxxxxxxxxxxxxxx</td>
-<td>[<em>必填</em>] SMTP登录密码/授权码，不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式。</td>
-</tr>
-<tr>
-<td>SMTP_SERVICE</td>
-<td>QQ</td>
-<td>[<em>必填</em>] 邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多。</td>
-</tr>
-<tr>
-<td>SMTP_USER</td>
-<td><a href="mailto:&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#120;&#x78;&#64;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#x78;&#x78;&#x78;&#x78;&#x78;&#x78;&#120;&#x78;&#64;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;</a></td>
-<td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
-</tr>
-</tbody></table>
-<h3 id="SMTP授权码"><a href="#SMTP授权码" class="headerlink" title="SMTP授权码"></a>SMTP授权码</h3><p>我用的是QQ邮箱，其他邮件服务商自己百度。</p>
-<p>登录<a href="https://mail.qq.com/">QQ邮箱</a> -&gt; 设置 -&gt; 账户 -&gt; 开启SMTP服务</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211720.png" alt="image-20210822211720760"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211739.png" alt="image-20210822211739670"></p>
-<p>根据提示获取授权码，写入的时候<em><strong>不要带空格不要带空格不要带空格</strong></em></p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 部署 -&gt; 部署项目 -&gt; Git部署   ，输入<code>https://github.com/zhaojun1998/Valine-Admin.git</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212055.png" alt="image-20210822212054925"></p>
-<p>分支或提交填写master，点击部署</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212316.png" alt="image-20210822212316905"></p>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>当收到评论时，QQ邮件提醒</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212626.jpg" alt="QQ图片20210822212521"></p>
-<h3 id="后台评论管理"><a href="#后台评论管理" class="headerlink" title="后台评论管理"></a>后台评论管理</h3><p>数据存储 -&gt; 结构化数据 -&gt; _User -&gt; 添加行   添加后台管理用户，<code>uesrname</code>,<code>password</code>,<code>email</code>三个字段就行</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822214549.png" alt="image-20210822214549875"></p>
-<p>设置 -&gt; 域名绑定，填写一个自己域名的二级域名，配置云引擎域名</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232011.png" alt="image-20210822232011572"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232211.png" alt="image-20210822232211699"></p>
-<p>LeanCloud -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
-<p><code>ADMIN_URL</code>：<code>刚刚绑定的域名</code>，<strong>添加后重新手动部署</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232345.png" alt="image-20210822232345575"></p>
-<p>访问域名，管理评论</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823094953.png" alt="image-20210823094953512"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823113800.png" alt="image-20210823113759964"></p>
-<h3 id="配置自动唤醒"><a href="#配置自动唤醒" class="headerlink" title="配置自动唤醒"></a>配置自动唤醒</h3><p><strong>免费版的LeanCloud是不能24小时运行的，每天必须休眠 6 个小时，30 分钟内没有外部请求，则休眠，需要设置定时休眠来保证大多数时间邮件服务是正常的。</strong></p>
-<p>云引擎 -&gt; 定时任务 -&gt; 创建定时任务</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232504.png" alt="image-20210822232504769"></p>
-<p>表达式<code>0 */20 7-23 * * ?</code>表示为7-23时每20分钟</p>
-<p><strong>重启服务</strong>生效</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822233626.png" alt="image-20210822233626036"></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>valine</tag>
-        <tag>LeanCloud</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>记一次debian10的安装</title>
     <url>/2021/08/27/21082701/</url>
     <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>久久总能碰上一次Debian系统安装的需求，其实跟其他linx系统都差不多，但时间久了总能忘掉一些细节，比如网卡配置文件的路径等等。记录下，有空看看，加强记忆。</p>
@@ -1084,120 +998,6 @@
       </categories>
       <tags>
         <tag>Debian10</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>仙境传说 绯雨骑士团H5公益服</title>
-    <url>/2021/08/28/21082901/</url>
-    <content><![CDATA[<h3 id="游戏介绍："><a href="#游戏介绍：" class="headerlink" title="游戏介绍："></a>游戏介绍：</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829085126.png" alt="image-20210829085125752"></p>
-<p>绯雨骑士团是一款二次元挂机游戏，将二次元和挂机结合起来，为玩家打造一个休闲养肝的游戏。只要轻轻点击，即可进行游戏，无需繁琐操作，任何人都可以轻松玩转。</p>
-<p>黑衣剑士吉莲、超能法师爱丽丝、无敌射手伊芙、万能骑士爱德华……各职业英雄全员等候召令！守护您的二次元情怀，即刻，出发！</p>
-<p>独家剧情！一手资料，先睹为快！</p>
-<p>召集组队，为守护而战。更可多人同屏华丽战斗，宏大绝杀场面。</p>
-<p>守护世界的正义！成为一名赏金猎人吧！你可以和你的好友一起讨伐红名通缉犯。让妹纸为你侧目，为正义战斗！</p>
-<span id="more"></span>
-
-<h3 id="游戏地址："><a href="#游戏地址：" class="headerlink" title="游戏地址："></a>游戏地址：</h3><p><a href="http://82.156.19.29/">http://82.156.19.29/</a>  </p>
-<p>手机、平板、PC三屏联动！都能玩！是兄弟就来砍我。</p>
-<p>注册的时候<strong>用户名</strong>和<strong>密码</strong>是比较随意的，但请务必记住！无法找回。</p>
-<p>过了新手引导点击头像可以改<strong>名字</strong>，<strong>头像</strong>，<strong>声音</strong>，<strong>画质</strong>！其他的自己探索啦~</p>
-<p>非盈利纯娱乐。无限充值。过新手任务后修改昵称后将<strong>昵称</strong>在本文下方评论告诉我，我给你设置授权密码。（评论的时候请留下可接收邮件的正确邮箱，设置好授权密码我会回复你）</p>
-<p>访问<a href="http://82.156.19.29/gm">http://82.156.19.29/gm</a>  玩家后台自己充值</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210830123935.png" alt="image-20210830123935694"></p>
-<h3 id="网页添加到桌面："><a href="#网页添加到桌面：" class="headerlink" title="网页添加到桌面："></a>网页添加到桌面：</h3><p>这样就不用每次打开浏览器输入网址啦~</p>
-<ul>
-<li><strong>手机</strong></li>
-</ul>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829143207.png" alt="image-20210829143206895" style="zoom:67%;" />
-
-<ul>
-<li>电脑</li>
-</ul>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829143435.png" alt="image-20210829143434741"></p>
-<h3 id="架设教程："><a href="#架设教程：" class="headerlink" title="架设教程："></a>架设教程：</h3><p>写给有需要的人~</p>
-<p>服务器是腾讯云白嫖的，1h2g，第一个月免费，第二个月9元，续费一年也才不到100元，尽管玩，我保证只要有一个人玩就永不停服。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235300.gif" alt="img"></p>
-<p>阿里云：<a href="https://free.aliyun.com/">https://free.aliyun.com/</a></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235902.png" alt="image-20210828235902337"></p>
-<p>腾讯云：<a href="https://cloud.tencent.com/act/free">https://cloud.tencent.com/act/free</a></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829000002.png" alt="image-20210829000002846"></p>
-<p>新用户注册就能领取，亲测1h2g能玩，如果你有更高配置的现有服务器那更好啦~</p>
-<h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>Windows Server 2012 R2 DataCenter 64bitCN</p>
-<p>重置密码后远程桌面登录。</p>
-<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>绯雨骑士团H5  链接：<a href="https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g">https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g</a>  提取码：r1s4</p>
-<p><a href="https://notepad-plus-plus.org/">notepad++</a>    链接：<a href="https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw">https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw</a>  提取码：tspf</p>
-<p>navicat数据库管理工具  链接：<a href="https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g">https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g</a>   提取码：rp15</p>
-<p>解压缩工具（腾讯云2012自带7-zip)</p>
-<p>下载文件，解压notepad++和navicat到桌面</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829101624.png" alt="image-20210829101623940"></p>
-<h4 id="新建分区D盘"><a href="#新建分区D盘" class="headerlink" title="新建分区D盘"></a>新建分区D盘</h4><p>系统默认只有一个C盘，而且盘符D被CD驱动器占用。</p>
-<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理   -&gt; 更改驱动器号和路径  -&gt; 确定</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102104.png" alt="image-20210829102103999"></p>
-<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理 -&gt; 右击C盘  -&gt; 压缩卷  -&gt; 压缩出15G的空间</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102352.png" alt="image-20210829102352759"></p>
-<p>新建简单卷  无脑下一步得到D盘</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102530.png" alt="image-20210829102529915"></p>
-<h4 id="解压游戏源码"><a href="#解压游戏源码" class="headerlink" title="解压游戏源码"></a>解压游戏源码</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102722.png" alt="image-20210829102722329"></p>
-<h4 id="启动phpstudy"><a href="#启动phpstudy" class="headerlink" title="启动phpstudy"></a>启动phpstudy</h4><p>打开之后点击启动，启动apache2.4.39和mysql5.7.26。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103038.png" alt="image-20210829103038512"></p>
-<h4 id="游戏外网修改"><a href="#游戏外网修改" class="headerlink" title="游戏外网修改"></a>游戏外网修改</h4><p>使用notepad++把以下路径里面的81.70.8.199修改成你的外网IP</p>
-<p>D:\fyqst_wudiliu.Com\wudiliu\Server\s1\wserver\logic\guildbattle\appUtil.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\cityserver_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\server_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\version_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\versions里面的manifest2.0.1.json到manifest2.3.5.json【15个】json文件<br>D:\fyqst_wudiliu.Com\wudiliu\www\game.html</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103331.png" alt="image-20210829103331512"></p>
-<p>一次性打开所有需要修改的文件(可以直接拖动文件到Notepad++)，ctrl+F 查找替换 -&gt; 替换所有打开文件(o) </p>
-<p>一共24处，务必确认下！！</p>
-<p>修改完全部保存，全部关闭。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103501.png" alt="image-20210829103501540"></p>
-<h4 id="数据库修改"><a href="#数据库修改" class="headerlink" title="数据库修改"></a>数据库修改</h4><p>用Navicat链接数据库</p>
-<p>数据库账号:root<br>数据库密码:123456</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104022.png" alt="image-20210829104022223"></p>
-<p>打开数据库【ttf_ly_login】找到【uw_server_info表】   <em><strong>tips:注意这个表有两个字段需要修改host和host2</strong></em><br>打开数据库【ttf_ly_main】找到【uw_game_config表】和【uw_battles_group表】</p>
-<p>把以上路径里面的ip修改成你的外网IP</p>
-<p>修改完点击下方✔保存</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104155.png" alt="image-20210829104155332"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104638.png" alt="image-20210829104638092"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104740.png" alt="image-20210829104740744"></p>
-<h4 id="启动游戏"><a href="#启动游戏" class="headerlink" title="启动游戏"></a>启动游戏</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104820.png" alt="image-20210829104820729"></p>
-<p>一共有七个窗口，少一个都不行</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104910.png" alt="image-20210829104910032"></p>
-<h4 id="进入游戏"><a href="#进入游戏" class="headerlink" title="进入游戏"></a>进入游戏</h4><p>访问ip</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105014.png" alt="image-20210829105014261"></p>
-<p>起飞~</p>
-<p>封面不太正经但游戏绝对正经，就是点点点，刷怪升级。体验下80后玩传奇的感觉。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105037.gif" alt="img"></p>
-<p>私服自然有GM后台，游戏源码里【使用说明】有讲。略。下课~</p>
-<p><strong>免责声明：</strong></p>
-<p>1.本文部分内容转载自其它媒体，但并不代表本站赞同其观点和对其真实性负责。<br>2.若您需要商业运营或用于其他商业活动，请您购买正版授权并合法使用。<br>3.如果本站有侵犯、不妥之处的资源，请在网站下方联系我们。将会第一时间解决！<br>4.本站所有内容均由互联网收集整理、网友上传，仅供大家参考、学习，不存在任何商业目的与商业用途。<br>5.本站提供的所有资源仅供参考学习使用，版权归原著所有，禁止下载本站资源参与商业和非法行为，请在24小时之内自行删除！</p>
-]]></content>
-      <categories>
-        <category>休闲娱乐</category>
-      </categories>
-      <tags>
-        <tag>游戏</tag>
-        <tag>绯雨骑士团H5</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/07/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hello World</tag>
       </tags>
   </entry>
   <entry>
@@ -1361,6 +1161,232 @@
         <tag>惠普笔记本</tag>
         <tag>windows hello</tag>
         <tag>人脸解锁</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux防火墙之Firewalls &amp; iptables</title>
+    <url>/2021/11/09/21110801/</url>
+    <content><![CDATA[<p>Linux中有两种防火墙软件，<em>ConterOS7.0</em>以上使用的是firewall，ConterOS7.0以下使用的是iptables。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/Firewalls.jpg" alt="Firewalls"></p>
+<span id="more"></span>
+
+
+
+<p>**Tips:*<em>systemctl是</em>CentOS7*的服务管理工具中主要的工具，融合之前service和chkconfig的功能于一体。</p>
+<table>
+<thead>
+<tr>
+<th>System V init 命令（RHEL 6）</th>
+<th>systemctl 命令（RHEL 7）</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>service xxxx start</td>
+<td>systemctl start xxxx.service</td>
+<td>启动服务</td>
+</tr>
+<tr>
+<td>service xxxx stop</td>
+<td>systemctl stop xxxx.service</td>
+<td>停止服务</td>
+</tr>
+<tr>
+<td>service xxxx restart</td>
+<td>systemctl restart xxxx.service</td>
+<td>重启服务</td>
+</tr>
+<tr>
+<td>service xxxx reload</td>
+<td>systemctl reload xxxx.service</td>
+<td>重新加载配置文件（不终止服务）</td>
+</tr>
+<tr>
+<td>service xxxx status</td>
+<td>systemctl status xxxx.service</td>
+<td>查看服务状态</td>
+</tr>
+<tr>
+<td>chkconfig xxxx on</td>
+<td>systemctl enable xxxx.service</td>
+<td>开机自启</td>
+</tr>
+<tr>
+<td>chkconfig xxxx off</td>
+<td>systemctl disable xxxx.service</td>
+<td>禁止开机自启</td>
+</tr>
+<tr>
+<td>chkconfig xxxx</td>
+<td>systemctl is-enabled xxxx.service</td>
+<td>查看特定服务是否为开机自启</td>
+</tr>
+<tr>
+<td>chkconfig –list</td>
+<td>systemctl list-unit-files –type=service</td>
+<td>查看各个级别下服务的启动与禁用情况</td>
+</tr>
+</tbody></table>
+<p><strong>Tips:</strong>  reload (重新加载)，reload会重新加载配置文件，服务不会中断。而且reload时会测试conf语法等，如果出错会rollback用上一次正确配置文件保持正常运行。也叫平滑重启，不会对已经连接的服务造成影响。<br>restart (重启)（先stop后start），会重启服务。这个重启会造成服务一瞬间的中断，restart自然也就reload了。</p>
+<h3 id="Firewalls"><a href="#Firewalls" class="headerlink" title="Firewalls"></a>Firewalls</h3><p>firewall-cmd 是 firewalld的字符界面管理工具，firewalld是centos7的一大特性，最大的好处有两个：支持动态更新，不用重启服务；第二个就是加入了防火墙的“zone”概念。</p>
+<h4 id="相关常用命令"><a href="#相关常用命令" class="headerlink" title="相关常用命令"></a>相关常用命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start  firewalld # 启动</span><br><span class="line">systemctl stop firewalld # 关闭</span><br><span class="line">systemctl status firewalld # 或者 firewall-cmd --state 查看状态</span><br><span class="line">systemctl restart firewalld # 重启</span><br><span class="line">firewall-cmd --reload # 重新加载配置文件</span><br><span class="line">firewall-cmd --help  #获取帮助</span><br><span class="line">systemctl enable firewalld.service # 开机自启</span><br><span class="line">systemctl disable firewalld.service # 禁用开机自启</span><br><span class="line">systemctl is-enabled firewalld # 查看服务是否开机启动</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="1、开放端口"><a href="#1、开放端口" class="headerlink" title="1、开放端口"></a>1、开放端口</h4><p>（1）如我们需要开启XShell连接时需要使用的22端口</p>
+<p><strong>临时增加</strong> (<code>reload</code>之后消失)：不需要<code>reload</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=22/tcp</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>永久增加</strong> ：<code>reload</code>后生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=22/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>其中–permanent的作用是使设置永久生效，不加的话机器重启之后失效 </p>
+<p>（2）重新载入一下防火墙设置，使设置生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>（3）可通过如下命令查看是否生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --query-port=22/tcp</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113230828367.png" alt="image-20211113230828367"></p>
+<p>（4）如下命令可查看当前系统打开的所有端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113230901879.png" alt="image-20211113230901879"></p>
+<h4 id="2、限制端口"><a href="#2、限制端口" class="headerlink" title="2、限制端口"></a>2、限制端口</h4><p>（1）比如我们现在需要关掉刚刚打开的22端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --remove-port=22/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>（2）重新载入一下防火墙设置，使设置生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>（3）再去查看系统所有开放的端口，已经看到没有22端口了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3、批量开放或限制端口"><a href="#3、批量开放或限制端口" class="headerlink" title="3、批量开放或限制端口"></a>3、批量开放或限制端口</h4><p>（1）批量开放端口，如从100到500这之间的端口我们全部要打开</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=100-500/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4、服务相关"><a href="#4、服务相关" class="headerlink" title="4、服务相关"></a>4、服务相关</h4><p>获取所有支持的服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --get-services</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113233042121.png" alt="image-20211113233042121"></p>
+<p>增加服务： (临时增加)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-service=http</span><br></pre></td></tr></table></figure>
+
+<p>删除服务： (临时删除)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --remove-service=http</span><br></pre></td></tr></table></figure>
+
+<p>查询服务 :</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --query-service=http</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><p>iptables 的最大优点是它可以配置有状态的<a href="https://baike.baidu.com/item/%E9%98%B2%E7%81%AB%E5%A2%99">防火墙</a>，有四种有效状态，名称分别为 ESTABLISHED 、 INVALID 、 NEW 和 RELATED。</p>
+<h4 id="相关常用命令-1"><a href="#相关常用命令-1" class="headerlink" title="相关常用命令"></a>相关常用命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service iptables start           //启动iptables</span><br><span class="line">service iptables stop           //关闭iptables</span><br><span class="line">service iptables restart       //重启iptables</span><br><span class="line">service iptables status       //查看iptables状态</span><br><span class="line">cat /etc/sysconfig/iptables  //查看iptables规则</span><br><span class="line">vi /etc/sysconfig/iptables  //修改iptables的规则</span><br><span class="line">service iptables save      //保存命令行中设置的iptables规则到iptables文件中</span><br><span class="line">iptables -V   (注意：V是大写字母V）  //查看iptables版本</span><br></pre></td></tr></table></figure>
+
+<p>iptables简直是地狱中的地狱，我还是会开关就好了，告辞。</p>
+<p>以上内容均来自百度各大佬文章进行总结归纳，也就图个自己查看方便，勿喷。</p>
+<p>​    </p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Firewalls</tag>
+        <tag>iptables</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为博客Valine评论系统添加邮件提醒和后台管理</title>
+    <url>/2021/08/22/21082202/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>​        之前在<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造</a>中已经添加了评论系统，但是没有邮件通知，别人评论不能第一时间知道（虽然也不会有人评论）。这功能吧，可以不要，但不能没有。</p>
+<span id="more"></span>
+
+<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p>博客添加valine评论系统不再赘述，参考之前的配置<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造——评论系统</a>。</p>
+<h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822210329.png" alt="image-20210822210329228"></p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SENDER_NAME</td>
+<td>qyxie</td>
+<td>评论提醒 [可选] 发件人</td>
+</tr>
+<tr>
+<td>SITE_NAME</td>
+<td>滑稽树</td>
+<td>[<em>必填</em>] 网站名称</td>
+</tr>
+<tr>
+<td>SITE_URL</td>
+<td><a href="https://www.qyxie.top/">https://www.qyxie.top</a></td>
+<td>[<em>必填</em>] 网站地址，<strong>最后不要加 /</strong></td>
+</tr>
+<tr>
+<td>SMTP_PASS</td>
+<td>xxxxxxxxxxxxxxxx</td>
+<td>[<em>必填</em>] SMTP登录密码/授权码，不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式。</td>
+</tr>
+<tr>
+<td>SMTP_SERVICE</td>
+<td>QQ</td>
+<td>[<em>必填</em>] 邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多。</td>
+</tr>
+<tr>
+<td>SMTP_USER</td>
+<td><a href="mailto:&#120;&#x78;&#120;&#120;&#120;&#x78;&#120;&#x78;&#x40;&#113;&#x71;&#46;&#x63;&#x6f;&#109;">&#120;&#x78;&#120;&#120;&#120;&#x78;&#120;&#x78;&#x40;&#113;&#x71;&#46;&#x63;&#x6f;&#109;</a></td>
+<td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
+</tr>
+</tbody></table>
+<h3 id="SMTP授权码"><a href="#SMTP授权码" class="headerlink" title="SMTP授权码"></a>SMTP授权码</h3><p>我用的是QQ邮箱，其他邮件服务商自己百度。</p>
+<p>登录<a href="https://mail.qq.com/">QQ邮箱</a> -&gt; 设置 -&gt; 账户 -&gt; 开启SMTP服务</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211720.png" alt="image-20210822211720760"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211739.png" alt="image-20210822211739670"></p>
+<p>根据提示获取授权码，写入的时候<em><strong>不要带空格不要带空格不要带空格</strong></em></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 部署 -&gt; 部署项目 -&gt; Git部署   ，输入<code>https://github.com/zhaojun1998/Valine-Admin.git</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212055.png" alt="image-20210822212054925"></p>
+<p>分支或提交填写master，点击部署</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212316.png" alt="image-20210822212316905"></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>当收到评论时，QQ邮件提醒</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212626.jpg" alt="QQ图片20210822212521"></p>
+<h3 id="后台评论管理"><a href="#后台评论管理" class="headerlink" title="后台评论管理"></a>后台评论管理</h3><p>数据存储 -&gt; 结构化数据 -&gt; _User -&gt; 添加行   添加后台管理用户，<code>uesrname</code>,<code>password</code>,<code>email</code>三个字段就行</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822214549.png" alt="image-20210822214549875"></p>
+<p>设置 -&gt; 域名绑定，填写一个自己域名的二级域名，配置云引擎域名</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232011.png" alt="image-20210822232011572"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232211.png" alt="image-20210822232211699"></p>
+<p>LeanCloud -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
+<p><code>ADMIN_URL</code>：<code>刚刚绑定的域名</code>，<strong>添加后重新手动部署</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232345.png" alt="image-20210822232345575"></p>
+<p>访问域名，管理评论</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823094953.png" alt="image-20210823094953512"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823113800.png" alt="image-20210823113759964"></p>
+<h3 id="配置自动唤醒"><a href="#配置自动唤醒" class="headerlink" title="配置自动唤醒"></a>配置自动唤醒</h3><p><strong>免费版的LeanCloud是不能24小时运行的，每天必须休眠 6 个小时，30 分钟内没有外部请求，则休眠，需要设置定时休眠来保证大多数时间邮件服务是正常的。</strong></p>
+<p>云引擎 -&gt; 定时任务 -&gt; 创建定时任务</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232504.png" alt="image-20210822232504769"></p>
+<p>表达式<code>0 */20 7-23 * * ?</code>表示为7-23时每20分钟</p>
+<p><strong>重启服务</strong>生效</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822233626.png" alt="image-20210822233626036"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>valine</tag>
+        <tag>LeanCloud</tag>
       </tags>
   </entry>
   <entry>
@@ -1533,146 +1559,6 @@
       <tags>
         <tag>腾讯云</tag>
         <tag>Genshin</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux防火墙之Firewalls &amp; iptables</title>
-    <url>/2021/11/09/21110801/</url>
-    <content><![CDATA[<p>Linux中有两种防火墙软件，<em>ConterOS7.0</em>以上使用的是firewall，ConterOS7.0以下使用的是iptables。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/Firewalls.jpg" alt="Firewalls"></p>
-<span id="more"></span>
-
-
-
-<p>**Tips:*<em>systemctl是</em>CentOS7*的服务管理工具中主要的工具，融合之前service和chkconfig的功能于一体。</p>
-<table>
-<thead>
-<tr>
-<th>System V init 命令（RHEL 6）</th>
-<th>systemctl 命令（RHEL 7）</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>service xxxx start</td>
-<td>systemctl start xxxx.service</td>
-<td>启动服务</td>
-</tr>
-<tr>
-<td>service xxxx stop</td>
-<td>systemctl stop xxxx.service</td>
-<td>停止服务</td>
-</tr>
-<tr>
-<td>service xxxx restart</td>
-<td>systemctl restart xxxx.service</td>
-<td>重启服务</td>
-</tr>
-<tr>
-<td>service xxxx reload</td>
-<td>systemctl reload xxxx.service</td>
-<td>重新加载配置文件（不终止服务）</td>
-</tr>
-<tr>
-<td>service xxxx status</td>
-<td>systemctl status xxxx.service</td>
-<td>查看服务状态</td>
-</tr>
-<tr>
-<td>chkconfig xxxx on</td>
-<td>systemctl enable xxxx.service</td>
-<td>开机自启</td>
-</tr>
-<tr>
-<td>chkconfig xxxx off</td>
-<td>systemctl disable xxxx.service</td>
-<td>禁止开机自启</td>
-</tr>
-<tr>
-<td>chkconfig xxxx</td>
-<td>systemctl is-enabled xxxx.service</td>
-<td>查看特定服务是否为开机自启</td>
-</tr>
-<tr>
-<td>chkconfig –list</td>
-<td>systemctl list-unit-files –type=service</td>
-<td>查看各个级别下服务的启动与禁用情况</td>
-</tr>
-</tbody></table>
-<p><strong>Tips:</strong>  reload (重新加载)，reload会重新加载配置文件，服务不会中断。而且reload时会测试conf语法等，如果出错会rollback用上一次正确配置文件保持正常运行。也叫平滑重启，不会对已经连接的服务造成影响。<br>restart (重启)（先stop后start），会重启服务。这个重启会造成服务一瞬间的中断，restart自然也就reload了。</p>
-<h3 id="Firewalls"><a href="#Firewalls" class="headerlink" title="Firewalls"></a>Firewalls</h3><p>firewall-cmd 是 firewalld的字符界面管理工具，firewalld是centos7的一大特性，最大的好处有两个：支持动态更新，不用重启服务；第二个就是加入了防火墙的“zone”概念。</p>
-<h4 id="相关常用命令"><a href="#相关常用命令" class="headerlink" title="相关常用命令"></a>相关常用命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start  firewalld # 启动</span><br><span class="line">systemctl stop firewalld # 关闭</span><br><span class="line">systemctl status firewalld # 或者 firewall-cmd --state 查看状态</span><br><span class="line">systemctl restart firewalld # 重启</span><br><span class="line">firewall-cmd --reload # 重新加载配置文件</span><br><span class="line">firewall-cmd --help  #获取帮助</span><br><span class="line">systemctl enable firewalld.service # 开机自启</span><br><span class="line">systemctl disable firewalld.service # 禁用开机自启</span><br><span class="line">systemctl is-enabled firewalld # 查看服务是否开机启动</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="1、开放端口"><a href="#1、开放端口" class="headerlink" title="1、开放端口"></a>1、开放端口</h4><p>（1）如我们需要开启XShell连接时需要使用的22端口</p>
-<p><strong>临时增加</strong> (<code>reload</code>之后消失)：不需要<code>reload</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=22/tcp</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>永久增加</strong> ：<code>reload</code>后生效</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=22/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<p>其中–permanent的作用是使设置永久生效，不加的话机器重启之后失效 </p>
-<p>（2）重新载入一下防火墙设置，使设置生效</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<p>（3）可通过如下命令查看是否生效</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --query-port=22/tcp</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113230828367.png" alt="image-20211113230828367"></p>
-<p>（4）如下命令可查看当前系统打开的所有端口</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113230901879.png" alt="image-20211113230901879"></p>
-<h4 id="2、限制端口"><a href="#2、限制端口" class="headerlink" title="2、限制端口"></a>2、限制端口</h4><p>（1）比如我们现在需要关掉刚刚打开的22端口</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --remove-port=22/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<p>（2）重新载入一下防火墙设置，使设置生效</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<p>（3）再去查看系统所有开放的端口，已经看到没有22端口了</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3、批量开放或限制端口"><a href="#3、批量开放或限制端口" class="headerlink" title="3、批量开放或限制端口"></a>3、批量开放或限制端口</h4><p>（1）批量开放端口，如从100到500这之间的端口我们全部要打开</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=100-500/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="4、服务相关"><a href="#4、服务相关" class="headerlink" title="4、服务相关"></a>4、服务相关</h4><p>获取所有支持的服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --get-services</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211113233042121.png" alt="image-20211113233042121"></p>
-<p>增加服务： (临时增加)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-service=http</span><br></pre></td></tr></table></figure>
-
-<p>删除服务： (临时删除)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --remove-service=http</span><br></pre></td></tr></table></figure>
-
-<p>查询服务 :</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --query-service=http</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><p>iptables 的最大优点是它可以配置有状态的<a href="https://baike.baidu.com/item/%E9%98%B2%E7%81%AB%E5%A2%99">防火墙</a>，有四种有效状态，名称分别为 ESTABLISHED 、 INVALID 、 NEW 和 RELATED。</p>
-<h4 id="相关常用命令-1"><a href="#相关常用命令-1" class="headerlink" title="相关常用命令"></a>相关常用命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service iptables start           //启动iptables</span><br><span class="line">service iptables stop           //关闭iptables</span><br><span class="line">service iptables restart       //重启iptables</span><br><span class="line">service iptables status       //查看iptables状态</span><br><span class="line">cat /etc/sysconfig/iptables  //查看iptables规则</span><br><span class="line">vi /etc/sysconfig/iptables  //修改iptables的规则</span><br><span class="line">service iptables save      //保存命令行中设置的iptables规则到iptables文件中</span><br><span class="line">iptables -V   (注意：V是大写字母V）  //查看iptables版本</span><br></pre></td></tr></table></figure>
-
-<p>iptables简直是地狱中的地狱，我还是会开关就好了，告辞。</p>
-<p>以上内容均来自百度各大佬文章进行总结归纳，也就图个自己查看方便，勿喷。</p>
-<p>​    </p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Firewalls</tag>
-        <tag>iptables</tag>
       </tags>
   </entry>
   <entry>
@@ -1949,6 +1835,120 @@
       </categories>
       <tags>
         <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/07/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hello World</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>仙境传说 绯雨骑士团H5公益服</title>
+    <url>/2021/08/28/21082901/</url>
+    <content><![CDATA[<h3 id="游戏介绍："><a href="#游戏介绍：" class="headerlink" title="游戏介绍："></a>游戏介绍：</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829085126.png" alt="image-20210829085125752"></p>
+<p>绯雨骑士团是一款二次元挂机游戏，将二次元和挂机结合起来，为玩家打造一个休闲养肝的游戏。只要轻轻点击，即可进行游戏，无需繁琐操作，任何人都可以轻松玩转。</p>
+<p>黑衣剑士吉莲、超能法师爱丽丝、无敌射手伊芙、万能骑士爱德华……各职业英雄全员等候召令！守护您的二次元情怀，即刻，出发！</p>
+<p>独家剧情！一手资料，先睹为快！</p>
+<p>召集组队，为守护而战。更可多人同屏华丽战斗，宏大绝杀场面。</p>
+<p>守护世界的正义！成为一名赏金猎人吧！你可以和你的好友一起讨伐红名通缉犯。让妹纸为你侧目，为正义战斗！</p>
+<span id="more"></span>
+
+<h3 id="游戏地址："><a href="#游戏地址：" class="headerlink" title="游戏地址："></a>游戏地址：</h3><p><a href="http://82.156.19.29/">http://82.156.19.29/</a>  </p>
+<p>手机、平板、PC三屏联动！都能玩！是兄弟就来砍我。</p>
+<p>注册的时候<strong>用户名</strong>和<strong>密码</strong>是比较随意的，但请务必记住！无法找回。</p>
+<p>过了新手引导点击头像可以改<strong>名字</strong>，<strong>头像</strong>，<strong>声音</strong>，<strong>画质</strong>！其他的自己探索啦~</p>
+<p>非盈利纯娱乐。无限充值。过新手任务后修改昵称后将<strong>昵称</strong>在本文下方评论告诉我，我给你设置授权密码。（评论的时候请留下可接收邮件的正确邮箱，设置好授权密码我会回复你）</p>
+<p>访问<a href="http://82.156.19.29/gm">http://82.156.19.29/gm</a>  玩家后台自己充值</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210830123935.png" alt="image-20210830123935694"></p>
+<h3 id="网页添加到桌面："><a href="#网页添加到桌面：" class="headerlink" title="网页添加到桌面："></a>网页添加到桌面：</h3><p>这样就不用每次打开浏览器输入网址啦~</p>
+<ul>
+<li><strong>手机</strong></li>
+</ul>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829143207.png" alt="image-20210829143206895" style="zoom:67%;" />
+
+<ul>
+<li>电脑</li>
+</ul>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829143435.png" alt="image-20210829143434741"></p>
+<h3 id="架设教程："><a href="#架设教程：" class="headerlink" title="架设教程："></a>架设教程：</h3><p>写给有需要的人~</p>
+<p>服务器是腾讯云白嫖的，1h2g，第一个月免费，第二个月9元，续费一年也才不到100元，尽管玩，我保证只要有一个人玩就永不停服。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235300.gif" alt="img"></p>
+<p>阿里云：<a href="https://free.aliyun.com/">https://free.aliyun.com/</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210828235902.png" alt="image-20210828235902337"></p>
+<p>腾讯云：<a href="https://cloud.tencent.com/act/free">https://cloud.tencent.com/act/free</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829000002.png" alt="image-20210829000002846"></p>
+<p>新用户注册就能领取，亲测1h2g能玩，如果你有更高配置的现有服务器那更好啦~</p>
+<h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>Windows Server 2012 R2 DataCenter 64bitCN</p>
+<p>重置密码后远程桌面登录。</p>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>绯雨骑士团H5  链接：<a href="https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g">https://pan.baidu.com/s/1NBlJ6MK0DBeJ-eUpkJGx8g</a>  提取码：r1s4</p>
+<p><a href="https://notepad-plus-plus.org/">notepad++</a>    链接：<a href="https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw">https://pan.baidu.com/s/12LiKHKK6tdd9s-47OXznBw</a>  提取码：tspf</p>
+<p>navicat数据库管理工具  链接：<a href="https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g">https://pan.baidu.com/s/1Zlb5ntOoF2qZU6AVB1fD3g</a>   提取码：rp15</p>
+<p>解压缩工具（腾讯云2012自带7-zip)</p>
+<p>下载文件，解压notepad++和navicat到桌面</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829101624.png" alt="image-20210829101623940"></p>
+<h4 id="新建分区D盘"><a href="#新建分区D盘" class="headerlink" title="新建分区D盘"></a>新建分区D盘</h4><p>系统默认只有一个C盘，而且盘符D被CD驱动器占用。</p>
+<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理   -&gt; 更改驱动器号和路径  -&gt; 确定</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102104.png" alt="image-20210829102103999"></p>
+<p>管理工具 -&gt; 计算机管理 -&gt; 磁盘管理 -&gt; 右击C盘  -&gt; 压缩卷  -&gt; 压缩出15G的空间</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102352.png" alt="image-20210829102352759"></p>
+<p>新建简单卷  无脑下一步得到D盘</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102530.png" alt="image-20210829102529915"></p>
+<h4 id="解压游戏源码"><a href="#解压游戏源码" class="headerlink" title="解压游戏源码"></a>解压游戏源码</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829102722.png" alt="image-20210829102722329"></p>
+<h4 id="启动phpstudy"><a href="#启动phpstudy" class="headerlink" title="启动phpstudy"></a>启动phpstudy</h4><p>打开之后点击启动，启动apache2.4.39和mysql5.7.26。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103038.png" alt="image-20210829103038512"></p>
+<h4 id="游戏外网修改"><a href="#游戏外网修改" class="headerlink" title="游戏外网修改"></a>游戏外网修改</h4><p>使用notepad++把以下路径里面的81.70.8.199修改成你的外网IP</p>
+<p>D:\fyqst_wudiliu.Com\wudiliu\Server\s1\wserver\logic\guildbattle\appUtil.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\cityserver_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\server_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\env-cfg\version_cfg.js<br>D:\fyqst_wudiliu.Com\wudiliu\Server\uc\versions里面的manifest2.0.1.json到manifest2.3.5.json【15个】json文件<br>D:\fyqst_wudiliu.Com\wudiliu\www\game.html</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103331.png" alt="image-20210829103331512"></p>
+<p>一次性打开所有需要修改的文件(可以直接拖动文件到Notepad++)，ctrl+F 查找替换 -&gt; 替换所有打开文件(o) </p>
+<p>一共24处，务必确认下！！</p>
+<p>修改完全部保存，全部关闭。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829103501.png" alt="image-20210829103501540"></p>
+<h4 id="数据库修改"><a href="#数据库修改" class="headerlink" title="数据库修改"></a>数据库修改</h4><p>用Navicat链接数据库</p>
+<p>数据库账号:root<br>数据库密码:123456</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104022.png" alt="image-20210829104022223"></p>
+<p>打开数据库【ttf_ly_login】找到【uw_server_info表】   <em><strong>tips:注意这个表有两个字段需要修改host和host2</strong></em><br>打开数据库【ttf_ly_main】找到【uw_game_config表】和【uw_battles_group表】</p>
+<p>把以上路径里面的ip修改成你的外网IP</p>
+<p>修改完点击下方✔保存</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104155.png" alt="image-20210829104155332"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104638.png" alt="image-20210829104638092"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104740.png" alt="image-20210829104740744"></p>
+<h4 id="启动游戏"><a href="#启动游戏" class="headerlink" title="启动游戏"></a>启动游戏</h4><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104820.png" alt="image-20210829104820729"></p>
+<p>一共有七个窗口，少一个都不行</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829104910.png" alt="image-20210829104910032"></p>
+<h4 id="进入游戏"><a href="#进入游戏" class="headerlink" title="进入游戏"></a>进入游戏</h4><p>访问ip</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105014.png" alt="image-20210829105014261"></p>
+<p>起飞~</p>
+<p>封面不太正经但游戏绝对正经，就是点点点，刷怪升级。体验下80后玩传奇的感觉。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210829105037.gif" alt="img"></p>
+<p>私服自然有GM后台，游戏源码里【使用说明】有讲。略。下课~</p>
+<p><strong>免责声明：</strong></p>
+<p>1.本文部分内容转载自其它媒体，但并不代表本站赞同其观点和对其真实性负责。<br>2.若您需要商业运营或用于其他商业活动，请您购买正版授权并合法使用。<br>3.如果本站有侵犯、不妥之处的资源，请在网站下方联系我们。将会第一时间解决！<br>4.本站所有内容均由互联网收集整理、网友上传，仅供大家参考、学习，不存在任何商业目的与商业用途。<br>5.本站提供的所有资源仅供参考学习使用，版权归原著所有，禁止下载本站资源参与商业和非法行为，请在24小时之内自行删除！</p>
+]]></content>
+      <categories>
+        <category>休闲娱乐</category>
+      </categories>
+      <tags>
+        <tag>游戏</tag>
+        <tag>绯雨骑士团H5</tag>
       </tags>
   </entry>
 </search>

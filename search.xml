@@ -1759,7 +1759,7 @@
   <entry>
     <title>云盘变本地硬盘</title>
     <url>/2021/12/13/21121301/</url>
-    <content><![CDATA[<p>今天带来的是一个好用的工具 **<u><em>CloudDrive</em></u>**，可以把你的阿里云盘和天翼云盘的内容映射到本地盘符，方便的使用。<br>功能：快捷访问云盘文件、使用第三方播放器播放视频、文件重命名、全局下载带宽控制<br>本地上传、本地下载、115秒传迁移到阿里云盘、网络盘、本地盘互换等</p>
+    <content><![CDATA[<p>今天带来的是一个好用的工具 <u><em>CloudDrive</em></u>，可以把你的阿里云盘和天翼云盘的内容映射到本地盘符，方便的使用。<br>功能：快捷访问云盘文件、使用第三方播放器播放视频、文件重命名、全局下载带宽控制<br>本地上传、本地下载、115秒传迁移到阿里云盘、网络盘、本地盘互换等</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211213180843830.png" alt="image-20211213180843830"></p>
 <span id="more"></span>
 
@@ -1949,6 +1949,42 @@
         <tag>Hexo</tag>
         <tag>valine</tag>
         <tag>LeanCloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Valine评论系统失效</title>
+    <url>/2022/02/21/22022101/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>2022 年 1 月 27 日开始，<strong>LeanCloud华北节点的 lncld.net 共享域名被域名注册商停止解析（clientHold）</strong>。导致华北节点下Valine评论系统失效。</p>
+<span id="more"></span>
+
+<h3 id="问题跟踪"><a href="#问题跟踪" class="headerlink" title="问题跟踪"></a>问题跟踪</h3><p>今天收到博客评论邮件提醒，但是上博客看的时候发现博客的所有评论都没有加载出来。</p>
+<p>但是LeanCloud的后台数据还是在的。</p>
+<p>F12开发者模式下发现报错</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20220221185433011.png" alt="image-20220221185433011"></p>
+<p>大概就是<code>themes/next/layout/_third-party/comments/valine.swig</code>中的<code>av-min.js</code>网页找不到的问题。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20220221185857997.png" alt="image-20220221185857997"></p>
+<p>继续深究，</p>
+<p><a href="https://forum.leancloud.cn/t/lncld-net/24985">LeanCloud新闻公告</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20220221185602475.png" alt="image-20220221185602475"></p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><ol>
+<li>等待恢复解析，时间不确定</li>
+<li>下载<code>av-min.js</code>到本地</li>
+</ol>
+<p>网友给出的<code>av-min.js</code>下载地址：<a href="http://www.fujiatian.com/js/src/av-min.js">http://www.fujiatian.com/js/src/av-min.js</a></p>
+<p>直接下载上传或者访问后直接复制全部，创建 js 文件，放致<code>themes\next\source\js\src\av-min.js</code>这里即可</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20220221190022427.png" alt="image-20220221190022427"></p>
+<p>然后更改<code>themes\next\layout\_third-party\comments\valine.swig</code>文件</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20220221190056655.png" alt="image-20220221190056655"></p>
+<p><code>hexo g</code>  <code>hexo d</code> 网站即可恢复正常的 Valine 评论功能</p>
+<ol start="3">
+<li>如果考虑到放在本地加载速度问题，可以放在免费的cdn平台上了，以提高网站的加载速度~</li>
+</ol>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
 </search>

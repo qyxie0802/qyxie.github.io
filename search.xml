@@ -2065,7 +2065,7 @@
 <p>但是ChatGPT在国内使用起来是非常不方便，需要外国的网络环境和手机号。</p>
 <span id="more"></span>
 
-<h2 id="使用ChatGPT有两种方法："><a href="#使用ChatGPT有两种方法：" class="headerlink" title="使用ChatGPT有两种方法："></a>使用ChatGPT有两种方法：</h2><h3 id="网页在线模拟："><a href="#网页在线模拟：" class="headerlink" title="网页在线模拟："></a><strong>网页在线模拟</strong>：</h3><p>您可以在线模拟ChatGPT，并通过在网页上与其进行交互来使用它。网页在线使用的是GPT3.5 （davinci-003），心智理论相当于相当于9岁儿童！</p>
+<h2 id="使用ChatGPT有两种方法："><a href="#使用ChatGPT有两种方法：" class="headerlink" title="使用ChatGPT有两种方法："></a>使用ChatGPT有两种方法：</h2><h3 id="方法1、网页在线模拟："><a href="#方法1、网页在线模拟：" class="headerlink" title="方法1、网页在线模拟："></a><strong>方法1、网页在线模拟</strong>：</h3><p>您可以在线模拟ChatGPT，并通过在网页上与其进行交互来使用它。网页在线使用的是GPT3.5 （davinci-003），心智理论相当于相当于9岁儿童！</p>
 <h4 id="注册-OpenAI"><a href="#注册-OpenAI" class="headerlink" title="注册 OpenAI"></a>注册 OpenAI</h4><p><u>Tips:这步需要科学上网，要求是韩国，日本，印度，新加坡，美国这些国家的地址都合适。反正香港或中国的代理肯定不行。不然会提示“OpenAI’s services are not available in your country. “</u></p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20230215155819405.png" alt="image-20230215155819405"></p>
 <p>首先打开<a href="https://beta.openai.com/signup">ChatGPT的账户注册页面</a>，建议配合谷歌或者微软食用。再不济邮箱注册。</p>
@@ -2087,9 +2087,9 @@
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20230215163053655.png" alt="image-20230215163053655"></p>
 <p>在接码平台收到验证码，回填完成注册。</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20230215163254711.png" alt="image-20230215163254711"></p>
-<p>然后访问<a href="https://link.juejin.cn/?target=http://chat.openai.com/chat">chat.openai.com/chat</a>，通过网页与其进行交互来使用它</p>
+<p>然后访问<a href="http://chat.openai.com/chat">chat.openai.com/chat</a>，通过网页对话框与其进行交互来使用它</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20230215163927714.png" alt="image-20230215163927714"></p>
-<h3 id="通过API："><a href="#通过API：" class="headerlink" title="通过API："></a><strong>通过API</strong>：</h3><p>您也可以通过访问OpenAI的API来使用ChatGPT。您只需要向API发送一个询问，然后您将得到一个回答。您可以使用各种编程语言（例如Python，Java，Ruby，C ++等）来实现这一点。但OpenAI的API使用的是davinci-002版本的GPT3，跟GPT3.5相比，只能说差强人意。不建议不推荐不好玩。</p>
+<h3 id="方法2、通过API："><a href="#方法2、通过API：" class="headerlink" title="方法2、通过API："></a><strong>方法2、通过API</strong>：</h3><p>您也可以通过访问OpenAI的API来使用ChatGPT。您只需要向API发送一个询问，然后您将得到一个回答。您可以使用各种编程语言（例如Python，Java，Ruby，C ++等）来实现这一点。但OpenAI的API使用的是davinci-002版本的GPT3，跟GPT3.5相比，只能说差强人意。不建议不推荐不好玩。</p>
 <h4 id="简单举例使用在VsCode中使用ChatGPT"><a href="#简单举例使用在VsCode中使用ChatGPT" class="headerlink" title="简单举例使用在VsCode中使用ChatGPT"></a>简单举例使用在VsCode中使用ChatGPT</h4><p>1.下载安装打开 Visual Studio Code</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20230215165019421.png" alt="image-20230215165019421"></p>
 <p>2.单击左侧栏中的扩展程序图标</p>
@@ -2105,7 +2105,7 @@
 <p>此模式下，速度会比较稳定，如果有条件，建议使用本模式！！！！！！</p>
 <p>输入key登录成功后，不再需要开启代理。</p>
 <p>具体操作如下：</p>
-<p>科学上网注册登录后<a href="https://openai.com/%EF%BC%8C%E7%82%B9%E5%87%BB%E5%A4%B4%E5%83%8F">https://openai.com/，点击头像</a> - &gt; View API Keys - &gt;Create new secret key</p>
+<p>科学上网注册后登录<a href="https://openai.com/">https://openai.com/</a>     。点击头像 - &gt; View API Keys - &gt;Create new secret key</p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20230215171214458.png" alt="image-20230215171214458"></p>
 <p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20230215171305769.png" alt="image-20230215171305769"></p>
 <p>VScode 快捷键<code>ctrl+shift+p</code>，搜索“chatGPT：切换…….”,点击后复制粘贴OpenAI获取到的Key，然后回车就可以切换到国外模式。</p>

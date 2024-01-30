@@ -2172,4 +2172,45 @@
         <tag>Hello World</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Git22端口连接超时问题</title>
+    <url>/2023/06/01/23060101/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>将博客推送到云服务器和github pages时报错</p>
+<p>“ssh:connect to host github.com port 22: Connection timed out</p>
+<p>fatal: Could not read from remote repository.”</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240130215000994.png" alt="image-20240130215000994"></p>
+<span id="more"></span>
+
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p><strong>中文为:</strong><br>ssh:连接到主机 github.com端口22:连接超时</p>
+<p>fatal:无法从远程存储库读取</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240130220147271.png" alt="image-20240130220147271"></p>
+<p>测试无法连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@ssh.github.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240130220750026.png" alt="image-20240130220750026"></p>
+<p><strong>443端口测试没问题，22端口被占用了或者某些网络可能会阻塞ssh的默认的22端口，换网络或者科学上网可能可以解决。当然也可以考虑永久地更改你的ssh配置以使用443端口！！！</strong></p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>在**.ssh**文件夹中新建文本文件config。（该文件夹下还存有id_rsa id_rsa.pub known_hosts三个文件,如有请进行下一步）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim config</span><br></pre></td></tr></table></figure>
+
+<p>输入以下内容，保存后即可，其中<a href="mailto:&#120;&#x78;&#120;&#x40;&#113;&#x71;&#x2e;&#99;&#x6f;&#109;">&#120;&#x78;&#120;&#x40;&#113;&#x71;&#x2e;&#99;&#x6f;&#109;</a>为你自己的邮箱</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">User xxx4@qq.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240130221259348.png" alt="image-20240130221259348"></p>
+<p>再次测试连接以及推送 都没有问题。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240130221926325.png" alt="image-20240130221926325"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240130221944895.png" alt="image-20240130221944895"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>github</tag>
+        <tag>Hermux</tag>
+      </tags>
+  </entry>
 </search>

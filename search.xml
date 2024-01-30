@@ -245,6 +245,356 @@
       </tags>
   </entry>
   <entry>
+    <title>PicGo + 阿里云对象存储OSS搭建个人图床</title>
+    <url>/2021/08/01/21080101/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141727.jpg" alt="aliyunOSS"></p>
+<span id="more"></span>
+
+<p><em><strong>图床</strong></em>，就是指储存图片的服务器。</p>
+<p>网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。</p>
+<p><em><strong>图床工具</strong></em>，就是自动把本地图片转换成链接的一款工具，网络上有很多图床工具，就目前使用种类而言，PicGo 算得上一款比较优秀的图床工具。它是一款用 <code>Electron-vue</code> 开发的软件，可以支持微博，七牛云，腾讯云COS，又拍云，GitHub，阿里云OSS，SM.MS，imgur 等8种常用图床，功能强大，简单易用。</p>
+<h3 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h3><p><a href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载地址</a></p>
+<p><em>mac</em> 系统选择 .<em>dmg</em> 下载，<em>windwos</em> 选择 <em>.exe</em>系统</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png" alt="image-20210801202853961" style="zoom: 67%;" />
+
+
+
+<h3 id="安装PicGo"><a href="#安装PicGo" class="headerlink" title="安装PicGo"></a>安装PicGo</h3><p>安装完成后在右下角，我一直打不开以为安装没成功，又卸载重装了一遍才发现在右下角<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155405.jpg" alt="img"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203029.png" alt="image-20210801203029160"></p>
+<p>一开始用Github仓库存储图片，但还是那个问题，github服务器在国外，不做加速处理，图片加载慢，甚至加载不出来。配置过程讲个大概就行。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203912.png" alt="QQ截图20210801142842" style="zoom:50%;" />
+
+
+
+
+
+<p><strong>新建一个仓库</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204908.png" alt="image-20210801204908692"></p>
+<p>个人中心，<em>Settings</em>-&gt; <em>Developer settings</em> -&gt;  <em>Personal access tokens</em>，我们在这里创建需要的 <em>token</em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204725.png" alt="image-20210801204725223"></p>
+<p>生成一个 <em>token</em> ，复制保存到其他地方，这个 <em>token</em> 只显示一次。</p>
+<p>打开PicGo -&gt;  图床设置 -&gt;  github图床</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204500.png" alt="image-20210801204500664"></p>
+<p>俗话说的好，免费的就没好东西<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155509.gif" alt="img">Gitee也行，虽然是国内的，但是据说仓库的容量有上限（好像是1个G)，并且图片的大小超过1M 就需要登录才能显示，否则看不见。</p>
+<p>这种事可以花点钱嘛~花不了多少钱。40G的容量一年才9块钱，外网流出流量 00:00-08:00（闲时）：0.25元/GB \ 8:00-24:00（忙时）：0.50元/GB   完全可以抹零。</p>
+<h3 id="开通并创建阿里云对象存储OSS"><a href="#开通并创建阿里云对象存储OSS" class="headerlink" title="开通并创建阿里云对象存储OSS"></a>开通并创建阿里云对象存储OSS</h3><ol>
+<li><p><strong>登录<a href="https://www.aliyun.com/">阿里云</a></strong></p>
+</li>
+<li><p><strong>搜索对象存储 OSS</strong></p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211006.png" alt="image-20210801211006780"></p>
+<ol start="3">
+<li><strong>购买OSS资源包</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211306.png" alt="image-20210801211306142"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211453.png" alt="image-20210801211453531"></p>
+<ol start="4">
+<li><p><strong>创建Bucket</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212005.png" alt="image-20210801212005690"></p>
+</li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212314.png" alt="image-20210801212314421"></p>
+<ol start="5">
+<li><strong>新建目录</strong></li>
+</ol>
+<p>对象存储/Bucket 列表/qyxie-blog/文件管理</p>
+<p>推荐目录名为：<code>img/</code>目录名后要加一个<code>/</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212706.png" alt="image-20210801212706425"></p>
+<h3 id="配置AccessKey"><a href="#配置AccessKey" class="headerlink" title="配置AccessKey"></a>配置AccessKey</h3><ol>
+<li><strong>找到右上角的头像 - AccessKey管理</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213136.png" alt="image-20210801213136841"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213200.png" alt="image-20210801213200840"></p>
+<ol start="2">
+<li><strong>创建AccessKey</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213218.png" alt="image-20210801213218688"></p>
+<ol start="3">
+<li><strong>保存AccessKey ID 和AccessKey Secret</strong></li>
+</ol>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213430.png" alt="image-20200812145115691"></p>
+<ol start="4">
+<li><p><strong>记下存储空间名和存储区域</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213917.png" alt="image-20210801213917839"></p>
+</li>
+</ol>
+<h3 id="PicGo设置"><a href="#PicGo设置" class="headerlink" title="PicGo设置"></a>PicGo设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801214043.png" alt="image-20210801214043035"></p>
+<p>好了，使用起来也是非常的方便快捷呢。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif" alt="img"></p>
+<h3 id="Tips：设置防盗链"><a href="#Tips：设置防盗链" class="headerlink" title="Tips：设置防盗链"></a>Tips：设置防盗链</h3><p>防盗链，就是防止别人盗取你的图片。怕有居心不良的人用我们资源拿去在他们网站展示，消费的是我们的流量，为了解决这种问题，才会有防盗链这个思路。</p>
+<p>存储对象 -&gt;  权限管理 -&gt; 防盗链</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801220136.png" alt="image-20210801220136432"></p>
+<p>但这也将导致编辑博客时<code>Typora</code>本地无法预览图片，暂时不知道如何解决，酌情使用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155518.gif" alt="img"></p>
+<p>搭建个人图床主要目的还是写博客快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>aliyun</tag>
+        <tag>PicGo</tag>
+        <tag>OSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何优雅写博客</title>
+    <url>/2021/08/07/21080701/</url>
+    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141834.jpg" alt="Typora" style="zoom:150%;" />
+
+<span id="more"></span>
+
+<p><strong>Markdown</strong>是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<em>——百度百科</em></p>
+<p>Hexo 使用 <strong>Markdown</strong>(或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>工欲善其事必先利其器，用Hexo写博客不可能每次都</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后用记事本或者vi编辑器去写文章中。效率非常低，而且图片插入是个难点。需要一个 高效好用的<strong>Markdown 文本编辑器</strong>。</p>
+<h2 id="Typora-是什么？"><a href="#Typora-是什么？" class="headerlink" title="Typora 是什么？"></a>Typora 是什么？</h2><p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，完全免费的。<a href="https://typora.io/">Typora 官网</a> 上他们将 Typora 描述为 「A truly <strong>minimal</strong> markdown editor. 」。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807142738.png" alt="img"></p>
+<h4 id="极致简洁"><a href="#极致简洁" class="headerlink" title="极致简洁"></a>极致简洁</h4><p>打开Typora，你会发现它的界面非常简洁，几乎没有任何按钮，只在上方有一排功能键，右下角是字数统计，其余强大的功能都被藏在后台。且按下F11进入全屏状态，你的世界里就只有文字。</p>
+<h4 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h4><p>般Markdown 编辑器界面都是两个窗口，左边是Markdown 源码，右边是效果预览。有时一边写源码，一边看效果，确实有点不便。但是使用<strong>Typora</strong> 可以实时的看到渲染效果，而且是在同一个界面，所见即所得。</p>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p><strong>Typora</strong> 对几乎所有Markdown 语法都提供了快捷操作，通过菜单栏的<code>段落</code> 和<code>格式</code> 中的功能可以快速设置标记语法，一些常用的操作都有快捷键，用起来非常高效。</p>
+<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145046.png" alt="image-20210807145046432" style="zoom:50%;" />
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145129.png" alt="image-20210807145129861"></p>
+<h4 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h4><p>Typora 的图片插入功能是广受好评的。要知道，Markdown 原生不太注重图片插入的功能，但你在 Typora 中：</p>
+<ul>
+<li><p>可以直接将网络图片、剪贴板图片复制到文档中</p>
+</li>
+<li><p>可以拖动本地图片到文档中</p>
+</li>
+<li><p><a href="https://www.qyxie.top/2021/08/01/21080101/#more">配合PicGo个人图床</a>  <!--PicGo + 阿里云对象存储OSS搭建个人图床教程--></p>
+<p><code>文件</code>-&gt;<code>偏好设置</code>-&gt;<code>图像</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807143933.png" alt="image-20210807143933250"></p>
+</li>
+</ul>
+<p>Typora 会自动帮你插入符合 Markdown 语法的图片语句，并给它加上标题。</p>
+<p>Typora和PicGo几乎绑定，写博客才能快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>PicGo</tag>
+        <tag>Markdown</tag>
+        <tag>Typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>获取网站的Favicon图标的API接口</title>
+    <url>/2021/08/08/21080801/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
+<span id="more"></span>
+
+<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
+<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
+<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
+<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
+<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
+<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>下载程序到网站目录</strong></em></p>
+<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
+<p><em><strong>解压缩</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
+<p><em><strong>域名添加解析</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
+<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
+<p>有问题的话试试：cache 文件夹给 755 权限。</p>
+<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
+<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
+<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>favicon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易的随机图片API接口</title>
+    <url>/2021/08/06/21081401/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
+<span id="more"></span>    
+
+
+
+<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
+<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
+<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
+<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
+<p><em><strong>新建目录</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
+<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
+<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
+<p>好了，在网页源码中调用就行了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
+<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站ICP备案与公安备案</title>
+    <url>/2021/08/19/21081901/</url>
+    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820135606.png" alt="image-20210820135606772"></p>
+<span id="more"></span>
+
+<p>在阿里云，腾讯云等购买国内服务器，如果是用于web访问的话就必须备案后才能使用（无需域名的情况除外）。否则会提示“该网站暂时无法访问”。但如果不需要web访问的话，目前看来是无需备案的。</p>
+<p>也可以买国外的服务器，好处是不需要备案，但是一般国内用户访问国外服务器，速度会非常慢，然后访问服务器也时常变的不稳定，这种情况还是选择国内云服务器比较稳妥。</p>
+<h3 id="备案是什么？"><a href="#备案是什么？" class="headerlink" title="备案是什么？"></a>备案是什么？</h3><p>所谓备案，就是我们常说的网站备案，备案的全称叫做ICP备案。ICP也就是Internet Content Provider，指的是网络内容服务商 ，即向广大用户综合提供互联网信息业务和增值业务的网络运营商。ICP备案是信息产业部对网站的一种管理，为了防止非法网站。就像是官方认可的网站，就好像开个小门面需要办营业执照一样。</p>
+<p>备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播。根据中华人民共和国国务院令第291号《中华人民共和国电信条例》、第292号《互联网信息服务管理办法》（简称ICP管理办法），国家对提供互联网信息服务的ICP实行许可证制度。ICP证是网站经营的许可证，根据国家,互联网信息服务管理办法》规定，经营性网站必须办理ICP证，否则就属于非法经营。</p>
+<h2 id="备案、域名、服务器之间的关系"><a href="#备案、域名、服务器之间的关系" class="headerlink" title="备案、域名、服务器之间的关系"></a>备案、域名、服务器之间的关系</h2><p>其实网站备案、ICP备案、域名备案、服务器备案本质上指的都是给网站申请ICP备案号。</p>
+<ul>
+<li>只有域名+没有国内服务器空间=不能备案</li>
+<li>没有域名+只有国内服务器空间=不能备案</li>
+<li>有域名+有国内服务器空间=可以备案</li>
+</ul>
+<p>备案是针对服务器空间的，但是备案号是挂在域名上的，可以说备案如果没有空间或者没有域名都备案不了。简单来说，就是完成ICP备案，域名和服务器缺一不可。</p>
+<h3 id="找谁办理备案"><a href="#找谁办理备案" class="headerlink" title="找谁办理备案"></a>找谁办理备案</h3><p>备案正常情况下是找服务器/虚拟主机的提供商办理备案，你使用了相关服务商提供的网络服务器，服务商自然会提供相应的备案服务。为了方便备案请尽量保证域名和服务器的提供商一致。如果不是，请保证域名和服务器的实名认证一致。</p>
+<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>阿里云轻量应用服务器购买时长在3个月及以上（含续费），赠送备案服务号5个。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819232653.png" alt="image-20210819232653671"></p>
+<p><a href="https://help.aliyun.com/knowledge_detail/36922.html?source=5176.11533457&userCode=28kqeewo">首次备案流程-备案-阿里云</a></p>
+<p>按照以上流程，阿里云初审用时2天，工信部审核用时9天。（仅供参考）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233527.png" alt="image-20210819233527311"></p>
+<p>网站开通后，请在网站首页底部中间位置放置您的ICP备案号并链接至”<a href="https://beian.miit.gov.cn&quot;./">https://beian.miit.gov.cn&quot;。</a> 并在开通之日起30日内登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a>提交公安联网备案申请。获取《<a href="https://help.aliyun.com/knowledge_detail/36981.html">公安备案信息填写指南</a>》。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233627.png" alt="image-20210819233627212"></p>
+<h3 id="公安备案"><a href="#公安备案" class="headerlink" title="公安备案"></a>公安备案</h3><p>网站备案是根据国家法律法规需要网站的所有者向国家有关部门申请的备案，公安局备案是其中一种。公安局备案一般按照各地公安机关指定的地点和方式进行，操作流程会比ICP备案流程简单，主要是已登记为主。</p>
+<p>公安备案不做后果咱也不是很清楚（ICP备案不做域名直接访问不了），但是每个公民都有配合义务，在条例层面是「必须」遵守。</p>
+<p>注册登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a></p>
+<h5 id="开办主体管理，提交审核"><a href="#开办主体管理，提交审核" class="headerlink" title="开办主体管理，提交审核"></a>开办主体管理，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235154.png" alt="image-20210819235154678"></p>
+<p>等待审核通过</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235817.png" alt="image-20210819235817040"></p>
+<h5 id="新办网站申请，提交审核"><a href="#新办网站申请，提交审核" class="headerlink" title="新办网站申请，提交审核"></a>新办网站申请，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235855.png" alt="image-20210819235855616"></p>
+<p>新办网站申请信息填写参考<a href="https://help.aliyun.com/knowledge_detail/36981.html">阿里云-公安备案信息填写指南</a></p>
+<p>公安备案审核时间/流程似乎取决于你当地的公安机关，网警，反正我备案的时候直接在网站上提交资料和照片,不到十天就通过了。但是听说也要求本人到携带身份证到当地公安机关进行备案的。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000130.png" alt="image-20210820000130624"></p>
+<p>​    <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000330.png" alt="image-20210820000330671"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001339.png" alt="image-20210820001339754"></p>
+<p>将公安备案编号HTML代码稍作修改，加上ICP备案编号，加上备案编号图标。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;a href=&quot;https://beian.miit.gov.cn/&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽ICP备2021011133号-1&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;a target=&quot;_blank&quot; href=&quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35052402000312&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;img src=&quot;https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210805124438.png&quot; style=&quot;float:left;&quot;/&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽公网安备 35052402000312号&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>大家也可以直接复制我的代码，以下几处自行修改。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001931.png" alt="image-20210820001930929"></p>
+<p>打开<code>themes/next/layout/_partials/footer.swig</code></p>
+<p>将代码放到合适的位置</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002328.png" alt="QQ图片20210820002320"></p>
+<p>效果展示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002411.png" alt="image-20210820002411893"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>备案</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo部署到服务器CSS样式失效</title>
+    <url>/2021/08/20/21082001/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
+<span id="more"></span>
+
+<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
+<p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
+<p>多的我也看不懂，直接解决问题好了。</p>
+<p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164711.png" alt="image-20210820164711269"></p>
+<p>删除后如下图所示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164748.png" alt="image-20210820164747984"></p>
+<p>重新生成静态文件，部署到服务器，总算是对头了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何设置浏览器的默认首页</title>
+    <url>/2021/08/20/21082002/</url>
+    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
+<p>我二次开发了一个简单的<a href="https://nav.qyxie.top/">个人网址导航</a>，免费为大家收录精选的网站，指引大家愉快上网，希望大家积极提交收录申请，并将此网页设置为浏览器的默认首页。</p>
+<span id="more"></span>
+
+<p>网址：<a href="https://nav.qyxie.top/">https://nav.qyxie.top/</a></p>
+<ol>
+<li><h4 id="Gogle-Chrome"><a href="#Gogle-Chrome" class="headerlink" title="Gogle Chrome"></a>Gogle Chrome</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 启动时 -&gt; 打开特定网页或一组网页 -&gt; 添加新网页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820225836.png" alt="image-20210820225836555"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230249.png" alt="image-20210820230249451"></p>
+<p>外观 -&gt; 显示“主页”按钮</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230739.png" alt="image-20210820230739006"></p>
+<p>就是左上角的这个，设置跳转</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230904.png" alt="image-20210820230904283"></p>
+<ol start="2">
+<li><h4 id="Microsoft-Edge"><a href="#Microsoft-Edge" class="headerlink" title="Microsoft Edge"></a>Microsoft Edge</h4></li>
+</ol>
+<p>右上角 -&gt; 设置 -&gt; 开始、主页和新建标签页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230550.png" alt="image-20210820230550677"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230653.png" alt="image-20210820230653035"></p>
+<ol start="3">
+<li><h4 id="Internet-Explorer"><a href="#Internet-Explorer" class="headerlink" title="Internet Explorer"></a>Internet Explorer</h4></li>
+</ol>
+<p>右上角 -&gt; Internet选项 -&gt; 常规 -&gt; 主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231148.png" alt="image-20210820231148136"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231415.png" alt="image-20210820231415538"></p>
+<ol start="4">
+<li><h4 id="手机浏览器"><a href="#手机浏览器" class="headerlink" title="手机浏览器"></a>手机浏览器</h4></li>
+</ol>
+<p>设置 -&gt; 主页设置 -&gt; 编辑自定义主页</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820232127.png" alt="image-20210820232127516"></p>
+<p>多的不说，其他大差不差，大家都是聪明人，不用讲的太明白(<em>ﾟ∀ﾟ</em>)！ </p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Chrome</tag>
+        <tag>IE</tag>
+        <tag>Edge</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo之Next主题优化改造</title>
     <url>/2021/08/06/21080601/</url>
     <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820132857.png" alt="image-20210820132857390"></p>
@@ -516,250 +866,51 @@
       </tags>
   </entry>
   <entry>
-    <title>PicGo + 阿里云对象存储OSS搭建个人图床</title>
-    <url>/2021/08/01/21080101/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141727.jpg" alt="aliyunOSS"></p>
+    <title>Hexo文章加密</title>
+    <url>/2021/08/21/21082101/</url>
+    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>​        博客中可能有些文章是个人情感宣泄、敏感内容或收费技术等，不方便公开，需要对文章进行加密处理。而Next这个主题可谓是包办了几乎所有的需求，却偏偏没有集成<strong>文章加密功能</strong>。但俗话说的好，办法总比困难多。</p>
 <span id="more"></span>
 
-<p><em><strong>图床</strong></em>，就是指储存图片的服务器。</p>
-<p>网上搜索一下，会发现有很多免费的图床，但长时间怕丢图，或者人家跑路了，整个网站的图片都GG。所以还是要搭建属于自己的图床。</p>
-<p><em><strong>图床工具</strong></em>，就是自动把本地图片转换成链接的一款工具，网络上有很多图床工具，就目前使用种类而言，PicGo 算得上一款比较优秀的图床工具。它是一款用 <code>Electron-vue</code> 开发的软件，可以支持微博，七牛云，腾讯云COS，又拍云，GitHub，阿里云OSS，SM.MS，imgur 等8种常用图床，功能强大，简单易用。</p>
-<h3 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h3><p><a href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载地址</a></p>
-<p><em>mac</em> 系统选择 .<em>dmg</em> 下载，<em>windwos</em> 选择 <em>.exe</em>系统</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801202854.png" alt="image-20210801202853961" style="zoom: 67%;" />
+<h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>编辑<code>/themes/next/layout/_partials/head.swig</code>在如下位置添加代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    (function()&#123;</span><br><span class="line">        if(&#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">            if (prompt(&#x27;请输入密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">                alert(&#x27;密码错误&#x27;);</span><br><span class="line">                history.back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-
-
-<h3 id="安装PicGo"><a href="#安装PicGo" class="headerlink" title="安装PicGo"></a>安装PicGo</h3><p>安装完成后在右下角，我一直打不开以为安装没成功，又卸载重装了一遍才发现在右下角<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155405.jpg" alt="img"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203029.png" alt="image-20210801203029160"></p>
-<p>一开始用Github仓库存储图片，但还是那个问题，github服务器在国外，不做加速处理，图片加载慢，甚至加载不出来。配置过程讲个大概就行。</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801203912.png" alt="QQ截图20210801142842" style="zoom:50%;" />
-
-
-
-
-
-<p><strong>新建一个仓库</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204908.png" alt="image-20210801204908692"></p>
-<p>个人中心，<em>Settings</em>-&gt; <em>Developer settings</em> -&gt;  <em>Personal access tokens</em>，我们在这里创建需要的 <em>token</em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204725.png" alt="image-20210801204725223"></p>
-<p>生成一个 <em>token</em> ，复制保存到其他地方，这个 <em>token</em> 只显示一次。</p>
-<p>打开PicGo -&gt;  图床设置 -&gt;  github图床</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801204500.png" alt="image-20210801204500664"></p>
-<p>俗话说的好，免费的就没好东西<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155509.gif" alt="img">Gitee也行，虽然是国内的，但是据说仓库的容量有上限（好像是1个G)，并且图片的大小超过1M 就需要登录才能显示，否则看不见。</p>
-<p>这种事可以花点钱嘛~花不了多少钱。40G的容量一年才9块钱，外网流出流量 00:00-08:00（闲时）：0.25元/GB \ 8:00-24:00（忙时）：0.50元/GB   完全可以抹零。</p>
-<h3 id="开通并创建阿里云对象存储OSS"><a href="#开通并创建阿里云对象存储OSS" class="headerlink" title="开通并创建阿里云对象存储OSS"></a>开通并创建阿里云对象存储OSS</h3><ol>
-<li><p><strong>登录<a href="https://www.aliyun.com/">阿里云</a></strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143327.png" alt="image-20210821143327571"></p>
+<p>之后，在你想要加密的文章的头文件里添加上<code>password: xxxxxx </code>即可。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143828.png" alt="image-20210821143828921"></p>
+<p>演示：</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821144043.png" alt="image-20210821144043245"></p>
+<p>问题：</p>
+<ul>
+<li><p>丑。调用浏览器的UI，各个平台的样式不统一。</p>
 </li>
-<li><p><strong>搜索对象存储 OSS</strong></p>
+<li><p>容易被破解。前端的验证，都是浮云。有心之人想要破解的话那不是分分钟的事。</p>
 </li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211006.png" alt="image-20210801211006780"></p>
-<ol start="3">
-<li><strong>购买OSS资源包</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211306.png" alt="image-20210801211306142"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801211453.png" alt="image-20210801211453531"></p>
-<ol start="4">
-<li><p><strong>创建Bucket</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212005.png" alt="image-20210801212005690"></p>
-</li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212314.png" alt="image-20210801212314421"></p>
-<ol start="5">
-<li><strong>新建目录</strong></li>
-</ol>
-<p>对象存储/Bucket 列表/qyxie-blog/文件管理</p>
-<p>推荐目录名为：<code>img/</code>目录名后要加一个<code>/</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801212706.png" alt="image-20210801212706425"></p>
-<h3 id="配置AccessKey"><a href="#配置AccessKey" class="headerlink" title="配置AccessKey"></a>配置AccessKey</h3><ol>
-<li><strong>找到右上角的头像 - AccessKey管理</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213136.png" alt="image-20210801213136841"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213200.png" alt="image-20210801213200840"></p>
-<ol start="2">
-<li><strong>创建AccessKey</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213218.png" alt="image-20210801213218688"></p>
-<ol start="3">
-<li><strong>保存AccessKey ID 和AccessKey Secret</strong></li>
-</ol>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213430.png" alt="image-20200812145115691"></p>
-<ol start="4">
-<li><p><strong>记下存储空间名和存储区域</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801213917.png" alt="image-20210801213917839"></p>
-</li>
-</ol>
-<h3 id="PicGo设置"><a href="#PicGo设置" class="headerlink" title="PicGo设置"></a>PicGo设置</h3><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801214043.png" alt="image-20210801214043035"></p>
-<p>好了，使用起来也是非常的方便快捷呢。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155448.gif" alt="img"></p>
-<h3 id="Tips：设置防盗链"><a href="#Tips：设置防盗链" class="headerlink" title="Tips：设置防盗链"></a>Tips：设置防盗链</h3><p>防盗链，就是防止别人盗取你的图片。怕有居心不良的人用我们资源拿去在他们网站展示，消费的是我们的流量，为了解决这种问题，才会有防盗链这个思路。</p>
-<p>存储对象 -&gt;  权限管理 -&gt; 防盗链</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801220136.png" alt="image-20210801220136432"></p>
-<p>但这也将导致编辑博客时<code>Typora</code>本地无法预览图片，暂时不知道如何解决，酌情使用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155518.gif" alt="img"></p>
-<p>搭建个人图床主要目的还是写博客快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
+</ul>
+<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用大神Hexo插件。</p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></table></figure>
+
+<h5 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h5><p>在站点配置文件添加如下代码，启用插件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="文章配置"><a href="#文章配置" class="headerlink" title="文章配置"></a>文章配置</h5><p>在你的文章的头部添加上对应的字段，如 password, abstract, message</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821145640.png" alt="image-20210821145640641"></p>
+<ul>
+<li>password: 是该博客加密使用的密码</li>
+<li>abstract: 是该博客的摘要，会显示在博客的列表页</li>
+<li>message: 这个是博客查看时，密码输入框上面的描述性文字</li>
+</ul>
+<h5 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  default_abstract: 文章默认摘要</span><br><span class="line">  default_message: 文章默认描述文字</span><br></pre></td></tr></table></figure>
+
+<p>这样，对于每一篇需要加密的文章就不必都在在头部添加 <strong>abstract</strong> 和 <strong>message</strong> 字段了，脚本会自动添加默认的内容填充。 而你在文章头部的配置优先级高于<strong>站点配置文件</strong> 的 <strong>default</strong>配置，会覆盖它。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821151528.png" alt="image-20210821151528503"></p>
+<p><em>tips:本地预览输入密码可能会无响应，因为需要https协议，部署到服务器就没问题啦。</em></p>
 ]]></content>
       <categories>
         <category>实用教程</category>
       </categories>
       <tags>
-        <tag>aliyun</tag>
-        <tag>PicGo</tag>
-        <tag>OSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何优雅写博客</title>
-    <url>/2021/08/07/21080701/</url>
-    <content><![CDATA[<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807141834.jpg" alt="Typora" style="zoom:150%;" />
-
-<span id="more"></span>
-
-<p><strong>Markdown</strong>是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<em>——百度百科</em></p>
-<p>Hexo 使用 <strong>Markdown</strong>(或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>工欲善其事必先利其器，用Hexo写博客不可能每次都</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
-
-<p>然后用记事本或者vi编辑器去写文章中。效率非常低，而且图片插入是个难点。需要一个 高效好用的<strong>Markdown 文本编辑器</strong>。</p>
-<h2 id="Typora-是什么？"><a href="#Typora-是什么？" class="headerlink" title="Typora 是什么？"></a>Typora 是什么？</h2><p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，完全免费的。<a href="https://typora.io/">Typora 官网</a> 上他们将 Typora 描述为 「A truly <strong>minimal</strong> markdown editor. 」。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807142738.png" alt="img"></p>
-<h4 id="极致简洁"><a href="#极致简洁" class="headerlink" title="极致简洁"></a>极致简洁</h4><p>打开Typora，你会发现它的界面非常简洁，几乎没有任何按钮，只在上方有一排功能键，右下角是字数统计，其余强大的功能都被藏在后台。且按下F11进入全屏状态，你的世界里就只有文字。</p>
-<h4 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h4><p>般Markdown 编辑器界面都是两个窗口，左边是Markdown 源码，右边是效果预览。有时一边写源码，一边看效果，确实有点不便。但是使用<strong>Typora</strong> 可以实时的看到渲染效果，而且是在同一个界面，所见即所得。</p>
-<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><p><strong>Typora</strong> 对几乎所有Markdown 语法都提供了快捷操作，通过菜单栏的<code>段落</code> 和<code>格式</code> 中的功能可以快速设置标记语法，一些常用的操作都有快捷键，用起来非常高效。</p>
-<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145046.png" alt="image-20210807145046432" style="zoom:50%;" />
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807145129.png" alt="image-20210807145129861"></p>
-<h4 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h4><p>Typora 的图片插入功能是广受好评的。要知道，Markdown 原生不太注重图片插入的功能，但你在 Typora 中：</p>
-<ul>
-<li><p>可以直接将网络图片、剪贴板图片复制到文档中</p>
-</li>
-<li><p>可以拖动本地图片到文档中</p>
-</li>
-<li><p><a href="https://www.qyxie.top/2021/08/01/21080101/#more">配合PicGo个人图床</a>  <!--PicGo + 阿里云对象存储OSS搭建个人图床教程--></p>
-<p><code>文件</code>-&gt;<code>偏好设置</code>-&gt;<code>图像</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210807143933.png" alt="image-20210807143933250"></p>
-</li>
-</ul>
-<p>Typora 会自动帮你插入符合 Markdown 语法的图片语句，并给它加上标题。</p>
-<p>Typora和PicGo几乎绑定，写博客才能快捷高效，博客中的图片一般都采用网络图片，采用本地图片有一些路径的问题，而且上传文章时图片也要打包上传，非常不好用。<img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210801155503.gif" alt="img"></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>PicGo</tag>
-        <tag>Markdown</tag>
-        <tag>Typora</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>获取网站的Favicon图标的API接口</title>
-    <url>/2021/08/08/21080801/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133021.png" alt="image-20210820133021076"></p>
-<span id="more"></span>
-
-<p>每个网站都应该会有一个favicon图片，就是显示在浏览器标题栏上面的小图标，当打开网页或将网页加入收藏时都会显示这个图标。举个例子：<img src="http://api.qyxie.top/getFavicon/www.baidu.com.png" alt="img"></p>
-<p>目前获取网站的Favicon图标并显示在你的网页上这个小功能还是很火的。友情链接，导航站点用的很多。</p>
-<p>最近在搭建<a href="https://nav.qyxie.top/">个人导航站点</a>就需要这个小功能，原本用的是谷歌提供的接口，但兼容性不是很好呢，甚至get百度返回的都是默认图标，而且都是（16x16）低像素的，非常的不好用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.google.cn/s2/favicons?domain=https://www.baidu.com/</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808225552.png" alt="image-20210808225552577"></p>
-<p>网上也有很多别人搭建的接口，缺点就是不稳定，人家要是跑路了，就GG。</p>
-<p>项目开源，刚好也有自己的服务器，不如自己动手丰衣足食。</p>
-<p><a href="https://github.com/owen0o0/getFavicon">项目地址</a></p>
-<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
-<p><em><strong>下载程序到网站目录</strong></em></p>
-<p>下载地址：<a href="https://github.com/owen0o0/getFavicon/archive/master.zip">https://github.com/owen0o0/getFavicon/archive/master.zip</a></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230746.png" alt="img"></p>
-<p><em><strong>解压缩</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231044.png" alt="image-20210808231044452"></p>
-<p><em><strong>域名添加解析</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808234346.png" alt="img"></p>
-<p>就是这么简单，之后，我们测试效果，打开网站形式如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/get.php?url=https://www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808231342.png" alt="image-20210808231342711"></p>
-<p>有问题的话试试：cache 文件夹给 755 权限。</p>
-<p>直接使用API虽然可以获取 favicon图标，但是这个是动态地址，不方便CDN缓存，建议将其伪静态，具体规则如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Nginx规则</span><br><span class="line">rewrite ^/getFavicon/(.*)\.png$ /getFavicon/get.php?url=$1;</span><br><span class="line"></span><br><span class="line"># Apache规则</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^getFavicon/(.*)\.png$ getFavicon/get.php?url=$1 [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果你跟我一样使用的是Nginx和宝塔面板，<em>站点-&gt;设置-&gt;伪静态</em>，添加Nginx规则并保存即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808232158.png" alt="image-20210808232158331"></p>
-<p>完成了伪静态规则设置之后，获取网站Favicon图标API接口就变为:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://api.qyxie.top/getFavicon/www.baidu.com.png</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808233533.png" alt="image-20210808233533337"></p>
-<p><em>tips： .png结尾，前面不用加http(s)!!!</em></p>
-]]></content>
-      <categories>
-        <category>实用工具</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-        <tag>favicon</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo部署到服务器CSS样式失效</title>
-    <url>/2021/08/20/21082001/</url>
-    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>今天花了一下午时间，博客添加了随机背景图<code>background</code>，修改了内容，菜单，评论等的透明度，整个博客变得有点花里胡哨—_—|| 。以后还是少做些主题优化，专心写文章实在。然后我<code>hexo d</code>部署到服务器，刷新，emmmmm，好像没有什么变化。重新上传，刷新，等待，刷新，依旧没有变化。</p>
-<span id="more"></span>
-
-<p>我博客<code>github page</code>和阿里云服务器都有部署 打开<a href="https://qyxie0802.github.io/">https://qyxie0802.github.io/</a>  发现CSS样式居然是正常的。我也不知道为什么部署到github正常，部署到服务器就CSS版本混乱了呢？？？</p>
-<p>有问题找度娘，经过一番搜索，找到了<a href="https://segmentfault.com/a/1190000022196027">完美解决：Hexo Next主题本地可预览CSS，但部署到网站CSS失效问题！</a></p>
-<p>多的我也看不懂，直接解决问题好了。</p>
-<p>删除<code>themes/next/layout/_partials/head.swig</code>中的<code>main.css?v=&#123;&#123; version &#125;&#125;</code>后面的<code>?v=&#123;&#123; version &#125;&#125;</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164711.png" alt="image-20210820164711269"></p>
-<p>删除后如下图所示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820164748.png" alt="image-20210820164747984"></p>
-<p>重新生成静态文件，部署到服务器，总算是对头了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
         <tag>Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简易的随机图片API接口</title>
-    <url>/2021/08/06/21081401/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820133039.png" alt="image-20210820133038936"></p>
-<span id="more"></span>    
-
-
-
-<p><a href="https://nav.qyxie.top/">个人网站导航</a>的首页最开始用的是本地的一张图片，图片每天都是重样的是在是看得心烦意乱，我希望每次访问都能看到不一样的风景。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814104845.png" alt="image-20210814104844872"></p>
-<p>可以用别人的API接口，但是毕竟是别人的，大多图片不能自己选择，而且不稳定。反正有服务器，搭建起来也非常的简单，自己搞一搞。</p>
-<p><em><strong>上传文件到图床，获取URL。</strong></em>（没有个人图床的可以用免费图床）</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814110659.png" alt="image-20210814110659336"></p>
-<p><em><strong>打开宝塔面板-&gt;添加站点</strong></em>域名记得解析。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210808230550.png" alt="img"></p>
-<p><em><strong>新建目录</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814111141.png" alt="image-20210814111140943"></p>
-<p><em><strong>创建一个<code>tu.php</code>,写入代码。</strong></em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//存有美图链接的文件名img.txt</span><br><span class="line">$filename = &quot;img.txt&quot;;</span><br><span class="line">if(!file_exists($filename))&#123;</span><br><span class="line">    die(&#x27;文件不存在&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从文本获取链接</span><br><span class="line">$pics = [];</span><br><span class="line">$fs = fopen($filename, &quot;r&quot;);</span><br><span class="line">while(!feof($fs))&#123;</span><br><span class="line">    $line=trim(fgets($fs));</span><br><span class="line">    if($line!=&#x27;&#x27;)&#123;</span><br><span class="line">        array_push($pics, $line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从数组随机获取链接</span><br><span class="line">$pic = $pics[array_rand($pics)];</span><br><span class="line"></span><br><span class="line">//返回指定格式</span><br><span class="line">$type=$_GET[&#x27;type&#x27;];</span><br><span class="line">switch($type)&#123;</span><br><span class="line"></span><br><span class="line">//JSON返回</span><br><span class="line">case &#x27;json&#x27;:</span><br><span class="line">    header(&#x27;Content-type:text/json&#x27;);</span><br><span class="line">    die(json_encode([&#x27;pic&#x27;=&gt;$pic]));</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">    die(header(&quot;Location: $pic&quot;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><em><strong>创建一个<code>img.txt</code>，写入图片URL。</strong></em></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814114313.png" alt="image-20210814114313221"></p>
-<p>随机图片接口 <a href="http://api.qyxie.top/tu/tu.php">http://api.qyxie.top/tu/tu.php</a></p>
-<p>好了，在网页源码中调用就行了。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210814115323.png" alt="image-20210814115323334"></p>
-<p>具体效果☞<a href="https://nav.qyxie.top/">一个主页，整个世界</a>  F5刷新更换横幅图片。</p>
-]]></content>
-      <categories>
-        <category>实用工具</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -806,51 +957,89 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo文章加密</title>
-    <url>/2021/08/21/21082101/</url>
-    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>​        博客中可能有些文章是个人情感宣泄、敏感内容或收费技术等，不方便公开，需要对文章进行加密处理。而Next这个主题可谓是包办了几乎所有的需求，却偏偏没有集成<strong>文章加密功能</strong>。但俗话说的好，办法总比困难多。</p>
+    <title>为博客Valine评论系统添加邮件提醒和后台管理</title>
+    <url>/2021/08/22/21082202/</url>
+    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>​        之前在<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造</a>中已经添加了评论系统，但是没有邮件通知，别人评论不能第一时间知道（虽然也不会有人评论）。这功能吧，可以不要，但不能没有。</p>
 <span id="more"></span>
 
-<h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>编辑<code>/themes/next/layout/_partials/head.swig</code>在如下位置添加代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    (function()&#123;</span><br><span class="line">        if(&#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">            if (prompt(&#x27;请输入密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;)&#123;</span><br><span class="line">                alert(&#x27;密码错误&#x27;);</span><br><span class="line">                history.back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143327.png" alt="image-20210821143327571"></p>
-<p>之后，在你想要加密的文章的头文件里添加上<code>password: xxxxxx </code>即可。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821143828.png" alt="image-20210821143828921"></p>
-<p>演示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821144043.png" alt="image-20210821144043245"></p>
-<p>问题：</p>
-<ul>
-<li><p>丑。调用浏览器的UI，各个平台的样式不统一。</p>
-</li>
-<li><p>容易被破解。前端的验证，都是浮云。有心之人想要破解的话那不是分分钟的事。</p>
-</li>
-</ul>
-<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用大神Hexo插件。</p>
-<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></table></figure>
-
-<h5 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h5><p>在站点配置文件添加如下代码，启用插件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="文章配置"><a href="#文章配置" class="headerlink" title="文章配置"></a>文章配置</h5><p>在你的文章的头部添加上对应的字段，如 password, abstract, message</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821145640.png" alt="image-20210821145640641"></p>
-<ul>
-<li>password: 是该博客加密使用的密码</li>
-<li>abstract: 是该博客的摘要，会显示在博客的列表页</li>
-<li>message: 这个是博客查看时，密码输入框上面的描述性文字</li>
-</ul>
-<h5 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  default_abstract: 文章默认摘要</span><br><span class="line">  default_message: 文章默认描述文字</span><br></pre></td></tr></table></figure>
-
-<p>这样，对于每一篇需要加密的文章就不必都在在头部添加 <strong>abstract</strong> 和 <strong>message</strong> 字段了，脚本会自动添加默认的内容填充。 而你在文章头部的配置优先级高于<strong>站点配置文件</strong> 的 <strong>default</strong>配置，会覆盖它。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210821151528.png" alt="image-20210821151528503"></p>
-<p><em>tips:本地预览输入密码可能会无响应，因为需要https协议，部署到服务器就没问题啦。</em></p>
+<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p>博客添加valine评论系统不再赘述，参考之前的配置<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造——评论系统</a>。</p>
+<h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822210329.png" alt="image-20210822210329228"></p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SENDER_NAME</td>
+<td>qyxie</td>
+<td>评论提醒 [可选] 发件人</td>
+</tr>
+<tr>
+<td>SITE_NAME</td>
+<td>滑稽树</td>
+<td>[<em>必填</em>] 网站名称</td>
+</tr>
+<tr>
+<td>SITE_URL</td>
+<td><a href="https://www.qyxie.top/">https://www.qyxie.top</a></td>
+<td>[<em>必填</em>] 网站地址，<strong>最后不要加 /</strong></td>
+</tr>
+<tr>
+<td>SMTP_PASS</td>
+<td>xxxxxxxxxxxxxxxx</td>
+<td>[<em>必填</em>] SMTP登录密码/授权码，不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式。</td>
+</tr>
+<tr>
+<td>SMTP_SERVICE</td>
+<td>QQ</td>
+<td>[<em>必填</em>] 邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多。</td>
+</tr>
+<tr>
+<td>SMTP_USER</td>
+<td><a href="mailto:&#x78;&#120;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#x6d;">&#x78;&#120;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#x6d;</a></td>
+<td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
+</tr>
+</tbody></table>
+<h3 id="SMTP授权码"><a href="#SMTP授权码" class="headerlink" title="SMTP授权码"></a>SMTP授权码</h3><p>我用的是QQ邮箱，其他邮件服务商自己百度。</p>
+<p>登录<a href="https://mail.qq.com/">QQ邮箱</a> -&gt; 设置 -&gt; 账户 -&gt; 开启SMTP服务</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211720.png" alt="image-20210822211720760"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211739.png" alt="image-20210822211739670"></p>
+<p>根据提示获取授权码，写入的时候<em><strong>不要带空格不要带空格不要带空格</strong></em></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 部署 -&gt; 部署项目 -&gt; Git部署   ，输入<code>https://github.com/zhaojun1998/Valine-Admin.git</code></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212055.png" alt="image-20210822212054925"></p>
+<p>分支或提交填写master，点击部署</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212316.png" alt="image-20210822212316905"></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>当收到评论时，QQ邮件提醒</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212626.jpg" alt="QQ图片20210822212521"></p>
+<h3 id="后台评论管理"><a href="#后台评论管理" class="headerlink" title="后台评论管理"></a>后台评论管理</h3><p>数据存储 -&gt; 结构化数据 -&gt; _User -&gt; 添加行   添加后台管理用户，<code>uesrname</code>,<code>password</code>,<code>email</code>三个字段就行</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822214549.png" alt="image-20210822214549875"></p>
+<p>设置 -&gt; 域名绑定，填写一个自己域名的二级域名，配置云引擎域名</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232011.png" alt="image-20210822232011572"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232211.png" alt="image-20210822232211699"></p>
+<p>LeanCloud -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
+<p><code>ADMIN_URL</code>：<code>刚刚绑定的域名</code>，<strong>添加后重新手动部署</strong></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232345.png" alt="image-20210822232345575"></p>
+<p>访问域名，管理评论</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823094953.png" alt="image-20210823094953512"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823113800.png" alt="image-20210823113759964"></p>
+<h3 id="配置自动唤醒"><a href="#配置自动唤醒" class="headerlink" title="配置自动唤醒"></a>配置自动唤醒</h3><p><strong>免费版的LeanCloud是不能24小时运行的，每天必须休眠 6 个小时，30 分钟内没有外部请求，则休眠，需要设置定时休眠来保证大多数时间邮件服务是正常的。</strong></p>
+<p>云引擎 -&gt; 定时任务 -&gt; 创建定时任务</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232504.png" alt="image-20210822232504769"></p>
+<p>表达式<code>0 */20 7-23 * * ?</code>表示为7-23时每20分钟</p>
+<p><strong>重启服务</strong>生效</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822233626.png" alt="image-20210822233626036"></p>
 ]]></content>
       <categories>
-        <category>实用教程</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Next</tag>
         <tag>Hexo</tag>
+        <tag>valine</tag>
+        <tag>LeanCloud</tag>
       </tags>
   </entry>
   <entry>
@@ -1290,6 +1479,162 @@
       </tags>
   </entry>
   <entry>
+    <title>Windows Subsystem for Android安卓子系统初体验</title>
+    <url>/2021/11/14/21111401/</url>
+    <content><![CDATA[<p>微软官方在 Windows 11 内测版刚发布的时候就曾被爆出 Windows 11 将支持安装安卓应用，早前Windows 11发布我也是第一时间通过加入Dev通道获得推送，但安装成功后索然无味，感觉除了UI的变化毫无亮点，支持安装安卓应用功能也未上线。如今Windows 11 发布了安卓子系统 Windows Subsystem for Android，前段时间有事没能第一时间体验到，最近有空在酷安了解了下如何安装，分享下。</p>
+<span id="more"></span>
+
+
+
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>安装了WIN11。</p>
+<p><a href="https://www.microsoft.com/zh-cn/software-download/windows11">win11官方镜像下载</a></p>
+<p>下载ISO镜像文件用pe安装，方便快捷，没有硬件要求，也不需要UEFI，我家十年前的电脑都用上win11啦.</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/J%5BKGKPT@LXF%7DMUJCBR%5DW4LU.png" alt="img"></p>
+<h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><p>设置 &gt; 系统 &gt; 存储 &gt; 高级存储设置 &gt; 保存新内容的地方</p>
+<p>怕C盘爆了的话，在这里可以改安装位置 ，如果你只有一个盘当我没说 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163237401.png" alt="image-20211114163237401"></p>
+<p>当然，已经安装在C盘了也可以更改</p>
+<p>设置 &gt;  应用 &gt; 应用和功能 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163233680.png" alt="image-20211114163233680"></p>
+<h3 id="安装Windows-Subsystem-for-Android"><a href="#安装Windows-Subsystem-for-Android" class="headerlink" title="安装Windows Subsystem for Android"></a>安装Windows Subsystem for Android</h3><p>控制面板 &gt; 启动或关闭Windows功能  把“虚拟机平台”和“Hyper-V”前面的勾打上，然后点击确定 安装完成后重启即可 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163228691.png" alt="image-20211114163228691"></p>
+<p><a href="https://pan.xunlei.com/s/VMoT7Faoxb3Y8F2OvIxd83dPA1">迅雷</a><br>提取码：s7hn</p>
+<p><a href="https://pan.baidu.com/s/1_X8mQtyGMlO7rDEMjd66aw">百度云网盘</a><br>提取码：hmgr</p>
+<p>下载WSA.zip 解压到D盘根目录下。当然你也可以放在其他位置，就是安装和执行脚本的时候自己考虑下路径问题。</p>
+<p>同时按住Win键和x唤出菜单，选择Windows终端（管理员），安装WSA</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add-Appxpackage &quot;D:\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.Msixbundle&quot;  </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163222224.png" alt="image-20211114163222224"></p>
+<p>如下报错就到微软商店更新【应用安装程序】</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211124101043061.png" alt="image-20211124101043061"></p>
+<p> 等待安完毕 ，打开开始菜单，就可以看到<strong>「Windows Subsystem for Android」</strong>的绿色图标。打开后依次点击  “文档”  “开启开发人员模式”  “刷新IP地址”     </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163213647.png" alt="image-20211114163213647"></p>
+<h3 id="安装外部apk"><a href="#安装外部apk" class="headerlink" title="安装外部apk"></a>安装外部apk</h3><p>“D:\apk\platform-tools” 目录是adb工具，用来安装apk的 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163205612.png" alt="image-20211114163205612"></p>
+<p>“D:\apk\双击apk安装脚本.bat” 是apk安装脚本 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163146033.png" alt="image-20211114163146033"></p>
+<p>修改 1.apk 文件默认打开方式</p>
+<p>右键 1.apk 文件，打开属性。</p>
+<p>选择更改，选择在这台电脑查找其他应用，并勾选始终使用此应用打开 .apk 文件。</p>
+<p>选择.bat 脚本，点击确定即可。 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163326569.png" alt="image-20211114163326569"></p>
+<p>外部应用通过上诉脚本实现安装，安卓子系统内部的话下载完就直接安装了，这个1.apk就是酷安，你可以通过先安装酷安在搜索其他软件进行安装，不行就外部下载双击安装。</p>
+<h3 id="问题与解决："><a href="#问题与解决：" class="headerlink" title="问题与解决："></a>问题与解决：</h3><p>安卓子系统WSA用户数据以虚拟磁盘vhdx形式存放在如下路径：C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\LocalCache\userdata.vhdx，比较大，WSA虽然可以安装或者在设置里应用和功能里进行移动到其他盘符，但这个操作只是移动了WSA系统文件，而安装软件都是装到了上诉路径下系统盘的userdata.vhdx镜像中。这样C盘有点顶不住撒。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163539044.png" alt="image-20211114163539044"></p>
+<p>Tips：是个隐藏文件。 </p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163400022.png" alt="image-20211114163400022"></p>
+<p>万能的贴吧老哥给出了办法，用windows 的mklink命令进行移动。</p>
+<p>首先完全关闭wsa，把系统盘的LocalCache文件夹剪切（里面有个userdata.vhdx虚拟磁盘，注意是剪切，或者复制完删除C盘的LocalCache）到想要放到的目录，如D盘根目录，（如果无法移动说明wsa正在后台运行，任务管理器结束任务或者重启电脑）；</p>
+<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114164304618.png" alt="image-20211114164304618"></p>
+<p>按win+r，输入cmd打开windows命令提示符输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mklink /J &quot;C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\LocalCache&quot; &quot;D:\LocalCache&quot;</span><br></pre></td></tr></table></figure>
+
+<p>前面是原位置，后面是移动后的位置，根据实际情况自己灵活改动。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114191118035.png" alt="image-20211114191118035"></p>
+<p>之后在C盘 C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\路径下又出现了个LocalCache文件夹，并且文件夹左下角带有一个小箭头，说明映射成功。</p>
+<p> 重启电脑，打开Windows Subsystem for Android，或者开几个app看看，应该是没问题的，亲测有效可用。解放系统盘。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Windows Subsystem for Android是我对WIN11最大的期待，有许多app只有移动端没有电脑端，绕过安卓模拟器直装后启动速度非常快，而且使用起来非常流畅。卸载也可以在“程序和功能”中直接卸载。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114171320827.png" alt="image-20211114171320827"></p>
+<p>但目前看来安卓模拟器仍有不可替代的优势，键盘手柄映射等等，WSA只能玩玩金铲铲之类的只需要鼠标点点点的游戏。期待Windows Subsystem for Android的下一次更新。</p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BiliHelper部署，升级好比坐火箭</title>
+    <url>/2021/12/11/21121101/</url>
+    <content><![CDATA[<p>B站距离等级6还有五千经验，平时都只刷刷视频甚至不投币（俗称：白嫖怪），升级遥遥无期，今天看到一个B站助手还不错，研究部署下。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211183609071.png" alt="image-20211211183609071"></p>
+<p>项目地址：<a href="https://github.com/lkeme/BiliHelper-personal">哔哩哔哩（Bilibili）助手 - PHP 版（Personal）</a>，Github也有部署指南，开源免费，如果你感觉本项目对你有所帮助的话，欢迎点击对原作者进行打赏。</p>
+<p>话不多说，开始我的部署教程吧。</p>
+<span id="more"></span>
+
+<h3 id="环境依赖："><a href="#环境依赖：" class="headerlink" title="环境依赖："></a>环境依赖：</h3><p>linux服务器安装宝塔面板（略）</p>
+<p>宝塔面板软件商店搜索安装php8.0</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153450418.png" alt="image-20211211153450418"></p>
+<p>php8.0管理，删除禁用函数putenv、proc_open、pcntl_signal_dispatch，一共三个</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153635155.png" alt="image-20211211153635155"></p>
+<h3 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h3><p><a href="https://www.runoob.com/w3cnote/composer-install-and-usage.html">Composer 安装与使用</a></p>
+<p>使用以下命令来安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># php -r &quot;copy(&#x27;https://install.phpcomposer.com/installer&#x27;, &#x27;composer-setup.php&#x27;);&quot;</span><br><span class="line"># php composer-setup.php</span><br><span class="line"></span><br><span class="line">All settings correct for using Composer</span><br><span class="line">Downloading...</span><br><span class="line"></span><br><span class="line">Composer (version 1.6.5) successfully installed to: /root/composer.phar</span><br><span class="line">Use it: php composer.phar</span><br></pre></td></tr></table></figure>
+
+
+
+<p>移动 composer.phar，这样 composer 就可以进行全局调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
+
+<p>更新 composer：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">composer selfupdate</span><br></pre></td></tr></table></figure>
+
+<p>切换为国内镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="部署指南："><a href="#部署指南：" class="headerlink" title="部署指南："></a>部署指南：</h3><ol>
+<li>下载（克隆）项目代码，初始化项目</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git clone https://github.com/lkeme/BiliHelper-personal.git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211152627375.png" alt="image-20211211152627375"></p>
+<p>没有安装git或者跟我一样git失败的也可以直接下载压缩包，上传解压</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153218821.png" alt="image-20211211153218821"></p>
+<ol start="2">
+<li>使用 composer工具进行安装</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd BiliHelper-personal/</span><br><span class="line"># composer install</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211164816662.png" alt="image-20211211164816662"></p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211164727178.png" alt="image-20211211164727178"></p>
+<ol start="3">
+<li>修改配置文件 <code>user.ini</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd conf/</span><br><span class="line"># cp user.ini.example user.ini</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211165806755.png" alt="image-20211211165806755"></p>
+<p>用宝塔面板修改方便点，配置账号密码，保存</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211170413879.png" alt="image-20211211170413879"></p>
+<p>登录模式|[1.账密模式 2.短信验证码模式 ]</p>
+<p>1就是直接输入账号密码，2短信登录，此时password字段随意填</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211172141151.png" alt="image-20211211172141151"></p>
+<ol start="4">
+<li>运行测试</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd ,,  #回到项目路径</span><br><span class="line"># php index.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211172554683.png" alt="image-20211211172554683"></p>
+<p>起飞~</p>
+<h3 id="Supervisor-配置："><a href="#Supervisor-配置：" class="headerlink" title="Supervisor 配置："></a>Supervisor 配置：</h3><p>将 BiliHelper-personal 部署到线上服务器时，需要配置一个进程监控器来监测 <code>php index.php</code> 命令，在它意外退出时自动重启。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install supervisor # 使用yum安装supervisor</span><br><span class="line">systemctl enable supervisord.service # 设置开机自启</span><br></pre></td></tr></table></figure>
+
+<p>编辑/etc/supervisord.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[program:bilibili]</span><br><span class="line">process_name=%(program_name)s</span><br><span class="line">command=php /path/to/your/BiliHelper-personal/index.php    #注：路径根据实际情况</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">redirect_stderr=true</span><br><span class="line">stdout_logfile=/tmp/bilibili.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211173809947.png" alt="image-20211211173809947"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">supervisord -c /etc/supervisord.conf # 指定配置文件启动</span><br></pre></td></tr></table></figure>
+
+<p>再次运行测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># php index.php</span><br></pre></td></tr></table></figure>
+
+<p>之后就算ctrl+c 结束也没事了 ，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能。在/tmp/bilibili.log中也不断有日志输出，部署没得问题。</p>
+<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>关于项目的更多功能以及配置请访问项目原地址<a href="https://github.com/lkeme/BiliHelper-personal">哔哩哔哩（Bilibili）助手 - PHP 版（Personal）</a>查阅文档，我也是菜鸡，更多的是发现好的项目，剩下的靠大家了。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211183356350.png" alt="image-20211211183356350"></p>
+<p>项目应该也是可以使用云函数部署的，但是我不会，有大佬研究下欢迎指导下。</p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>bilibili</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>白嫖腾讯云函数，实现原神小助手</title>
     <url>/2021/11/09/21110901/</url>
     <content><![CDATA[<ul>
@@ -1462,162 +1807,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows Subsystem for Android安卓子系统初体验</title>
-    <url>/2021/11/14/21111401/</url>
-    <content><![CDATA[<p>微软官方在 Windows 11 内测版刚发布的时候就曾被爆出 Windows 11 将支持安装安卓应用，早前Windows 11发布我也是第一时间通过加入Dev通道获得推送，但安装成功后索然无味，感觉除了UI的变化毫无亮点，支持安装安卓应用功能也未上线。如今Windows 11 发布了安卓子系统 Windows Subsystem for Android，前段时间有事没能第一时间体验到，最近有空在酷安了解了下如何安装，分享下。</p>
-<span id="more"></span>
-
-
-
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>安装了WIN11。</p>
-<p><a href="https://www.microsoft.com/zh-cn/software-download/windows11">win11官方镜像下载</a></p>
-<p>下载ISO镜像文件用pe安装，方便快捷，没有硬件要求，也不需要UEFI，我家十年前的电脑都用上win11啦.</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/J%5BKGKPT@LXF%7DMUJCBR%5DW4LU.png" alt="img"></p>
-<h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><p>设置 &gt; 系统 &gt; 存储 &gt; 高级存储设置 &gt; 保存新内容的地方</p>
-<p>怕C盘爆了的话，在这里可以改安装位置 ，如果你只有一个盘当我没说 </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163237401.png" alt="image-20211114163237401"></p>
-<p>当然，已经安装在C盘了也可以更改</p>
-<p>设置 &gt;  应用 &gt; 应用和功能 </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163233680.png" alt="image-20211114163233680"></p>
-<h3 id="安装Windows-Subsystem-for-Android"><a href="#安装Windows-Subsystem-for-Android" class="headerlink" title="安装Windows Subsystem for Android"></a>安装Windows Subsystem for Android</h3><p>控制面板 &gt; 启动或关闭Windows功能  把“虚拟机平台”和“Hyper-V”前面的勾打上，然后点击确定 安装完成后重启即可 </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163228691.png" alt="image-20211114163228691"></p>
-<p><a href="https://pan.xunlei.com/s/VMoT7Faoxb3Y8F2OvIxd83dPA1">迅雷</a><br>提取码：s7hn</p>
-<p><a href="https://pan.baidu.com/s/1_X8mQtyGMlO7rDEMjd66aw">百度云网盘</a><br>提取码：hmgr</p>
-<p>下载WSA.zip 解压到D盘根目录下。当然你也可以放在其他位置，就是安装和执行脚本的时候自己考虑下路径问题。</p>
-<p>同时按住Win键和x唤出菜单，选择Windows终端（管理员），安装WSA</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add-Appxpackage &quot;D:\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.Msixbundle&quot;  </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163222224.png" alt="image-20211114163222224"></p>
-<p>如下报错就到微软商店更新【应用安装程序】</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211124101043061.png" alt="image-20211124101043061"></p>
-<p> 等待安完毕 ，打开开始菜单，就可以看到<strong>「Windows Subsystem for Android」</strong>的绿色图标。打开后依次点击  “文档”  “开启开发人员模式”  “刷新IP地址”     </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163213647.png" alt="image-20211114163213647"></p>
-<h3 id="安装外部apk"><a href="#安装外部apk" class="headerlink" title="安装外部apk"></a>安装外部apk</h3><p>“D:\apk\platform-tools” 目录是adb工具，用来安装apk的 </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163205612.png" alt="image-20211114163205612"></p>
-<p>“D:\apk\双击apk安装脚本.bat” 是apk安装脚本 </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163146033.png" alt="image-20211114163146033"></p>
-<p>修改 1.apk 文件默认打开方式</p>
-<p>右键 1.apk 文件，打开属性。</p>
-<p>选择更改，选择在这台电脑查找其他应用，并勾选始终使用此应用打开 .apk 文件。</p>
-<p>选择.bat 脚本，点击确定即可。 </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163326569.png" alt="image-20211114163326569"></p>
-<p>外部应用通过上诉脚本实现安装，安卓子系统内部的话下载完就直接安装了，这个1.apk就是酷安，你可以通过先安装酷安在搜索其他软件进行安装，不行就外部下载双击安装。</p>
-<h3 id="问题与解决："><a href="#问题与解决：" class="headerlink" title="问题与解决："></a>问题与解决：</h3><p>安卓子系统WSA用户数据以虚拟磁盘vhdx形式存放在如下路径：C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\LocalCache\userdata.vhdx，比较大，WSA虽然可以安装或者在设置里应用和功能里进行移动到其他盘符，但这个操作只是移动了WSA系统文件，而安装软件都是装到了上诉路径下系统盘的userdata.vhdx镜像中。这样C盘有点顶不住撒。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163539044.png" alt="image-20211114163539044"></p>
-<p>Tips：是个隐藏文件。 </p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114163400022.png" alt="image-20211114163400022"></p>
-<p>万能的贴吧老哥给出了办法，用windows 的mklink命令进行移动。</p>
-<p>首先完全关闭wsa，把系统盘的LocalCache文件夹剪切（里面有个userdata.vhdx虚拟磁盘，注意是剪切，或者复制完删除C盘的LocalCache）到想要放到的目录，如D盘根目录，（如果无法移动说明wsa正在后台运行，任务管理器结束任务或者重启电脑）；</p>
-<p> <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114164304618.png" alt="image-20211114164304618"></p>
-<p>按win+r，输入cmd打开windows命令提示符输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mklink /J &quot;C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\LocalCache&quot; &quot;D:\LocalCache&quot;</span><br></pre></td></tr></table></figure>
-
-<p>前面是原位置，后面是移动后的位置，根据实际情况自己灵活改动。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114191118035.png" alt="image-20211114191118035"></p>
-<p>之后在C盘 C:\Users\kkax\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\路径下又出现了个LocalCache文件夹，并且文件夹左下角带有一个小箭头，说明映射成功。</p>
-<p> 重启电脑，打开Windows Subsystem for Android，或者开几个app看看，应该是没问题的，亲测有效可用。解放系统盘。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Windows Subsystem for Android是我对WIN11最大的期待，有许多app只有移动端没有电脑端，绕过安卓模拟器直装后启动速度非常快，而且使用起来非常流畅。卸载也可以在“程序和功能”中直接卸载。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211114171320827.png" alt="image-20211114171320827"></p>
-<p>但目前看来安卓模拟器仍有不可替代的优势，键盘手柄映射等等，WSA只能玩玩金铲铲之类的只需要鼠标点点点的游戏。期待Windows Subsystem for Android的下一次更新。</p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>Windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BiliHelper部署，升级好比坐火箭</title>
-    <url>/2021/12/11/21121101/</url>
-    <content><![CDATA[<p>B站距离等级6还有五千经验，平时都只刷刷视频甚至不投币（俗称：白嫖怪），升级遥遥无期，今天看到一个B站助手还不错，研究部署下。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211183609071.png" alt="image-20211211183609071"></p>
-<p>项目地址：<a href="https://github.com/lkeme/BiliHelper-personal">哔哩哔哩（Bilibili）助手 - PHP 版（Personal）</a>，Github也有部署指南，开源免费，如果你感觉本项目对你有所帮助的话，欢迎点击对原作者进行打赏。</p>
-<p>话不多说，开始我的部署教程吧。</p>
-<span id="more"></span>
-
-<h3 id="环境依赖："><a href="#环境依赖：" class="headerlink" title="环境依赖："></a>环境依赖：</h3><p>linux服务器安装宝塔面板（略）</p>
-<p>宝塔面板软件商店搜索安装php8.0</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153450418.png" alt="image-20211211153450418"></p>
-<p>php8.0管理，删除禁用函数putenv、proc_open、pcntl_signal_dispatch，一共三个</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153635155.png" alt="image-20211211153635155"></p>
-<h3 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h3><p><a href="https://www.runoob.com/w3cnote/composer-install-and-usage.html">Composer 安装与使用</a></p>
-<p>使用以下命令来安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># php -r &quot;copy(&#x27;https://install.phpcomposer.com/installer&#x27;, &#x27;composer-setup.php&#x27;);&quot;</span><br><span class="line"># php composer-setup.php</span><br><span class="line"></span><br><span class="line">All settings correct for using Composer</span><br><span class="line">Downloading...</span><br><span class="line"></span><br><span class="line">Composer (version 1.6.5) successfully installed to: /root/composer.phar</span><br><span class="line">Use it: php composer.phar</span><br></pre></td></tr></table></figure>
-
-
-
-<p>移动 composer.phar，这样 composer 就可以进行全局调用：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
-
-<p>更新 composer：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">composer selfupdate</span><br></pre></td></tr></table></figure>
-
-<p>切换为国内镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="部署指南："><a href="#部署指南：" class="headerlink" title="部署指南："></a>部署指南：</h3><ol>
-<li>下载（克隆）项目代码，初始化项目</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git clone https://github.com/lkeme/BiliHelper-personal.git</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211152627375.png" alt="image-20211211152627375"></p>
-<p>没有安装git或者跟我一样git失败的也可以直接下载压缩包，上传解压</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211153218821.png" alt="image-20211211153218821"></p>
-<ol start="2">
-<li>使用 composer工具进行安装</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd BiliHelper-personal/</span><br><span class="line"># composer install</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211164816662.png" alt="image-20211211164816662"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211164727178.png" alt="image-20211211164727178"></p>
-<ol start="3">
-<li>修改配置文件 <code>user.ini</code></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd conf/</span><br><span class="line"># cp user.ini.example user.ini</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211165806755.png" alt="image-20211211165806755"></p>
-<p>用宝塔面板修改方便点，配置账号密码，保存</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211170413879.png" alt="image-20211211170413879"></p>
-<p>登录模式|[1.账密模式 2.短信验证码模式 ]</p>
-<p>1就是直接输入账号密码，2短信登录，此时password字段随意填</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211172141151.png" alt="image-20211211172141151"></p>
-<ol start="4">
-<li>运行测试</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cd ,,  #回到项目路径</span><br><span class="line"># php index.php</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211172554683.png" alt="image-20211211172554683"></p>
-<p>起飞~</p>
-<h3 id="Supervisor-配置："><a href="#Supervisor-配置：" class="headerlink" title="Supervisor 配置："></a>Supervisor 配置：</h3><p>将 BiliHelper-personal 部署到线上服务器时，需要配置一个进程监控器来监测 <code>php index.php</code> 命令，在它意外退出时自动重启。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install supervisor # 使用yum安装supervisor</span><br><span class="line">systemctl enable supervisord.service # 设置开机自启</span><br></pre></td></tr></table></figure>
-
-<p>编辑/etc/supervisord.conf</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[program:bilibili]</span><br><span class="line">process_name=%(program_name)s</span><br><span class="line">command=php /path/to/your/BiliHelper-personal/index.php    #注：路径根据实际情况</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">redirect_stderr=true</span><br><span class="line">stdout_logfile=/tmp/bilibili.log</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211173809947.png" alt="image-20211211173809947"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">supervisord -c /etc/supervisord.conf # 指定配置文件启动</span><br></pre></td></tr></table></figure>
-
-<p>再次运行测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># php index.php</span><br></pre></td></tr></table></figure>
-
-<p>之后就算ctrl+c 结束也没事了 ，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能。在/tmp/bilibili.log中也不断有日志输出，部署没得问题。</p>
-<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>关于项目的更多功能以及配置请访问项目原地址<a href="https://github.com/lkeme/BiliHelper-personal">哔哩哔哩（Bilibili）助手 - PHP 版（Personal）</a>查阅文档，我也是菜鸡，更多的是发现好的项目，剩下的靠大家了。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20211211183356350.png" alt="image-20211211183356350"></p>
-<p>项目应该也是可以使用云函数部署的，但是我不会，有大佬研究下欢迎指导下。</p>
-]]></content>
-      <categories>
-        <category>实用工具</category>
-      </categories>
-      <tags>
-        <tag>bilibili</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Composer安装报错</title>
     <url>/2021/12/11/21121102/</url>
     <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Composer安装报错，错误代码如下：</p>
@@ -1656,104 +1845,6 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何设置浏览器的默认首页</title>
-    <url>/2021/08/20/21082002/</url>
-    <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>浏览器作为上网冲浪工具，每台电脑必不可少，有时我们为了方便上网需要一打开浏览器就要显示自己想要的网页，这个就要用到浏览器的默认首页设置功能。</p>
-<p>我二次开发了一个简单的<a href="https://nav.qyxie.top/">个人网址导航</a>，免费为大家收录精选的网站，指引大家愉快上网，希望大家积极提交收录申请，并将此网页设置为浏览器的默认首页。</p>
-<span id="more"></span>
-
-<p>网址：<a href="https://nav.qyxie.top/">https://nav.qyxie.top/</a></p>
-<ol>
-<li><h4 id="Gogle-Chrome"><a href="#Gogle-Chrome" class="headerlink" title="Gogle Chrome"></a>Gogle Chrome</h4></li>
-</ol>
-<p>右上角 -&gt; 设置 -&gt; 启动时 -&gt; 打开特定网页或一组网页 -&gt; 添加新网页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820225836.png" alt="image-20210820225836555"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230249.png" alt="image-20210820230249451"></p>
-<p>外观 -&gt; 显示“主页”按钮</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230739.png" alt="image-20210820230739006"></p>
-<p>就是左上角的这个，设置跳转</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230904.png" alt="image-20210820230904283"></p>
-<ol start="2">
-<li><h4 id="Microsoft-Edge"><a href="#Microsoft-Edge" class="headerlink" title="Microsoft Edge"></a>Microsoft Edge</h4></li>
-</ol>
-<p>右上角 -&gt; 设置 -&gt; 开始、主页和新建标签页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230550.png" alt="image-20210820230550677"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820230653.png" alt="image-20210820230653035"></p>
-<ol start="3">
-<li><h4 id="Internet-Explorer"><a href="#Internet-Explorer" class="headerlink" title="Internet Explorer"></a>Internet Explorer</h4></li>
-</ol>
-<p>右上角 -&gt; Internet选项 -&gt; 常规 -&gt; 主页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231148.png" alt="image-20210820231148136"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820231415.png" alt="image-20210820231415538"></p>
-<ol start="4">
-<li><h4 id="手机浏览器"><a href="#手机浏览器" class="headerlink" title="手机浏览器"></a>手机浏览器</h4></li>
-</ol>
-<p>设置 -&gt; 主页设置 -&gt; 编辑自定义主页</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820232127.png" alt="image-20210820232127516"></p>
-<p>多的不说，其他大差不差，大家都是聪明人，不用讲的太明白(<em>ﾟ∀ﾟ</em>)！ </p>
-]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>Chrome</tag>
-        <tag>IE</tag>
-        <tag>Edge</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>召唤神龙</title>
-    <url>/2022/01/03/22010301/</url>
-    <content><![CDATA[<p>​    《召唤神龙》又名《玩出心脏病看我讹不讹你就完了》《关于我完了半个小时被王八吃掉的故事》《十面埋伏》《今天你就别想召唤神龙》《重生之王八遇到蛟》《关于我一波三折成鲸之后又变回这件事儿》《别高兴太早》《小鲤鱼历险记》《阴险青鱼》《怨种王八》《永恒青蛙》《迷失》《升级消失鳗》《十面埋伏》《今天你就别想召唤神龙》《重生之王八遇到蛟》《关于我一波三折成鲸之后又变回蝌蚪这件事儿》。</p>
-<p>​    游戏没有畅快淋漓的打击感，也没有制霸天下快感，而是“游戏虐我千百遍,我待游戏如初恋”的生死纠葛。欢迎分享给身边的朋友可以治疗低血压哦~</p>
-<span id="more"></span>
-
-<p><strong><u><em>可以横屏，竖屏。建议横屏（手机设置自动旋转然后横着手机就行）</em></u></strong></p>
-<p>演示站：<a href="http://games.qyxie.top/ShenLong/">http://games.qyxie.top/ShenLong/</a></p>
-<p>安装包：<a href="http://bt.qyxie.top:2333/down/KEB2V2n1iWXZ">http://bt.qyxie.top:2333/down/KEB2V2n1iWXZ</a>    上传至服务器就可以使用~</p>
-<ol>
-<li><p>这是一款非常有意思的小游戏，玩法类似大鱼吃小鱼。    </p>
-</li>
-<li><p>游戏带来了非常休闲而有趣的气氛，随时都可以打开游戏玩，畅享游戏带来的“快乐”。</p>
-</li>
-</ol>
-<p>升级的顺序为蝌蚪——青蛙——乌龟——金鱼——锦鲤——电鳗——小鲨鱼——大鲸鱼——青蛟，最终集齐三只青蛟召唤出神龙。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20220103001907115.png" alt="image-20220103001907115"></p>
-<p>你学会了吗<del>那就开始召唤神龙吧</del></p>
-]]></content>
-      <categories>
-        <category>休闲娱乐</category>
-      </categories>
-      <tags>
-        <tag>游戏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/07/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hello World</tag>
       </tags>
   </entry>
   <entry>
@@ -1809,146 +1900,30 @@
       </tags>
   </entry>
   <entry>
-    <title>网站ICP备案与公安备案</title>
-    <url>/2021/08/19/21081901/</url>
-    <content><![CDATA[<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820135606.png" alt="image-20210820135606772"></p>
+    <title>召唤神龙</title>
+    <url>/2022/01/03/22010301/</url>
+    <content><![CDATA[<p>​    《召唤神龙》又名《玩出心脏病看我讹不讹你就完了》《关于我完了半个小时被王八吃掉的故事》《十面埋伏》《今天你就别想召唤神龙》《重生之王八遇到蛟》《关于我一波三折成鲸之后又变回这件事儿》《别高兴太早》《小鲤鱼历险记》《阴险青鱼》《怨种王八》《永恒青蛙》《迷失》《升级消失鳗》《十面埋伏》《今天你就别想召唤神龙》《重生之王八遇到蛟》《关于我一波三折成鲸之后又变回蝌蚪这件事儿》。</p>
+<p>​    游戏没有畅快淋漓的打击感，也没有制霸天下快感，而是“游戏虐我千百遍,我待游戏如初恋”的生死纠葛。欢迎分享给身边的朋友可以治疗低血压哦~</p>
 <span id="more"></span>
 
-<p>在阿里云，腾讯云等购买国内服务器，如果是用于web访问的话就必须备案后才能使用（无需域名的情况除外）。否则会提示“该网站暂时无法访问”。但如果不需要web访问的话，目前看来是无需备案的。</p>
-<p>也可以买国外的服务器，好处是不需要备案，但是一般国内用户访问国外服务器，速度会非常慢，然后访问服务器也时常变的不稳定，这种情况还是选择国内云服务器比较稳妥。</p>
-<h3 id="备案是什么？"><a href="#备案是什么？" class="headerlink" title="备案是什么？"></a>备案是什么？</h3><p>所谓备案，就是我们常说的网站备案，备案的全称叫做ICP备案。ICP也就是Internet Content Provider，指的是网络内容服务商 ，即向广大用户综合提供互联网信息业务和增值业务的网络运营商。ICP备案是信息产业部对网站的一种管理，为了防止非法网站。就像是官方认可的网站，就好像开个小门面需要办营业执照一样。</p>
-<p>备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播。根据中华人民共和国国务院令第291号《中华人民共和国电信条例》、第292号《互联网信息服务管理办法》（简称ICP管理办法），国家对提供互联网信息服务的ICP实行许可证制度。ICP证是网站经营的许可证，根据国家,互联网信息服务管理办法》规定，经营性网站必须办理ICP证，否则就属于非法经营。</p>
-<h2 id="备案、域名、服务器之间的关系"><a href="#备案、域名、服务器之间的关系" class="headerlink" title="备案、域名、服务器之间的关系"></a>备案、域名、服务器之间的关系</h2><p>其实网站备案、ICP备案、域名备案、服务器备案本质上指的都是给网站申请ICP备案号。</p>
-<ul>
-<li>只有域名+没有国内服务器空间=不能备案</li>
-<li>没有域名+只有国内服务器空间=不能备案</li>
-<li>有域名+有国内服务器空间=可以备案</li>
-</ul>
-<p>备案是针对服务器空间的，但是备案号是挂在域名上的，可以说备案如果没有空间或者没有域名都备案不了。简单来说，就是完成ICP备案，域名和服务器缺一不可。</p>
-<h3 id="找谁办理备案"><a href="#找谁办理备案" class="headerlink" title="找谁办理备案"></a>找谁办理备案</h3><p>备案正常情况下是找服务器/虚拟主机的提供商办理备案，你使用了相关服务商提供的网络服务器，服务商自然会提供相应的备案服务。为了方便备案请尽量保证域名和服务器的提供商一致。如果不是，请保证域名和服务器的实名认证一致。</p>
-<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>阿里云轻量应用服务器购买时长在3个月及以上（含续费），赠送备案服务号5个。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819232653.png" alt="image-20210819232653671"></p>
-<p><a href="https://help.aliyun.com/knowledge_detail/36922.html?source=5176.11533457&userCode=28kqeewo">首次备案流程-备案-阿里云</a></p>
-<p>按照以上流程，阿里云初审用时2天，工信部审核用时9天。（仅供参考）</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233527.png" alt="image-20210819233527311"></p>
-<p>网站开通后，请在网站首页底部中间位置放置您的ICP备案号并链接至”<a href="https://beian.miit.gov.cn&quot;./">https://beian.miit.gov.cn&quot;。</a> 并在开通之日起30日内登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a>提交公安联网备案申请。获取《<a href="https://help.aliyun.com/knowledge_detail/36981.html">公安备案信息填写指南</a>》。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819233627.png" alt="image-20210819233627212"></p>
-<h3 id="公安备案"><a href="#公安备案" class="headerlink" title="公安备案"></a>公安备案</h3><p>网站备案是根据国家法律法规需要网站的所有者向国家有关部门申请的备案，公安局备案是其中一种。公安局备案一般按照各地公安机关指定的地点和方式进行，操作流程会比ICP备案流程简单，主要是已登记为主。</p>
-<p>公安备案不做后果咱也不是很清楚（ICP备案不做域名直接访问不了），但是每个公民都有配合义务，在条例层面是「必须」遵守。</p>
-<p>注册登录<a href="http://www.beian.gov.cn/portal/index">全国互联网安全管理平台</a></p>
-<h5 id="开办主体管理，提交审核"><a href="#开办主体管理，提交审核" class="headerlink" title="开办主体管理，提交审核"></a>开办主体管理，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235154.png" alt="image-20210819235154678"></p>
-<p>等待审核通过</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235817.png" alt="image-20210819235817040"></p>
-<h5 id="新办网站申请，提交审核"><a href="#新办网站申请，提交审核" class="headerlink" title="新办网站申请，提交审核"></a>新办网站申请，提交审核</h5><p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210819235855.png" alt="image-20210819235855616"></p>
-<p>新办网站申请信息填写参考<a href="https://help.aliyun.com/knowledge_detail/36981.html">阿里云-公安备案信息填写指南</a></p>
-<p>公安备案审核时间/流程似乎取决于你当地的公安机关，网警，反正我备案的时候直接在网站上提交资料和照片,不到十天就通过了。但是听说也要求本人到携带身份证到当地公安机关进行备案的。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000130.png" alt="image-20210820000130624"></p>
-<p>​    <img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820000330.png" alt="image-20210820000330671"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001339.png" alt="image-20210820001339754"></p>
-<p>将公安备案编号HTML代码稍作修改，加上ICP备案编号，加上备案编号图标。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;a href=&quot;https://beian.miit.gov.cn/&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽ICP备2021011133号-1&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;a target=&quot;_blank&quot; href=&quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35052402000312&quot; style=&quot;display:inline-block;text-decoration:none;height:20px;line-height:20px;&quot;&gt;&lt;img src=&quot;https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210805124438.png&quot; style=&quot;float:left;&quot;/&gt;&lt;p style=&quot;float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;&quot;&gt;闽公网安备 35052402000312号&lt;/p&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>大家也可以直接复制我的代码，以下几处自行修改。</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820001931.png" alt="image-20210820001930929"></p>
-<p>打开<code>themes/next/layout/_partials/footer.swig</code></p>
-<p>将代码放到合适的位置</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002328.png" alt="QQ图片20210820002320"></p>
-<p>效果展示：</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210820002411.png" alt="image-20210820002411893"></p>
+<p><strong><u><em>可以横屏，竖屏。建议横屏（手机设置自动旋转然后横着手机就行）</em></u></strong></p>
+<p>演示站：<a href="http://games.qyxie.top/ShenLong/">http://games.qyxie.top/ShenLong/</a></p>
+<p>安装包：<a href="http://bt.qyxie.top:2333/down/KEB2V2n1iWXZ">http://bt.qyxie.top:2333/down/KEB2V2n1iWXZ</a>    上传至服务器就可以使用~</p>
+<ol>
+<li><p>这是一款非常有意思的小游戏，玩法类似大鱼吃小鱼。    </p>
+</li>
+<li><p>游戏带来了非常休闲而有趣的气氛，随时都可以打开游戏玩，畅享游戏带来的“快乐”。</p>
+</li>
+</ol>
+<p>升级的顺序为蝌蚪——青蛙——乌龟——金鱼——锦鲤——电鳗——小鲨鱼——大鲸鱼——青蛟，最终集齐三只青蛟召唤出神龙。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20220103001907115.png" alt="image-20220103001907115"></p>
+<p>你学会了吗<del>那就开始召唤神龙吧</del></p>
 ]]></content>
       <categories>
-        <category>实用教程</category>
+        <category>休闲娱乐</category>
       </categories>
       <tags>
-        <tag>备案</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为博客Valine评论系统添加邮件提醒和后台管理</title>
-    <url>/2021/08/22/21082202/</url>
-    <content><![CDATA[<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>​        之前在<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造</a>中已经添加了评论系统，但是没有邮件通知，别人评论不能第一时间知道（虽然也不会有人评论）。这功能吧，可以不要，但不能没有。</p>
-<span id="more"></span>
-
-<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p>博客添加valine评论系统不再赘述，参考之前的配置<a href="https://www.qyxie.top/2021/08/06/21080601/#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">Hexo之Next主题优化改造——评论系统</a>。</p>
-<h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822210329.png" alt="image-20210822210329228"></p>
-<table>
-<thead>
-<tr>
-<th>变量</th>
-<th>示例</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SENDER_NAME</td>
-<td>qyxie</td>
-<td>评论提醒 [可选] 发件人</td>
-</tr>
-<tr>
-<td>SITE_NAME</td>
-<td>滑稽树</td>
-<td>[<em>必填</em>] 网站名称</td>
-</tr>
-<tr>
-<td>SITE_URL</td>
-<td><a href="https://www.qyxie.top/">https://www.qyxie.top</a></td>
-<td>[<em>必填</em>] 网站地址，<strong>最后不要加 /</strong></td>
-</tr>
-<tr>
-<td>SMTP_PASS</td>
-<td>xxxxxxxxxxxxxxxx</td>
-<td>[<em>必填</em>] SMTP登录密码/授权码，不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式。</td>
-</tr>
-<tr>
-<td>SMTP_SERVICE</td>
-<td>QQ</td>
-<td>[<em>必填</em>] 邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多。</td>
-</tr>
-<tr>
-<td>SMTP_USER</td>
-<td><a href="mailto:&#120;&#120;&#x78;&#x78;&#120;&#120;&#120;&#120;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#x6d;">&#120;&#120;&#x78;&#x78;&#120;&#120;&#120;&#120;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#x6d;</a></td>
-<td>[<em>必填</em>] SMTP登录用户，一般为邮箱地址</td>
-</tr>
-</tbody></table>
-<h3 id="SMTP授权码"><a href="#SMTP授权码" class="headerlink" title="SMTP授权码"></a>SMTP授权码</h3><p>我用的是QQ邮箱，其他邮件服务商自己百度。</p>
-<p>登录<a href="https://mail.qq.com/">QQ邮箱</a> -&gt; 设置 -&gt; 账户 -&gt; 开启SMTP服务</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211720.png" alt="image-20210822211720760"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822211739.png" alt="image-20210822211739670"></p>
-<p>根据提示获取授权码，写入的时候<em><strong>不要带空格不要带空格不要带空格</strong></em></p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>LeanCloud -&gt; 云引擎 -&gt; WEB -&gt; 部署 -&gt; 部署项目 -&gt; Git部署   ，输入<code>https://github.com/zhaojun1998/Valine-Admin.git</code></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212055.png" alt="image-20210822212054925"></p>
-<p>分支或提交填写master，点击部署</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212316.png" alt="image-20210822212316905"></p>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>当收到评论时，QQ邮件提醒</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822212626.jpg" alt="QQ图片20210822212521"></p>
-<h3 id="后台评论管理"><a href="#后台评论管理" class="headerlink" title="后台评论管理"></a>后台评论管理</h3><p>数据存储 -&gt; 结构化数据 -&gt; _User -&gt; 添加行   添加后台管理用户，<code>uesrname</code>,<code>password</code>,<code>email</code>三个字段就行</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822214549.png" alt="image-20210822214549875"></p>
-<p>设置 -&gt; 域名绑定，填写一个自己域名的二级域名，配置云引擎域名</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232011.png" alt="image-20210822232011572"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232211.png" alt="image-20210822232211699"></p>
-<p>LeanCloud -&gt; WEB -&gt; 设置 -&gt; 自定义环境变量 -&gt; 添加变量</p>
-<p><code>ADMIN_URL</code>：<code>刚刚绑定的域名</code>，<strong>添加后重新手动部署</strong></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232345.png" alt="image-20210822232345575"></p>
-<p>访问域名，管理评论</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823094953.png" alt="image-20210823094953512"></p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210823113800.png" alt="image-20210823113759964"></p>
-<h3 id="配置自动唤醒"><a href="#配置自动唤醒" class="headerlink" title="配置自动唤醒"></a>配置自动唤醒</h3><p><strong>免费版的LeanCloud是不能24小时运行的，每天必须休眠 6 个小时，30 分钟内没有外部请求，则休眠，需要设置定时休眠来保证大多数时间邮件服务是正常的。</strong></p>
-<p>云引擎 -&gt; 定时任务 -&gt; 创建定时任务</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822232504.png" alt="image-20210822232504769"></p>
-<p>表达式<code>0 */20 7-23 * * ?</code>表示为7-23时每20分钟</p>
-<p><strong>重启服务</strong>生效</p>
-<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/20210822233626.png" alt="image-20210822233626036"></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>valine</tag>
-        <tag>LeanCloud</tag>
+        <tag>游戏</tag>
       </tags>
   </entry>
   <entry>
@@ -2011,6 +1986,28 @@
       </tags>
   </entry>
   <entry>
+    <title>Python知苗易约九价</title>
+    <url>/2022/07/26/22072601/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="3c42c4bc3d06b2b4658b4d6635945c41f4d261bc39c6792abcf438639cf8329b">9a484b91b0f9ababedaaacd17f0d17351df40a651b56496f9a09bb4cd637979087cd7a313e7aa54016f734009eaea54c866271b549c029dfad4e2b25a7bb6aadfc1b4b3c1725f6b17e6a9209b7bd556b2313a9ba1051b9c75c4e757723b35aecf3c7120adab93c508983c753649d93f01541ea23a163b7259b4ed4aab594d6d33fd136daecb4eec7de1ffbe1c5bd20181cdd5b0de23e3dce8f149219469e5982fa8c0ccda022b937af505399942644dd4a770fb56caa9305500adb5ed7fb1676b8266867b60cc909656cf7ab1d1f142198c4dfaf352575defbd44249a2435f518a2e91cf6217a875abcc1c66bf6c8c84272517cdd2a13012c02b86f73c9c2b56ee0af0b0b1b59316fb7b744203b9cbc7d2acf4e1fea5333a01a4f8073af77d66137acbf3e0b08e36bebf8c06d235aca57630faa91964caf0b06623055a902fb44f3127799b2349eed2c09ba129fab2d19278ed0c53a80b37e8aceeb2e4e3b46e963e75b905563cc775cd275ed4c8838a2a3f0224e088a47fb098975caa4859921288b41c66ec3721e181c9472d2a9d5edc4b0e509609ea6bfcc4deebf6737ead7e9f70f222b49af2fda69465ab6b1be70880b08b1abd4ae2e4e9436900a1586e35a901388d2666a0c9ffa7ef023836b6587b11a6f95b58305904c2852114ede32f8f5a50354b2677cc801d955fc4e670fbd9a3177c48b06e89caf0840b062a33515128b8b49196d6b7fe985b805a243f6d8aa30b4020f10f63c73765da3f91fa5668b28c6ffa01ec4d4c5f297843d55aa4efacd9f87109e2a5af8e48acec60d82c560c3a9f1b53d8fd492cdf85f247cdafe1177f519b86e8de28437bfcc9f299f2b760ccafc7f8c4cbcc44b5db0e257309ba090c2274aa99eff1790bfbba2ca534ab835ebf81d6316b3ad5e5992969763c5c1477be68a69a658a4a6e870d39808e15ab037a3bd8969de32c32ca027722cb939322d03a94b518b1949ac70f34b1d1874235f718d964c3b30124d48faa98125e783d3d943dc54f88cf4ec850d9ec897f4b261e5374bffa1c38d8cca6f876878ec2810b3b0a61df403d0d1862d83f6b372c10dffa7570364e52b79515c67e3218edcea88ac3c70ab241704defc6cf5da574c22f5b61c417e4eb78dcb3c43af62b2905803450976103e73184eca1a0d1261e40e87ac3a1f74fa96acd24b3df2c94222ee53e3b3e085bbb071f56a222f40806d7f224fbbf1bc8880c06478df7507fe879f4e873656d4e4f69c7187fea342b00676abbe4c97157cfdc45c148627406692a91e59c7586483d55b6da2d90751872bda5185e107ec91c88469c3bff64df803725716d88ee8dcb1be35e3d87f1c2ab6696d798e27e7dba2a17670cfe4c9bb65f79a886870970ffcbd9a3cdfe59d1c1dc2907e7fffe66b8dac0374d8fa3ce6fd1e54996eba2a2539dc05a64dda2d8206ce4003825c7335842ac4ab27a3e935503268b30eb47793ce49f411c1e52b98cdcc221becb95cde25c57a25c1e379a13cf498f3845a459f4510dd9800af0c01e91219cc9269bbf96a27beb3f35de9f017e97d03589a63612b706c605720e35a13b6b7fe417b255ed6adac308dcc939967dec7062baff09d510195f45663c8e9dc09bea598f70f9b8cbb4f023a0ff2241eaaac81c08cc5e47e7deb882d326921520633b6545893d0d30163ff73a965af5adcf32ca2e6bfadb226e6faa333353f78a9e850faad15574a13922d007f10fe89c401160803c1d61bc3f5ce7d33a20cfab53bb19f4c023bf819e195ed479218e7f81fd8a6781e2a47e8cacba5620081809efe63f2fb5422ffe95f223e85d3317189d254b6f747af319037984bbb97c95d12e5ea453e1e5d4274dc06dce81aa12102172905d278c5e31907664fd3efa3b7b39eefdf31946799851441d970575dfc49c3508b761a16096539d7caf08fa0bbddf24d1c1bf2af03e67739967e36109faaebe9e865295b92ca51c992b8f29c1e56673beeb95f408c7266ec6d394cc8fd12592455f50549b73dfd79d26167d2f20e2dc0dced7d347eed440f7812fd8985dcf204fc9f93a3c41e917ee0cd1e5b8958240dcb5ec1cf3e5c395089d6f1101651f72663e6e87c5d8a91bd35f1d181ee95be2ae2631c066e4e681395a12a4c4d988422b457a1e988780882bcf8c623d1d3615355eb5002dd860c27d1b9969a3ea523d74756edf36c85aa3fccc7679d5f4224732d0364e4b32ed66a8afaafd554dcb17c26f8c9731e1eb8fcc7744a7c442c1c987d2bbfd96acbf0999be92337609e0a088c1f36dd05cca231a111df1c94aaeb53989cafc1fa5398266bef03e97dc260f08918a5c5dbb97f4aa20473331dba6a78e7036afb249a3aa2479a26830548e200434e27dcdfeb35f5a3f3d5945aa48cee60825dead8af7f9b4ff2397a79f23754b304b2b3d95c625e509a06de3212b879fe8b91e65cb157bf91a0f972e155dcf8114a31b3f6316be1aae7e6faf6c80dd43bca523436a21c3ed495671bbce88c323dfbdc4e421c268c42a04480e59b930edcf5fb8bca2aa74d4d68cf97aa19fcd31d6250a0aa4e42728eaab8ac9ff024120825dfe1442df205dc9bae098ed6481f066067d45cb95d67b071ee96093dd28e2a191f1410c9da5024485bc18877aafcedf79508a9d42d85fba2e55f5e2279e055e9c9934662cac5c03f32ae07e1dce498b2a44dd6cd490213838c26b27f28e9fc8c07d1abcf9dba29ba6c348c18da955059d84f1024fc959de77143aa111782eb3ef3a83ae81097e8d67f9e5359dcdcd751207f4ff24e1429a421e491fbeef449a825c33e8ae755f2dc635f68d82432df112d481cc3b3c866414037c1e907c8cced2edd8a4188526699e38abdcd00935f5eba3dd9e64e2d4d4b2613d39c6d24c2c508f766968dd8361ffae62d65b68935c80c3630c0026152b2c9c58c4a44f3e3c36fe34e79d1cd64d440bfb541f3da8bb5b3c7bd0858172fed93a238f16b2e46061944ba96d902264ecf7062eedb73f74d31a9060f79507a8c2f51bbe0b65ad39bf0265f57fc42469c0d7b290f63f5443c58ab456e7cb83a414a1f91f5601a8f8c6ad566f10689c95bc0251eb8aec2cd142b8c42001cc0479262bfe106cc777c5bd68752e21aca70d39612dd1b89e4d8865dec3d72669da318aed014454a65633fd2c5d734a4d322c906e24ed8a34a48d1a61abccdb1272d926f255a4eac0dc72fbffbdd1a43f820b1636614876467e8767c0feffc2a5fc642b8824418f372bafd3decdd11544c405b3d448fbb55061b94ebf1db854638c7ed7fff4f6e530843a2813a42a71a4c1883b796e3fc0d4e0449eb42f25611d42bcbf54e34e0747e3d713a083e2915171d23dc3a51901fba0bfed748f3dfd26de9f28e81b03e5fc860c8733e31e60368ef390380dc4c5ad1d126bdf971d006b21b85aafdfe5aa29e024abba327f183baabe1cd13107389fda8e03de6f6de13110781a11b123b96bb3a631aa5afa2ca01d6967c9fcbf754414b410f4a83a13f222637c3712c5dd17d3ceefdfe8689e2febb858d87834e819c123f63ab45e759286ac25bcae5e4a7ff3aeb72e71c5e44348f2a81d9f5d0e4a865b6ec064090c6bcad93a8cf577ad4554ca78c562d3a452a53120a741169524f561230c6ffd7c69c80b9d6902141345a4d9c60ef993944bdeb1f67ebf0d598289c5dbd4612fcc15dbdb2f6a5a8ef3e50155bc7580b4569718c76a144a18fb83388a2323bcb270a55aa8ae258ea063536559e2fe7a5b2f2b01d8d776730b8496aacb68749c37a2d17b2efb36adaf5de98f740d112de8592d74a46b994b3e67181e5401961882257427d451d85566a099439fe80e935793e5780b6d8db84b5a7f18f8bf32e32f2e5a9279d1f91f85dcfefb5451cbeb4793baa446a06fb41a69811f7728cdf1f55815f39ed6e8eff575a93418c5e647e4a8bd6ac729f30d1d73ddb5df4ff81ade8774b8061f1fe30476b76dce783678c2ee49bb03c9f5b993776776b17c54cb6c4c00e63ce7c869c8c97d773d2f68929eac68ef5caabbb71ea8ab9ce1abc956c2f7f091ca31251be92b017e3b8fb42f77c913e98d96cb7e696c35a698b4a2102435d6a5aea2341617640f835327adee5202ccbb84d753fbc897bbbc987a37a2e330e222e8965f10f57baa2c60a8f68b04e052e71019597702eb53744468e297e9a1d6cf3a270d8594893a3fd3bec82917deacdd728d7cd2340a7d23342731e0fc7c2fbfdde838bdb4a3bcbdabab740bf383bc6cc3b21bb188deaa83e866ba53621fab87269a85c494fbb7b2fd20ee120ae38d246b6b4111a621866960c129314b89596bd0f8b19a56110f675e958b8bb9fa53d7f407c2097412649c35276c29d1d08998ded529558a6457db76a5d68abb5b858d94fd7fa6c3cba585871ec4c63cab7dc6616b0fa15a3478b60992d6cfa30079380e3f2d8bcf00ac808d5aabee570467d14e2c950c9bbb4a526d4457476ee757ead27a83f700fddf4c68ca4d285cac80f5daa2ab92a383e852ff093ad17b56d64c22cea9b768613c2f94372d74ab81ec319c13ae5e542369e96cc9060799c4356c0f204bbb4243c7319a69cc288665b62921645de917c2f611c5937e4b447c443d07079c8c320949ef39526a1d06ab6b6709b469a7c29059b963b430a29426e14b1303c1861d490ef8e62a4a7d289aecbebcbc88b0ca75ad6ddb074b7adcd1309d7cfdc5be84fab290ed6fc2371bcd4daa3edc203d5182e4a13748db191f47969af7c26f779401d94c6fcc36a17389eb31487a9afad035642277cde4daf4cb7fb339db4f0948ab2dc775c50a3db46fd818fe6bf897c4245dd6e1c72ca67d6794ce22b8856592f44f6e9c326935f6342acb63b724181b7c445efeeac781ba982ca74501e4bc1f81cd86314c5911f3e9713d7849d6c7d6fcc4714775a23e39eff36df723ee3ecf42ee34a2c2ad032413747848269156ccbd6fa5ca72846c2d43f76048fa6f6562173db929398ebb08cc3ead2797d0562bc297c50f3ee4b12526319ef72dc3fa7775e22173e598b6c54a2516fa1ea30df062b2c14185ab8c2bb6aae2ec8a405bf0c90c78fa420b441316b7ae7d5f175329e9fa7e5ccb93a54bf22f1be04bf5c9ef25dd5d28744ca14523560521613f2c25052aea76b8d4467d6c67e7c91aa605ed6e2b8601fa0f57d557fbbe35eb2af4bf04f9f2bd4b8796adf1b7a14f3403ac256beaedd1b9f87c60524f50b97c6b087a96f6c21d16b92871bfde39cece08a8dc63526b9ed28fccf0a09eafbc49d8ca9cdc78fec0b6159f928dd880f151cb9d8e61822b0f5cb9e61d160b68cce972c4a82ae1f60f154887acb324d5114eb6e8627ff50e97ec98190747ae8e06f2c3423c8cddb2257c10d531660aa12b8cadc6860841ddfbdda42d69251211ff90f6d109385287427062040e74fd7e842ff4637835b8db29cc70805d6b33c043f1981ded4abc12b0a656b0415c2e43ec708b1f8992219c0e711203335e673656c33b5fe3c36020c86e93f885faaeb6a2c498d5896bf628d53e2bfb28a297af90d772d92c82b1c80c64926c7ca0bae2982440b4c56db4af75239bbfb5affef03f487c5b6addcf406418762628a8d72da03b5ba0c47e206495a630c4798f03f2af4a7b81203389570ecb3ba48dce991ca932510b4c90f9daa2551c364da6f153a58c585a6a72fd0ddec129c967e4fbfcb8eccb77ab31ea8a58b0504de04a1278835c45d9bc94c3cc8b5215d3e75680cfa893913df6c385f2e6f36295917acb9e257ec057f6622c1a418f3c2bd8496820ba4959679a34a55d72a1bcb03a254e0afe73038fd3e33f85ef1a9fd80eba4d89b16fc0d8dd6d51c167733422f5c829ff69ec402e80ed1c5af9f69a949e93fcebb71e2da292d55cd103923a3509b8317307db06bbb2e2aa4cae468489def3184100af7e7f523f674805aad19b69fc7aa077180d5e716f6807e86bfe6053777415a179240f7234a366c4d274671318305e2d35e720dd54172a3f54fc91aec298ff5bb0722da25f6400e4c2d9c2fc4bfafe2aa7972867e14548b639410935143fdd28494de5e561e73770a09275f6202908ce42dfb62fc850c1071cf2d3f87118a04a8227cebe77397f0e302e1845e51c446206636f342284603fd85e2cc9a20080a1aee3e87c1c242df531dca23b910ec791b177644ff044fb89455b9fe73d02b0cb59f8f8ec9ea5021a1f8ca62fb2927b8f443a8f17df18cda437d70a4417f62461d0fb1e447d2ef9678b0a89358a807d59b0145df3a3145e82fd08e958d969177edab9c6044e0240ff809a92346d54c3cc640187ad81f643e1f07bbc6243d03f3685da42546cba3e53baf369e60a6841d54ba565b97ace72eb2897644a558232f37cd04b73c108e1a168e13d3cabc3006baf12afaa24e734f715998137c5ff00203a7b64a3df968f095b35ba0f555e5388854813a7920beaecb1be95bed889956e00d08f2c0c7dbeca0fa0c7db8dc3756b69f7d98d0ffc2226ac2ea887b4f4772e06e6e00e52b45c9861da391b80fbaeb1aa1dbb3e870b77a7bae70e4ad1b031deccafdc79533380ca1bbd45c3eb1411faff6601095495b057092638ea46fe81f3fe9d55666c4149c68d9b0e252b01caaef5784dc22320d5f3e1247152623b1d54e21f45877b5176e70e1acd42ab89c5274f80f1522b426127b6b2867c480f148fcf86e8415aff04a0b7de22971c645a2aaeee61fba6b59fb724fc811af5913c5403ee22d23500a8a7514ef030e1ab8cd1d380a2e81e74fc3593d4743f9fa9f4bf5c10c459dee680b271c2a3946434f104ceeccea1150afdcff72277b9bfcf01ff56b45035d0c07d7bfea4a1d705e7dfbe58c9cbc79014bead6a2a2dffea2c3b14be406e1c0142d395332ac4aa56aabcb321dae611611bb01e06aa96197d2f4b40cb5c0b7f125e6fb553c62800576395deb597a43af36a09d186bb6d56bd37cd3f4208dc97ad8a3fb85b418b7c3098ba2b08d1c0c735b56895c14af7a528d1f3cc4a6305ae1fccd6108d42039880a712ba72c99f6d37f2a5c3c02f73e6a52ad37113dc124763a1410675508a2469b8af41d881180db24b1df184cb21a9a7725a8505d3ed69c320d186ea5f57c9a890dc3e5732142df59afcfad6397df892d049e5191e20f354de581cbdfc2c0991fb4ef67f02ba9dee2cd21ad8acfd7cdaf40cead3e735b3d28770c10f18e9f33cdb2481df56daed5bebc6559de49918999c40090bfcd69b93ff8b79a5e60e774cd363b878cc45dbbc6a4824bd4a34950da8db4287c4930947bbdbcf14100c9ba7fc9a9e84187f52d4e7968808cda5a2b75f1f05560cf730049035a0142c7d159022dee92b2aaabf0be76f8babd5ed8007fce5334e41d589eb646dfd74b2e38d54c573fa0aa05a9333f959c31ec2bcd5dd0a35837f5620e1f46513acfd48699fea1e45fdbf9cff1f7e7f462a9cdebb6f6c5c0778a4c8e3fd9045694fb5b5206aa8499b213a8a80edf68e929ac2ae167b7ef96b6e1dd12a5ffe962eb498f156a2314eb2bdf68363fafce44ab8c22f8d5d97c51249de0e97a5e331251e225977713e06a0cfae03f13a2719fd9894997f0fd0054dcae12ffa044b7ef8ed8fe03e77b9098f9c23bc5d8c65634cda0661f364546ce345705e87c3cbd7d816241aec6a0e23b1f58ae7ca1e5e88cdd5de78d53de1bcabeadf785ba870045a4f5305a441f5d76c4da2b4b16d0fa327257e3ef5d830216dfff7cec59de3c23cb8cac736ac4ca1b1447c8bdf457d131463059081f9bb16ddde26ded0e7d9dfe0bb63c4935049a1a19fb0831ecd42c43d0d75e1116231d85dcae55067ebf8eec3c417e3d0de0df32105f919f8c82b1963c09259e328cbe6b8769e506467ccfa5568a894fb87273c149b84efeaa76e8a4a1507c3609273564f65f7cc039219b3289cf801e813b459c20f635c5f1bcfc189317326bae1abebeef52945fc5ac16769082981e98e2a7c9db6504755a9bc2dc8eac0e92d228f5f53433571520d50814a710d1a87b003b331277ce6c8c4fc0412d3d3bae29aac117bd2c7785a19ca59abae7f703803d64b44715337001499e0f1ec4e2bc8b2de666516daea8ab13290f628769b46d39161be8a7a23b0e18231b83eb4ac09232663c64012673a132a5a8e4d8e1d9423b34e6c9551d2ea409cf94436861aa58c02e6a12dafb04ea35f4cb55e747bfe6bd33aba8e8de7fb1b32ebab5918a46e2916a56d5dcb69f1dae59819cd112e065b46da76636fad162d76868bb69d7079c4bcb8d57580fbcdf25ffd234ea808703311ca62441b9c3a30d665a89d3db9a0eb7b50dd9ae6c49c200d3a4c4f1e5c5dccf9c8b9c545b435d1ce9a345144e700ee7c26748dd72e90b774ab704bc9d9089b2310a188d670328102dbacf76b528f44e15cf09aadb6319537b76c31467279f9c60bdbc6e68a2134cf14622bd358521113d97794b21052a378e8a3d0315623adaf241dc1d48366437fa0344c89d8a0a6195af12634f7ba23fc810c69d432671689e1add56ddf31ee23e111292d006b8479b79f9316d993aa63eeb60b527c4453c96e9174c5274bc46af65e0f34377efa8d44eadf00c270914685d688e8b79ace02730e7e615515ef421ec3c72b759bdb916a38acb59121588b72f06acd5b047f73332513976242c7d5b09954bec6053302f3bb05a2a9db4481505abef5a78a64858e8161a62c2a343fc5d1a934dca3eab21c74fc42612ab8c95978e4a29f9464b928c0d3e5a6a586a723f0f3bf57c25ec14c0f854e90967de743df046d6b7e9b7d8ea21ec9cb456b3a1d22eb9286d5d7ce41e6b1b820d8eddc2bc5015f14ff159ab38c714172d98dc6783672b3b21f05dd97702e4e41bd4b994a391447a2094afee1b6d1e9330cd36dffa3d566edd877d0e8978d1ed86955da326ec941d65f2bce1a25af20d823a8a11b7afa1ab1c127ce203218c13a109a828ce362a282c8b274a850cc07c52bdcec00cbdf6646c00f760d8585500d64105d66be5426e4ae11c6e77c4a11c1fad1d962d4cfa93c8c3660041028ec7ad3ee87e80718d9f6e7c35e24f267bba4734dcc223dd994fee47ffa1b67c69e58b5de4ff4c27a041f7763e48fa5452b6b491d5fb1ba914916032f42aed0e5f73b14aacbd8bcdd857d86c1ee22b24da3bc184fffa0c860583ecfff13fa9e8320bff097f61a5a3622d16971c2b7d4ef94805191687165924db6945418059ed9bddaf1423b873f87ec12d401ed32662cf38a2791d304a64a5ea7b737b2660a4f9fb671899a6d0553df04f71b32668afea5a5b40ef86ad24004ca590958f7d803b6a52416e2649f1047cfa428c9c8d0b35f8528c3043476c60aa3fac405d344570ec8e91db51455e4b44314626835fa886ba7b910c36f9becc666127d1ab281ea5f0d719e7c2052c0601aaed63e5ac73917436cf9808228994e119e07c4adf088ee587b1c7182ad99c43fda25a2979821638b128b7e2cdaef9f287aee016ac9247f5628e042c48025df6dc997e00c1014e41ea4e4d39ca84d61a1999ff14e5b17796206e68c85d623aeb2913be56b164a5dacb23fa19b72ff9cf7faffc06d22043aa6a8fdca7c6bc15f15c91f8fce44715cc8ddd9ece3cbca7220568458a371734df9201144bd7887495b11a4a34520a6ecc98d7fda168c0d8a3a51eb5fe3ca12ac4496b8b6d235fb52f62fc7a02a115b9a00b0e54119ef0d6d9f7e823a74816852109acb244927fc667fa73a9c34c36fe39be83bf79e33d33d3a2db39d930cf75722c70ad0a513f74acda2408e534add298ca0790f4b73f1da5e7f1ba0f62cbfe7b83ba9b084fe8b412ed9e4cbea82389e0a14f21e1ca3a242bd2609170e8a49b1d20c14fa5026621585a71a34eafa7e6a7ead8794100fcf1dc872dec4e8b5fb28abc476c5432b37a346c03a6b263661abba79dac9d869be860ac8d6817f764a734b1b963018921e2f071d45a7bba3bdc0e8f72c3dd08647253f13a53fd7111dae97702b8d4642f1c1939bae91247e3822417106e200ce78c34ab5392900b1e687ba9a24c174ca2a3b4532bb4653ab7c699d32eebafc1d7c55233305f33f4c25e0e30954c89f4404b1af145c3bf3212fabda27c59c1d476b63b310bcd67be5f7a66bfb547be05775a6899c129b0bfdf8717b9e01ea7447c1da80801674e0f79c48e514968b7b258e03104d6366fcd73df29b296b0e818746571b5b549ef4143fb681d1d6652560021c32f678a85334a212db6b51639b46decef1cac9afe246237ec9638bb1651b3676e2fb7e0a6536f6997ec57f88c0ba28f2c121f59d1ae75025378f70fadb21b00f891a3010c8288d51856f13ae386829b4ff833f9793bdbb056f06a1f34be6fc81c6a04fbc81ecb4357d9f10e6819959fed5857a5a4a33a9b589f58cbe9b3fe4518d7a1c933ccc676813ac09d1868481a7b4d1cfd21134b81baa307d354c2e7d6aea14f8e16d144c8bedee19cdf8b2b4b8217688469de743613dfc99439d01f44f98b5fe9993da3265d703f212d8f81fccf92a490582580d162fe822dd0288c5f2e2e195961f7dc3874b6e7690805cd6e89bda347f501a4a1aed784987377ef671dab3c1bbacab67244cc505fc5c3624912ae514f2c63ce751a6589f124d39c8767c5cc5781f9d401254330e572ead1a25e9ec1a84f3d1fb29d19eb4f7c22a6c81129e261db98512da1fb3b682bfcdba4c0b4451aaae1c8527562645b6bed524071e11310ce1449540831823ecb7daf9fabdba3b7e65b90f1189eb97a13089b50d3e4e6e12958a82ce763ad0d73431b69588a7afcf4bcffefc02486a1f8335ea501a1efe1139fd8e556d5615c21c38496aea461e65bfdeb7f0e35b5353e88bf07daf2ff9526716a4c0212de37fe25b64cb86b07d79c356cbe276ba74edd4db1df835ff14e45e2deea0858f13fa3340428a67d0b103e9764dbff8603c259bd7e19d1734bcf0558bc688a87a9c191cf235a0f9d48a6b058868d627d0fb8d4cb962018cdd1b0c634a0c3f8ca087f036af236f808f49062f2c9f5884df45dc894201294d0e884964cc7f52e1717817987d7d59b0d69e46d4cfb065bcde7f79483cd4aa93ae42a87b8089ddc83e0a30f5db58c2d6e3946f93714b562199914d8de7959af6421bdb86894b5fb51ee16cfdaace8243fe493f3666ff0417a237f587b975dbe11176a624810a683254c546c26b0812f6d1be7ae8ef9a2645bae05d8b0d49beeb1a49f7c8491288ca3b77618abb4baa3cf18ade247ada0adc294a21fa6c5e5f6d90ff367bd7b5557ed3c9ade2e03671050066a99389cf3c2b0a6351cad83ece531f3b506b64c3c2af95f95ac42d1d7c3b7feaebe9d6e8a3b3ea3bffe5bc703c981919cc877fd972889599c27e2c7019b491d0d49ed42b43b155e1797f09b54d9535eae80c66cf35a4fb79c995454c8a469aaed223b7eb8fcf219d2d9aabaa9699ed9e24ed95214fd98b9d5b786bfdb5e3124b25270ca4476962c1756293ff8d326d67aee91d0437fdd774c140f5c147984674cbef0e76a177354c0dc1e1385ebaaa4fd3717a0dc9afa93be3789acdbde8208d7270d0846a764c7c8ba47df2f7235e1922536eb6680fe8bcb27c785d0cf0b5cb2ce0bf8fd4a341c12e33c622739e22293470fb1b905cb65d67f07074bd21af1f715663c57254e076626cfac7a0f7524f4f4ab12cdd2c6109e55dbedf003abe85a5b30312d9831e61ce86e08d483da386ed8d70687d1aa55fe339b6918dd0f294c68c9aeeee843ac428aba5853f8d28427449544b561bd3537e57378ade7dbc1091af12da89cfc3706164cbd4b52aafb0e064fd76691694d43fe0e58dbb9a60640504ef22d1869c7ff6e1dd8b49ac3c136cf22f336bd3e62c016362a075f6fdade58b14c61ea60ab0493b1f940e4b08f1a54344322fe204cb5714b7f245913e95c78ff0fb34855a1c0bd1c52040fd4866759fb576a492950cd950dfa612e0909c6417fd706aef845a90fada8fbb201bfdfcbb39796599a3b62321cf2b26be6c99ba0aec05598a058847feb2237af2b0e44c2f4b7d0a69621fcd36fe6cc0e414cf858e3ed75abe22b23e77989be4c6992a6b7b228e6c9567662783514bb1c363447f88cd6d5c34c4e351f79d7d61272299747c103ce472d44406ffd16270b1d9e395fd13b69824d0f9d7af10c666cc873232e52e385f864f09f45fe5f585eefae3fa20567750fe385d384dc85f7e287a471670fe2d6c5baf22eee80874ac1c85ef3a89ad465b1ac398bcd68b1970db064c17d2f70385560377756c2381ef9fdb3ec3d6d07d3b6a4cb3f8bf03cbb618a3c77c2dc59b593b67ec3415a6db2feeb0a2b4936b562bde46729fcb770f63cb887617e02ce895721e36bfc689516967f1d707f0e2c1016cad36b381a3470dd6a821a1fd27f335a610db04ebd26cfa3202d6f83f230fcb6d40e93e23060fe1375d99bb4dd7eafa6e4eb4d0fca9db3b95d3264f111b34eaf2089ef7e9a862abb103f9d78c5de18624b7bd8460b753070c15669f05e5438d0c4d32c9d534b5f7aa7535acc98557ed94db210ea70e757c152ec9b4fffe33e7ded899ce503c14ecdecaa8a70d6b0fa859f9ed06733429b5b0f42d6d78b76cb5571d57e1aef9ddcb444d7d7c4706afbb10fcfe4bfc14d3c04fc5b390d854774bf6ff3d9800522e8b61c687a1443e4476cc5ed3dc057fd02614a32ae7cc96d32f272a92ad8bb05777c4b11f356d17c19314fd97af794a0ff83aefbf7316983224e6f6d759e91dd6050d8d57134869a68a2b6c2623f821dcd6d160e62319f4159446ab0b0f15063d1a558f06bd8a862e9827ee09a3380e44c6dd147cfb2907e181ca272fded467a5ba02205bc082f41934838a80ed88c80eed994ec65572eaf1c392aea25ccafe767ad919e26c12ca7ae91a7859b7b5a1f4afcec8f886a859fb2adcfefa552bb436c4a049ba3ee3a8e0d10dd7bd141e48b06f5adae11f9f38039524751b3cad4c059c8d67eb84c169da3709b155e7a9a97fc15084043692a1e2914ef62eac8e3de0d635e4ea2fe07f7a0a153c15a31e34ec100c7d12d1500aea571d0b46b8d9aca9824bf0fec21b706604611f404096de1fd90a2accd6076ec31e8211d884d0825c1e31f1d5d656227adc8359193225fbd5c3c0f36ed26486aba79222df9434fd6db9360656bc25cf98d94a889107f6038b291ca9cde8a87938ae12b470c84f349f61614895e6a6963c520525e68f631baf53b87d8efd42913866c66580be8a149b6b5944138f6ef1e44e5160313d2a13a4626bcec61eb876b5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">输入密码，查看文章</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>jiujia</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Typora付费破解</title>
     <url>/2022/07/31/22073101/</url>
     <content><![CDATA[<p>Typora最后的免费版本也用不了</p>
@@ -2034,28 +2031,6 @@
       </categories>
       <tags>
         <tag>Typora</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python知苗易约九价</title>
-    <url>/2022/07/26/22072601/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="3c42c4bc3d06b2b4658b4d6635945c41f4d261bc39c6792abcf438639cf8329b">9a484b91b0f9ababedaaacd17f0d17351df40a651b56496f9a09bb4cd637979087cd7a313e7aa54016f734009eaea54c866271b549c029dfad4e2b25a7bb6aadfc1b4b3c1725f6b17e6a9209b7bd556b2313a9ba1051b9c75c4e757723b35aecf3c7120adab93c508983c753649d93f01541ea23a163b7259b4ed4aab594d6d33fd136daecb4eec7de1ffbe1c5bd20181cdd5b0de23e3dce8f149219469e5982fa8c0ccda022b937af505399942644dd4a770fb56caa9305500adb5ed7fb1676b8266867b60cc909656cf7ab1d1f142198c4dfaf352575defbd44249a2435f518a2e91cf6217a875abcc1c66bf6c8c84272517cdd2a13012c02b86f73c9c2b56ee0af0b0b1b59316fb7b744203b9cbc7d2acf4e1fea5333a01a4f8073af77d66137acbf3e0b08e36bebf8c06d235aca57630faa91964caf0b06623055a902fb44f3127799b2349eed2c09ba129fab2d19278ed0c53a80b37e8aceeb2e4e3b46e963e75b905563cc775cd275ed4c8838a2a3f0224e088a47fb098975caa4859921288b41c66ec3721e181c9472d2a9d5edc4b0e509609ea6bfcc4deebf6737ead7e9f70f222b49af2fda69465ab6b1be70880b08b1abd4ae2e4e9436900a1586e35a901388d2666a0c9ffa7ef023836b6587b11a6f95b58305904c2852114ede32f8f5a50354b2677cc801d955fc4e670fbd9a3177c48b06e89caf0840b062a33515128b8b49196d6b7fe985b805a243f6d8aa30b4020f10f63c73765da3f91fa5668b28c6ffa01ec4d4c5f297843d55aa4efacd9f87109e2a5af8e48acec60d82c560c3a9f1b53d8fd492cdf85f247cdafe1177f519b86e8de28437bfcc9f299f2b760ccafc7f8c4cbcc44b5db0e257309ba090c2274aa99eff1790bfbba2ca534ab835ebf81d6316b3ad5e5992969763c5c1477be68a69a658a4a6e870d39808e15ab037a3bd8969de32c32ca027722cb939322d03a94b518b1949ac70f34b1d1874235f718d964c3b30124d48faa98125e783d3d943dc54f88cf4ec850d9ec897f4b261e5374bffa1c38d8cca6f876878ec2810b3b0a61df403d0d1862d83f6b372c10dffa7570364e52b79515c67e3218edcea88ac3c70ab241704defc6cf5da574c22f5b61c417e4eb78dcb3c43af62b2905803450976103e73184eca1a0d1261e40e87ac3a1f74fa96acd24b3df2c94222ee53e3b3e085bbb071f56a222f40806d7f224fbbf1bc8880c06478df7507fe879f4e873656d4e4f69c7187fea342b00676abbe4c97157cfdc45c148627406692a91e59c7586483d55b6da2d90751872bda5185e107ec91c88469c3bff64df803725716d88ee8dcb1be35e3d87f1c2ab6696d798e27e7dba2a17670cfe4c9bb65f79a886870970ffcbd9a3cdfe59d1c1dc2907e7fffe66b8dac0374d8fa3ce6fd1e54996eba2a2539dc05a64dda2d8206ce4003825c7335842ac4ab27a3e935503268b30eb47793ce49f411c1e52b98cdcc221becb95cde25c57a25c1e379a13cf498f3845a459f4510dd9800af0c01e91219cc9269bbf96a27beb3f35de9f017e97d03589a63612b706c605720e35a13b6b7fe417b255ed6adac308dcc939967dec7062baff09d510195f45663c8e9dc09bea598f70f9b8cbb4f023a0ff2241eaaac81c08cc5e47e7deb882d326921520633b6545893d0d30163ff73a965af5adcf32ca2e6bfadb226e6faa333353f78a9e850faad15574a13922d007f10fe89c401160803c1d61bc3f5ce7d33a20cfab53bb19f4c023bf819e195ed479218e7f81fd8a6781e2a47e8cacba5620081809efe63f2fb5422ffe95f223e85d3317189d254b6f747af319037984bbb97c95d12e5ea453e1e5d4274dc06dce81aa12102172905d278c5e31907664fd3efa3b7b39eefdf31946799851441d970575dfc49c3508b761a16096539d7caf08fa0bbddf24d1c1bf2af03e67739967e36109faaebe9e865295b92ca51c992b8f29c1e56673beeb95f408c7266ec6d394cc8fd12592455f50549b73dfd79d26167d2f20e2dc0dced7d347eed440f7812fd8985dcf204fc9f93a3c41e917ee0cd1e5b8958240dcb5ec1cf3e5c395089d6f1101651f72663e6e87c5d8a91bd35f1d181ee95be2ae2631c066e4e681395a12a4c4d988422b457a1e988780882bcf8c623d1d3615355eb5002dd860c27d1b9969a3ea523d74756edf36c85aa3fccc7679d5f4224732d0364e4b32ed66a8afaafd554dcb17c26f8c9731e1eb8fcc7744a7c442c1c987d2bbfd96acbf0999be92337609e0a088c1f36dd05cca231a111df1c94aaeb53989cafc1fa5398266bef03e97dc260f08918a5c5dbb97f4aa20473331dba6a78e7036afb249a3aa2479a26830548e200434e27dcdfeb35f5a3f3d5945aa48cee60825dead8af7f9b4ff2397a79f23754b304b2b3d95c625e509a06de3212b879fe8b91e65cb157bf91a0f972e155dcf8114a31b3f6316be1aae7e6faf6c80dd43bca523436a21c3ed495671bbce88c323dfbdc4e421c268c42a04480e59b930edcf5fb8bca2aa74d4d68cf97aa19fcd31d6250a0aa4e42728eaab8ac9ff024120825dfe1442df205dc9bae098ed6481f066067d45cb95d67b071ee96093dd28e2a191f1410c9da5024485bc18877aafcedf79508a9d42d85fba2e55f5e2279e055e9c9934662cac5c03f32ae07e1dce498b2a44dd6cd490213838c26b27f28e9fc8c07d1abcf9dba29ba6c348c18da955059d84f1024fc959de77143aa111782eb3ef3a83ae81097e8d67f9e5359dcdcd751207f4ff24e1429a421e491fbeef449a825c33e8ae755f2dc635f68d82432df112d481cc3b3c866414037c1e907c8cced2edd8a4188526699e38abdcd00935f5eba3dd9e64e2d4d4b2613d39c6d24c2c508f766968dd8361ffae62d65b68935c80c3630c0026152b2c9c58c4a44f3e3c36fe34e79d1cd64d440bfb541f3da8bb5b3c7bd0858172fed93a238f16b2e46061944ba96d902264ecf7062eedb73f74d31a9060f79507a8c2f51bbe0b65ad39bf0265f57fc42469c0d7b290f63f5443c58ab456e7cb83a414a1f91f5601a8f8c6ad566f10689c95bc0251eb8aec2cd142b8c42001cc0479262bfe106cc777c5bd68752e21aca70d39612dd1b89e4d8865dec3d72669da318aed014454a65633fd2c5d734a4d322c906e24ed8a34a48d1a61abccdb1272d926f255a4eac0dc72fbffbdd1a43f820b1636614876467e8767c0feffc2a5fc642b8824418f372bafd3decdd11544c405b3d448fbb55061b94ebf1db854638c7ed7fff4f6e530843a2813a42a71a4c1883b796e3fc0d4e0449eb42f25611d42bcbf54e34e0747e3d713a083e2915171d23dc3a51901fba0bfed748f3dfd26de9f28e81b03e5fc860c8733e31e60368ef390380dc4c5ad1d126bdf971d006b21b85aafdfe5aa29e024abba327f183baabe1cd13107389fda8e03de6f6de13110781a11b123b96bb3a631aa5afa2ca01d6967c9fcbf754414b410f4a83a13f222637c3712c5dd17d3ceefdfe8689e2febb858d87834e819c123f63ab45e759286ac25bcae5e4a7ff3aeb72e71c5e44348f2a81d9f5d0e4a865b6ec064090c6bcad93a8cf577ad4554ca78c562d3a452a53120a741169524f561230c6ffd7c69c80b9d6902141345a4d9c60ef993944bdeb1f67ebf0d598289c5dbd4612fcc15dbdb2f6a5a8ef3e50155bc7580b4569718c76a144a18fb83388a2323bcb270a55aa8ae258ea063536559e2fe7a5b2f2b01d8d776730b8496aacb68749c37a2d17b2efb36adaf5de98f740d112de8592d74a46b994b3e67181e5401961882257427d451d85566a099439fe80e935793e5780b6d8db84b5a7f18f8bf32e32f2e5a9279d1f91f85dcfefb5451cbeb4793baa446a06fb41a69811f7728cdf1f55815f39ed6e8eff575a93418c5e647e4a8bd6ac729f30d1d73ddb5df4ff81ade8774b8061f1fe30476b76dce783678c2ee49bb03c9f5b993776776b17c54cb6c4c00e63ce7c869c8c97d773d2f68929eac68ef5caabbb71ea8ab9ce1abc956c2f7f091ca31251be92b017e3b8fb42f77c913e98d96cb7e696c35a698b4a2102435d6a5aea2341617640f835327adee5202ccbb84d753fbc897bbbc987a37a2e330e222e8965f10f57baa2c60a8f68b04e052e71019597702eb53744468e297e9a1d6cf3a270d8594893a3fd3bec82917deacdd728d7cd2340a7d23342731e0fc7c2fbfdde838bdb4a3bcbdabab740bf383bc6cc3b21bb188deaa83e866ba53621fab87269a85c494fbb7b2fd20ee120ae38d246b6b4111a621866960c129314b89596bd0f8b19a56110f675e958b8bb9fa53d7f407c2097412649c35276c29d1d08998ded529558a6457db76a5d68abb5b858d94fd7fa6c3cba585871ec4c63cab7dc6616b0fa15a3478b60992d6cfa30079380e3f2d8bcf00ac808d5aabee570467d14e2c950c9bbb4a526d4457476ee757ead27a83f700fddf4c68ca4d285cac80f5daa2ab92a383e852ff093ad17b56d64c22cea9b768613c2f94372d74ab81ec319c13ae5e542369e96cc9060799c4356c0f204bbb4243c7319a69cc288665b62921645de917c2f611c5937e4b447c443d07079c8c320949ef39526a1d06ab6b6709b469a7c29059b963b430a29426e14b1303c1861d490ef8e62a4a7d289aecbebcbc88b0ca75ad6ddb074b7adcd1309d7cfdc5be84fab290ed6fc2371bcd4daa3edc203d5182e4a13748db191f47969af7c26f779401d94c6fcc36a17389eb31487a9afad035642277cde4daf4cb7fb339db4f0948ab2dc775c50a3db46fd818fe6bf897c4245dd6e1c72ca67d6794ce22b8856592f44f6e9c326935f6342acb63b724181b7c445efeeac781ba982ca74501e4bc1f81cd86314c5911f3e9713d7849d6c7d6fcc4714775a23e39eff36df723ee3ecf42ee34a2c2ad032413747848269156ccbd6fa5ca72846c2d43f76048fa6f6562173db929398ebb08cc3ead2797d0562bc297c50f3ee4b12526319ef72dc3fa7775e22173e598b6c54a2516fa1ea30df062b2c14185ab8c2bb6aae2ec8a405bf0c90c78fa420b441316b7ae7d5f175329e9fa7e5ccb93a54bf22f1be04bf5c9ef25dd5d28744ca14523560521613f2c25052aea76b8d4467d6c67e7c91aa605ed6e2b8601fa0f57d557fbbe35eb2af4bf04f9f2bd4b8796adf1b7a14f3403ac256beaedd1b9f87c60524f50b97c6b087a96f6c21d16b92871bfde39cece08a8dc63526b9ed28fccf0a09eafbc49d8ca9cdc78fec0b6159f928dd880f151cb9d8e61822b0f5cb9e61d160b68cce972c4a82ae1f60f154887acb324d5114eb6e8627ff50e97ec98190747ae8e06f2c3423c8cddb2257c10d531660aa12b8cadc6860841ddfbdda42d69251211ff90f6d109385287427062040e74fd7e842ff4637835b8db29cc70805d6b33c043f1981ded4abc12b0a656b0415c2e43ec708b1f8992219c0e711203335e673656c33b5fe3c36020c86e93f885faaeb6a2c498d5896bf628d53e2bfb28a297af90d772d92c82b1c80c64926c7ca0bae2982440b4c56db4af75239bbfb5affef03f487c5b6addcf406418762628a8d72da03b5ba0c47e206495a630c4798f03f2af4a7b81203389570ecb3ba48dce991ca932510b4c90f9daa2551c364da6f153a58c585a6a72fd0ddec129c967e4fbfcb8eccb77ab31ea8a58b0504de04a1278835c45d9bc94c3cc8b5215d3e75680cfa893913df6c385f2e6f36295917acb9e257ec057f6622c1a418f3c2bd8496820ba4959679a34a55d72a1bcb03a254e0afe73038fd3e33f85ef1a9fd80eba4d89b16fc0d8dd6d51c167733422f5c829ff69ec402e80ed1c5af9f69a949e93fcebb71e2da292d55cd103923a3509b8317307db06bbb2e2aa4cae468489def3184100af7e7f523f674805aad19b69fc7aa077180d5e716f6807e86bfe6053777415a179240f7234a366c4d274671318305e2d35e720dd54172a3f54fc91aec298ff5bb0722da25f6400e4c2d9c2fc4bfafe2aa7972867e14548b639410935143fdd28494de5e561e73770a09275f6202908ce42dfb62fc850c1071cf2d3f87118a04a8227cebe77397f0e302e1845e51c446206636f342284603fd85e2cc9a20080a1aee3e87c1c242df531dca23b910ec791b177644ff044fb89455b9fe73d02b0cb59f8f8ec9ea5021a1f8ca62fb2927b8f443a8f17df18cda437d70a4417f62461d0fb1e447d2ef9678b0a89358a807d59b0145df3a3145e82fd08e958d969177edab9c6044e0240ff809a92346d54c3cc640187ad81f643e1f07bbc6243d03f3685da42546cba3e53baf369e60a6841d54ba565b97ace72eb2897644a558232f37cd04b73c108e1a168e13d3cabc3006baf12afaa24e734f715998137c5ff00203a7b64a3df968f095b35ba0f555e5388854813a7920beaecb1be95bed889956e00d08f2c0c7dbeca0fa0c7db8dc3756b69f7d98d0ffc2226ac2ea887b4f4772e06e6e00e52b45c9861da391b80fbaeb1aa1dbb3e870b77a7bae70e4ad1b031deccafdc79533380ca1bbd45c3eb1411faff6601095495b057092638ea46fe81f3fe9d55666c4149c68d9b0e252b01caaef5784dc22320d5f3e1247152623b1d54e21f45877b5176e70e1acd42ab89c5274f80f1522b426127b6b2867c480f148fcf86e8415aff04a0b7de22971c645a2aaeee61fba6b59fb724fc811af5913c5403ee22d23500a8a7514ef030e1ab8cd1d380a2e81e74fc3593d4743f9fa9f4bf5c10c459dee680b271c2a3946434f104ceeccea1150afdcff72277b9bfcf01ff56b45035d0c07d7bfea4a1d705e7dfbe58c9cbc79014bead6a2a2dffea2c3b14be406e1c0142d395332ac4aa56aabcb321dae611611bb01e06aa96197d2f4b40cb5c0b7f125e6fb553c62800576395deb597a43af36a09d186bb6d56bd37cd3f4208dc97ad8a3fb85b418b7c3098ba2b08d1c0c735b56895c14af7a528d1f3cc4a6305ae1fccd6108d42039880a712ba72c99f6d37f2a5c3c02f73e6a52ad37113dc124763a1410675508a2469b8af41d881180db24b1df184cb21a9a7725a8505d3ed69c320d186ea5f57c9a890dc3e5732142df59afcfad6397df892d049e5191e20f354de581cbdfc2c0991fb4ef67f02ba9dee2cd21ad8acfd7cdaf40cead3e735b3d28770c10f18e9f33cdb2481df56daed5bebc6559de49918999c40090bfcd69b93ff8b79a5e60e774cd363b878cc45dbbc6a4824bd4a34950da8db4287c4930947bbdbcf14100c9ba7fc9a9e84187f52d4e7968808cda5a2b75f1f05560cf730049035a0142c7d159022dee92b2aaabf0be76f8babd5ed8007fce5334e41d589eb646dfd74b2e38d54c573fa0aa05a9333f959c31ec2bcd5dd0a35837f5620e1f46513acfd48699fea1e45fdbf9cff1f7e7f462a9cdebb6f6c5c0778a4c8e3fd9045694fb5b5206aa8499b213a8a80edf68e929ac2ae167b7ef96b6e1dd12a5ffe962eb498f156a2314eb2bdf68363fafce44ab8c22f8d5d97c51249de0e97a5e331251e225977713e06a0cfae03f13a2719fd9894997f0fd0054dcae12ffa044b7ef8ed8fe03e77b9098f9c23bc5d8c65634cda0661f364546ce345705e87c3cbd7d816241aec6a0e23b1f58ae7ca1e5e88cdd5de78d53de1bcabeadf785ba870045a4f5305a441f5d76c4da2b4b16d0fa327257e3ef5d830216dfff7cec59de3c23cb8cac736ac4ca1b1447c8bdf457d131463059081f9bb16ddde26ded0e7d9dfe0bb63c4935049a1a19fb0831ecd42c43d0d75e1116231d85dcae55067ebf8eec3c417e3d0de0df32105f919f8c82b1963c09259e328cbe6b8769e506467ccfa5568a894fb87273c149b84efeaa76e8a4a1507c3609273564f65f7cc039219b3289cf801e813b459c20f635c5f1bcfc189317326bae1abebeef52945fc5ac16769082981e98e2a7c9db6504755a9bc2dc8eac0e92d228f5f53433571520d50814a710d1a87b003b331277ce6c8c4fc0412d3d3bae29aac117bd2c7785a19ca59abae7f703803d64b44715337001499e0f1ec4e2bc8b2de666516daea8ab13290f628769b46d39161be8a7a23b0e18231b83eb4ac09232663c64012673a132a5a8e4d8e1d9423b34e6c9551d2ea409cf94436861aa58c02e6a12dafb04ea35f4cb55e747bfe6bd33aba8e8de7fb1b32ebab5918a46e2916a56d5dcb69f1dae59819cd112e065b46da76636fad162d76868bb69d7079c4bcb8d57580fbcdf25ffd234ea808703311ca62441b9c3a30d665a89d3db9a0eb7b50dd9ae6c49c200d3a4c4f1e5c5dccf9c8b9c545b435d1ce9a345144e700ee7c26748dd72e90b774ab704bc9d9089b2310a188d670328102dbacf76b528f44e15cf09aadb6319537b76c31467279f9c60bdbc6e68a2134cf14622bd358521113d97794b21052a378e8a3d0315623adaf241dc1d48366437fa0344c89d8a0a6195af12634f7ba23fc810c69d432671689e1add56ddf31ee23e111292d006b8479b79f9316d993aa63eeb60b527c4453c96e9174c5274bc46af65e0f34377efa8d44eadf00c270914685d688e8b79ace02730e7e615515ef421ec3c72b759bdb916a38acb59121588b72f06acd5b047f73332513976242c7d5b09954bec6053302f3bb05a2a9db4481505abef5a78a64858e8161a62c2a343fc5d1a934dca3eab21c74fc42612ab8c95978e4a29f9464b928c0d3e5a6a586a723f0f3bf57c25ec14c0f854e90967de743df046d6b7e9b7d8ea21ec9cb456b3a1d22eb9286d5d7ce41e6b1b820d8eddc2bc5015f14ff159ab38c714172d98dc6783672b3b21f05dd97702e4e41bd4b994a391447a2094afee1b6d1e9330cd36dffa3d566edd877d0e8978d1ed86955da326ec941d65f2bce1a25af20d823a8a11b7afa1ab1c127ce203218c13a109a828ce362a282c8b274a850cc07c52bdcec00cbdf6646c00f760d8585500d64105d66be5426e4ae11c6e77c4a11c1fad1d962d4cfa93c8c3660041028ec7ad3ee87e80718d9f6e7c35e24f267bba4734dcc223dd994fee47ffa1b67c69e58b5de4ff4c27a041f7763e48fa5452b6b491d5fb1ba914916032f42aed0e5f73b14aacbd8bcdd857d86c1ee22b24da3bc184fffa0c860583ecfff13fa9e8320bff097f61a5a3622d16971c2b7d4ef94805191687165924db6945418059ed9bddaf1423b873f87ec12d401ed32662cf38a2791d304a64a5ea7b737b2660a4f9fb671899a6d0553df04f71b32668afea5a5b40ef86ad24004ca590958f7d803b6a52416e2649f1047cfa428c9c8d0b35f8528c3043476c60aa3fac405d344570ec8e91db51455e4b44314626835fa886ba7b910c36f9becc666127d1ab281ea5f0d719e7c2052c0601aaed63e5ac73917436cf9808228994e119e07c4adf088ee587b1c7182ad99c43fda25a2979821638b128b7e2cdaef9f287aee016ac9247f5628e042c48025df6dc997e00c1014e41ea4e4d39ca84d61a1999ff14e5b17796206e68c85d623aeb2913be56b164a5dacb23fa19b72ff9cf7faffc06d22043aa6a8fdca7c6bc15f15c91f8fce44715cc8ddd9ece3cbca7220568458a371734df9201144bd7887495b11a4a34520a6ecc98d7fda168c0d8a3a51eb5fe3ca12ac4496b8b6d235fb52f62fc7a02a115b9a00b0e54119ef0d6d9f7e823a74816852109acb244927fc667fa73a9c34c36fe39be83bf79e33d33d3a2db39d930cf75722c70ad0a513f74acda2408e534add298ca0790f4b73f1da5e7f1ba0f62cbfe7b83ba9b084fe8b412ed9e4cbea82389e0a14f21e1ca3a242bd2609170e8a49b1d20c14fa5026621585a71a34eafa7e6a7ead8794100fcf1dc872dec4e8b5fb28abc476c5432b37a346c03a6b263661abba79dac9d869be860ac8d6817f764a734b1b963018921e2f071d45a7bba3bdc0e8f72c3dd08647253f13a53fd7111dae97702b8d4642f1c1939bae91247e3822417106e200ce78c34ab5392900b1e687ba9a24c174ca2a3b4532bb4653ab7c699d32eebafc1d7c55233305f33f4c25e0e30954c89f4404b1af145c3bf3212fabda27c59c1d476b63b310bcd67be5f7a66bfb547be05775a6899c129b0bfdf8717b9e01ea7447c1da80801674e0f79c48e514968b7b258e03104d6366fcd73df29b296b0e818746571b5b549ef4143fb681d1d6652560021c32f678a85334a212db6b51639b46decef1cac9afe246237ec9638bb1651b3676e2fb7e0a6536f6997ec57f88c0ba28f2c121f59d1ae75025378f70fadb21b00f891a3010c8288d51856f13ae386829b4ff833f9793bdbb056f06a1f34be6fc81c6a04fbc81ecb4357d9f10e6819959fed5857a5a4a33a9b589f58cbe9b3fe4518d7a1c933ccc676813ac09d1868481a7b4d1cfd21134b81baa307d354c2e7d6aea14f8e16d144c8bedee19cdf8b2b4b8217688469de743613dfc99439d01f44f98b5fe9993da3265d703f212d8f81fccf92a490582580d162fe822dd0288c5f2e2e195961f7dc3874b6e7690805cd6e89bda347f501a4a1aed784987377ef671dab3c1bbacab67244cc505fc5c3624912ae514f2c63ce751a6589f124d39c8767c5cc5781f9d401254330e572ead1a25e9ec1a84f3d1fb29d19eb4f7c22a6c81129e261db98512da1fb3b682bfcdba4c0b4451aaae1c8527562645b6bed524071e11310ce1449540831823ecb7daf9fabdba3b7e65b90f1189eb97a13089b50d3e4e6e12958a82ce763ad0d73431b69588a7afcf4bcffefc02486a1f8335ea501a1efe1139fd8e556d5615c21c38496aea461e65bfdeb7f0e35b5353e88bf07daf2ff9526716a4c0212de37fe25b64cb86b07d79c356cbe276ba74edd4db1df835ff14e45e2deea0858f13fa3340428a67d0b103e9764dbff8603c259bd7e19d1734bcf0558bc688a87a9c191cf235a0f9d48a6b058868d627d0fb8d4cb962018cdd1b0c634a0c3f8ca087f036af236f808f49062f2c9f5884df45dc894201294d0e884964cc7f52e1717817987d7d59b0d69e46d4cfb065bcde7f79483cd4aa93ae42a87b8089ddc83e0a30f5db58c2d6e3946f93714b562199914d8de7959af6421bdb86894b5fb51ee16cfdaace8243fe493f3666ff0417a237f587b975dbe11176a624810a683254c546c26b0812f6d1be7ae8ef9a2645bae05d8b0d49beeb1a49f7c8491288ca3b77618abb4baa3cf18ade247ada0adc294a21fa6c5e5f6d90ff367bd7b5557ed3c9ade2e03671050066a99389cf3c2b0a6351cad83ece531f3b506b64c3c2af95f95ac42d1d7c3b7feaebe9d6e8a3b3ea3bffe5bc703c981919cc877fd972889599c27e2c7019b491d0d49ed42b43b155e1797f09b54d9535eae80c66cf35a4fb79c995454c8a469aaed223b7eb8fcf219d2d9aabaa9699ed9e24ed95214fd98b9d5b786bfdb5e3124b25270ca4476962c1756293ff8d326d67aee91d0437fdd774c140f5c147984674cbef0e76a177354c0dc1e1385ebaaa4fd3717a0dc9afa93be3789acdbde8208d7270d0846a764c7c8ba47df2f7235e1922536eb6680fe8bcb27c785d0cf0b5cb2ce0bf8fd4a341c12e33c622739e22293470fb1b905cb65d67f07074bd21af1f715663c57254e076626cfac7a0f7524f4f4ab12cdd2c6109e55dbedf003abe85a5b30312d9831e61ce86e08d483da386ed8d70687d1aa55fe339b6918dd0f294c68c9aeeee843ac428aba5853f8d28427449544b561bd3537e57378ade7dbc1091af12da89cfc3706164cbd4b52aafb0e064fd76691694d43fe0e58dbb9a60640504ef22d1869c7ff6e1dd8b49ac3c136cf22f336bd3e62c016362a075f6fdade58b14c61ea60ab0493b1f940e4b08f1a54344322fe204cb5714b7f245913e95c78ff0fb34855a1c0bd1c52040fd4866759fb576a492950cd950dfa612e0909c6417fd706aef845a90fada8fbb201bfdfcbb39796599a3b62321cf2b26be6c99ba0aec05598a058847feb2237af2b0e44c2f4b7d0a69621fcd36fe6cc0e414cf858e3ed75abe22b23e77989be4c6992a6b7b228e6c9567662783514bb1c363447f88cd6d5c34c4e351f79d7d61272299747c103ce472d44406ffd16270b1d9e395fd13b69824d0f9d7af10c666cc873232e52e385f864f09f45fe5f585eefae3fa20567750fe385d384dc85f7e287a471670fe2d6c5baf22eee80874ac1c85ef3a89ad465b1ac398bcd68b1970db064c17d2f70385560377756c2381ef9fdb3ec3d6d07d3b6a4cb3f8bf03cbb618a3c77c2dc59b593b67ec3415a6db2feeb0a2b4936b562bde46729fcb770f63cb887617e02ce895721e36bfc689516967f1d707f0e2c1016cad36b381a3470dd6a821a1fd27f335a610db04ebd26cfa3202d6f83f230fcb6d40e93e23060fe1375d99bb4dd7eafa6e4eb4d0fca9db3b95d3264f111b34eaf2089ef7e9a862abb103f9d78c5de18624b7bd8460b753070c15669f05e5438d0c4d32c9d534b5f7aa7535acc98557ed94db210ea70e757c152ec9b4fffe33e7ded899ce503c14ecdecaa8a70d6b0fa859f9ed06733429b5b0f42d6d78b76cb5571d57e1aef9ddcb444d7d7c4706afbb10fcfe4bfc14d3c04fc5b390d854774bf6ff3d9800522e8b61c687a1443e4476cc5ed3dc057fd02614a32ae7cc96d32f272a92ad8bb05777c4b11f356d17c19314fd97af794a0ff83aefbf7316983224e6f6d759e91dd6050d8d57134869a68a2b6c2623f821dcd6d160e62319f4159446ab0b0f15063d1a558f06bd8a862e9827ee09a3380e44c6dd147cfb2907e181ca272fded467a5ba02205bc082f41934838a80ed88c80eed994ec65572eaf1c392aea25ccafe767ad919e26c12ca7ae91a7859b7b5a1f4afcec8f886a859fb2adcfefa552bb436c4a049ba3ee3a8e0d10dd7bd141e48b06f5adae11f9f38039524751b3cad4c059c8d67eb84c169da3709b155e7a9a97fc15084043692a1e2914ef62eac8e3de0d635e4ea2fe07f7a0a153c15a31e34ec100c7d12d1500aea571d0b46b8d9aca9824bf0fec21b706604611f404096de1fd90a2accd6076ec31e8211d884d0825c1e31f1d5d656227adc8359193225fbd5c3c0f36ed26486aba79222df9434fd6db9360656bc25cf98d94a889107f6038b291ca9cde8a87938ae12b470c84f349f61614895e6a6963c520525e68f631baf53b87d8efd42913866c66580be8a149b6b5944138f6ef1e44e5160313d2a13a4626bcec61eb876b5</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">输入密码，查看文章</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>实用教程</category>
-      </categories>
-      <tags>
-        <tag>jiujia</tag>
       </tags>
   </entry>
   <entry>
@@ -2120,6 +2095,81 @@
       <tags>
         <tag>OpenAI</tag>
         <tag>ChatGPT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS 7找回root密码</title>
+    <url>/2023/04/29/23042901/</url>
+    <content><![CDATA[<p><strong>1</strong>、首先，启动系统，进入开机界面，在界面中按“<strong>e</strong>”进入编辑界面</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240129205221267.png" alt="image-20240129205221267"></p>
+<span id="more"></span>
+
+<p><strong>2</strong>、在编辑界面，使用键盘上的上下键把光标往下移动，找到以“<strong>Linux16</strong>”开头的内容所在的行数</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240129204701983.png" alt="image-20240129204701983"></p>
+<p><strong>3</strong>、在“Linux16”开头的内容所在的行数，在行的最后输入：<code>init=/bin/sh</code></p>
+<p><strong>4</strong>、输入完成后，直接按快捷键：Ctrl+X进入单用户模式</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240129204736921.png" alt="image-20240129204736921"></p>
+<p><strong>5</strong>、接着，在光标闪烁的位置输入：<code>mount -o remount,rw /</code> （各个单词间有空格），完成后按回车键（Enter）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240129204756131.png" alt="image-20240129204756131"></p>
+<p><strong>6</strong>、在新的一行输入：<code>passwd</code>，完成后按回车键（Enter）。输入密码，然后再次确认密码即可。密码修改成功后，会显示passwd…的样式，说明密码修改成功</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240129204813674.png" alt="image-20240129204813674"></p>
+<p><strong>7</strong>、在光标闪烁的位置（最后一行）输入：<code>touch / .autorelabel</code>（touch与/后面都有空格），完成后按键盘回车键（Enter）</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240129204903207.png" alt="image-20240129204903207"></p>
+<p><strong>8</strong>、在光标闪烁的位置（最后一行）输入：<code>exec /sbin/init</code>（exec后面有空格），完成按回车键（Enter）。或者先<code>exit</code>然后<code>reboot</code>。完成后，系统会自动重启，新的密码生效了（这个过程等待时间有点长，耐心等待）。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240129204919487.png" alt="image-20240129204919487"></p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Remote Desktop Services灰色无法启动的问题</title>
+    <url>/2023/05/15/23051501/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>远程桌面服务启动、停止、暂停、恢复等几个按钮都是灰色的，无法启用。最简单暴力的方法就是重启系统，毕竟重启解决90%的问题。</p>
+<p><img src="https://qyxie-blog.oss-cn-beijing.aliyuncs.com/img/image-20240130193801479.png" alt="image-20240130193801479"></p>
+<span id="more"></span>
+
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>“Win+R”打开运行，键入: services.msc，打开服务界面，找到”Remote Desktop Services”服务，双击打开，确认服务名称为”TermService”;<br>在打开“管理员:命令提示符”，键入以下命令查看当前”Remote Desktop Services”服务对应的PID，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sc queryex TermService</span><br></pre></td></tr></table></figure>
+
+<p>再根据反馈的PID来键入以下命令强制终止”Remote Desktop Services”服务，比如我电脑中对应的PID为: 1612，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">taskkill /f /pid 1612</span><br></pre></td></tr></table></figure>
+
+<p>完成后再在服务中找到”Remote Desktop Services”服务，看看是否可以恢复正常操作来启用。</p>
+]]></content>
+      <categories>
+        <category>实用教程</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/07/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hello World</tag>
       </tags>
   </entry>
 </search>
